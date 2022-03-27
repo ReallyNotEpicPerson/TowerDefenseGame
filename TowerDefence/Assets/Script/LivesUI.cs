@@ -7,14 +7,25 @@ public class LivesUI : MonoBehaviour
 	public bool isTmp = true;
 	public TMP_Text text;
 	public Text livesText;
-
+    private void OnValidate()
+    {
+        if (text != null)
+        {
+            isTmp = true;
+        }
+        else
+        {
+            isTmp = false;
+        }
+    }
     void Update()
 	{
-        if (!isTmp)
-        {
-			livesText.text = PlayerStat.Lives.ToString()+ " Lives";
+        if (isTmp)
+        {		
+            text.text = PlayerStat.Lives.ToString();
 			return;
         }
-		text.text = PlayerStat.Lives.ToString()+" Lives";
+        livesText.text = PlayerStat.Lives.ToString();
+
 	}
 }

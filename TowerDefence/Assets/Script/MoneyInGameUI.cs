@@ -10,13 +10,25 @@ public class MoneyInGameUI : MonoBehaviour
     public Text Money;
     public TMP_Text money_Text;
 
+    public void OnValidate()
+    {
+        if (money_Text != null)
+        {
+            isTmp = true;
+        }
+        else
+        {
+            isTmp = false;
+        }
+    }
     void Update()
     {
-        if (!isTmp)
-        {
-            Money.text =PlayerStat.moneyInGame.ToString() + " $";
+        if (isTmp)
+        {        
+            money_Text.text = PlayerStat.moneyInGame.ToString();
             return;
-        }
-        money_Text.text = PlayerStat.moneyInGame.ToString() + " $";
+        } 
+        Money.text =PlayerStat.moneyInGame.ToString() ;
+       
     }
 }

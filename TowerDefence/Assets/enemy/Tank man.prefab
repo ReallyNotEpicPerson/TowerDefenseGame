@@ -179,17 +179,17 @@ MonoBehaviour:
   enemyState: 0
   startSpeed: 1
   startHealth: 1000
-  startArmor: 100
-  damangeReductionPtc: 0
+  armorStat: {fileID: 0}
+  UsePathFinding: 0
   speed: 0
   worth: 60
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 4926811030794074729}
-  armorBar: {fileID: 0}
   Displayer: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
     type: 3}
   ListOfMOD: []
   Handler: {fileID: -6811311253033788735}
+  fxManager: {fileID: 0}
 --- !u!114 &3220608815816332734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSpeed:
+    baseValue: 0
+  speed: 0
 --- !u!61 &5501463020607041469
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -351,7 +354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.66}
+  m_AnchoredPosition: {x: 0, y: 1.5}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7104940753277464565
@@ -397,7 +400,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8147006432935199228
 MonoBehaviour:
   m_ObjectHideFlags: 0

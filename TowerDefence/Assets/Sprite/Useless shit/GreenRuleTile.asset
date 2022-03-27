@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6098839c8537baf419615ead1505131b, type: 3}
-  m_Name: Revive
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: GreenRuleTile
   m_EditorClassIdentifier: 
-  ID: REVIVE
-  Sprite: {fileID: 0}
-  effectType: 0
-  removableType: 0
-  expirableType: 0
-  _duration: 4
-  chance: 1
-  description: Revive enemy after sometime
+  m_DefaultSprite: {fileID: -4059306939283467200, guid: 72646a83b0de2f142955ea3834ba129e,
+    type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules: []

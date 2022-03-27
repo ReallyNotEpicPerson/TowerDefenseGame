@@ -115,7 +115,7 @@ public class LazerTypeTurret : BaseTurretStat
             txt.text = (System.Math.Round(LazerDamageWithoutCrit(), 2).ToString());
             txtManip.NormalColor(new Color32(255, 255, 255, 255), new Color32(0, 0, 0, 255));
         }
-        tar.ConstantSlow(slowPtc.baseValue);
+        //tar.ConstantSlow(slowPtc.baseValue);
         tar.EffectColor(Color.blue);
         //Debug.Log(tar.name);
         if (!lineRenderer.enabled)

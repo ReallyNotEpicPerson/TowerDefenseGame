@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class FastForward : MonoBehaviour
 {
     public int timeToFastForward;
-    public Text ff;
+    public TMP_Text ff;
     private int i=1;
     public void Increase() 
     {

@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     private SpriteRenderer enemyColor;
     [SerializeField] private GameObject Displayer;
-    [SerializeField] float[] ListOfMOD;//Get rid of
 
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
@@ -77,7 +76,7 @@ public class Enemy : MonoBehaviour
     #region run in the editor
     private void OnValidate()
     {
-        if (healthBar == null)
+        if (healthBar == null)//change
         {
             healthBar = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
         }
@@ -99,7 +98,7 @@ public class Enemy : MonoBehaviour
         {
             enemyNavMeshMovement = GetComponent<NavMeshAI>();
         }
-        TryGetComponent(out fxManager);
+        //TryGetComponent(out fxManager);
         
     }
     #endregion
@@ -305,6 +304,7 @@ public class Enemy : MonoBehaviour
         EffectColor(Color.white);
     }
     #endregion
+    /*
     public void ConstantSlow(float ptc)
     {
         if (1 - ptc > ListOfMOD[1])
@@ -321,8 +321,9 @@ public class Enemy : MonoBehaviour
         /*if (gameObject.activeSelf == true)
         {
             StartCoroutine(SlowPerSecondCoroutine(ptc, 0.2f));
-        }*/
-    }//fix this crap
+        }
+    }fix this crap*/
+
     public void When_Insta_kill()//remove soon??
     {
         GameObject sth = Instantiate(Displayer, transform.position, Quaternion.identity);

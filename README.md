@@ -1,3 +1,2 @@
 # TowerDefenseGame
-This is a game about pain, the pain without github . Imagine you are that dumbass that thought: "meh i dont need github, ha!" before losing all of his data...., anyways that dumbass was me
-that is I made this  
+Imagine you are that dumbass that thought: "meh i dont need github, ha!" before losing all data...., anyways that dumbass was me,that is why I made this 

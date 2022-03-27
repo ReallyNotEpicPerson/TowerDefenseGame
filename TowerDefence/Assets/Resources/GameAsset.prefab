@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &330115279664743294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3732730720559913897}
+  - component: {fileID: 7201169576999226851}
+  m_Layer: 0
+  m_Name: GameAsset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3732730720559913897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330115279664743294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 78.947975, y: 15.997465, z: -332.35016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7201169576999226851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330115279664743294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b49da6cc0f39f448ddb01973ec4922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret:
+  - prefab: {fileID: 1322322404890757603, guid: 0903351180797ee44a7d09e42ef6e603,
+      type: 3}
+    cost: 80
+    upgradePrefab: {fileID: 1322322404890757603, guid: 0903351180797ee44a7d09e42ef6e603,
+      type: 3}
+    upgradeCost: 20
+    sellPtcReduction: 0.5
+    upgradedPrefabs: []
+    upgradeCosts: 
+  - prefab: {fileID: 2901893777028136064, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
+      type: 3}
+    cost: 50
+    upgradePrefab: {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529,
+      type: 3}
+    upgradeCost: 100
+    sellPtcReduction: 0.5
+    upgradedPrefabs: []
+    upgradeCosts: 
+  - prefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
+      type: 3}
+    cost: 50
+    upgradePrefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
+      type: 3}
+    upgradeCost: 50
+    sellPtcReduction: 0.5
+    upgradedPrefabs: []
+    upgradeCosts: 
+  - prefab: {fileID: 5826005812112630557, guid: 8c9eaaf07f7550f448e5a934195be047,
+      type: 3}
+    cost: 150
+    upgradePrefab: {fileID: 741333515900032696, guid: e0c3b6fb69525c54596ec9c19465d344,
+      type: 3}
+    upgradeCost: 250
+    sellPtcReduction: 0.5
+    upgradedPrefabs: []
+    upgradeCosts: 
+  - prefab: {fileID: 5139430634388571129, guid: 6b56a90063a6d1d4db4d2d647d33ca1b,
+      type: 3}
+    cost: 100
+    upgradePrefab: {fileID: 5255571582873797314, guid: c3c2030742d97c44b9b9cbfd7e6d3612,
+      type: 3}
+    upgradeCost: 200
+    sellPtcReduction: 0.5
+    upgradedPrefabs: []
+    upgradeCosts: 
+  weaponSprite: []
+  charImg:
+  - {fileID: 7130945377822670081, guid: 28d6c3bd805af4e4fbeaa28030bbfd44, type: 3}
+  - {fileID: 5165142716011584292, guid: 6ff774e397df58743a18a774bb2ac0aa, type: 3}
+  - {fileID: 2846784767227669150, guid: d042d2c5c95c17b4c98cf6a7a2ead054, type: 3}
+  - {fileID: 7436772537051650074, guid: cca10a3945f60ca4dbacc0659155d86e, type: 3}
+  - {fileID: 4874449705774183522, guid: 7225b9a4b108f0b44bb562a3cc12c20b, type: 3}
+  damageDisplayer: {fileID: 7861630055729467459, guid: dcf6fbd7753960d41acff7b7d5656a5f,
+    type: 3}

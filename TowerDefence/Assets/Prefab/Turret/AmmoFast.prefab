@@ -109,7 +109,7 @@ MonoBehaviour:
   ImpactFx: {fileID: 7601149693699062836, guid: b96c124f2589fd74b97f61c400fa155e,
     type: 3}
   Taggu: Enemy
-  bulletType: 4
+  bulletType: 128
   effectManager: {fileID: 99656583981239410, guid: b21c6192f7b34654bb77431c04969ae4,
     type: 3}
   explosionRadius:

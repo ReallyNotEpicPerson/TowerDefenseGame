@@ -5,9 +5,14 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
 {
     [SerializeField] List<BaseEffect> listOfDebuffs;
 
-    public List<BaseEffect> GetList()
+    public bool HaveStatusEffect()
     {
-        return listOfDebuffs;
+        if(listOfDebuffs.Count == 0)
+        {
+            Debug.LogError("You forgot sth");
+            return false;
+        }
+        return true;
     }
     public bool HaveThis(BaseEffect bfx)
     {
@@ -96,6 +101,18 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
             if (listOfDebuffs[i] is FearEffect && Random.value <= listOfDebuffs[i].chance)
+            {
+                enemy.AddDebuff(listOfDebuffs[i]);
+                return;
+            }
+        }
+        Debug.LogError("nothing");
+    }
+    public void Weaken(Enemy enemy)
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Weaken && Random.value <= listOfDebuffs[i].chance)
             {
                 enemy.AddDebuff(listOfDebuffs[i]);
                 return;

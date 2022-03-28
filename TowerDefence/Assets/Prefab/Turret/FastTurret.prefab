@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfDebuffs:
-  - {fileID: 11400000, guid: 6d5798658316b204c933c182e8ec857a, type: 2}
+  - {fileID: 11400000, guid: 175196c5cb08b8f44ba8130057202404, type: 2}
 --- !u!1 &3428752715087785849
 GameObject:
   m_ObjectHideFlags: 0

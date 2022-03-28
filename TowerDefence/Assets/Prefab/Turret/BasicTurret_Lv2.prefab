@@ -236,6 +236,7 @@ MonoBehaviour:
   listOfDebuffs:
   - {fileID: 11400000, guid: ca9c4b1f8f0d0904c8f3d2d0ed722c33, type: 2}
   - {fileID: 11400000, guid: e97cff0cddbfc294ab3a786d058cf043, type: 2}
+  - {fileID: 11400000, guid: 175196c5cb08b8f44ba8130057202404, type: 2}
 --- !u!1 &5827280883138840939
 GameObject:
   m_ObjectHideFlags: 0

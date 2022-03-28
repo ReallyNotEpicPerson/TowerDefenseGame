@@ -61,26 +61,47 @@ public class Bullet : BaseBulletClass
     void Damage(Transform enemy)
     {
         Enemy ene = enemy.GetComponent<Enemy>();
-        EnemyType enemyType;
-        ene.EnemyType(out enemyType);
-        float Modifier = BaseTurretStat.CheckType(turretType, enemyType);//get rid of
+        StatValueType Modifier = ene.GetWeakenValue();
         float damage;
         if (ene != null)
         {
             if (Random.value < critChance.baseValue)
             {
-                damage = CritDamage() * Modifier;
+                damage = CritDamage() ;
+                if (ene.enemyState.HasFlag(EnemyState.Weaken))
+                {
+                    if (Modifier.modType == StatModType.Flat)
+                    {
+                        damage += Modifier.statValue.value;
+                    }
+                    else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                    {
+                        damage *= (1 + Modifier.statValue.value);
+                    }
+                }                    
                 ene.TakeDamage(damage, DamageDisplayerType.Critial);
+
             }
             else
             {
-                damage = bulletDamage.baseValue * Modifier;
+                damage = bulletDamage.baseValue;
+                if (ene.enemyState.HasFlag(EnemyState.Weaken))
+                {
+                    if (Modifier.modType == StatModType.Flat)
+                    {
+                        damage += Modifier.statValue.value;
+                    }
+                    else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentAdd)
+                    {
+                        damage *= (1 + Modifier.statValue.value);
+                    }
+                }
                 ene.TakeDamage(damage);
             }
-            /*if (enemyType.HasFlag(EnemyType.ImmunityToAll))
+            if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
             {
                 return;
-            }*/
+            }
             if (bulletType.HasFlag(BulletType.Insta_Kill))
             {
                 effectManager.Insta_kill(ene);
@@ -99,12 +120,11 @@ public class Bullet : BaseBulletClass
             {
                 effectManager.Fear(ene);
             }
+            if (bulletType.HasFlag(BulletType.Weaken))
+            {
+                effectManager.Weaken(ene);
+            }
         }
-    }
-    void DisplayDamage(float damage, Transform pos)
-    {
-        GameObject damdis = Instantiate(damageDisplayUI, pos.transform.position, target.rotation);
-        damdis.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().GetComponent<TMP_TextController>().Blushing();
     }
     float CritDamage()
     {

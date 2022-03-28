@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, Slow = 1 << 0, DOTS = 1 << 1, Amored = 1 << 2, TakeNoDamage = 1 << 3, Fear = 1 << 4,
+    None = 0, Slow = 1 << 1, Weaken = 1 << 2, Amored = 1 << 3, TakeNoDamage = 1 << 4, Fear = 1 << 5,
     //BlueFlamed = Slow | DOTS,
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -16,12 +16,9 @@ public enum EnemyState
 [System.Flags]
 public enum EnemyType
 {
-    None = 0, Fast = 1 << 0,
-    Tough = 1 << 1,
-    Armored = 1 << 2,
-    Special = 1 << 3,
-    //Immunity = 1 << 4,
-    //ImmunityToAll = 1 << 5,
+    None = 0,//just a normal enemy
+    Mutant = 1 << 1,// have one or more special ability
+    ImmunityToAll = 1 << 3,//immune to all status effect,even the good one?
 }
 public enum movementType
 {
@@ -45,6 +42,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     private float health;
     public int worth = 20;
+    private StatValueType modifier; 
     #endregion
 
     public GameObject dedFX;
@@ -80,7 +78,6 @@ public class Enemy : MonoBehaviour
         {
             healthBar = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
         }
-        enemyColor = GetComponent<SpriteRenderer>();
         if (!TryGetComponent(out armorStat))
         {
             //Debug.LogError("you forgot the armor bro");
@@ -98,8 +95,11 @@ public class Enemy : MonoBehaviour
         {
             enemyNavMeshMovement = GetComponent<NavMeshAI>();
         }
+        if (enemyType.HasFlag(EnemyType.Mutant))
+        {
+            fxManager.HaveStatusEffect();
+        }
         //TryGetComponent(out fxManager);
-        
     }
     #endregion
 
@@ -141,7 +141,6 @@ public class Enemy : MonoBehaviour
     {
         if (enemyState.HasFlag(EnemyState.TakeNoDamage))
         {
-            Debug.Log("bonk");
             return false;
         }
         if (enemyState.HasFlag(EnemyState.Amored))
@@ -216,9 +215,14 @@ public class Enemy : MonoBehaviour
     {
         Handler.RemoveALLDebuff();
     }
+    public void RemoveALLDebuffExcept()
+    {
+        Handler.RemoveAllDebuffExcept();
+    }
     #endregion
     void Die()
     {
+        RemoveALLDebuff();
         isDead = true;
         PlayerStat.moneyInGame += worth;
         Ded.SetActive(true);
@@ -228,18 +232,18 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
     public void FakeDeath()
-    {        
+    {
         Debug.Log("Sleep");
         gameObject.tag = "Untagged";
         if (enemyNavMeshMovement != null)
         {
             GetComponent<NavMeshAI>().Enable(false);
         }
-        else if(enemyPathMovement != null)
+        else if (enemyPathMovement != null)
         {
             GetComponent<EnemyMovement>().enabled = false;
         }
-        GetComponent<SpriteRenderer>().enabled = false;
+        enemyColor.enabled = false;
         EnableState(EnemyState.TakeNoDamage);
         //GetComponent<EntityEffectHandler>().enabled=true;
         //throw new NotImplementedException();
@@ -259,7 +263,7 @@ public class Enemy : MonoBehaviour
         gameObject.tag = "Enemy";
         if (enemyNavMeshMovement != null)
         {
-            Debug.Log("Turn back on YOU BITCH");
+            //Debug.Log("Turn back on YOU BITCH");
             NavMeshAI nmAI = GetComponent<NavMeshAI>();
             nmAI.Enable(true);
             nmAI.SetDestination();
@@ -268,16 +272,10 @@ public class Enemy : MonoBehaviour
         {
             GetComponent<EnemyMovement>().enabled = true;
         }
-        GetComponent<SpriteRenderer>().enabled=true;
+        enemyColor.enabled = true;
         //gameObject.SetActive(true);
         //throw new NotImplementedException();
     }
-    #region [depricated]
-    public void EnemyType(out EnemyType type)//get rid of as soon as possible
-    {
-        type = enemyType;
-    }
-    #endregion
 
     #region for adjusting speed
     public void TurnBack(int i)
@@ -342,26 +340,6 @@ public class Enemy : MonoBehaviour
         EffectColor(Color.white);
     }
     #endregion
-    /*
-    public void ConstantSlow(float ptc)
-    {
-        if (1 - ptc > ListOfMOD[1])
-        {
-            speed = startSpeed * (1 - ptc);
-            ListOfMOD[1] = (1 - ptc);
-        }
-        ListOfMOD[0] += 0.1f;
-        if (!enemyState.HasFlag(EnemyState.Slow))
-        {
-            EnableState(EnemyState.Slow);
-        }
-
-        /*if (gameObject.activeSelf == true)
-        {
-            StartCoroutine(SlowPerSecondCoroutine(ptc, 0.2f));
-        }
-    }fix this crap*/
-
     public void When_Insta_kill()//remove soon??
     {
         GameObject sth = Instantiate(Displayer, transform.position, Quaternion.identity);
@@ -370,6 +348,20 @@ public class Enemy : MonoBehaviour
         Handler.RemoveALLDebuff();
         Die();//pooling
     }
+    public void Weaken(StatValueType stat)
+    {
+        modifier = stat;
+        EnableState(EnemyState.Weaken);
+    }
+    public StatValueType GetWeakenValue()
+    {
+        return modifier;
+    }
+    public void EndWeaken()
+    {
+        DisableState(EnemyState.Weaken);
+    }
+
     public void EffectColor(Color color)
     {
         enemyColor.color = color;

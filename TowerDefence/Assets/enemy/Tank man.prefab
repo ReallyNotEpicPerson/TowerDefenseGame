@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
+  enemyType: 0
   enemyState: 0
   startSpeed: 1
   startHealth: 1000
@@ -187,7 +187,6 @@ MonoBehaviour:
   healthBar: {fileID: 4926811030794074729}
   Displayer: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
     type: 3}
-  ListOfMOD: []
   Handler: {fileID: -6811311253033788735}
   fxManager: {fileID: 0}
 --- !u!114 &3220608815816332734

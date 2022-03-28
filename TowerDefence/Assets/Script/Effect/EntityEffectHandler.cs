@@ -83,6 +83,17 @@ public class EntityEffectHandler : MonoBehaviour
                     _effectList[revive.ID].Activate();
                 }
                 break;
+            case Weaken weaken:
+                if (_effectList.ContainsKey(weaken.ID))
+                {
+                    _effectList[weaken.ID].Activate();
+                }
+                else
+                {
+                    _effectList.Add(weaken.ID, weaken.init(enemy.gameObject));
+                    _effectList[weaken.ID].Activate();
+                }
+                break;
             default:
                 Debug.LogError("wait what the fuck is this?");
                 break;
@@ -110,9 +121,16 @@ public class EntityEffectHandler : MonoBehaviour
             }
         }
     }
-    public void RemoveAllDebuffExcept()
+    public void RemoveAllDebuffExcept(string name="Revive")
     {
-
+        foreach (KeyValuePair<string, TimedEffect> effect in _effectList) 
+        {
+            if(effect.Value is TimedReviveEffect)
+            {
+                continue;
+            }
+            _effectList.Remove(effect.Key);
+        }
     }
     public void RemoveALLDebuff()
     {

@@ -197,18 +197,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
+  enemyState: 0
   startSpeed: 3
   startHealth: 800
-  startArmor: 100
-  damangeReductionPtc: 0
+  armorStat: {fileID: 0}
+  UsePathFinding: 0
   speed: 0
   worth: 200
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 8343804406420000564}
-  haveArmor: 0
-  armorBar: {fileID: 0}
-  enemyType: 1
-  enemyState: 0
+  Displayer: {fileID: 0}
+  Handler: {fileID: 0}
+  fxManager: {fileID: 0}
 --- !u!114 &1023484182875080328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSpeed:
+    baseValue: 0
+  speed: 0
 --- !u!1 &5383288911744159699
 GameObject:
   m_ObjectHideFlags: 0

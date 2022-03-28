@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  enemyState: 4
+  enemyState: 8
   startSpeed: 10
   startHealth: 100
   armorStat: {fileID: 3053064806348107543}

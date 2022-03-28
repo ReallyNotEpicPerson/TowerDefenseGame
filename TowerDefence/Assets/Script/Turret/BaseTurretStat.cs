@@ -47,34 +47,9 @@ public class BaseTurretStat : MonoBehaviour
     protected Direction direction;
     private Node _node;
 
-    public static Dictionary<Name, float> StatDict = new Dictionary<Name, float>
-    {
-        { new Name(TurretType.NormalBullet, EnemyType.None), 1 },
-        { new Name(TurretType.NormalBullet, EnemyType.Fast),1.2f },
-        { new Name(TurretType.NormalBullet, EnemyType.Tough),0.8f},
-        { new Name(TurretType.Energy, EnemyType.None), 1},
-        { new Name(TurretType.Energy, EnemyType.Fast),0.8f},
-        { new Name(TurretType.Energy, EnemyType.Tough),1.2f},
-        { new Name(TurretType.Group, EnemyType.None),0.8f},
-        { new Name(TurretType.Group, EnemyType.Fast),1},
-        { new Name(TurretType.Group, EnemyType.Tough),1.2f},
-        { new Name(TurretType.CloseCombat,EnemyType.None),1.2f },
-        { new Name(TurretType.CloseCombat,EnemyType.Fast),2f },
-        { new Name(TurretType.CloseCombat,EnemyType.Tough),0.5f },
-    };//template { new Name(TurretType.NormalBullet,EnemyType.Fast),1 }
-
     public void SetNode(Node node)
     {
         _node = node;
-    }
-    public static float CheckType(TurretType t, EnemyType e)
-    {
-        if (!StatDict.ContainsKey(new Name(t, e)))
-        {
-            Debug.Log(StatDict.ContainsKey(new Name(t, e)) + " Didn`t work ");
-            return 1;
-        }
-        return StatDict[new Name(t, e)];
     }
     public virtual void OnMouseDown()
     {

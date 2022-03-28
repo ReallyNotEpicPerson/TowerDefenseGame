@@ -13,12 +13,6 @@ public class TimedBurnEffect : TimedEffect
     {
         _enemy = obj.GetComponent<Enemy>();
     }
-    
-    public bool CompareStat(BurnEffect newBurnEffect)
-    {
-        BurnEffect ThisBurnEffect = (BurnEffect)effect;
-        return newBurnEffect.damagePerRate.value * (int)(newBurnEffect._duration / newBurnEffect.rate.value) > (ThisBurnEffect.damagePerRate.value * (int)(ThisBurnEffect._duration / ThisBurnEffect.rate.value));       
-    }
     public override void Tick()
     {
         if (effect.expirableType.HasFlag(ExpirableType.NonExpireable))
@@ -45,8 +39,11 @@ public class TimedBurnEffect : TimedEffect
         //Debug.Log(timer);
         if (timer <= 0)
         {
-            _enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned);
-            sumDamage += tempDamage;
+            if(!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned))
+            {
+                return;
+            }
+            //sumDamage += tempDamage;
             _enemy.EffectColor(Color.yellow);
             //Debug.Log(tempDamage);
             timer = tempRate;

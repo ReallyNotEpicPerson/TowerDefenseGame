@@ -4,6 +4,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Revive", menuName = "Revive")]
 public class Revive : BaseEffect
 {
+    public override void OnValidate()
+    {
+        base.OnValidate();
+        if (!effectType.HasFlag(EffectType.LateActivation))
+        {
+            Debug.LogError("only LateActivation....sorry");
+        }
+    }
     public override TimedEffect init(GameObject obj)
     {
         return new TimedReviveEffect(this, obj);

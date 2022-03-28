@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, Slow = 1 << 0, DOTS = 1 << 1, Amored = 1 << 2, Insta_Killed = 1 << 3, Fear = 1 << 4,
+    None = 0, Slow = 1 << 0, DOTS = 1 << 1, Amored = 1 << 2, TakeNoDamage = 1 << 3, Fear = 1 << 4,
     //BlueFlamed = Slow | DOTS,
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -137,15 +137,20 @@ public class Enemy : MonoBehaviour
         Ded.SetActive(false);
     }
     #region Damaging
-    public void TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
+    public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
+        if (enemyState.HasFlag(EnemyState.TakeNoDamage))
+        {
+            Debug.Log("bonk");
+            return false;
+        }
         if (enemyState.HasFlag(EnemyState.Amored))
         {
             if (armorStat.DamageArmor(amount) == false)
             {
                 DisableState(EnemyState.Amored);
             }
-            return;
+            return true;
         }
         switch (type)
         {
@@ -168,13 +173,15 @@ public class Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
-            if (fxManager != null)
+            if (fxManager != null && fxManager.Revive(this))
             {
-                fxManager.Revive(this);
-                return;
+                Debug.Log("He live this time");
+                return false;
             }
+            Debug.Log("Nope .... he died");
             Die();
         }
+        return true;
     }
     public void ArmorPiercing(float amount)
     {
@@ -182,11 +189,12 @@ public class Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
-            if (fxManager != null)
+            if (fxManager != null && fxManager.Revive(this))
             {
-                fxManager.Revive(this);
+                Debug.Log("He wont die this time");
                 return;
             }
+            Debug.Log("He ded , oopsie daisy");
             Die();
         }
     }
@@ -222,15 +230,45 @@ public class Enemy : MonoBehaviour
     public void FakeDeath()
     {        
         Debug.Log("Sleep");
-        health = startHealth;
-        armorStat.restoreArmor();
-        //gameObject.SetActive(false);
+        gameObject.tag = "Untagged";
+        if (enemyNavMeshMovement != null)
+        {
+            GetComponent<NavMeshAI>().Enable(false);
+        }
+        else if(enemyPathMovement != null)
+        {
+            GetComponent<EnemyMovement>().enabled = false;
+        }
+        GetComponent<SpriteRenderer>().enabled = false;
+        EnableState(EnemyState.TakeNoDamage);
         //GetComponent<EntityEffectHandler>().enabled=true;
         //throw new NotImplementedException();
     }
     public void Revive()
     {
         Debug.Log("wake");
+        RemoveALLDebuff();
+        DisableState(EnemyState.TakeNoDamage);
+        health = startHealth;
+        healthBar.fillAmount = health / startHealth;
+        if (armorStat != null)
+        {
+            armorStat.restoreArmor();
+            EnableState(EnemyState.Amored);
+        }
+        gameObject.tag = "Enemy";
+        if (enemyNavMeshMovement != null)
+        {
+            Debug.Log("Turn back on YOU BITCH");
+            NavMeshAI nmAI = GetComponent<NavMeshAI>();
+            nmAI.Enable(true);
+            nmAI.SetDestination();
+        }
+        else if (enemyPathMovement != null)
+        {
+            GetComponent<EnemyMovement>().enabled = true;
+        }
+        GetComponent<SpriteRenderer>().enabled=true;
         //gameObject.SetActive(true);
         //throw new NotImplementedException();
     }

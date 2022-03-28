@@ -13,7 +13,6 @@ public class TimedReviveEffect : TimedEffect
     public override void End()
     {
         _enemy.Revive();
-        _enemy.gameObject.SetActive(true);
     }
 
     protected override void ApplyEffect()

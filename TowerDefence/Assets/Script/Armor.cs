@@ -73,6 +73,7 @@ public class Armor : MonoBehaviour
             MaxLayer = 0;
             ArmorBarAdjust(false);
         }
+        armorBar.fillAmount = armor / startArmor;
     }
     public float Refresh()
     {
@@ -113,7 +114,6 @@ public class Armor : MonoBehaviour
         {
             layerNum.text = layer.ToString();
         }
-        
     }
     public void ArmorBarAdjust(bool state)
     {

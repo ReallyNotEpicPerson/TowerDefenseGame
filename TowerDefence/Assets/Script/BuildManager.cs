@@ -4,8 +4,8 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
 
-    public NodeUI nodeUI;
-    public NodeUI_2_For_Now newNodeUI;
+    public NodeUIBAD nodeUI;
+    public NodeUI newNodeUI;
     [HideInInspector]
     public GameObject tempTurret = null;
 

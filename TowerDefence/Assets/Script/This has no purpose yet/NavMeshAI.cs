@@ -60,6 +60,10 @@ public class NavMeshAI : MonoBehaviour
     {
         agent.SetDestination(newLoc);
     }
+    public void SetDestination()
+    {
+        agent.SetDestination(target.position);
+    }
     #endregion
     public void AddAccelerationMod(StatModifier acceleration)
     {
@@ -72,6 +76,10 @@ public class NavMeshAI : MonoBehaviour
         tempSpeed.AddModifier(slowPtc);
         //Debug.Log("speed mod added :" + tempSpeed.value);
         agent.speed = tempSpeed.value;
+    }
+    public void Enable(bool b)
+    {
+        agent.enabled = b;
     }
     public void RemoveMod(object source)
     {

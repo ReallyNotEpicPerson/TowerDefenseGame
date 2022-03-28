@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: REVIVE
   Sprite: {fileID: 0}
-  effectType: 0
-  removableType: 0
+  effectType: 8
+  removableType: 1
   expirableType: 0
   _duration: 4
-  chance: 1
-  description: Revive enemy after sometime
+  chance: 0.7
+  description: Revive enemy after some time

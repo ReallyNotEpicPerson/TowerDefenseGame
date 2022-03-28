@@ -149,7 +149,7 @@ public class TileMapManager : MonoBehaviour
                     return;
                 }
                 Debug.Log("You Touch ME :3");
-                NodeUI_2_For_Now UI = nodeUI.GetComponent<NodeUI_2_For_Now>();
+                NodeUI UI = nodeUI.GetComponent<NodeUI>();
                 UI.Display(turret);
                 //UI.ui.SetActive(true);
             }

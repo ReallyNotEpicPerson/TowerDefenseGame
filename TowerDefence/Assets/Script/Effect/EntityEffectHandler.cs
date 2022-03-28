@@ -110,14 +110,19 @@ public class EntityEffectHandler : MonoBehaviour
             }
         }
     }
+    public void RemoveAllDebuffExcept()
+    {
+
+    }
     public void RemoveALLDebuff()
     {
         _effectList.Clear();
+        Debug.Log("No Debuff left right? "+_effectList.Count());
     }
     
     public void ListAllDebuff()
     {
-        Debug.Log(_effectList.Count());
+        //Debug.Log(_effectList.Count());
         foreach (KeyValuePair<string, TimedEffect> pair in _effectList)
         {
             Debug.Log( pair +"\n");

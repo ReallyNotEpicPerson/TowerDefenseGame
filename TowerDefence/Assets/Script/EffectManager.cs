@@ -51,17 +51,17 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         Debug.LogError("nothing");
     }
-    public void Revive(Enemy enemy)
+    public bool Revive(Enemy enemy)
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is Revive && !enemy.HaveThis(listOfDebuffs[i].ID))
+            if (Random.value <= listOfDebuffs[i].chance && listOfDebuffs[i] is Revive && !enemy.HaveThis(listOfDebuffs[i].ID))
             {
                 enemy.AddDebuff(listOfDebuffs[i]);
-                return;
+                return true;
             }
         }
-        Debug.LogError("nothing");
+        return false;
     }
     public void Slow(Enemy enemy)
     {

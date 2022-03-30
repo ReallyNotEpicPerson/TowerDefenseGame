@@ -15,12 +15,12 @@ public class TimedBurnEffect : TimedEffect
     }
     public override void Tick()
     {
-        if (effect.expirableType.HasFlag(ExpirableType.NonExpireable))
+        if (Effect.expirableType.HasFlag(ExpirableType.NonExpireable))
         {
             burnPertick();
             return;
         }            
-        if (effect.expirableType.HasFlag(ExpirableType.Expirable))
+        if (Effect.expirableType.HasFlag(ExpirableType.Expirable))
         {        
             _duration -= Time.deltaTime;
             //Debug.Log(_duration);
@@ -51,7 +51,7 @@ public class TimedBurnEffect : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        BurnEffect burnEffect = (BurnEffect)effect;
+        BurnEffect burnEffect = (BurnEffect)Effect;
         if(effectStacks == burnEffect.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + burnEffect.stackTime);
@@ -61,7 +61,7 @@ public class TimedBurnEffect : TimedEffect
         tempDamage = burnEffect.damagePerRate.value;
         tempRate = burnEffect.rate.value;
         timer = tempRate;
-        if (effectStacks < burnEffect.stackTime && effect.effectType.HasFlag(EffectType.StackingEffect))
+        if (effectStacks < burnEffect.stackTime && Effect.effectType.HasFlag(EffectType.StackingEffect))
         {
             effectStacks++;
             switch (burnEffect.damageIncreaseRate.modType)
@@ -118,7 +118,7 @@ public class TimedBurnEffect : TimedEffect
     }
     public override void End()
     {
-        BurnEffect burnEffect = (BurnEffect)effect;
+        BurnEffect burnEffect = (BurnEffect)Effect;
         burnEffect.damagePerRate.RemoveAllModifiersFromSource(this);
         _enemy.EffectColor(Color.white);
         //EffectStacks = 0;
@@ -126,13 +126,13 @@ public class TimedBurnEffect : TimedEffect
     public override StringBuilder Display()
     {
         sb.Clear();
-        sb.Append("Effect ID :" + effect.ID + "\n");
+        sb.Append("Effect ID :" + Effect.ID + "\n");
         sb.Append("SumDamage :" + sumDamage + "\n");
         sb.Append("Damage :" + tempDamage + "\n");
         sb.Append("Rate :" + tempRate + "\n");
         sb.Append("Duration :" + _duration + "\n");
         sb.Append("Timer :" + timer + "\n");
-        sb.Append("Description :" + effect.description + "\n");
+        sb.Append("Description :" + Effect.description + "\n");
         sb.Append("/////////////////////////////////////////////////////////\n");
         return sb;
     }

@@ -18,10 +18,10 @@ public class CharacterSetup : MonoBehaviour
 
     void Start()
     {
-        character = GameAsset.i.turret;
+        character = GameAsset.I.turret;
         slotOpened = 5;//change according to data
         GenerateButton1(slotOpened);
-        GenerateButton2(GameAsset.i.turret.Count);
+        GenerateButton2(GameAsset.I.turret.Count);
         checkExistString = new List<string>();
         checkExistInt = new Stack<int>();
         readyButton.interactable = false;
@@ -47,9 +47,9 @@ public class CharacterSetup : MonoBehaviour
             but.transform.SetParent(transform);
             but.transform.localScale = Vector3.one;
             but.name = "Button " + (i + 1);
-            Image _image = Instantiate(GameAsset.i.charImg[i], but.transform.position, Quaternion.identity);
+            Image _image = Instantiate(GameAsset.I.charImg[i], but.transform.position, Quaternion.identity);
             //Image _image = Instantiate(character[i].prefabImage, but.transform.position, Quaternion.identity);
-            _image.name = GameAsset.i.turret[i].prefab.name;
+            _image.name = GameAsset.I.turret[i].prefab.name;
             _image.transform.SetParent(but.transform);
             _image.transform.localScale = Vector3.one;
             but.onClick.AddListener(delegate { Selected(but); });

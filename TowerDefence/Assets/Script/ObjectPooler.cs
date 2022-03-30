@@ -38,8 +38,7 @@ public class ObjectPooler : MonoBehaviour
         }
         GameObject objToSpawn = poolDict[name].Dequeue();
         objToSpawn.SetActive(true);
-        objToSpawn.transform.position =position;
-        objToSpawn.transform.rotation =rotation;
+        objToSpawn.transform.SetPositionAndRotation(position, rotation);
         poolDict[name].Enqueue(objToSpawn);
         return objToSpawn;
     }

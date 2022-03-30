@@ -16,7 +16,7 @@ public class FearEffect : BaseEffect
             stackTime = 1;
         }
     }
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         return new TimedFearEffect(this,obj);
     }

@@ -12,7 +12,7 @@ public class Revive : BaseEffect
             Debug.LogError("only LateActivation....sorry");
         }
     }
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         return new TimedReviveEffect(this, obj);
     }

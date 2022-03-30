@@ -5,7 +5,7 @@ public abstract class TimedEffect
 {
     protected float _duration = 0;
     protected int effectStacks = 0;
-    public BaseEffect effect { get; }
+    public BaseEffect Effect { get; }
     protected readonly GameObject Target;
     public bool IsFinished;
 
@@ -13,7 +13,7 @@ public abstract class TimedEffect
 
     public TimedEffect(BaseEffect fx, GameObject tar)
     {
-        effect = fx;
+        Effect = fx;
         Target = tar;
     }
     #region Duration
@@ -23,7 +23,7 @@ public abstract class TimedEffect
     }
     public void ResetDuration()
     {
-        _duration = effect._duration;
+        _duration = Effect._duration;
         //Debug.Log(_duration);
     }
     public void IncreaseDuration(float dur)
@@ -38,11 +38,11 @@ public abstract class TimedEffect
     #endregion
     public virtual void Tick()
     {
-        if (effect.expirableType.HasFlag(ExpirableType.NonExpireable))
+        if (Effect.expirableType.HasFlag(ExpirableType.NonExpireable))
         {
             return;
         }
-        else if (effect.expirableType.HasFlag(ExpirableType.Expirable))
+        else if (Effect.expirableType.HasFlag(ExpirableType.Expirable))
         {
             _duration -= Time.deltaTime;
             if (_duration <= 0)
@@ -63,15 +63,15 @@ public abstract class TimedEffect
      */
     public void Activate()
     {//might redo this function
-        if (effect.effectType.HasFlag(EffectType.StackingEffect) || _duration <= 0) //activate shiz
+        if (Effect.effectType.HasFlag(EffectType.StackingEffect) || _duration <= 0) //activate shiz
         {
             ApplyEffect();
         }
-        if (effect.effectType.HasFlag(EffectType.StackableDuration) || _duration <= 0)//Add duration and shiz
+        if (Effect.effectType.HasFlag(EffectType.StackableDuration) || _duration <= 0)//Add duration and shiz
         {
-            IncreaseDuration(effect._duration);
+            IncreaseDuration(Effect._duration);
         }
-        else if (effect.effectType.HasFlag(EffectType.None) || _duration <= 0)//reset duration and shiz
+        else if (Effect.effectType.HasFlag(EffectType.None) || _duration <= 0)//reset duration and shiz
         {
             ResetDuration();
         }

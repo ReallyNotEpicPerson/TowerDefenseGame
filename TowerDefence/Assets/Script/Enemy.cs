@@ -20,7 +20,7 @@ public enum EnemyType
     Mutant = 1 << 1,// have one or more special ability
     ImmunityToAll = 1 << 3,//immune to all status effect,even the good one?
 }
-public enum movementType
+public enum MovementType
 {
     FixedPath,
     NavMesh,
@@ -49,16 +49,18 @@ public class Enemy : MonoBehaviour
     GameObject Ded;
 
     [SerializeField] private Image healthBar;
+
     private bool isDead = false;
     private SpriteRenderer enemyColor;
     [SerializeField] private GameObject Displayer;
 
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
+    [SerializeField] private EffectIcon fxIcon;
 
     StatUI_InGame statUI;
     #region wait for second List
-    static Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
+    static readonly Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
     const float FloatToIntRate = 1000;
     public static WaitForSeconds WaitFor(int seconds)
     {
@@ -102,7 +104,6 @@ public class Enemy : MonoBehaviour
         //TryGetComponent(out fxManager);
     }
     #endregion
-
     private void Awake()
     {
         enemyColor = GetComponent<SpriteRenderer>();
@@ -126,6 +127,10 @@ public class Enemy : MonoBehaviour
         else if (!UsePathFinding)
         {
             enemyPathMovement = GetComponent<EnemyMovement>();
+        }
+        if (fxIcon != null)
+        {
+            GetComponent<EffectIcon>();
         }
         TryGetComponent(out fxManager);
     }
@@ -209,7 +214,7 @@ public class Enemy : MonoBehaviour
     }
     public bool HaveThis(string ID)
     {
-        return Handler.contain(ID);
+        return Handler.Contain(ID);
     }
     public void RemoveALLDebuff()
     {
@@ -257,8 +262,11 @@ public class Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
         if (armorStat != null)
         {
-            armorStat.restoreArmor();
-            EnableState(EnemyState.Amored);
+            armorStat.RestoreArmor();
+            if (!armorStat.armorType.HasFlag(ArmorType.None))
+            {
+                EnableState(EnemyState.Amored);
+            }
         }
         gameObject.tag = "Enemy";
         if (enemyNavMeshMovement != null)
@@ -360,8 +368,15 @@ public class Enemy : MonoBehaviour
     public void EndWeaken()
     {
         DisableState(EnemyState.Weaken);
+    }/*
+    public void MakeIcon(BaseEffect bfx)
+    {
+        fxIcon.MakeIcon(bfx.sprite);
     }
-
+    public void DeleteIcon(BaseEffect bfx)
+    {
+        fxIcon.DeleteIcon(bfx.sprite);
+    }*/
     public void EffectColor(Color color)
     {
         enemyColor.color = color;

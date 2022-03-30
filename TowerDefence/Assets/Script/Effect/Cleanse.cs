@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Cleanse", menuName = "Cleanse")]
 public class Cleanse : BaseEffect
 {
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         throw new System.NotImplementedException();
     }

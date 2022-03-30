@@ -18,8 +18,8 @@ public class TimedFearEffect : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        FearEffect fear = (FearEffect)effect;
-        if (effectStacks < fear.stackTime && effect.effectType.HasFlag(EffectType.StackingEffect))
+        FearEffect fear = (FearEffect)Effect;
+        if (effectStacks < fear.stackTime && Effect.effectType.HasFlag(EffectType.StackingEffect))
         {
             effectStacks++;
             switch (fear.runBackSpeed.modType)

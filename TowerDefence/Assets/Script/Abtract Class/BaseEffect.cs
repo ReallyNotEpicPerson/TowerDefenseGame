@@ -17,7 +17,7 @@ public enum ExpirableType { Expirable, NonExpireable };
 public abstract class BaseEffect : ScriptableObject
 {
     public string ID;
-    [SerializeField] private Sprite Sprite;
+    public Sprite sprite;
     public EffectType effectType;
     public RemovableType removableType;
     public ExpirableType expirableType;
@@ -52,7 +52,7 @@ public abstract class BaseEffect : ScriptableObject
             chance = 1;
         }
     }
-    public abstract TimedEffect init(GameObject obj);
+    public abstract TimedEffect Init(GameObject obj);
     #region state control
     public void DisableState(EffectType et)
     {

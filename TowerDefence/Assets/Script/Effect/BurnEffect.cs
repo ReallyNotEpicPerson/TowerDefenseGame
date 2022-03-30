@@ -80,7 +80,7 @@ public class BurnEffect : BaseEffect
                 break;
         }
     }
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         return new TimedBurnEffect(this, obj);
     }

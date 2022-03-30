@@ -64,7 +64,7 @@ public class Node : MonoBehaviour
         turret = _turret;
         turret.name = blueprint.prefab.name;
         turretBluePrint = blueprint;
-        turret.GetComponent<BaseTurretStat>().SetNode(this);
+        //turret.GetComponent<BaseTurretStat>().SetNode(this);
 
         GameObject Bfx = Instantiate(buildManager.BuildFX, transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
@@ -85,7 +85,7 @@ public class Node : MonoBehaviour
         //Make a new one 
         GameObject _turret = Instantiate(turretBluePrint.upgradePrefab, transform.position, Quaternion.identity);
         turret = _turret;
-        turret.GetComponent<BaseTurretStat>().SetNode(this);
+        //turret.GetComponent<BaseTurretStat>().SetNode(this);
 
         turret.name = turretBluePrint.upgradePrefab.name;
 
@@ -100,7 +100,7 @@ public class Node : MonoBehaviour
         PlayerStat.moneyInGame += turretBluePrint.GetSellAmount();
         GameObject Sellfx = Instantiate(buildManager.SellFX, transform.position, Quaternion.identity);
         Destroy(Sellfx, 2f);
-        turret.GetComponent<BaseTurretStat>().SetNode(null) ;
+       // turret.GetComponent<BaseTurretStat>().SetNode(null) ;
         Destroy(turret);
 
         turretBluePrint = null;

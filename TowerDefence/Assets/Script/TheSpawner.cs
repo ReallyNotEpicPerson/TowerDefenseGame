@@ -90,13 +90,13 @@ public class TheSpawner : MonoBehaviour
 
             for (int i = 0; i < wave.enemy[j].count; i++)
             {
-                enemySpawner(wave.enemy[j].enemy);
+                EnemySpawner(wave.enemy[j].enemy);
                 yield return new WaitForSeconds(1f / wave.enemy[j].rate);
             }
         }
         waveNum++;
     }
-    void enemySpawner(GameObject enemy)
+    void EnemySpawner(GameObject enemy)
     {
         //move all the enemy to a enemylist soon
         GameObject lol= Instantiate(enemy, SpawnPoint.position, SpawnPoint.rotation);//,"EnemyList")

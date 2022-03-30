@@ -45,22 +45,22 @@ public class BaseTurretStat : MonoBehaviour
 
     [SerializeField] protected TurretType turretType;
     protected Direction direction;
-    private Node _node;
-
+    /*private Node _node;
+    
     public void SetNode(Node node)
     {
         _node = node;
-    }
+    }*/
     public virtual void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
-        if (_node != null)
+        /*if (_node != null)
         {
             _node.CallBuildManager();
-        }
+        }*/
     }
     public virtual void OnMouseEnter()
     {
@@ -84,11 +84,7 @@ public class BaseTurretStat : MonoBehaviour
         //Debug.DrawRay(transform.position, target.transform.position);
     }
 
-    public static implicit operator BaseTurretStat(bool v)
-    {
-        throw new NotImplementedException();
-    }
-}
+}/*
 public struct Name : IEquatable<Name>
 {
     private TurretType _turretType;
@@ -152,5 +148,5 @@ public struct TurretEntity
     CharacterStat Range;
     CharacterStat Target;
     
-}
+}*/
 

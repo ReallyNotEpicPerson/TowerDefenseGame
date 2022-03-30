@@ -22,10 +22,10 @@ public class Inventory : ItemContainer
             itemSlots[i].onRightClickEvent += slot => onRightClickedEvent(slot);
             itemSlots[i].onPointerEnterEvent += slot => onPointerEnterEvent(slot);
             itemSlots[i].onPointerExitEvent += slot => onPointerExitEvent(slot);
-            itemSlots[i].onBeginDragEvent += slot => onBeginDragEvent(slot);
-            itemSlots[i].onEndDragEvent += slot => onEndDragEvent(slot);
-            itemSlots[i].onDragEvent += slot => onDragEvent(slot);
-            itemSlots[i].onDropEvent += slot=> onDropEvent(slot);
+            itemSlots[i].OnBeginDragEvent += slot => onBeginDragEvent(slot);
+            itemSlots[i].OnEndDragEvent += slot => onEndDragEvent(slot);
+            itemSlots[i].OnDragEvent += slot => onDragEvent(slot);
+            itemSlots[i].OnDropEvent += slot=> onDropEvent(slot);
         }
         SetStartingItem();
     }

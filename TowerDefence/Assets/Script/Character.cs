@@ -157,8 +157,7 @@ public class Character : MonoBehaviour
     {
         if (inventory.RemoveItem(item))
         {
-            EquippableItem previousItem;
-            if (equipmentPanel.AddItem(item, out previousItem))
+            if (equipmentPanel.AddItem(item, out EquippableItem previousItem))
             {
                 if (previousItem != null)
                 {

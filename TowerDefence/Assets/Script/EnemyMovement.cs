@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //Target.position.z *= 0;
         Vector3 dir = Target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
         //if (turnBack == false) { 
             if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
             {

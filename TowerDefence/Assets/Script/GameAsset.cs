@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameAsset : MonoBehaviour
 {
     private static GameAsset _i;
-    public static GameAsset i
+    public static GameAsset I
     {
         get
         {
@@ -19,4 +19,5 @@ public class GameAsset : MonoBehaviour
     public Image[] charImg;
 
     public Transform damageDisplayer ;
+
 }

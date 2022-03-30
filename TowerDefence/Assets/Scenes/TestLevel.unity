@@ -23814,6 +23814,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 664026795567817584, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3053064804829631974, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: m_IsActive
@@ -23902,17 +23907,22 @@ PrefabInstance:
     - target: {fileID: 3053064806348107541, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: enemyState
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107543, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: MaxLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107543, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: armorType
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540034314286165266, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8899509522840294181, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}

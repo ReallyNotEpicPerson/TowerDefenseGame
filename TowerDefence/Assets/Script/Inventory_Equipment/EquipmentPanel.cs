@@ -21,10 +21,10 @@ public class EquipmentPanel : MonoBehaviour
             equipmentSlot[i].onRightClickEvent += slot=> onRightClickedEvent(slot);
             equipmentSlot[i].onPointerEnterEvent += slot => onPointerEnterEvent(slot);
             equipmentSlot[i].onPointerExitEvent += slot => onPointerExitEvent(slot);
-            equipmentSlot[i].onBeginDragEvent += slot => onBeginDragEvent(slot);
-            equipmentSlot[i].onEndDragEvent += slot => onEndDragEvent(slot);
-            equipmentSlot[i].onDragEvent += slot => onDragEvent(slot);
-            equipmentSlot[i].onDropEvent += slot => onDropEvent(slot);
+            equipmentSlot[i].OnBeginDragEvent += slot => onBeginDragEvent(slot);
+            equipmentSlot[i].OnEndDragEvent += slot => onEndDragEvent(slot);
+            equipmentSlot[i].OnDragEvent += slot => onDragEvent(slot);
+            equipmentSlot[i].OnDropEvent += slot => onDropEvent(slot);
         }
     }
     private void OnValidate()

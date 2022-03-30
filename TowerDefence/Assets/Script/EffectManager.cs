@@ -7,7 +7,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
 
     public bool HaveStatusEffect()
     {
-        if(listOfDebuffs.Count == 0)
+        if (listOfDebuffs.Count == 0)
         {
             Debug.LogError("You forgot sth");
             return false;
@@ -25,21 +25,20 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         return false;
     }
-
     public void Insta_kill(Enemy enemy)
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
             if (listOfDebuffs[i] is Insta_Kill)
             {
-                Insta_Kill insta_kill = (Insta_Kill)listOfDebuffs[i];
+                Insta_Kill insta_kill = listOfDebuffs[i] as Insta_Kill;
                 if (insta_kill.CanKYS())
                 {
                     enemy.When_Insta_kill();
                 }
             }
-        }        
-        Debug.LogError("nothing");       
+        }
+        Debug.LogError("nothing");
     }
     public void Cleanse(Enemy enemy)
     {
@@ -47,11 +46,11 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         {
             if (listOfDebuffs[i] is Cleanse)
             {
-                if (listOfDebuffs[i] is SlowEffect && Random.value <= listOfDebuffs[i].chance)
+                if (Random.value <= listOfDebuffs[i].chance)
                 {
                     enemy.RemoveALLDebuff();
                 }
-
+                return;
             }
         }
         Debug.LogError("nothing");
@@ -60,10 +59,13 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (Random.value <= listOfDebuffs[i].chance && listOfDebuffs[i] is Revive && !enemy.HaveThis(listOfDebuffs[i].ID))
+            if (listOfDebuffs[i] is Revive && !enemy.HaveThis(listOfDebuffs[i].ID))
             {
-                enemy.AddDebuff(listOfDebuffs[i]);
-                return true;
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                    return true;
+                }
             }
         }
         return false;
@@ -72,9 +74,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if(listOfDebuffs[i] is SlowEffect && Random.value <= listOfDebuffs[i].chance)
+            if (listOfDebuffs[i] is SlowEffect)
             {
-                enemy.AddDebuff(listOfDebuffs[i]);
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                }
                 return;
             }
         }
@@ -84,9 +89,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is BurnEffect && Random.value <= listOfDebuffs[i].chance)
+            if (listOfDebuffs[i] is BurnEffect)
             {
-                enemy.AddDebuff(listOfDebuffs[i]);
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                }
                 return;
             }
         }
@@ -100,9 +108,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is FearEffect && Random.value <= listOfDebuffs[i].chance)
+            if (listOfDebuffs[i] is FearEffect)
             {
-                enemy.AddDebuff(listOfDebuffs[i]);
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                }
                 return;
             }
         }
@@ -112,9 +123,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is Weaken && Random.value <= listOfDebuffs[i].chance)
+            if (listOfDebuffs[i] is Weaken )
             {
-                enemy.AddDebuff(listOfDebuffs[i]);
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                }
                 return;
             }
         }

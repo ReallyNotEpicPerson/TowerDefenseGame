@@ -32,10 +32,10 @@ public class StatusEffectDisplayer : MonoBehaviour
         foreach (var component in gObj.GetComponents<Component>())
         {
             //componentList.Add(component);
-            if (component is EntityEffectHandler)
+            if (component is EntityEffectHandler handler)
             {
                 //TurretEffectManager FxManager = (TurretEffectManager)component;
-                return (EntityEffectHandler)component;
+                return handler;
             }
         }
         return null;
@@ -45,9 +45,9 @@ public class StatusEffectDisplayer : MonoBehaviour
         foreach (var component in anObject.GetComponents<Component>())
         {
             //componentList.Add(component);
-            if (component is EntityEffectHandler)
+            if (component is EntityEffectHandler handler)
             {
-                effectHandler = (EntityEffectHandler)component;
+                effectHandler = handler;
                 //TurretEffectManager FxManager = (TurretEffectManager)component;
                 return;
             }
@@ -56,16 +56,14 @@ public class StatusEffectDisplayer : MonoBehaviour
     public void CheckStatusEffectDisplay(TimedEffect fx)
     {
         sb.Clear();
-        if (fx is TimedBurnEffect)
+        if (fx is TimedBurnEffect tbe)
         {
-            TimedBurnEffect tbe = (TimedBurnEffect)fx;
             sb.Append(tbe.Display());
         }
-        else if (fx is TimedSlowEffect)
+        else if (fx is TimedSlowEffect tse)
         {
-            TimedSlowEffect tse = (TimedSlowEffect)fx;
             sb.Append(tse.Display());
-        }            
+        }
         Template(sb);
         /*
         else if (fx is TimedFearEffect)

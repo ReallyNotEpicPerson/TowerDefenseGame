@@ -22,13 +22,13 @@ public class EntityEffectHandler : MonoBehaviour
             effect.Tick();
             if (effect.IsFinished)
             {
-                RemoveDebuff(effect.effect.ID);
+                RemoveDebuff(effect.Effect.ID);
                 ListAllDebuff();
             }
         }
     }
     #endregion
-    public bool contain(string ID)
+    public bool Contain(string ID)
     {
         return _effectList.ContainsKey(ID);
     }
@@ -43,7 +43,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(slowEffect.ID, slowEffect.init(enemy.gameObject));
+                    _effectList.Add(slowEffect.ID, slowEffect.Init(enemy.gameObject));
                     _effectList[slowEffect.ID].Activate();
                 }
                 break;
@@ -54,7 +54,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(burnEffect.ID, burnEffect.init(enemy.gameObject));
+                    _effectList.Add(burnEffect.ID, burnEffect.Init(enemy.gameObject));
                     _effectList[burnEffect.ID].Activate();
                 }
                 break;
@@ -68,7 +68,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(fearEffect.ID, fearEffect.init(enemy.gameObject));
+                    _effectList.Add(fearEffect.ID, fearEffect.Init(enemy.gameObject));
                     _effectList[fearEffect.ID].Activate();
                 }
                 break;
@@ -79,7 +79,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(revive.ID, revive.init(enemy.gameObject));
+                    _effectList.Add(revive.ID, revive.Init(enemy.gameObject));
                     _effectList[revive.ID].Activate();
                 }
                 break;
@@ -90,7 +90,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(weaken.ID, weaken.init(enemy.gameObject));
+                    _effectList.Add(weaken.ID, weaken.Init(enemy.gameObject));
                     _effectList[weaken.ID].Activate();
                 }
                 break;

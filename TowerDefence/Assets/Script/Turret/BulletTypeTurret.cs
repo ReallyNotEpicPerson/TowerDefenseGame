@@ -13,11 +13,10 @@ public class BulletTypeTurret : BaseTurretStat
     public GameObject BulletPrefab;
     public string etag = "Enemy";
     private float FireCountDown = 0f;
-    private ObjectPooler pool;
+    //private ObjectPooler pool;
     private void Awake()
     {
-        pool = GetComponent<ObjectPooler>();
-        
+        //pool = GetComponent<ObjectPooler>();
     }
     public void OnValidate()
     {
@@ -36,7 +35,8 @@ public class BulletTypeTurret : BaseTurretStat
     }
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.2f);
+        //InvokeRepeating("UpdateTarget", 0f, 0.2f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
     void UpdateTarget()
     {
@@ -52,7 +52,7 @@ public class BulletTypeTurret : BaseTurretStat
                 nearestenemy = enemy;
             }
         }
-        if (nearestenemy != null && shortestDis <= range.baseValue)//range.baseValue)
+        if (nearestenemy != null && shortestDis <= range.baseValue)
         {
             target = nearestenemy.transform;
         }
@@ -62,7 +62,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
     }
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
         if (target == null)
         {

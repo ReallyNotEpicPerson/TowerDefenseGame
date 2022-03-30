@@ -96,7 +96,7 @@ public class Armor : MonoBehaviour
             return false;
         return true;
     }
-    public void restoreArmor()
+    public void RestoreArmor()
     {
         SetArmorType();
     }

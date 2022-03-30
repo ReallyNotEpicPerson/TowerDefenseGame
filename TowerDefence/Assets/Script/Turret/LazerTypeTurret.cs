@@ -45,7 +45,8 @@ public class LazerTypeTurret : BaseTurretStat
         hiddenUI.SetActive(false);
         txt = hiddenUI.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
         txtManip = txt.GetComponent<TMP_TextController>();
-        InvokeRepeating("UpdateTarget", 0f, 0.2f);
+        //InvokeRepeating("UpdateTarget", 0f, 0.2f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
     void UpdateTarget()
     {

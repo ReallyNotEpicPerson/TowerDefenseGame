@@ -62,36 +62,7 @@ public class ExplodingTypeBullet : BaseBulletClass
     }
     void Damage(Transform enemy)
     {
-        GameObject damdis = Instantiate(damageDisplayUI, enemy.transform.position, target.rotation);
-        damdis.name = "DamageDisplayer" + "of" + name;
-        float damage;
-        if (Random.value < critChance.baseValue)
-        {
-            damage = CritDamage();
-            damdis.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().GetComponent<TMP_TextController>().Blushing();
-        }
-        else
-        {
-            damage = bulletDamage.baseValue;
-            damdis.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().GetComponent<TMP_TextController>().NormalColor(new Color32(255, 255, 255, 255), new Color32(0, 0, 0, 255));
-        }
-        damdis.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text = System.Math.Round(damage,4).ToString();
-        Destroy(damdis, 0.5f);
-
-        Enemy ene = enemy.GetComponent<Enemy>();
-        if (ene != null)
-        {
-            
-            if (bulletType.HasFlag(BulletType.SlowPerSecond))
-            {
-                // ene.SlowPerSecond(slowPtc.baseValue, slowDownSecond.baseValue);
-                //Debug.Log("SlowDownHit");
-            }
-            if (bulletType.HasFlag(BulletType.Burn))
-            {
-                //ene.Dots(dots.baseValue, dotsTime.baseValue);
-            }
-        }
+        
     }
     float CritDamage()
     {

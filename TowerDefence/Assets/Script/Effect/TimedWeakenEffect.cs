@@ -14,14 +14,14 @@ public class TimedWeakenEffect : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        Weaken weaken = (Weaken)effect;
+        Weaken weaken = (Weaken)Effect;
         //tempPercentage = slowEffect._slowPercentage.value;
         if (effectStacks == weaken.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + weaken.stackTime);
             return;
         }
-        if (effectStacks < weaken.stackTime && effect.effectType.HasFlag(EffectType.StackingEffect))
+        if (effectStacks < weaken.stackTime && Effect.effectType.HasFlag(EffectType.StackingEffect))
         {
             effectStacks++;
             switch (weaken.increaseRate.modType)

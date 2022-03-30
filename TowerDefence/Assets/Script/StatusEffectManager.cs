@@ -11,8 +11,8 @@ public class StatusEffectManager : MonoBehaviour//, IDamageable<float,float,floa
     static Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
     public static WaitForSeconds WaitFor(int seconds)
     {
-        WaitForSeconds wfs;
-        if (!dictWaitForSecond.TryGetValue(seconds, out wfs))
+        
+        if (!dictWaitForSecond.TryGetValue(seconds, out WaitForSeconds wfs))
         {
             dictWaitForSecond.Add(seconds, wfs = new WaitForSeconds((float)seconds / FloatToIntRate));
             Debug.Log(seconds + " " + (float)seconds / FloatToIntRate);

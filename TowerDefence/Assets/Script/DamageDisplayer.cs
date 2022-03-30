@@ -31,7 +31,7 @@ public class DamageDisplayer : MonoBehaviour
     }
     public static DamageDisplayer Create(Vector3 pos, int amount, bool critical)
     {
-        Transform DamagePopUp = Instantiate(GameAsset.i.damageDisplayer, pos, Quaternion.identity);
+        Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
         displayer.SetUp(amount, critical);
         //Debug.Log(critical);
@@ -54,7 +54,7 @@ public class DamageDisplayer : MonoBehaviour
     }
     public static DamageDisplayer Create(Vector3 pos, float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
-        Transform DamagePopUp = Instantiate(GameAsset.i.damageDisplayer, pos, Quaternion.identity);
+        Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
         displayer.SetUp(amount, type);
         //Debug.Log(critical);
@@ -62,7 +62,7 @@ public class DamageDisplayer : MonoBehaviour
     }
     public static void Create(Vector3 pos, string str)
     {
-        Transform DamagePopUp = Instantiate(GameAsset.i.damageDisplayer, pos, Quaternion.identity);
+        Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
         displayer.SetTextTo(str);
     }

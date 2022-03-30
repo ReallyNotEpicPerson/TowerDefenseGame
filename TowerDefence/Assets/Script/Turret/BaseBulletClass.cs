@@ -22,20 +22,10 @@ public class BaseBulletClass : MonoBehaviour
     public CharacterStat critChance;
     public CharacterStat critDamage;
 
-    public GameObject damageDisplayUI;
     public GameObject ImpactFx;
 
     [SerializeField] protected string Taggu = "Enemy";
 
     public BulletType bulletType;
     //public PassiveAbility passiveAbility;
-
-    private void OnValidate()
-    {
-        if (damageDisplayUI == null)
-        {
-            damageDisplayUI = (GameObject)Resources.Load("Displayer");
-        }
-    }
-
 }

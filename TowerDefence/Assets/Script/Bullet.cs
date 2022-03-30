@@ -105,8 +105,6 @@ public class Bullet : BaseBulletClass
             if (bulletType.HasFlag(BulletType.Insta_Kill))
             {
                 effectManager.Insta_kill(ene);
-                //ene.Insta_kill(insta_killptc.baseValue);
-                //Debug.Log("Insta_kill");
             }
             if (bulletType.HasFlag(BulletType.SlowPerSecond))
             {

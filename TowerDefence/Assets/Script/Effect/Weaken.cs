@@ -29,7 +29,7 @@ public class Weaken : BaseEffect
         }
     }
 
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         return new TimedWeakenEffect(this,obj);
     }

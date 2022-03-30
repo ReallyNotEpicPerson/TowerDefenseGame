@@ -41,7 +41,7 @@ public class SlowEffect : BaseEffect
                 break;
         }*/
     }
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         return new TimedSlowEffect(this, obj);
     }

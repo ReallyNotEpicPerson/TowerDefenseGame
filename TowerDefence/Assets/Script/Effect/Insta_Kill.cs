@@ -11,7 +11,7 @@ public class Insta_Kill : BaseEffect
         }
         return false;
     }
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         throw new System.NotImplementedException();
     }

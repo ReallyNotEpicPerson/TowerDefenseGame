@@ -22,7 +22,7 @@ public class HealEffect : BaseEffect
             Debug.LogError("Choose the correct type BItCh!");
         }
     }*/
-    public override TimedEffect init(GameObject obj)
+    public override TimedEffect Init(GameObject obj)
     {
         throw new System.NotImplementedException();
     }

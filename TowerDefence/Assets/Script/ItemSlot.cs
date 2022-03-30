@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class ItemSlot : BaseItemSlot, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
-    public event Action<BaseItemSlot> onBeginDragEvent;
-    public event Action<BaseItemSlot> onDragEvent;
-    public event Action<BaseItemSlot> onEndDragEvent;
-    public event Action<BaseItemSlot> onDropEvent;
+    public event Action<BaseItemSlot> OnBeginDragEvent;
+    public event Action<BaseItemSlot> OnDragEvent;
+    public event Action<BaseItemSlot> OnEndDragEvent;
+    public event Action<BaseItemSlot> OnDropEvent;
 
     private bool isDragging;
     private Color dragColor = new Color(1, 1, 1, 0.5f);
@@ -32,25 +32,25 @@ public class ItemSlot : BaseItemSlot, IDragHandler, IBeginDragHandler, IEndDragH
         if (Item != null)
             image.color = dragColor;
 
-        if (onBeginDragEvent != null)
-            onBeginDragEvent(this);
+        if (OnBeginDragEvent != null)
+            OnBeginDragEvent(this);
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (onDragEvent != null)
-            onDragEvent(this);
+        if (OnDragEvent != null)
+            OnDragEvent(this);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
         if (Item != null)
             image.color = normalColor;
-        if (onEndDragEvent != null)
-            onEndDragEvent(this);
+        if (OnEndDragEvent != null)
+            OnEndDragEvent(this);
     }
     public void OnDrop(PointerEventData eventData)
     {
-        if (onDropEvent != null)
-            onDropEvent(this);
+        if (OnDropEvent != null)
+            OnDropEvent(this);
     }
 }

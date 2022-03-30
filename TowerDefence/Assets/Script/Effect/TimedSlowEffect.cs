@@ -4,7 +4,7 @@ using UnityEngine;
 public class TimedSlowEffect : TimedEffect
 {
     private readonly Enemy _enemy;
-    private float tempPercentage = 0;
+    private readonly float tempPercentage = 0;
 
     public TimedSlowEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
     {
@@ -13,7 +13,7 @@ public class TimedSlowEffect : TimedEffect
     #region [idk man ]
     public bool IsThisBetterThan(SlowEffect newSlowEffect)
     {
-        SlowEffect ThisSlowEffect = (SlowEffect)effect;
+        SlowEffect ThisSlowEffect = (SlowEffect)Effect;
         if (newSlowEffect._slowPercentage.value > ThisSlowEffect._slowPercentage.value)
         {
             return true;
@@ -22,19 +22,19 @@ public class TimedSlowEffect : TimedEffect
     }
     public float BestDuration(SlowEffect newSlowEffect)
     {
-        return Mathf.Max(newSlowEffect._duration, effect._duration);
+        return Mathf.Max(newSlowEffect._duration, Effect._duration);
     }
     #endregion
     protected override void ApplyEffect()
     {
-        SlowEffect slowEffect = (SlowEffect)effect;
+        SlowEffect slowEffect = (SlowEffect)Effect;
         //tempPercentage = slowEffect._slowPercentage.value;
         if (effectStacks == slowEffect.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + slowEffect.stackTime);
             return;
         }
-        if (effectStacks < slowEffect.stackTime && effect.effectType.HasFlag(EffectType.StackingEffect))
+        if (effectStacks < slowEffect.stackTime && Effect.effectType.HasFlag(EffectType.StackingEffect))
         {
             effectStacks++;
             switch (slowEffect.increaseRate.modType)
@@ -60,7 +60,7 @@ public class TimedSlowEffect : TimedEffect
     }
     public override void End()
     {
-        SlowEffect slowEffect = (SlowEffect)effect;
+        SlowEffect slowEffect = (SlowEffect)Effect;
         slowEffect._slowPercentage.RemoveAllModifiersFromSource(this);
         _enemy.UndoModification(this);
         effectStacks = 0;
@@ -68,10 +68,10 @@ public class TimedSlowEffect : TimedEffect
     public override StringBuilder Display()
     {
         sb.Clear();
-        sb.Append("Effect ID :" + effect.ID + "\n");
+        sb.Append("Effect ID :" + Effect.ID + "\n");
         sb.Append("SlowPtc :" + tempPercentage + "\n");
         sb.Append("Duration :" + _duration + "\n");
-        sb.Append("Description :" + effect.description + "\n");
+        sb.Append("Description :" + Effect.description + "\n");
         sb.Append("/////////////////////////////////////////////////////////\n");
         return sb;
     }

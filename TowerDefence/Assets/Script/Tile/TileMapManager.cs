@@ -142,8 +142,7 @@ public class TileMapManager : MonoBehaviour
             selected = true;
             if (state.HasFlag(TileNodeState.Upgrade_Sell))
             {
-                RefTurret turret;
-                turretOnTheField.TryGetValue(localGridPos, out turret);
+                turretOnTheField.TryGetValue(localGridPos, out RefTurret turret);
                 if (!turret.HaveTurret)
                 {
                     return;
@@ -210,9 +209,8 @@ public class TileMapManager : MonoBehaviour
         this.state = state;
     }
     public NodeTile GetNodeTile()
-    {
-        NodeTile nodeTile;
-        dataFromTile.TryGetValue(mainLayer.GetTile(localGridPos), out nodeTile);
+    {     
+        dataFromTile.TryGetValue(mainLayer.GetTile(localGridPos), out NodeTile nodeTile);
         return nodeTile;
     }
     public bool BuildTurret(TurretBluePrint blueprint)

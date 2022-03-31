@@ -40,7 +40,7 @@ public class BulletTypeTurret : BaseTurretStat
     }
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(etag);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(etag);//tr4m c4m function
         float shortestDis = Mathf.Infinity;
         GameObject nearestenemy = null;
         foreach (GameObject enemy in enemies)

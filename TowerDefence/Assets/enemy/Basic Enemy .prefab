@@ -271,7 +271,6 @@ GameObject:
   - component: {fileID: 3053064806348107543}
   - component: {fileID: 3727310694209542962}
   - component: {fileID: 1086908084338352726}
-  - component: {fileID: 8162316284443715655}
   m_Layer: 0
   m_Name: 'Basic Enemy '
   m_TagString: Enemy
@@ -481,21 +480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfDebuffs:
   - {fileID: 11400000, guid: a9f28636a4f338341afe08d5497974df, type: 2}
---- !u!114 &8162316284443715655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053064806348107529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6d19cf95c855e4591754ae20fc4a87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  Image: {fileID: 0}
-  parent: {fileID: 0}
 --- !u!1 &4571930864691467095
 GameObject:
   m_ObjectHideFlags: 0

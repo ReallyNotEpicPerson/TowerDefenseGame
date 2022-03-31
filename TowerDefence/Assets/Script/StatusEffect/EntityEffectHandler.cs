@@ -6,6 +6,8 @@ public class EntityEffectHandler : MonoBehaviour
 {
     public Dictionary<string, TimedEffect> _effectList = new Dictionary<string, TimedEffect>();
 
+    //EffectIcon
+
     #region Update Effect
     void Update()
     {

@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
-    [SerializeField] private EffectIcon fxIcon;
 
     StatUI_InGame statUI;
     #region wait for second List
@@ -128,10 +127,6 @@ public class Enemy : MonoBehaviour
         {
             enemyPathMovement = GetComponent<EnemyMovement>();
         }
-        if (fxIcon != null)
-        {
-            GetComponent<EffectIcon>();
-        }
         TryGetComponent(out fxManager);
     }
     void Start()
@@ -144,7 +139,7 @@ public class Enemy : MonoBehaviour
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
-        if (enemyState.HasFlag(EnemyState.TakeNoDamage))
+        if (enemyState.HasFlag(EnemyState.TakeNoDamage) || health>0 )
         {
             return false;
         }
@@ -174,6 +169,10 @@ public class Enemy : MonoBehaviour
                 break;
         }
         health -= amount;
+        if (health > startHealth)
+        {
+            health = startHealth;
+        }
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
@@ -225,6 +224,7 @@ public class Enemy : MonoBehaviour
         Handler.RemoveAllDebuffExcept();
     }
     #endregion
+    #region EnemyDeaths
     void Die()
     {
         RemoveALLDebuff();
@@ -284,7 +284,15 @@ public class Enemy : MonoBehaviour
         //gameObject.SetActive(true);
         //throw new NotImplementedException();
     }
-
+    public void When_Insta_kill()//remove soon??
+    {
+        GameObject sth = Instantiate(Displayer, transform.position, Quaternion.identity);
+        sth.transform.GetChild(0).GetComponentInChildren<TMP_TextController>().SetText("Insta Kill!!!");
+        Destroy(sth, 0.5f);
+        Handler.RemoveALLDebuff();
+        Die();//pooling
+    }
+    #endregion
     #region for adjusting speed
     public void TurnBack(int i)
     {
@@ -348,14 +356,7 @@ public class Enemy : MonoBehaviour
         EffectColor(Color.white);
     }
     #endregion
-    public void When_Insta_kill()//remove soon??
-    {
-        GameObject sth = Instantiate(Displayer, transform.position, Quaternion.identity);
-        sth.transform.GetChild(0).GetComponentInChildren<TMP_TextController>().SetText("Insta Kill!!!");
-        Destroy(sth, 0.5f);
-        Handler.RemoveALLDebuff();
-        Die();//pooling
-    }
+    #region weaken 
     public void Weaken(StatValueType stat)
     {
         modifier = stat;
@@ -368,15 +369,9 @@ public class Enemy : MonoBehaviour
     public void EndWeaken()
     {
         DisableState(EnemyState.Weaken);
-    }/*
-    public void MakeIcon(BaseEffect bfx)
-    {
-        fxIcon.MakeIcon(bfx.sprite);
     }
-    public void DeleteIcon(BaseEffect bfx)
-    {
-        fxIcon.DeleteIcon(bfx.sprite);
-    }*/
+    #endregion
+    
     public void EffectColor(Color color)
     {
         enemyColor.color = color;

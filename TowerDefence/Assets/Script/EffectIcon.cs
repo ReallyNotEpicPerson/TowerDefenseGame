@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,12 +17,20 @@ public enum EffectIconState
 }
 public class EffectIcon : MonoBehaviour
 {
-    private Dictionary<Sprite, Image> dict;
-    public Camera cam;
+    private Dictionary<string, TimedEffect> dict;
     public Image Image;
     public Transform parent;
     EffectIconState state;
 
+    public void MakeIcon(TimedEffect timedEffect)
+    {
+        dict.Add(timedEffect.Effect.ID, timedEffect);
+    }
+
+    internal void DeleteIcon(object sprite)
+    {
+        throw new NotImplementedException();
+    }
 
     #region state flip
     public void DisableState(EffectIconState ies)

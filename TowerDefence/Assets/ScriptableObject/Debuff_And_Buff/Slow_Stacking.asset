@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Slow_Stacking
   m_EditorClassIdentifier: 
   ID: SL_ST
-  Sprite: {fileID: 21300000, guid: 40a0b8461184248419cf5b10e8dfcda1, type: 3}
+  sprite: {fileID: 0}
   effectType: 2
   removableType: 0
   expirableType: 0
   _duration: 2
   chance: 1
-  description: Stack up shit
+  description: Slow down enemy more after each shot
   _slowPercentage:
     baseValue: 0.2
   increaseRate:

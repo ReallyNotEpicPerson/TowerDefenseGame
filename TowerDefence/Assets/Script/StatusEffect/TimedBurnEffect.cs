@@ -17,14 +17,14 @@ public class TimedBurnEffect : TimedEffect
     {
         if (Effect.expirableType.HasFlag(ExpirableType.NonExpireable))
         {
-            burnPertick();
+            BurnPertick();
             return;
         }            
         if (Effect.expirableType.HasFlag(ExpirableType.Expirable))
         {        
             _duration -= Time.deltaTime;
             //Debug.Log(_duration);
-            burnPertick();
+            BurnPertick();
             if (_duration <= 0)
             {
                 End();
@@ -33,7 +33,7 @@ public class TimedBurnEffect : TimedEffect
         }
         
     }
-    public void burnPertick()
+    public void BurnPertick()
     {
         timer -= Time.deltaTime;
         //Debug.Log(timer);

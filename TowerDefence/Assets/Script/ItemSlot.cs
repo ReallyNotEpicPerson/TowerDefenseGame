@@ -32,21 +32,18 @@ public class ItemSlot : BaseItemSlot, IDragHandler, IBeginDragHandler, IEndDragH
         if (Item != null)
             image.color = dragColor;
 
-        if (OnBeginDragEvent != null)
-            OnBeginDragEvent(this);
+        OnBeginDragEvent?.Invoke(this);
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (OnDragEvent != null)
-            OnDragEvent(this);
+        OnDragEvent?.Invoke(this);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
         if (Item != null)
             image.color = normalColor;
-        if (OnEndDragEvent != null)
-            OnEndDragEvent(this);
+        OnEndDragEvent?.Invoke(this);
     }
     public void OnDrop(PointerEventData eventData)
     {

@@ -139,7 +139,7 @@ public class CharacterSetup : MonoBehaviour
     {
         levelSelector.DisableCharacterSelection();
     }
-    public void readyButtonPressed()
+    public void ReadyButtonPressed()
     {
         DontDestroyOnLoad(_dontDestroyOnLoad);
         levelSelector.LoadScence();

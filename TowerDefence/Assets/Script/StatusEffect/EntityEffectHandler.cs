@@ -6,7 +6,7 @@ public class EntityEffectHandler : MonoBehaviour
 {
     public Dictionary<string, TimedEffect> _effectList = new Dictionary<string, TimedEffect>();
 
-    //EffectIcon
+    public EffectIcon fxIcon;
 
     #region Update Effect
     void Update()
@@ -100,13 +100,22 @@ public class EntityEffectHandler : MonoBehaviour
                 Debug.LogError("wait what the fuck is this?");
                 break;
         }
+        if (fxIcon != null && !fxIcon.HaveThis(baseEffect.ID))
+        {
+            Debug.Log("SetIcon");
+            fxIcon.AddIcon(baseEffect);
+        }
         ListAllDebuff();
     }
     public void RemoveDebuff(string ID)//OG remove
     {
         _effectList.Remove(ID);
+        if (fxIcon != null)
+        {
+            fxIcon.DeleteIcon(ID);
+        }
     }
-    public void RemoveALLDebuff(int LeType) //Well fuck,there are 2 type of status effect negative=0 and positive=1
+    /*public void RemoveALLDebuff(int LeType) //Well fuck,there are 2 type of status effect negative=0 and positive=1
     {
         if (LeType == 0)
         {
@@ -122,7 +131,7 @@ public class EntityEffectHandler : MonoBehaviour
                 //remove all positive effect somehow 
             }
         }
-    }
+    }*/
     public void RemoveAllDebuffExcept(string name="Revive")
     {
         foreach (KeyValuePair<string, TimedEffect> effect in _effectList) 
@@ -133,11 +142,19 @@ public class EntityEffectHandler : MonoBehaviour
             }
             _effectList.Remove(effect.Key);
         }
+        if (fxIcon != null)
+        {
+            fxIcon.DeleteAllICon();
+        }
     }
     public void RemoveALLDebuff()
     {
         _effectList.Clear();
         Debug.Log("No Debuff left right? "+_effectList.Count());
+        if (_effectList.Count > 0)
+        {
+            Debug.Log("WTF");
+        }
     }
     
     public void ListAllDebuff()

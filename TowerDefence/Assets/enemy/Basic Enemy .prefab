@@ -369,7 +369,6 @@ MonoBehaviour:
   Displayer: {fileID: 0}
   Handler: {fileID: 3727310694209542962}
   fxManager: {fileID: 1086908084338352726}
-  fxIcon: {fileID: 0}
 --- !u!61 &3053064806348107542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -466,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3e2e22538a4004b90c1e33419e3923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fxIcon: {fileID: 3555741443552291711}
 --- !u!114 &1086908084338352726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2880335386950434484}
   - component: {fileID: 7481350474444461334}
+  - component: {fileID: 3555741443552291711}
   - component: {fileID: 3634009418446868456}
   - component: {fileID: 9026817582049403231}
   m_Layer: 5
@@ -878,8 +879,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 67.8, y: 0}
-  m_SizeDelta: {x: -64.67, y: 0}
+  m_AnchoredPosition: {x: 60.067497, y: 0}
+  m_SizeDelta: {x: -80.134995, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7481350474444461334
 CanvasRenderer:
@@ -889,6 +890,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8462526898905198140}
   m_CullTransparentMesh: 1
+--- !u!114 &3555741443552291711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462526898905198140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6d19cf95c855e4591754ae20fc4a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1193080309296453912, guid: 8a43f810347980b4b903d0aacdc888a3, type: 3}
+  parent: {fileID: 2880335386950434484}
 --- !u!114 &3634009418446868456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,7 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -936,7 +951,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 3
   m_Spacing: 1
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0

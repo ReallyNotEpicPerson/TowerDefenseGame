@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Flags]
 public enum EffectIconState
@@ -17,21 +18,41 @@ public enum EffectIconState
 }
 public class EffectIcon : MonoBehaviour
 {
-    private Dictionary<string, TimedEffect> dict;
-    public Image Image;
+    Dictionary<string, Image> dict = new Dictionary<string, Image>();
+    public Image image;
     public Transform parent;
-    EffectIconState state;
 
-    public void MakeIcon(TimedEffect timedEffect)
+    public bool HaveThis(string ID)
     {
-        dict.Add(timedEffect.Effect.ID, timedEffect);
+        return dict.ContainsKey(ID);
     }
 
-    internal void DeleteIcon(object sprite)
+    public void AddIcon(BaseEffect bfx)
     {
-        throw new NotImplementedException();
-    }
+        Image img = Instantiate(image,parent);
+        img.sprite = bfx.sprite;
+        /*if (bfx.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            img.GetComponentInChildren<TMP_Text>().text = ;
+        }*/
+        //Debug.Log(img.sprite.name);
 
+        dict.Add(bfx.ID, img);
+    }
+    public void DeleteIcon(string ID)
+    {
+        Destroy(dict[ID].gameObject);
+        dict.Remove(ID);
+    }
+    public void DeleteAllICon()
+    {
+        foreach (KeyValuePair<string, Image> icon in dict)
+        {
+            Destroy(dict[icon.Key].gameObject);
+        }
+        dict.Clear();
+    }
+    /*
     #region state flip
     public void DisableState(EffectIconState ies)
     {
@@ -42,4 +63,5 @@ public class EffectIcon : MonoBehaviour
         state |= ies;
     }
     #endregion
+    */
 }

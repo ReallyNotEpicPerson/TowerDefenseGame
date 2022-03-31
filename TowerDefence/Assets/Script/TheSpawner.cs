@@ -31,14 +31,14 @@ public class TheSpawner : MonoBehaviour
     public void WaveCounter(string num)
     {
         Counter.text = "Wave " + num;
-    }
+    }/*
     IEnumerator WaveCount()
     {
         Counter.enabled = true;
         Counter.text = "Wave " + (waveNum + 1);
         yield return new WaitForSeconds(5);
         Counter.enabled = false;
-    }
+    }*/
     //
     void Start()
     {

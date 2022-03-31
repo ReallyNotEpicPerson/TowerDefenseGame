@@ -63,8 +63,7 @@ public class Enemy : MonoBehaviour
     const float FloatToIntRate = 1000;
     public static WaitForSeconds WaitFor(int seconds)
     {
-        WaitForSeconds wfs;
-        if (!dictWaitForSecond.TryGetValue(seconds, out wfs))
+        if (!dictWaitForSecond.TryGetValue(seconds, out WaitForSeconds wfs))
         {
             dictWaitForSecond.Add(seconds, wfs = new WaitForSeconds((float)seconds / FloatToIntRate));
             Debug.Log(seconds + " " + (float)seconds / FloatToIntRate);
@@ -139,7 +138,7 @@ public class Enemy : MonoBehaviour
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
-        if (enemyState.HasFlag(EnemyState.TakeNoDamage) || health>0 )
+        if (enemyState.HasFlag(EnemyState.TakeNoDamage))
         {
             return false;
         }

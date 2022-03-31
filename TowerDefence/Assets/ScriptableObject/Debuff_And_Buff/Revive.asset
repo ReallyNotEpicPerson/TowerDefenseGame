@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Revive
   m_EditorClassIdentifier: 
   ID: REVIVE
-  Sprite: {fileID: 21300000, guid: 8f830336d68e0f740a7fc169ca3b5566, type: 3}
+  sprite: {fileID: 21300000, guid: 8f830336d68e0f740a7fc169ca3b5566, type: 3}
   effectType: 8
   removableType: 1
   expirableType: 0

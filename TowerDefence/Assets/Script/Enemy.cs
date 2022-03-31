@@ -262,7 +262,7 @@ public class Enemy : MonoBehaviour
         if (armorStat != null)
         {
             armorStat.RestoreArmor();
-            if (!armorStat.armorType.HasFlag(ArmorType.None))
+            if (armorStat.armorType.HasFlag(ArmorType.Single)|| armorStat.armorType.HasFlag(ArmorType.Multiple))
             {
                 EnableState(EnemyState.Amored);
             }

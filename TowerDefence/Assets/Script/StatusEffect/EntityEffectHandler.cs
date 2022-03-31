@@ -34,9 +34,57 @@ public class EntityEffectHandler : MonoBehaviour
     {
         return _effectList.ContainsKey(ID);
     }
+    public void ActivateDebuff(TimedEffect timedEffect)
+    {
+        if (fxIcon != null && !fxIcon.HaveThis(timedEffect.Effect.ID))
+        {
+            Debug.Log("SetIcon");
+            fxIcon.AddIcon(timedEffect);
+        }
+        if (_effectList.ContainsKey(timedEffect.Effect.ID))
+        {
+            _effectList[timedEffect.Effect.ID].Activate();
+            /*if (fxIcon != null && _effectList[timedEffect.Effect.ID].Effect.effectType.HasFlag(EffectType.StackingEffect))
+            {
+                fxIcon.SetStack(_effectList[timedEffect.Effect.ID]);
+            }*/
+        }
+        else
+        {
+            _effectList.Add(timedEffect.Effect.ID, timedEffect);
+            _effectList[timedEffect.Effect.ID].Activate();
+            
+        }
+        if (fxIcon != null && _effectList[timedEffect.Effect.ID].Effect.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            fxIcon.SetStack(_effectList[timedEffect.Effect.ID]);
+        }
+        ListAllDebuff();
+    }
     public void AddDebuff(BaseEffect baseEffect, Enemy enemy)// the ultimate function
     {
-        switch (baseEffect)
+        switch (baseEffect) 
+        {
+            case SlowEffect slowEffect:
+                ActivateDebuff(slowEffect.Init(enemy.gameObject));
+                break;
+            case BurnEffect burnEffect:
+                ActivateDebuff(burnEffect.Init(enemy.gameObject));
+                break;
+            case FearEffect fearEffect:
+                ActivateDebuff(fearEffect.Init(enemy.gameObject));
+                break;
+            case Revive revive:
+                ActivateDebuff(revive.Init(enemy.gameObject));
+                break;
+            case Weaken weaken:
+                ActivateDebuff(weaken.Init(enemy.gameObject));
+                break;
+            default:
+                Debug.LogError("wait what the fuck is this?");
+                break;
+        }     
+        /*switch (baseEffect)
         {
             case SlowEffect slowEffect:
                 if (_effectList.ContainsKey(slowEffect.ID))
@@ -99,13 +147,7 @@ public class EntityEffectHandler : MonoBehaviour
             default:
                 Debug.LogError("wait what the fuck is this?");
                 break;
-        }
-        if (fxIcon != null && !fxIcon.HaveThis(baseEffect.ID))
-        {
-            Debug.Log("SetIcon");
-            fxIcon.AddIcon(baseEffect);
-        }
-        ListAllDebuff();
+        }*/
     }
     public void RemoveDebuff(string ID)//OG remove
     {
@@ -132,7 +174,7 @@ public class EntityEffectHandler : MonoBehaviour
             }
         }
     }*/
-    public void RemoveAllDebuffExcept(string name="Revive")
+    public void RemoveAllDebuffExcept()//string name="Revive")
     {
         foreach (KeyValuePair<string, TimedEffect> effect in _effectList) 
         {

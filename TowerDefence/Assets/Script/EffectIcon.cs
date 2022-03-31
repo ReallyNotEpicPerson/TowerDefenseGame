@@ -27,18 +27,29 @@ public class EffectIcon : MonoBehaviour
         return dict.ContainsKey(ID);
     }
 
-    public void AddIcon(BaseEffect bfx)
+    public void AddIcon(TimedEffect fx)
     {
         Image img = Instantiate(image,parent);
-        img.sprite = bfx.sprite;
-        /*if (bfx.effectType.HasFlag(EffectType.StackingEffect))
-        {
-            img.GetComponentInChildren<TMP_Text>().text = ;
-        }*/
+        img.sprite = fx.Effect.sprite;
+        dict.Add(fx.Effect.ID, img);
         //Debug.Log(img.sprite.name);
-
-        dict.Add(bfx.ID, img);
     }
+
+    public void ApplyEffect()
+    {
+
+    }
+
+    public void SetStack(TimedEffect fx)
+    {
+        TMP_Text text = dict[fx.Effect.ID].GetComponentInChildren<TMP_Text>();
+        Debug.Log(fx.GetStack());
+        if (fx.GetStack()>0)
+        {
+            text.text=fx.GetStack().ToString();
+        }
+    }
+
     public void DeleteIcon(string ID)
     {
         Destroy(dict[ID].gameObject);
@@ -53,15 +64,15 @@ public class EffectIcon : MonoBehaviour
         dict.Clear();
     }
     /*
-    #region state flip
-    public void DisableState(EffectIconState ies)
-    {
-        state &= ~ies;
-    }
-    public void EnableState(EffectIconState ies)
-    {
-        state |= ies;
-    }
-    #endregion
-    */
+#region state flip
+public void DisableState(EffectIconState ies)
+{
+   state &= ~ies;
+}
+public void EnableState(EffectIconState ies)
+{
+   state |= ies;
+}
+#endregion
+*/
 }

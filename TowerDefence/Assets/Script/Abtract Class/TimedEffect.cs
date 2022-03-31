@@ -36,6 +36,10 @@ public abstract class TimedEffect
         _duration -= dur;
     }
     #endregion
+    public int GetStack()
+    {
+        return effectStacks;
+    }
     public virtual void Tick()
     {
         if (Effect.expirableType.HasFlag(ExpirableType.NonExpireable))

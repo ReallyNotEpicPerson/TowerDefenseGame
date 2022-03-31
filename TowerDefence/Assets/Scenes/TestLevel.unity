@@ -23817,7 +23817,7 @@ PrefabInstance:
     - target: {fileID: 664026795567817584, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053064804829631974, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
@@ -23852,12 +23852,12 @@ PrefabInstance:
     - target: {fileID: 3053064806348107539, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.35
+      value: -8.06
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107539, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.08
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107539, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
@@ -23907,17 +23907,17 @@ PrefabInstance:
     - target: {fileID: 3053064806348107541, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: enemyState
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107543, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: MaxLayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107543, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: armorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6485711803017856445, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}

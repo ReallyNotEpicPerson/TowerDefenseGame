@@ -14,10 +14,12 @@ public enum RemovableType { Removable, NonRemovable };
 public enum ExpirableType { Expirable, NonExpireable };
 //Expirable : duration reduce over time , can extend duration
 //NonExpirable : duration never drop , extending duration have no meaning
+[System.Serializable]
 public abstract class BaseEffect : ScriptableObject
 {
     public string ID;
-    public Sprite sprite;
+    public Sprite Icon;
+    public GameObject specialFX;
     public EffectType effectType;
     public RemovableType removableType;
     public ExpirableType expirableType;

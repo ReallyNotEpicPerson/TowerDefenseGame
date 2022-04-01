@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Weaken_Basic
   m_EditorClassIdentifier: 
   ID: WE_BS
-  sprite: {fileID: 21300000, guid: 45dea61616902dc478ad262fd6f5d152, type: 3}
+  Icon: {fileID: 21300000, guid: 45dea61616902dc478ad262fd6f5d152, type: 3}
+  specialFX: {fileID: 0}
   effectType: 0
   removableType: 0
   expirableType: 0

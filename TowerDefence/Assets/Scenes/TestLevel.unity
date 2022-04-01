@@ -7120,6 +7120,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicTurret_Lv2
       objectReference: {fileID: 0}
+    - target: {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7083397131444511046, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
       propertyPath: m_RootOrder
@@ -11997,7 +12002,7 @@ PrefabInstance:
     - target: {fileID: 2901893777028136064, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
@@ -12007,12 +12012,12 @@ PrefabInstance:
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.99
+      value: -0.27
       objectReference: {fileID: 0}
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.07
+      value: -6.45
       objectReference: {fileID: 0}
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}

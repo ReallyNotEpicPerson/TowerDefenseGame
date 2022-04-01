@@ -18,7 +18,8 @@ public enum EffectIconState
 }
 public class EffectIcon : MonoBehaviour
 {
-    Dictionary<string, Image> dict = new Dictionary<string, Image>();
+    readonly Dictionary<string, Image> dict = new Dictionary<string, Image>();
+    readonly Dictionary<string, GameObject> gameObjectdict = new Dictionary<string, GameObject>();
     public Image image;
     public Transform parent;
 
@@ -30,14 +31,18 @@ public class EffectIcon : MonoBehaviour
     public void AddIcon(TimedEffect fx)
     {
         Image img = Instantiate(image,parent);
-        img.sprite = fx.Effect.sprite;
+        img.sprite = fx.Effect.Icon;
         dict.Add(fx.Effect.ID, img);
         //Debug.Log(img.sprite.name);
+        if(fx.Effect.specialFX != null)
+        {
+            ApplySpecialEffect(fx.Effect.specialFX);
+        }
     }
-
-    public void ApplyEffect()
+    
+    public void ApplySpecialEffect(GameObject pfx)
     {
-
+        Instantiate(pfx,transform.position,Quaternion.identity);
     }
 
     public void SetStack(TimedEffect fx)

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Burn_Stacking
   m_EditorClassIdentifier: 
   ID: BU_ST
-  sprite: {fileID: 21300000, guid: 4780c02dfd4d798499f3be404468fb84, type: 3}
+  Icon: {fileID: 21300000, guid: 4780c02dfd4d798499f3be404468fb84, type: 3}
+  specialFX: {fileID: 0}
   effectType: 2
   removableType: 0
   expirableType: 0

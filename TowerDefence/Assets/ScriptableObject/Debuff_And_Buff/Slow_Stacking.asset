@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Slow_Stacking
   m_EditorClassIdentifier: 
   ID: SL_ST
-  sprite: {fileID: 21300000, guid: 5a42eab955a166845a9689fc4475262e, type: 3}
+  Icon: {fileID: 21300000, guid: 40a0b8461184248419cf5b10e8dfcda1, type: 3}
+  specialFX: {fileID: 8109431180591657691, guid: e1bc0081b769c1848908b02c65e46123,
+    type: 3}
   effectType: 2
   removableType: 0
   expirableType: 0

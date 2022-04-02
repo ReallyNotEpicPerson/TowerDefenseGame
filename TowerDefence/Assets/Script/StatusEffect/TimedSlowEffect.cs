@@ -40,7 +40,7 @@ public class TimedSlowEffect : TimedEffect
             switch (slowEffect.increaseRate.modType)
             {
                 case StatModType.Flat:
-                    slowEffect._slowPercentage.AddingOneInstance(new StatModifier(slowEffect.increaseRate.statValue.value*effectStacks, StatModType.Flat, this));
+                    slowEffect._slowPercentage.AddingOneInstance(new StatModifier(slowEffect.increaseRate.statValue.value * effectStacks, StatModType.Flat, this));
                     break;
                 case StatModType.PercentAdd:
                     slowEffect._slowPercentage.AddModifier(new StatModifier(slowEffect.increaseRate.statValue.value, StatModType.PercentAdd, this));
@@ -52,10 +52,13 @@ public class TimedSlowEffect : TimedEffect
                     break;
             }
             //Debug.Log("Stack num "+effectStacks+" Stack value " + slowEffect._slowPercentage.value);
-        }    
+        }
         _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.value, StatModType.PercentDebuffBest, this));
-
-
+        if (!_enemy.ContainFX(Effect.ID))
+        {
+            Debug.Log("addFX");
+            _enemy.AddFX(this);
+        }
         //_enemy.AdjustSpeed(slowEffect._slowPercentage.value);
     }
     public override void End()
@@ -63,6 +66,7 @@ public class TimedSlowEffect : TimedEffect
         SlowEffect slowEffect = (SlowEffect)Effect;
         slowEffect._slowPercentage.RemoveAllModifiersFromSource(this);
         _enemy.UndoModification(this);
+        _enemy.RemoveFX(Effect.ID);
         effectStacks = 0;
     }
     public override StringBuilder Display()

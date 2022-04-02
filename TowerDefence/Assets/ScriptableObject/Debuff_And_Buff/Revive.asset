@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: REVIVE
   Icon: {fileID: 21300000, guid: 8f830336d68e0f740a7fc169ca3b5566, type: 3}
-  specialFX: {fileID: 0}
+  specialFX: {fileID: 3459325523100538173, guid: 4c3223480d694f24f94ae5d948df8919,
+    type: 3}
   effectType: 8
   removableType: 1
   expirableType: 0
   _duration: 4
-  chance: 0.8
+  chance: 1
   description: Revive enemy after some time

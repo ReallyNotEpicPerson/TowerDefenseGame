@@ -104,12 +104,10 @@ MonoBehaviour:
     baseValue: 0.5
   critDamage:
     baseValue: 1.5
-  damageDisplayUI: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
   Taggu: Enemy
-  bulletType: 4
+  bulletType: 32
   effectManager: {fileID: -9094273432376858205, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
     type: 3}
   explosionRadius:

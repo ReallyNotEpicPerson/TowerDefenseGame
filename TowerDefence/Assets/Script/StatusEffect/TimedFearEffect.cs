@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimedFearEffect : TimedEffect
@@ -15,6 +13,7 @@ public class TimedFearEffect : TimedEffect
         //enemyMovement.Turn();
         _enemy.UndoModification(this);
         _enemy.TurnBack(1);
+        _enemy.RemoveFX(Effect.ID);
     }
     protected override void ApplyEffect()
     {
@@ -40,6 +39,9 @@ public class TimedFearEffect : TimedEffect
         }
         _enemy.TurnBack(0);
         _enemy.IncreaseSpeed(new StatModifier(fear.runBackSpeed.statValue.value, fear.runBackSpeed.modType, this));
-        
+        if (!_enemy.ContainFX(Effect.ID))
+        {
+            _enemy.AddFX(this);
+        }
     }
 }

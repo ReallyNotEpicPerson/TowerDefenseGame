@@ -28,8 +28,8 @@ public enum MovementType
 #endregion 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public EnemyType enemyType;
-    [SerializeField] public EnemyState enemyState;
+    public EnemyType enemyType;
+    public EnemyState enemyState;
     #region EnemyStat
     public float startSpeed = 10f;
     public float startHealth = 100f;
@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
+    [SerializeField] private SpecialFX specialFX;
 
     StatUI_InGame statUI;
     #region wait for second List
@@ -218,9 +219,27 @@ public class Enemy : MonoBehaviour
     {
         Handler.RemoveALLDebuff();
     }
-    public void RemoveALLDebuffExcept()
+    #endregion
+    #region additional Special Effect
+    public bool ContainFX(string ID)
     {
-        Handler.RemoveAllDebuffExcept();
+        return specialFX.HaveThisFX(ID);
+    }
+    public void AddFX(TimedEffect fx)
+    {
+        specialFX.AddFX(fx);
+    }
+    public void RemoveFX(string ID)
+    {
+        specialFX.RemoveFX(ID);
+    }
+    public void RemoveAllFX()
+    {
+        specialFX.RemoveAllFX();
+    }
+    public void OneOffFX(TimedEffect fx)
+    {
+        specialFX.AddFX(fx);
     }
     #endregion
     #region EnemyDeaths

@@ -18,6 +18,6 @@ public class GameAsset : MonoBehaviour
     public List<GameObject> weaponSprite;
     public Image[] charImg;
 
-    public Transform damageDisplayer ;
+    public Transform damageDisplayer;
 
 }

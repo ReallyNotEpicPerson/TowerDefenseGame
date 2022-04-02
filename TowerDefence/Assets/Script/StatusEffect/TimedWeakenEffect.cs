@@ -11,6 +11,7 @@ public class TimedWeakenEffect : TimedEffect
     public override void End()
     {
         _enemy.EndWeaken();
+        _enemy.RemoveFX(Effect.ID);
     }
     protected override void ApplyEffect()
     {
@@ -41,5 +42,9 @@ public class TimedWeakenEffect : TimedEffect
             //Debug.Log("Stack num "+effectStacks+" Stack value " + slowEffect._slowPercentage.value);
         }
         _enemy.Weaken(weaken.extraDamageTaken);
+        if (!_enemy.ContainFX(Effect.ID))
+        {
+            _enemy.AddFX(this);
+        }
     }
 }

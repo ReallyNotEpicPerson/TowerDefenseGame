@@ -10,7 +10,8 @@ public class TimedReviveEffect : TimedEffect
         _enemy = obj.GetComponent<Enemy>();
     }
     public override void End()
-    {
+    {        
+        _enemy.OneOffFX(this);
         _enemy.Revive();
     }
     protected override void ApplyEffect()

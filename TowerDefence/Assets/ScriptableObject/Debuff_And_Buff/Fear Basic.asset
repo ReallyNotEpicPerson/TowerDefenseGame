@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Fear Basic
   m_EditorClassIdentifier: 
   ID: FE_BS
-  Sprite: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 363ab6bf03bc5334babd087b48a6daed, type: 3}
+  specialFX: {fileID: 8146328717029313891, guid: 70d4259d935b20841ac71665eb42b9b3,
+    type: 3}
   effectType: 0
   removableType: 0
   expirableType: 0

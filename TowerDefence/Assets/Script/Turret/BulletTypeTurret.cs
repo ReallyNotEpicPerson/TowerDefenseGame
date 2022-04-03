@@ -2,7 +2,6 @@
 using UnityEditor;
 #endif
 using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
 
 public class BulletTypeTurret : BaseTurretStat
@@ -62,7 +61,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
     }
     // Update is called once per frame
-    void Update() 
+    void Update()
     {
         if (target == null)
         {
@@ -83,10 +82,10 @@ public class BulletTypeTurret : BaseTurretStat
         for (int i = 0; i < firePoint.Count; i++)
         {
             Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
-            if (bullet != null){ bullet.Seek(target,turretType);}   
-        }    
+            if (bullet != null) { bullet.Seek(target, turretType); }
+        }
     }
-    private GameObject MakeBullet(int i) 
+    private GameObject MakeBullet(int i)
     {
         return Instantiate(BulletPrefab, firePoint[i].position, firePoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
@@ -100,5 +99,5 @@ public class BulletTypeTurret : BaseTurretStat
         /* Gizmos.color = Color.green;
          Gizmos.DrawWireSphere(transform.position, Range);*/
     }
- #endif
+#endif
 }

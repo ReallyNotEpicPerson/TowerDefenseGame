@@ -45,22 +45,13 @@ public class BaseTurretStat : MonoBehaviour
 
     [SerializeField] protected TurretType turretType;
     protected Direction direction;
-    /*private Node _node;
-    
-    public void SetNode(Node node)
-    {
-        _node = node;
-    }*/
+
     public virtual void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
-        /*if (_node != null)
-        {
-            _node.CallBuildManager();
-        }*/
     }
     public virtual void OnMouseEnter()
     {
@@ -149,4 +140,3 @@ public struct TurretEntity
     CharacterStat Target;
     
 }*/
-

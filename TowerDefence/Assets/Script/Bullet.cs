@@ -14,7 +14,7 @@ public class Bullet : BaseBulletClass
         target = _target;
         turretType = t;
     }
-    void Update()
+    void Update()//make bullet move and shit
     {
         if (target == null)
         {
@@ -89,7 +89,7 @@ public class Bullet : BaseBulletClass
             }
             else
             {
-                damage = bulletDamage.baseValue;
+                damage = bulletDamage.value;
                 if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
                     if (Modifier.modType == StatModType.Flat)

@@ -6,28 +6,31 @@ using UnityEngine;
 
 public class LazerTypeTurret : BaseTurretStat
 {
-    public CharacterStat critChance;//maybe
-    public CharacterStat critDamage;//maybe
-    public CharacterStat damageOverTime;//no
-    public CharacterStat slowPtc;//no
-    public Transform firePoint;//wait
+    public BulletType bulletType;
+    public CharacterStat critChance;
+    public CharacterStat critDamage;
+    public CharacterStat damageOverTime; 
+
+    public CharacterStat rate;
+    private float timer;
+
+    public Transform firePoint;
 
     public LineRenderer lineRenderer;
     public ParticleSystem lazerFX;
 
     public string etag = "Enemy";
-    private Enemy instance;
     private Enemy tar;
+    private float finalDamage;
 
-    public GameObject damageDisplayUI;
+    /*public GameObject damageDisplayUI;
     private GameObject hiddenUI;
     private TMP_Text txt;
-    private TMP_TextController txtManip; 
+    private TMP_TextController txtManip;*/
 
     public void OnValidate()
     {
-
-        if (lineRenderer==null)
+        if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
         }
@@ -35,25 +38,29 @@ public class LazerTypeTurret : BaseTurretStat
         {
             lazerFX = transform.GetChild(0).GetComponentInChildren<ParticleSystem>();
         }
-
     }
 
-    private void Start()
+    private void Awake()
     {
+        /*
         hiddenUI = Instantiate(damageDisplayUI, transform.position, Quaternion.identity);
         hiddenUI.name = "DamageDisplayer" + "of" + this.name;
         hiddenUI.SetActive(false);
         txt = hiddenUI.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        txtManip = txt.GetComponent<TMP_TextController>();
+        txtManip = txt.GetComponent<TMP_TextController>();*/
         //InvokeRepeating("UpdateTarget", 0f, 0.2f);
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
+    }
+    private void Start()
+    {
+        timer = rate.baseValue;
     }
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(etag);
         float shortestDis = Mathf.Infinity;
         GameObject nearestenemy = null;
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in enemies)//check distance
         {
             float DisToenenmy = Vector3.Distance(transform.position, enemy.transform.position);
             if (DisToenenmy < shortestDis)
@@ -62,14 +69,10 @@ public class LazerTypeTurret : BaseTurretStat
                 nearestenemy = enemy;
             }
         }
-        if (nearestenemy != null && shortestDis <= range.baseValue)
+        if (nearestenemy != null && shortestDis <= range.value)
         {
             target = nearestenemy.transform;
             tar = nearestenemy.GetComponent<Enemy>();
-            if (instance != null)
-            {
-                instance.EnemyColor(Color.white);
-            }
         }
         else
         {
@@ -78,7 +81,6 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void Update()
     {
-        instance = tar;
         if (target == null)
         {
             if (lineRenderer.enabled)
@@ -86,39 +88,71 @@ public class LazerTypeTurret : BaseTurretStat
                 lineRenderer.enabled = false;
                 lazerFX.Stop();
             }
-            hiddenUI.SetActive(false);
             return;
         }
         RotateToObject();
-        hiddenUI.SetActive(true);
-        LazerShoot();
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            LazerShoot();
+            timer = rate.value;
+        }
     }
-    float LazerDamageWithCrit()
+    float CritDamage()
     {
-        return damageOverTime.baseValue + (damageOverTime.baseValue * critChance.baseValue) * Time.deltaTime;
-    }
-    float LazerDamageWithoutCrit()
-    {
-        return damageOverTime.baseValue * Time.deltaTime;
+        return damageOverTime.value * critDamage.baseValue;
     }
     void LazerShoot()
     {
-        hiddenUI.transform.position = tar.transform.position;
-        if (Random.value <= critChance.baseValue)
+        if (Random.value <= critChance.value)
         {
-            tar.TakeDamage(LazerDamageWithCrit());
-            txt.text = (System.Math.Round(LazerDamageWithCrit(), 2).ToString());
-            txtManip.Blushing();
+            finalDamage = CritDamage();
+            /*if (ene.enemyState.HasFlag(EnemyState.Weaken))
+            {
+                if (Modifier.modType == StatModType.Flat)
+                {
+                    damage += Modifier.statValue.value;
+                }
+                else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                {
+                    damage *= (1 + Modifier.statValue.value);
+                }
+            }
+            if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+            {
+                ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+            }
+            else
+            {
+                ene.TakeDamage(damage, DamageDisplayerType.Critial);
+            }*/
+            tar.TakeDamage(finalDamage, DamageDisplayerType.Critial);
         }
         else
         {
-            tar.TakeDamage(LazerDamageWithoutCrit());
-            txt.text = (System.Math.Round(LazerDamageWithoutCrit(), 2).ToString());
-            txtManip.NormalColor(new Color32(255, 255, 255, 255), new Color32(0, 0, 0, 255));
+            finalDamage = damageOverTime.value;
+            /*if (ene.enemyState.HasFlag(EnemyState.Weaken))
+            {
+                if (Modifier.modType == StatModType.Flat)
+                {
+                    damage += Modifier.statValue.value;
+                }
+                else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                {
+                    damage *= (1 + Modifier.statValue.value);
+                }
+            }
+            if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+            {
+                ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+            }
+            else
+            {
+                ene.TakeDamage(damage, DamageDisplayerType.Critial);
+            }*/
+            tar.TakeDamage(finalDamage);
         }
-        //tar.ConstantSlow(slowPtc.baseValue);
-        tar.EnemyColor(Color.blue);
-        //Debug.Log(tar.name);
+
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
@@ -126,11 +160,40 @@ public class LazerTypeTurret : BaseTurretStat
         }
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
+
         Vector3 dir = firePoint.position - target.position;
         lazerFX.transform.position = target.position + dir.normalized;
+        /*if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
+        {
+            return;
+        }
+        if (bulletType.HasFlag(BulletType.Insta_Kill))
+        {
+            effectManager.Insta_kill(ene);
+        }
+        if (bulletType.HasFlag(BulletType.SlowPerSecond))
+        {
+            effectManager.Slow(ene);
+        }
+        if (bulletType.HasFlag(BulletType.Burn))
+        {
+            effectManager.Burn(ene);
+        }
+        if (bulletType.HasFlag(BulletType.Fear))
+        {
+            effectManager.Fear(ene);
+        }
+        if (bulletType.HasFlag(BulletType.Weaken))
+        {
+            effectManager.Weaken(ene);
+        }
+        if (bulletType.HasFlag(BulletType.DisableArmor))
+        {
+            effectManager.DisableArmor(ene);
+        }*/
         //lazerFX.transform.rotation = Quaternion.LookRotation(dir);
     }
-    /*svoid RotateToObj2()
+    /*void RotateToObj2()
     {
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -139,7 +202,7 @@ public class LazerTypeTurret : BaseTurretStat
     }*/
     public void DestroyLeftoverUI()
     {
-        Destroy(hiddenUI);
+        //Destroy(hiddenUI);
     }
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

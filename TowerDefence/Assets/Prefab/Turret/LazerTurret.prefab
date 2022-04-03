@@ -299,28 +299,20 @@ MonoBehaviour:
     baseValue: 4
   rotationSpeed:
     baseValue: 200
-  firePoint: {fileID: 4051587693748109641}
   target: {fileID: 0}
   turretType: 3
-  _node: {fileID: 0}
-  turretBluePrint:
-    prefab: {fileID: 0}
-    cost: 0
-    upgradePrefab: {fileID: 0}
-    upgradeCost: 0
   critChance:
-    baseValue: 0.05
+    baseValue: 0.2
   critDamage:
-    baseValue: 1
+    baseValue: 1.5
   damageOverTime:
     baseValue: 20
-  slowPtc:
-    baseValue: 0.5
+  rate:
+    baseValue: 0.2
+  firePoint: {fileID: 4051587693748109641}
   lineRenderer: {fileID: 3466726610650622654}
   lazerFX: {fileID: 4914668114188655008}
   etag: Enemy
-  damageDisplayUI: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
 --- !u!120 &3466726610650622654
 LineRenderer:
   m_ObjectHideFlags: 0

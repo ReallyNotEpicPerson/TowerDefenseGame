@@ -360,11 +360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   enemyState: 0
-  startSpeed: 10
   startHealth: 100
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 1
-  speed: 0
   worth: 20
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}

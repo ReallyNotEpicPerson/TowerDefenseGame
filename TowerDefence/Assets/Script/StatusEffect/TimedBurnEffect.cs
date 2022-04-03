@@ -44,7 +44,7 @@ public class TimedBurnEffect : TimedEffect
                 return;
             }
             //sumDamage += tempDamage;
-            _enemy.EffectColor(Color.yellow);
+            _enemy.EnemyColor(Color.yellow);
             //Debug.Log(tempDamage);
             timer = tempRate;
         }
@@ -120,7 +120,7 @@ public class TimedBurnEffect : TimedEffect
     {
         BurnEffect burnEffect = (BurnEffect)Effect;
         burnEffect.damagePerRate.RemoveAllModifiersFromSource(this);
-        _enemy.EffectColor(Color.white);
+        _enemy.EnemyColor(Color.white);
         //EffectStacks = 0;
     }
     public override StringBuilder Display()

@@ -9,8 +9,11 @@ public class AnimationScript : MonoBehaviour
     {
         TryGetComponent(out animator);
     }
-
-    public void Destroy()
+    public void Destroy(float timer)
+    {
+        Destroy(gameObject,timer);
+    }
+    public void Destroy2()
     {
         Destroy(gameObject);
     }

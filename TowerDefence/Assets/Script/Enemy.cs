@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +30,7 @@ public class Enemy : MonoBehaviour
     public EnemyType enemyType;
     public EnemyState enemyState;
     #region EnemyStat
-    public float startSpeed = 10f;
+    //public float startSpeed = 10f;
     public float startHealth = 100f;
     public Armor armorStat;
 
@@ -39,10 +38,10 @@ public class Enemy : MonoBehaviour
     private NavMeshAI enemyNavMeshMovement;
     private EnemyMovement enemyPathMovement;
     //[HideInInspector]
-    public float speed;
+    //public float speed;
     private float health;
     public int worth = 20;
-    private StatValueType modifier; 
+    private StatValueType modifier;
     #endregion
 
     public GameObject dedFX;
@@ -131,7 +130,7 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
-        speed = startSpeed;
+        //speed = startSpeed;
         health = startHealth;
         Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
         Ded.SetActive(false);
@@ -186,8 +185,25 @@ public class Enemy : MonoBehaviour
         }
         return true;
     }
-    public void ArmorPiercing(float amount)
+    public void ArmorPiercing(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
+        switch (type)
+        {
+            case DamageDisplayerType.Normal:
+                DamageDisplayer.Create(transform.position, amount);
+                break;
+            case DamageDisplayerType.Critial:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Critial);
+                break;
+            case DamageDisplayerType.Burned:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Burned);
+                break;
+            case DamageDisplayerType.ArmorPenetration:
+                break;
+            default:
+                Debug.LogError("But How?");
+                break;
+        }
         health -= amount;
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
@@ -281,7 +297,7 @@ public class Enemy : MonoBehaviour
         if (armorStat != null)
         {
             armorStat.RestoreArmor();
-            if (armorStat.armorType.HasFlag(ArmorType.Single)|| armorStat.armorType.HasFlag(ArmorType.Multiple))
+            if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
             {
                 EnableState(EnemyState.Amored);
             }
@@ -342,7 +358,7 @@ public class Enemy : MonoBehaviour
     public void SlowDown(StatModifier mod)
     {
         EnableState(EnemyState.Slow);
-        EffectColor(Color.blue);
+        EnemyColor(Color.blue);
         if (UsePathFinding)
         {
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
@@ -371,7 +387,7 @@ public class Enemy : MonoBehaviour
         {
             //speed = startSpeed;
         }
-        EffectColor(Color.white);
+        EnemyColor(Color.white);
     }
     #endregion
     #region weaken 
@@ -389,11 +405,12 @@ public class Enemy : MonoBehaviour
         DisableState(EnemyState.Weaken);
     }
     #endregion
-    
-    public void EffectColor(Color color)
+    public void EnemyColor(Color color)
     {
         enemyColor.color = color;
     }
+
+
     void OnMouseEnter()
     {
         //statUI.TransferCharacter(gameObject);

@@ -41,6 +41,7 @@ public class Armor : MonoBehaviour
         {
             layerNum.text = "";
             MaxLayer = 0;
+            armor = 0;
             ArmorBarAdjust(false);
         }
     }
@@ -52,25 +53,25 @@ public class Armor : MonoBehaviour
     {
         if (armorType.HasFlag(ArmorType.Multiple))
         {
-            armor = startArmor * MaxLayer;
             if (MaxLayer - 1 > 0)
             {
                 layerNum.text = (MaxLayer - 1).ToString();
             }
-            MaxLayer = 1;
+            armor = startArmor * MaxLayer;
             ArmorBarAdjust(true);
         }
         else if (armorType.HasFlag(ArmorType.Single))
         {
             layerNum.text = "";
+            MaxLayer = 1;            
             armor = startArmor;
-            MaxLayer = 1;
             ArmorBarAdjust(true);
         }
         else if (armorType.HasFlag(ArmorType.None))
         {
             layerNum.text = "";
             MaxLayer = 0;
+            armor = 0;
             ArmorBarAdjust(false);
         }
         armorBar.fillAmount = armor / startArmor;
@@ -103,6 +104,10 @@ public class Armor : MonoBehaviour
     public void AddArmor(float amount)
     {
         armor += amount;
+        if (armor > startArmor)
+        {
+            startArmor = armor;
+        }
         ArmorBarAdjust(true);
     }
     public void FillBar(float amount)
@@ -115,13 +120,15 @@ public class Armor : MonoBehaviour
             layerNum.text = layer.ToString();
         }
     }
+    public bool HaveArmor()
+    {
+        return armor > 0;
+    }
     public void ArmorBarAdjust(bool state)
     {
         armorBar.transform.parent.gameObject.SetActive(state);
         //Debug.Log(armorBar.transform.parent.name);
     }
-
-
     public void DisableState(ArmorType es)
     {
         armorType &= ~es;

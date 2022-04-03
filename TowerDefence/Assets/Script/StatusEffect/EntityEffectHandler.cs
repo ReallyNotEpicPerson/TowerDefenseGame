@@ -66,6 +66,9 @@ public class EntityEffectHandler : MonoBehaviour
             case Weaken weaken:
                 ActivateDebuff(weaken.Init(enemy.gameObject));
                 break;
+            case DisableArmor disableArmor:
+                ActivateDebuff(disableArmor.Init(enemy.gameObject));
+                break;
             default:
                 Debug.LogError("wait what the fuck is this?");
                 break;

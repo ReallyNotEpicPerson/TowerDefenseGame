@@ -68,7 +68,7 @@ public class LazerTypeTurret : BaseTurretStat
             tar = nearestenemy.GetComponent<Enemy>();
             if (instance != null)
             {
-                instance.EffectColor(Color.white);
+                instance.EnemyColor(Color.white);
             }
         }
         else
@@ -117,7 +117,7 @@ public class LazerTypeTurret : BaseTurretStat
             txtManip.NormalColor(new Color32(255, 255, 255, 255), new Color32(0, 0, 0, 255));
         }
         //tar.ConstantSlow(slowPtc.baseValue);
-        tar.EffectColor(Color.blue);
+        tar.EnemyColor(Color.blue);
         //Debug.Log(tar.name);
         if (!lineRenderer.enabled)
         {

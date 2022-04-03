@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1228373983551921560}
   - component: {fileID: 269780727420446995}
   - component: {fileID: 1775564567742071104}
-  - component: {fileID: 6369795426396183007}
+  - component: {fileID: 8869708922608801498}
   m_Layer: 0
   m_Name: Revive
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -8125774475627718875, guid: 10bf75256b310374893ff0c8ee5267dd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,7 +104,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6369795426396183007
+--- !u!114 &8869708922608801498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

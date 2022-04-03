@@ -11,7 +11,9 @@ public enum BulletType
     Burn = 1<<4,//done
     Fear = 1<<5,//done
     Insta_Kill = 1<<6,//done
-    Weaken = 1<<7,
+    Weaken = 1<<7,//Done
+    DisableArmor = 1<<8,
+    ArmorPiercing = 1<<9,
 }
 public class BaseBulletClass : MonoBehaviour
 {

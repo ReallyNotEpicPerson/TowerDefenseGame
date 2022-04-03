@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR
 #endif
-using TMPro;
 using UnityEngine;
 
 public class Bullet : BaseBulletClass
@@ -8,6 +7,7 @@ public class Bullet : BaseBulletClass
     private TurretType turretType;
     [SerializeField] EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
+    float damage;
 
     public void Seek(Transform _target, TurretType t)
     {
@@ -62,12 +62,11 @@ public class Bullet : BaseBulletClass
     {
         Enemy ene = enemy.GetComponent<Enemy>();
         StatValueType Modifier = ene.GetWeakenValue();
-        float damage;
         if (ene != null)
         {
             if (Random.value < critChance.baseValue)
             {
-                damage = CritDamage() ;
+                damage = CritDamage();
                 if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
                     if (Modifier.modType == StatModType.Flat)
@@ -78,9 +77,15 @@ public class Bullet : BaseBulletClass
                     {
                         damage *= (1 + Modifier.statValue.value);
                     }
-                }                    
-                ene.TakeDamage(damage, DamageDisplayerType.Critial);
-
+                }
+                if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+                {
+                    ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+                }
+                else
+                {
+                    ene.TakeDamage(damage, DamageDisplayerType.Critial);
+                }
             }
             else
             {
@@ -96,7 +101,14 @@ public class Bullet : BaseBulletClass
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                ene.TakeDamage(damage);
+                if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+                {
+                    ene.ArmorPiercing(damage);
+                }
+                else
+                {
+                    ene.TakeDamage(damage);
+                }
             }
             if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
             {
@@ -121,6 +133,10 @@ public class Bullet : BaseBulletClass
             if (bulletType.HasFlag(BulletType.Weaken))
             {
                 effectManager.Weaken(ene);
+            }
+            if (bulletType.HasFlag(BulletType.DisableArmor))
+            {
+                effectManager.DisableArmor(ene);
             }
         }
     }

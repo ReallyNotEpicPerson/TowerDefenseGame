@@ -29,7 +29,7 @@ public class StatUI_InGame : MonoBehaviour
             StoreTurretComponet();
             ShowLazerTypeStat();
         }
-        else if (Character.tag.Equals("Enemy"))
+        else if (Character.CompareTag("Enemy"))
         {
             StoreEnemyComponent();
             ShowEnemyStat();
@@ -57,7 +57,7 @@ public class StatUI_InGame : MonoBehaviour
     {
         _charName.text = main.name;
         _Charstat.text = "Health" + enemy.startHealth + "\n" +
-            "Speed:" + enemy.startSpeed + "\n" +
+            //"Speed:" + enemy.startSpeed + "\n" +
             "Worth:" + enemy.worth + "\n"+
             "Description:"+ EnemyDesscription(main.name);
     }
@@ -94,57 +94,30 @@ public class StatUI_InGame : MonoBehaviour
     string TurretDescription(string n)
     { 
         string des="";
-        switch (n)
+        des = n switch
         {
-            case "LazerTurret":
-                des= "A Lazer";
-                break;
-            case "BasicTurret":
-                des= "A Turd";
-                break;
-            case "MissleTurret":
-                des= "A Missle";
-                break;
-            case "LazerTurret_Lv2":
-                des= "A lv2 Lazer";
-                break;
-            case "BasicTurret_Lv2":
-                des = "A Lv2 Turd";
-                break;
-            case "MissleTurret_Lv2":
-                des = "A lv2 Missle";
-                break;
-            case "manaxe":
-                des = "An axe man";
-                break;
-            default:
-                des = "Nothing,you type wrong buddy";
-                break;
-        }
+            "LazerTurret" => "A Lazer",
+            "BasicTurret" => "A Turd",
+            "MissleTurret" => "A Missle",
+            "LazerTurret_Lv2" => "A lv2 Lazer",
+            "BasicTurret_Lv2" => "A Lv2 Turd",
+            "MissleTurret_Lv2" => "A lv2 Missle",
+            "manaxe" => "An axe man",
+            _ => "Nothing,you type wrong buddy",
+        };
         return des;
     }
     string EnemyDesscription(string n)
     {
         string des = "";
-        switch (n)
+        des = n switch
         {
-            case "Test enemy":
-                des = "A basic Bad guy";
-                break;
-            case "Tank man":
-                des = "A Strong Bad Guy";
-                break;
-            case "Leg man":
-                des = "A Fast bad guy";
-                break;
-            case "Boss":
-                des = "BIG boss";
-                break;
-            default:
-                des = "nothing,fix code u dummy!";
-                break;
-        }
-
+            "Test enemy" => "A basic Bad guy",
+            "Tank man" => "A Strong Bad Guy",
+            "Leg man" => "A Fast bad guy",
+            "Boss" => "BIG boss",
+            _ => "nothing,fix code u dummy!",
+        };
         return des;
     }
     void Update()

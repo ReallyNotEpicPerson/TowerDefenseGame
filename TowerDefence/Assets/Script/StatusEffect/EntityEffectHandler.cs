@@ -49,7 +49,7 @@ public class EntityEffectHandler : MonoBehaviour
     }
     public void AddDebuff(BaseEffect baseEffect, Enemy enemy)// the ultimate function
     {
-        switch (baseEffect)
+        /*switch (baseEffect)
         {
             case SlowEffect slowEffect:
                 ActivateDebuff(slowEffect.Init(enemy.gameObject));
@@ -72,8 +72,8 @@ public class EntityEffectHandler : MonoBehaviour
             default:
                 Debug.LogError("wait what the fuck is this?");
                 break;
-        }
-        /*switch (baseEffect)
+        }*/
+        switch (baseEffect)
         {
             case SlowEffect slowEffect:
                 if (_effectList.ContainsKey(slowEffect.ID))
@@ -96,9 +96,6 @@ public class EntityEffectHandler : MonoBehaviour
                     _effectList.Add(burnEffect.ID, burnEffect.Init(enemy.gameObject));
                     _effectList[burnEffect.ID].Activate();
                 }
-                break;
-            case HealEffect healEffect:
-                Debug.Log(healEffect.ID);
                 break;
             case FearEffect fearEffect:
                 if (_effectList.ContainsKey(fearEffect.ID))
@@ -133,10 +130,32 @@ public class EntityEffectHandler : MonoBehaviour
                     _effectList[weaken.ID].Activate();
                 }
                 break;
+            case DisableArmor disableArmor:
+                if (_effectList.ContainsKey(disableArmor.ID))
+                {
+                    _effectList[disableArmor.ID].Activate();
+                }
+                else
+                {
+                    _effectList.Add(disableArmor.ID, disableArmor.Init(enemy.gameObject));
+                    _effectList[disableArmor.ID].Activate();
+                }
+                break;
+            case Invisible invisible:
+                if (_effectList.ContainsKey(invisible.ID))
+                {
+                    _effectList[invisible.ID].Activate();
+                }
+                else
+                {
+                    _effectList.Add(invisible.ID, invisible.Init(enemy.gameObject));
+                    _effectList[invisible.ID].Activate();
+                }
+                break;
             default:
                 Debug.LogError("wait what the fuck is this?");
                 break;
-        }*/
+        }
     }
 
     public void RemoveDebuff(string ID)//OG remove

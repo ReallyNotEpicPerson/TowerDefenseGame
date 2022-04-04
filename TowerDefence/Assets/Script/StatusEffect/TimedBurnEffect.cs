@@ -19,9 +19,9 @@ public class TimedBurnEffect : TimedEffect
         {
             BurnPertick();
             return;
-        }            
+        }
         if (Effect.expirableType.HasFlag(ExpirableType.Expirable))
-        {        
+        {
             _duration -= Time.deltaTime;
             //Debug.Log(_duration);
             BurnPertick();
@@ -31,7 +31,6 @@ public class TimedBurnEffect : TimedEffect
                 IsFinished = true;
             }
         }
-        
     }
     public void BurnPertick()
     {
@@ -39,12 +38,11 @@ public class TimedBurnEffect : TimedEffect
         //Debug.Log(timer);
         if (timer <= 0)
         {
-            if(!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned))
+            if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned))
             {
                 return;
             }
             //sumDamage += tempDamage;
-            _enemy.EnemyColor(Color.yellow);
             //Debug.Log(tempDamage);
             timer = tempRate;
         }
@@ -52,12 +50,12 @@ public class TimedBurnEffect : TimedEffect
     protected override void ApplyEffect()
     {
         BurnEffect burnEffect = (BurnEffect)Effect;
-        if(effectStacks == burnEffect.stackTime)
+        if (effectStacks == burnEffect.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + burnEffect.stackTime);
             return;
         }
-        Debug.Log("Burn Damage : " + burnEffect.damagePerRate.value + " Rate " + burnEffect.rate.value);
+        //Debug.Log("Burn Damage : " + burnEffect.damagePerRate.value + " Rate " + burnEffect.rate.value);
         tempDamage = burnEffect.damagePerRate.value;
         tempRate = burnEffect.rate.value;
         timer = tempRate;
@@ -115,13 +113,18 @@ public class TimedBurnEffect : TimedEffect
                     break;
             }
         }
+        if (!_enemy.ContainFX(Effect.ID))
+        {
+            _enemy.AddFX(this);
+        }
     }
     public override void End()
     {
         BurnEffect burnEffect = (BurnEffect)Effect;
         burnEffect.damagePerRate.RemoveAllModifiersFromSource(this);
         _enemy.EnemyColor(Color.white);
-        //EffectStacks = 0;
+        _enemy.RemoveFX(Effect.ID);
+        effectStacks = 0;
     }
     public override StringBuilder Display()
     {

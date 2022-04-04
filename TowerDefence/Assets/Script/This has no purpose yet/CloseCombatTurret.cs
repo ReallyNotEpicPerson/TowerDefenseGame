@@ -71,7 +71,7 @@ public class CloseCombatTurret : BaseTurretStat
     {
         //Debug.Log("Shit");
         delay = true;
-        EnemyType enemyType;
+        //EnemyType enemyType;
         Enemy ene = collision.gameObject.GetComponent<Enemy>();
         //ene.EnemyType(out enemyType);
         //modifier = BaseTurretStat.CheckType(turretType, enemyType);

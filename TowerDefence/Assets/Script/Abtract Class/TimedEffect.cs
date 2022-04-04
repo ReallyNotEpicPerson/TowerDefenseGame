@@ -24,7 +24,7 @@ public abstract class TimedEffect
     public void ResetDuration()
     {
         _duration = Effect._duration;
-        //Debug.Log(_duration);
+       Debug.Log(_duration);
     }
     public void IncreaseDuration(float dur)
     {

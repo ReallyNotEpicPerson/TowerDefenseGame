@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: BU_ST
   Icon: {fileID: 21300000, guid: 4780c02dfd4d798499f3be404468fb84, type: 3}
-  specialFX: {fileID: 0}
+  specialFX: {fileID: 1006270265076942869, guid: 5bfe91a2b48dc1441a99ad729d036a39,
+    type: 3}
   effectType: 2
   removableType: 0
   expirableType: 0

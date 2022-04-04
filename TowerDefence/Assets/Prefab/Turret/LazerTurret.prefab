@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 1324694835017131976}
   - component: {fileID: 3466726610650622654}
   - component: {fileID: 5891870244430004750}
+  - component: {fileID: -8232551631418536626}
   m_Layer: 0
   m_Name: LazerTurret
   m_TagString: Untagged
@@ -301,6 +302,7 @@ MonoBehaviour:
     baseValue: 200
   target: {fileID: 0}
   turretType: 3
+  bulletType: 2
   critChance:
     baseValue: 0.2
   critDamage:
@@ -313,6 +315,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 3466726610650622654}
   lazerFX: {fileID: 4914668114188655008}
   etag: Enemy
+  effectManager: {fileID: -8232551631418536626}
 --- !u!120 &3466726610650622654
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -438,6 +441,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-8232551631418536626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826005812112630557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338763577d6538542bad6ff4d94766eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfDebuffs:
+  - {fileID: 11400000, guid: ca9c4b1f8f0d0904c8f3d2d0ed722c33, type: 2}
 --- !u!1 &7356486964737538981
 GameObject:
   m_ObjectHideFlags: 0

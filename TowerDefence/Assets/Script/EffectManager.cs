@@ -85,7 +85,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         Debug.LogError("nothing");
     }
-    public void Burn(Enemy enemy)
+    public void Dots(Enemy enemy)
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
@@ -134,7 +134,21 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         Debug.LogError("nothing");
     }
-
+    public void Invisible(Enemy enemy)
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Invisible)
+            {
+                if (Random.value <= listOfDebuffs[i].chance)
+                {
+                    enemy.AddDebuff(listOfDebuffs[i]);
+                }
+                return;
+            }
+        }
+        Debug.LogError("nothing");
+    }
     public void DisableArmor(Enemy enemy)
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)

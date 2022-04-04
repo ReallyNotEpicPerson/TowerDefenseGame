@@ -14,7 +14,7 @@ public class TimedDisableArmor : TimedEffect
         {
             _enemy.EnableState(EnemyState.Amored);
         }
-        //_enemy.RemoveFX(Effect.ID);
+        _enemy.RemoveFX(Effect.ID);
     }
 
     public override void Tick()
@@ -43,14 +43,16 @@ public class TimedDisableArmor : TimedEffect
         {
             haveArmorAtStart = true;
             _enemy.DisableState(EnemyState.Amored);
-            //_enemy.AddFX(this);
         }
         else
         {
             haveArmorAtStart = false;
-            //_enemy.AddFX(this);
             Debug.Log("no armor,man!");
             return;
+        }
+        if (!_enemy.ContainFX(Effect.ID))
+        {
+            _enemy.AddFX(this);
         }
     }
 }

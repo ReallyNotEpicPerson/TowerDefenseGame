@@ -346,5 +346,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfDebuffs:
-  - {fileID: 11400000, guid: 634810e9c6d1d2147a78be1e0acf4014, type: 2}
   - {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46, type: 2}
+  - {fileID: 11400000, guid: e2b645fc9d203914180220c97403c464, type: 2}

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: DISA
   Icon: {fileID: 21300000, guid: 3d5c2bcd85f0fe64a8e5610fe5e90702, type: 3}
-  specialFX: {fileID: 0}
+  specialFX: {fileID: 7235947678086242264, guid: ca363cf8e458e3d47b4e660f2cb4f67b,
+    type: 3}
   effectType: 0
   removableType: 0
   expirableType: 0

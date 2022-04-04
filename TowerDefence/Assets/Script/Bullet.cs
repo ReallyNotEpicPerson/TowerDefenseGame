@@ -64,7 +64,7 @@ public class Bullet : BaseBulletClass
         StatValueType Modifier = ene.GetWeakenValue();
         if (ene != null)
         {
-            if (Random.value < critChance.baseValue)
+            if (Random.value < critChance.value)
             {
                 damage = CritDamage();
                 if (ene.enemyState.HasFlag(EnemyState.Weaken))
@@ -78,8 +78,12 @@ public class Bullet : BaseBulletClass
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
+                    /*if (ene.TakeDamage(damage, DamageDisplayerType.Critial);
+                    {
+                        return;
+                    }*/
                     ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
                 }
                 else
@@ -101,7 +105,7 @@ public class Bullet : BaseBulletClass
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
                     ene.ArmorPiercing(damage);
                 }
@@ -122,9 +126,9 @@ public class Bullet : BaseBulletClass
             {
                 effectManager.Slow(ene);
             }
-            if (bulletType.HasFlag(BulletType.Burn))
+            if (bulletType.HasFlag(BulletType.Dots))
             {
-                effectManager.Burn(ene);
+                effectManager.Dots(ene);
             }
             if (bulletType.HasFlag(BulletType.Fear))
             {

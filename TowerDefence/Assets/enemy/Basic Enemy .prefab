@@ -450,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorType: 0
   startArmor: 100
-  damangeReductionPtc: 0.5
+  damangeReductionPtc: 0.9
   MaxLayer: 0
   armorBar: {fileID: 2855143225533144545}
   layerNum: {fileID: 6540034314286165266}

@@ -16,8 +16,11 @@ public enum EnemyState
 public enum EnemyType
 {
     None = 0,//just a normal enemy
-    Mutant = 1 << 1,// have one or more special ability
-    ImmunityToAll = 1 << 3,//immune to all status effect,even the good one?
+    Revive = 1 << 2,
+    ImmunityToAll = 1 << 3,
+    SpeedBoost = 1<<4,
+    SelfHealing = 1<<5,
+    MassHealing = 1<<6,
 }
 public enum MovementType
 {
@@ -57,6 +60,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EffectManager fxManager;
     [SerializeField] private SpecialFX specialFX;
 
+    private string ogTag;
+
     StatUI_InGame statUI;
     #region wait for second List
     static readonly Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
@@ -95,16 +100,22 @@ public class Enemy : MonoBehaviour
         {
             enemyNavMeshMovement = GetComponent<NavMeshAI>();
         }
-        if (enemyType.HasFlag(EnemyType.Mutant))
-        {
-            fxManager.HaveStatusEffect();
-        }
+        
         //TryGetComponent(out fxManager);
     }
     #endregion
     private void Awake()
     {
         enemyColor = GetComponent<SpriteRenderer>();
+        if (UsePathFinding)
+        {
+            enemyNavMeshMovement = GetComponent<NavMeshAI>();
+        }
+        else if (!UsePathFinding)
+        {
+            enemyPathMovement = GetComponent<EnemyMovement>();
+        }
+        TryGetComponent(out fxManager);
         if (!TryGetComponent(out armorStat))
         {
             //Debug.LogError("you forgot the armor bro");
@@ -118,15 +129,6 @@ public class Enemy : MonoBehaviour
         {
             DisableState(EnemyState.Amored);
         }
-        if (UsePathFinding)
-        {
-            enemyNavMeshMovement = GetComponent<NavMeshAI>();
-        }
-        else if (!UsePathFinding)
-        {
-            enemyPathMovement = GetComponent<EnemyMovement>();
-        }
-        TryGetComponent(out fxManager);
     }
     void Start()
     {
@@ -134,6 +136,7 @@ public class Enemy : MonoBehaviour
         health = startHealth;
         Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
         Ded.SetActive(false);
+        ogTag = gameObject.tag;
     }
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
@@ -185,8 +188,12 @@ public class Enemy : MonoBehaviour
         }
         return true;
     }
-    public void ArmorPiercing(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
+    public bool ArmorPiercing(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
+        if (enemyState.HasFlag(EnemyState.TakeNoDamage))
+        {
+            return false;
+        }
         switch (type)
         {
             case DamageDisplayerType.Normal:
@@ -205,17 +212,22 @@ public class Enemy : MonoBehaviour
                 break;
         }
         health -= amount;
+        if (health > startHealth)
+        {
+            health = startHealth;
+        }
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
             if (fxManager != null && fxManager.Revive(this))
             {
                 Debug.Log("He wont die this time");
-                return;
+                return false;
             }
             Debug.Log("He ded , oopsie daisy");
             Die();
         }
+        return true;
     }
     #endregion
     public bool IsDed()//idk
@@ -357,7 +369,6 @@ public class Enemy : MonoBehaviour
     }
     public void SlowDown(StatModifier mod)
     {
-        EnableState(EnemyState.Slow);
         EnemyColor(Color.blue);
         if (UsePathFinding)
         {
@@ -409,8 +420,16 @@ public class Enemy : MonoBehaviour
     {
         enemyColor.color = color;
     }
-
-
+    public void CUM()
+    {
+        gameObject.tag = ogTag;
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a + 100);
+    }
+    public void Invisible(string tag = "Untagged")
+    {
+        gameObject.tag = tag;
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a - 100);
+    }
     void OnMouseEnter()
     {
         //statUI.TransferCharacter(gameObject);

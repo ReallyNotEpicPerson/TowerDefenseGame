@@ -1406,7 +1406,7 @@ PrefabInstance:
     - target: {fileID: 2535420321667726498, guid: d7830c7e5b0e410408e2316220412551,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2535420321667726498, guid: d7830c7e5b0e410408e2316220412551,
         type: 3}
@@ -1795,7 +1795,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &126311715
 MonoBehaviour:
@@ -6255,10 +6255,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: LazerTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 5826005812112630557, guid: 8c9eaaf07f7550f448e5a934195be047,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6552128246981573692, guid: 8c9eaaf07f7550f448e5a934195be047,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6552128246981573692, guid: 8c9eaaf07f7550f448e5a934195be047,
         type: 3}
@@ -7043,7 +7048,7 @@ PrefabInstance:
     - target: {fileID: 3428752714890112888, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3428752714890112888, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
@@ -7203,12 +7208,29 @@ PrefabInstance:
     - target: {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e782bf3d6a653a4885bc1ea04b116a0,
+        type: 2}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46,
+        type: 2}
     - target: {fileID: 7083397131444511046, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7083397131444511046, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
@@ -12074,6 +12096,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9094273432376858205, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -9094273432376858205, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46,
+        type: 2}
+    - target: {fileID: -9094273432376858205, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e2b645fc9d203914180220c97403c464,
+        type: 2}
+    - target: {fileID: -9094273432376858205, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: e2b645fc9d203914180220c97403c464,
+        type: 2}
     - target: {fileID: 2901893777028136064, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
       propertyPath: m_Name
@@ -12087,7 +12132,7 @@ PrefabInstance:
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2901893777028136066, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
         type: 3}

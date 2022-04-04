@@ -20,13 +20,10 @@ public class LazerTypeTurret : BaseTurretStat
     public ParticleSystem lazerFX;
 
     public string etag = "Enemy";
-    private Enemy tar;
-    private float finalDamage;
+    private Enemy ene;
+    private float damage;
 
-    /*public GameObject damageDisplayUI;
-    private GameObject hiddenUI;
-    private TMP_Text txt;
-    private TMP_TextController txtManip;*/
+    public EffectManager effectManager;
 
     public void OnValidate()
     {
@@ -39,16 +36,8 @@ public class LazerTypeTurret : BaseTurretStat
             lazerFX = transform.GetChild(0).GetComponentInChildren<ParticleSystem>();
         }
     }
-
     private void Awake()
     {
-        /*
-        hiddenUI = Instantiate(damageDisplayUI, transform.position, Quaternion.identity);
-        hiddenUI.name = "DamageDisplayer" + "of" + this.name;
-        hiddenUI.SetActive(false);
-        txt = hiddenUI.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        txtManip = txt.GetComponent<TMP_TextController>();*/
-        //InvokeRepeating("UpdateTarget", 0f, 0.2f);
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
     private void Start()
@@ -72,7 +61,7 @@ public class LazerTypeTurret : BaseTurretStat
         if (nearestenemy != null && shortestDis <= range.value)
         {
             target = nearestenemy.transform;
-            tar = nearestenemy.GetComponent<Enemy>();
+            ene = nearestenemy.GetComponent<Enemy>();
         }
         else
         {
@@ -104,55 +93,58 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void LazerShoot()
     {
-        if (Random.value <= critChance.value)
+        StatValueType Modifier = ene.GetWeakenValue();
+        if (ene != null)
         {
-            finalDamage = CritDamage();
-            /*if (ene.enemyState.HasFlag(EnemyState.Weaken))
+            if (Random.value <= critChance.value)
             {
-                if (Modifier.modType == StatModType.Flat)
+                damage = CritDamage();
+                if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
-                    damage += Modifier.statValue.value;
+                    if (Modifier.modType == StatModType.Flat)
+                    {
+                        damage += Modifier.statValue.value;
+                    }
+                    else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                    {
+                        damage *= (1 + Modifier.statValue.value);
+                    }
                 }
-                else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    damage *= (1 + Modifier.statValue.value);
+                    ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
                 }
-            }
-            if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
-            {
-                ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+                else
+                {
+                    ene.TakeDamage(damage, DamageDisplayerType.Critial);
+                }
+                //ene.TakeDamage(damage, DamageDisplayerType.Critial);
             }
             else
             {
-                ene.TakeDamage(damage, DamageDisplayerType.Critial);
-            }*/
-            tar.TakeDamage(finalDamage, DamageDisplayerType.Critial);
-        }
-        else
-        {
-            finalDamage = damageOverTime.value;
-            /*if (ene.enemyState.HasFlag(EnemyState.Weaken))
-            {
-                if (Modifier.modType == StatModType.Flat)
+                damage = damageOverTime.value;
+                if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
-                    damage += Modifier.statValue.value;
+                    if (Modifier.modType == StatModType.Flat)
+                    {
+                        damage += Modifier.statValue.value;
+                    }
+                    else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                    {
+                        damage *= (1 + Modifier.statValue.value);
+                    }
                 }
-                else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
+                if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    damage *= (1 + Modifier.statValue.value);
+                    ene.ArmorPiercing(damage);
                 }
+                else
+                {
+                    ene.TakeDamage(damage);
+                }
+                //ene.TakeDamage(damage);
             }
-            if (ene.enemyState.HasFlag(BulletType.ArmorPiercing))
-            {
-                ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
-            }
-            else
-            {
-                ene.TakeDamage(damage, DamageDisplayerType.Critial);
-            }*/
-            tar.TakeDamage(finalDamage);
         }
-
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
@@ -163,7 +155,7 @@ public class LazerTypeTurret : BaseTurretStat
 
         Vector3 dir = firePoint.position - target.position;
         lazerFX.transform.position = target.position + dir.normalized;
-        /*if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
+        if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
         {
             return;
         }
@@ -175,9 +167,9 @@ public class LazerTypeTurret : BaseTurretStat
         {
             effectManager.Slow(ene);
         }
-        if (bulletType.HasFlag(BulletType.Burn))
+        if (bulletType.HasFlag(BulletType.Dots))
         {
-            effectManager.Burn(ene);
+            effectManager.Dots(ene);
         }
         if (bulletType.HasFlag(BulletType.Fear))
         {
@@ -190,7 +182,7 @@ public class LazerTypeTurret : BaseTurretStat
         if (bulletType.HasFlag(BulletType.DisableArmor))
         {
             effectManager.DisableArmor(ene);
-        }*/
+        }
         //lazerFX.transform.rotation = Quaternion.LookRotation(dir);
     }
     /*void RotateToObj2()

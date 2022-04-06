@@ -31,7 +31,7 @@ public class SpecialFX : MonoBehaviour
                     SpecialFXDict.Add(fx.Effect.ID, go);
                 }
                 break;
-            case BurnEffect _:
+            case DotsEffect _:
                 if (fx.Effect.ID.Contains("BU"))
                 {
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position, Quaternion.identity, fxParent);
@@ -40,7 +40,7 @@ public class SpecialFX : MonoBehaviour
                 else if(fx.Effect.ID.Contains("POI"))
                 {
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);
-                    SpecialFXDict.Add(fx.Effect.ID, go);
+                    SpecialFXDict.Add(fx.Effect.ID, go);                    
                 }
                 else// if(fx.Effect.ID.Contains("POI"))
                 {
@@ -58,6 +58,10 @@ public class SpecialFX : MonoBehaviour
                 break;
             case Revive _:
                 Instantiate(fx.Effect.specialFX, fxParent.transform.position, Quaternion.identity, fxParent);
+                break;
+            case DisableArmor _:
+                go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 1, 0), Quaternion.identity, fxParent);
+                SpecialFXDict.Add(fx.Effect.ID, go); 
                 break;
             default:
                 break;

@@ -309,6 +309,7 @@ MonoBehaviour:
     baseValue: 1.5
   damageOverTime:
     baseValue: 20
+  accuracy: 0.9
   rate:
     baseValue: 0.2
   firePoint: {fileID: 4051587693748109641}

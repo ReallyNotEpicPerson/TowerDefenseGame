@@ -13,13 +13,13 @@ public class TimedInvisible : TimedEffect
 
     public override void End()
     {
-        _enemy.CUM();
-        _enemy.RemoveFX(Effect.ID);
+        _enemy.ReverseBlackDad();
+        //_enemy.RemoveFX(Effect.ID);
     }
 
     protected override void ApplyEffect()
     {
         _enemy.Invisible();
-        _enemy.AddFX(this);
+        //_enemy.AddFX(this);
     }
 }

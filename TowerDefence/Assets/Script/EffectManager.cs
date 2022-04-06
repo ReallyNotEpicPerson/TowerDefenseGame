@@ -89,20 +89,24 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is BurnEffect)
+            if (listOfDebuffs[i] is DotsEffect)
             {
                 if (Random.value <= listOfDebuffs[i].chance)
                 {
+                    if (enemy.CheckEnemyType(EnemyType.ImmuneToFire) && listOfDebuffs[i].ID.Contains("BU"))
+                    {
+                        return;
+                    }
+                    if (enemy.CheckEnemyType(EnemyType.ImmuneToPoison) && listOfDebuffs[i].ID.Contains("POI"))
+                    {
+                        return;
+                    }
                     enemy.AddDebuff(listOfDebuffs[i]);
                 }
                 return;
             }
         }
         Debug.LogError("nothing");
-    }
-    public void Heal()
-    {
-
     }
     public void Fear(Enemy enemy)
     {
@@ -123,7 +127,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is Weaken )
+            if (listOfDebuffs[i] is Weaken)
             {
                 if (Random.value <= listOfDebuffs[i].chance)
                 {
@@ -164,5 +168,5 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         Debug.LogError("nothing");
     }
-   
+
 }

@@ -112,3 +112,4 @@ MonoBehaviour:
     type: 3}
   explosionRadius:
     baseValue: 0
+  accuracy: 1

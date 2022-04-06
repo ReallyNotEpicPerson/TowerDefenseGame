@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Burn Effect", menuName = "Burn")]
-public class BurnEffect : BaseEffect
+public class DotsEffect : BaseEffect
 {
     public CharacterStat damagePerRate;
     public CharacterStat rate;
@@ -82,6 +82,6 @@ public class BurnEffect : BaseEffect
     }
     public override TimedEffect Init(GameObject obj)
     {
-        return new TimedBurnEffect(this, obj);
+        return new TimeDotsEffect(this, obj);
     }
 }

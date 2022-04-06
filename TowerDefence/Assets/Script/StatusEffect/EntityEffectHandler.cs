@@ -86,7 +86,7 @@ public class EntityEffectHandler : MonoBehaviour
                     _effectList[slowEffect.ID].Activate();
                 }
                 break;
-            case BurnEffect burnEffect:
+            case DotsEffect burnEffect:
                 if (_effectList.ContainsKey(burnEffect.ID))
                 {
                     _effectList[burnEffect.ID].Activate();

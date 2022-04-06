@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-public class TimedBurnEffect : TimedEffect
+public class TimeDotsEffect : TimedEffect
 {
     private readonly Enemy _enemy;
     private float tempRate = 0;
@@ -9,7 +9,7 @@ public class TimedBurnEffect : TimedEffect
     private float tempDamage = 0;
     private float sumDamage = 0;
 
-    public TimedBurnEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
+    public TimeDotsEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
     {
         _enemy = obj.GetComponent<Enemy>();
     }
@@ -38,9 +38,19 @@ public class TimedBurnEffect : TimedEffect
         //Debug.Log(timer);
         if (timer <= 0)
         {
-            if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned))
+            if (Effect.ID.Contains("BU"))
             {
-                return;
+                if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Burned))
+                {
+                    return;
+                }
+            }
+            if (Effect.ID.Contains("POI"))
+            {
+                if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Poisoned))
+                {
+                    return;
+                }
             }
             //sumDamage += tempDamage;
             //Debug.Log(tempDamage);
@@ -49,7 +59,7 @@ public class TimedBurnEffect : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        BurnEffect burnEffect = (BurnEffect)Effect;
+        DotsEffect burnEffect = (DotsEffect)Effect;
         if (effectStacks == burnEffect.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + burnEffect.stackTime);
@@ -113,6 +123,10 @@ public class TimedBurnEffect : TimedEffect
                     break;
             }
         }
+        if (Effect.ID.Contains("POI"))
+        {
+            _enemy.SetHealthColor(Color.green);
+        }
         if (!_enemy.ContainFX(Effect.ID))
         {
             _enemy.AddFX(this);
@@ -120,10 +134,13 @@ public class TimedBurnEffect : TimedEffect
     }
     public override void End()
     {
-        BurnEffect burnEffect = (BurnEffect)Effect;
+        DotsEffect burnEffect = (DotsEffect)Effect;
         burnEffect.damagePerRate.RemoveAllModifiersFromSource(this);
-        _enemy.EnemyColor(Color.white);
         _enemy.RemoveFX(Effect.ID);
+        if (Effect.ID.Contains("POI"))
+        {
+            _enemy.SetHealthColor();
+        }
         effectStacks = 0;
     }
     public override StringBuilder Display()

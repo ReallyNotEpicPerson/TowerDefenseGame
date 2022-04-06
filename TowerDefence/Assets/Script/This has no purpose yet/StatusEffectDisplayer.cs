@@ -56,7 +56,7 @@ public class StatusEffectDisplayer : MonoBehaviour
     public void CheckStatusEffectDisplay(TimedEffect fx)
     {
         sb.Clear();
-        if (fx is TimedBurnEffect tbe)
+        if (fx is TimeDotsEffect tbe)
         {
             sb.Append(tbe.Display());
         }

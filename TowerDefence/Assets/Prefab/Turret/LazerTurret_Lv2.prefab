@@ -104,23 +104,23 @@ MonoBehaviour:
     baseValue: 5
   rotationSpeed:
     baseValue: 200
-  firePoint: {fileID: 6828990122727252777}
   target: {fileID: 0}
   turretType: 3
-  objectPooler: {fileID: 0}
+  bulletType: 0
   critChance:
     baseValue: 0.2
   critDamage:
     baseValue: 1
   damageOverTime:
     baseValue: 45
-  slowPtc:
-    baseValue: 0.5
+  accuracy: 0.85
+  rate:
+    baseValue: 0
+  firePoint: {fileID: 6828990122727252777}
   lineRenderer: {fileID: 6471560523672822142}
   lazerFX: {fileID: 2016529467894117611}
   etag: Enemy
-  damageDisplayUI: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
+  effectManager: {fileID: 0}
 --- !u!120 &6471560523672822142
 LineRenderer:
   m_ObjectHideFlags: 0

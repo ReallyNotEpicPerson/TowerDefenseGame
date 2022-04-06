@@ -7,6 +7,7 @@ public class Bullet : BaseBulletClass
     private TurretType turretType;
     [SerializeField] EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
+    public float accuracy=1;
     float damage;
 
     public void Seek(Transform _target, TurretType t)
@@ -61,6 +62,15 @@ public class Bullet : BaseBulletClass
     void Damage(Transform enemy)
     {
         Enemy ene = enemy.GetComponent<Enemy>();
+        if (accuracy * Random.value >= ene.ChanceToEvade * Random.value)
+        {
+            if (!ene.enemyState.HasFlag(EnemyState.FirstHit))
+            {
+                ene.EnableState(EnemyState.FirstHit);
+            }
+            DamageDisplayer.Create(ene.transform.position, "MISS");
+            return;
+        }
         StatValueType Modifier = ene.GetWeakenValue();
         if (ene != null)
         {
@@ -84,7 +94,7 @@ public class Bullet : BaseBulletClass
                     {
                         return;
                     }*/
-                    ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+                    ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
@@ -107,22 +117,23 @@ public class Bullet : BaseBulletClass
                 }
                 if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    ene.ArmorPiercing(damage);
+                    ene.ArmorPiercing(damage,DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
                     ene.TakeDamage(damage);
                 }
             }
+            //status effect 
             if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
             {
                 return;
             }
-            if (bulletType.HasFlag(BulletType.Insta_Kill))
+            if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(BulletType.Insta_Kill))
             {
                 effectManager.Insta_kill(ene);
             }
-            if (bulletType.HasFlag(BulletType.SlowPerSecond))
+            if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(BulletType.SlowPerSecond))
             {
                 effectManager.Slow(ene);
             }
@@ -130,15 +141,15 @@ public class Bullet : BaseBulletClass
             {
                 effectManager.Dots(ene);
             }
-            if (bulletType.HasFlag(BulletType.Fear))
+            if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(BulletType.Fear))
             {
                 effectManager.Fear(ene);
             }
-            if (bulletType.HasFlag(BulletType.Weaken))
+            if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(BulletType.Weaken))
             {
                 effectManager.Weaken(ene);
             }
-            if (bulletType.HasFlag(BulletType.DisableArmor))
+            if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.DisableArmor))
             {
                 effectManager.DisableArmor(ene);
             }

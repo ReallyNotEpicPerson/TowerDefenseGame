@@ -1,4 +1,3 @@
-using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -9,8 +8,8 @@ public class LazerTypeTurret : BaseTurretStat
     public BulletType bulletType;
     public CharacterStat critChance;
     public CharacterStat critDamage;
-    public CharacterStat damageOverTime; 
-
+    public CharacterStat damageOverTime;
+    public float accuracy=1f;
     public CharacterStat rate;
     private float timer;
 
@@ -93,6 +92,11 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void LazerShoot()
     {
+        if (accuracy * Random.value >= ene.ChanceToEvade * Random.value)
+        {
+            DamageDisplayer.Create(ene.transform.position, "MISS");
+            return;
+        }
         StatValueType Modifier = ene.GetWeakenValue();
         if (ene != null)
         {
@@ -112,7 +116,7 @@ public class LazerTypeTurret : BaseTurretStat
                 }
                 if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    ene.ArmorPiercing(damage, DamageDisplayerType.Critial);
+                    ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
@@ -136,7 +140,7 @@ public class LazerTypeTurret : BaseTurretStat
                 }
                 if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    ene.ArmorPiercing(damage);
+                    ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
@@ -155,15 +159,16 @@ public class LazerTypeTurret : BaseTurretStat
 
         Vector3 dir = firePoint.position - target.position;
         lazerFX.transform.position = target.position + dir.normalized;
+        //status effect 
         if (ene.enemyType.HasFlag(EnemyType.ImmunityToAll))
         {
             return;
         }
-        if (bulletType.HasFlag(BulletType.Insta_Kill))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(BulletType.Insta_Kill))
         {
             effectManager.Insta_kill(ene);
         }
-        if (bulletType.HasFlag(BulletType.SlowPerSecond))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(BulletType.SlowPerSecond))
         {
             effectManager.Slow(ene);
         }
@@ -171,15 +176,15 @@ public class LazerTypeTurret : BaseTurretStat
         {
             effectManager.Dots(ene);
         }
-        if (bulletType.HasFlag(BulletType.Fear))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(BulletType.Fear))
         {
             effectManager.Fear(ene);
         }
-        if (bulletType.HasFlag(BulletType.Weaken))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(BulletType.Weaken))
         {
             effectManager.Weaken(ene);
         }
-        if (bulletType.HasFlag(BulletType.DisableArmor))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.DisableArmor))
         {
             effectManager.DisableArmor(ene);
         }

@@ -235,11 +235,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfDebuffs:
   - {fileID: 11400000, guid: ca9c4b1f8f0d0904c8f3d2d0ed722c33, type: 2}
-  - {fileID: 11400000, guid: 6e782bf3d6a653a4885bc1ea04b116a0, type: 2}
   - {fileID: 11400000, guid: 175196c5cb08b8f44ba8130057202404, type: 2}
   - {fileID: 11400000, guid: 9a2cb40dad7b77e4b9ec4a4a233328e5, type: 2}
   - {fileID: 11400000, guid: 15c484328e2d20a428a3687ef320f84c, type: 2}
   - {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46, type: 2}
+  - {fileID: 11400000, guid: 9a2cb40dad7b77e4b9ec4a4a233328e5, type: 2}
 --- !u!1 &5827280883138840939
 GameObject:
   m_ObjectHideFlags: 0

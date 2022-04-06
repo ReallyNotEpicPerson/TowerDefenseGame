@@ -358,11 +358,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 32
   enemyState: 0
   startHealth: 100
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 1
+  ChanceToEvade: 0.8
   worth: 20
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}
@@ -480,6 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfDebuffs:
   - {fileID: 11400000, guid: a9f28636a4f338341afe08d5497974df, type: 2}
+  - {fileID: 11400000, guid: 590e4f5275fa11b4f9a6d5c6e22cc7b3, type: 2}
 --- !u!114 &1985217187315727894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.87058824, g: 0.08627451, b: 0.08627451, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

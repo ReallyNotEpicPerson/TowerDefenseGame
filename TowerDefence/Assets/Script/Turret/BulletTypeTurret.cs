@@ -77,8 +77,6 @@ public class BulletTypeTurret : BaseTurretStat
     }
     public void Shoot()
     {
-        //GameObject BulletGo = MakeBullet();
-        //BulletType bullettype = BulletGo.GetComponentInParent<BaseBulletClass>().bulletType;
         for (int i = 0; i < firePoint.Count; i++)
         {
             Bullet bullet = MakeBullet(i).GetComponent<Bullet>();

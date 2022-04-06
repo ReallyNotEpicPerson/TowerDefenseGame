@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: POISON
   Icon: {fileID: 21300000, guid: dedfd173b9c3c1d429fd5433e278b3b5, type: 3}
-  specialFX: {fileID: 0}
+  specialFX: {fileID: 8790166749387816976, guid: f7a25caedf33e0c4587c21346f739ba6,
+    type: 3}
   effectType: 0
   removableType: 1
   expirableType: 0
   _duration: 3
-  chance: 0
+  chance: 1
   description: 'Poison Enemy '
   damagePerRate:
-    baseValue: 0
+    baseValue: 20
   rate:
-    baseValue: 0
+    baseValue: 0.4
   damageIncreaseRate:
     modType: 0
     statValue:

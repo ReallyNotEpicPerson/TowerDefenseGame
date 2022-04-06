@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,8 @@ using UnityEngine.UI;
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, Slow = 1 << 1, Weaken = 1 << 2, Amored = 1 << 3, TakeNoDamage = 1 << 4, Fear = 1 << 5,
-    //BlueFlamed = Slow | DOTS,
+    None = 0, FirstHit = 1 << 1, Slow = 1 << 2, Weaken = 1 << 3, Amored = 1 << 4, TakeNoDamage = 1 << 5, Fear = 1 << 6, HealingTime = 1 << 7,
+
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
     //Slow3=1<<3,?
@@ -16,11 +17,14 @@ public enum EnemyState
 public enum EnemyType
 {
     None = 0,//just a normal enemy
+    SpeedBoost = 1 << 1,
     Revive = 1 << 2,
-    ImmunityToAll = 1 << 3,
-    SpeedBoost = 1<<4,
-    SelfHealing = 1<<5,
-    MassHealing = 1<<6,
+    SelfHealing = 1 << 3,
+    MassHealing = 1 << 4,
+    Invisible = 1 << 5,
+    ImmunityToAll = 1 << 6, ImmuneToPoison = 1 << 7, ImmuneToSlow = 1 << 8, ImmuneToFire = 1 << 9, ImmuneToFear = 1 << 10,
+    ImmunityToInsta_Kill = 1 << 11, ImmunityToWeaken = 1 << 12, ImmunityToArmorBreaking = 1 << 12,
+    //teleport?
 }
 public enum MovementType
 {
@@ -40,11 +44,11 @@ public class Enemy : MonoBehaviour
     public bool UsePathFinding;
     private NavMeshAI enemyNavMeshMovement;
     private EnemyMovement enemyPathMovement;
+    public float ChanceToEvade=0.1f;
     //[HideInInspector]
     //public float speed;
     private float health;
     public int worth = 20;
-    private StatValueType modifier;
     #endregion
 
     public GameObject dedFX;
@@ -60,8 +64,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EffectManager fxManager;
     [SerializeField] private SpecialFX specialFX;
 
+    private StatValueType modifier;
     private string ogTag;
-
+    private Color ogHealthBarColor;
     StatUI_InGame statUI;
     #region wait for second List
     static readonly Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
@@ -100,7 +105,7 @@ public class Enemy : MonoBehaviour
         {
             enemyNavMeshMovement = GetComponent<NavMeshAI>();
         }
-        
+
         //TryGetComponent(out fxManager);
     }
     #endregion
@@ -137,6 +142,7 @@ public class Enemy : MonoBehaviour
         Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
         Ded.SetActive(false);
         ogTag = gameObject.tag;
+        ogHealthBarColor = healthBar.color;
     }
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
@@ -144,6 +150,14 @@ public class Enemy : MonoBehaviour
         if (enemyState.HasFlag(EnemyState.TakeNoDamage))
         {
             return false;
+        }
+        if (!enemyState.HasFlag(EnemyState.FirstHit))
+        {
+            EnableState(EnemyState.FirstHit);
+            if (enemyType.HasFlag(EnemyType.Invisible))
+            {
+                fxManager.Invisible(this);
+            }
         }
         if (enemyState.HasFlag(EnemyState.Amored))
         {
@@ -164,7 +178,11 @@ public class Enemy : MonoBehaviour
             case DamageDisplayerType.Burned:
                 DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Burned);
                 break;
+            case DamageDisplayerType.Poisoned:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Poisoned);
+                break;
             case DamageDisplayerType.ArmorPenetration:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.ArmorPenetration);
                 break;
             default:
                 Debug.LogError("But How?");
@@ -194,6 +212,14 @@ public class Enemy : MonoBehaviour
         {
             return false;
         }
+        if (!enemyState.HasFlag(EnemyState.FirstHit))
+        {
+            EnableState(EnemyState.FirstHit);
+            if (enemyType.HasFlag(EnemyType.Invisible))
+            {
+                fxManager.Invisible(this);
+            }
+        }
         switch (type)
         {
             case DamageDisplayerType.Normal:
@@ -205,12 +231,17 @@ public class Enemy : MonoBehaviour
             case DamageDisplayerType.Burned:
                 DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Burned);
                 break;
+            case DamageDisplayerType.Poisoned:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.Poisoned);
+                break;
             case DamageDisplayerType.ArmorPenetration:
+                DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.ArmorPenetration);
                 break;
             default:
                 Debug.LogError("But How?");
                 break;
         }
+        //StartCoroutine(Shaking());
         health -= amount;
         if (health > startHealth)
         {
@@ -230,10 +261,6 @@ public class Enemy : MonoBehaviour
         return true;
     }
     #endregion
-    public bool IsDed()//idk
-    {
-        return isDead;
-    }
     #region Handler
     public void AddDebuff(BaseEffect baseEffect)//use this instead,like EVERY TIME
     {
@@ -271,6 +298,10 @@ public class Enemy : MonoBehaviour
     }
     #endregion
     #region EnemyDeaths
+    public bool IsDed()//idk
+    {
+        return isDead;
+    }
     void Die()
     {
         RemoveALLDebuff();
@@ -369,7 +400,6 @@ public class Enemy : MonoBehaviour
     }
     public void SlowDown(StatModifier mod)
     {
-        EnemyColor(Color.blue);
         if (UsePathFinding)
         {
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
@@ -398,7 +428,6 @@ public class Enemy : MonoBehaviour
         {
             //speed = startSpeed;
         }
-        EnemyColor(Color.white);
     }
     #endregion
     #region weaken 
@@ -416,19 +445,24 @@ public class Enemy : MonoBehaviour
         DisableState(EnemyState.Weaken);
     }
     #endregion
-    public void EnemyColor(Color color)
+    public void SetHealthColor()
     {
-        enemyColor.color = color;
+        healthBar.color = ogHealthBarColor;
     }
-    public void CUM()
+    public void SetHealthColor(Color c)
+    {
+        healthBar.color = c;
+    }
+    public void ReverseBlackDad()
     {
         gameObject.tag = ogTag;
-        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a + 100);
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a * 2);
     }
     public void Invisible(string tag = "Untagged")
     {
         gameObject.tag = tag;
-        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a - 100);
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a / 2);
+        Debug.Log(enemyColor.color);
     }
     void OnMouseEnter()
     {
@@ -440,6 +474,10 @@ public class Enemy : MonoBehaviour
         //statUI.enabled = false;
     }
     #region flag checking/Manipulation
+    public bool CheckEnemyType(EnemyType et)
+    {
+        return enemyType.HasFlag(et);
+    }
     public bool CheckState(EnemyState es)
     {
         return enemyState.HasFlag(es);

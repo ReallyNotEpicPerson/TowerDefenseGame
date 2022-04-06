@@ -7219,13 +7219,31 @@ PrefabInstance:
         type: 3}
       propertyPath: listOfDebuffs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 6e782bf3d6a653a4885bc1ea04b116a0,
+      objectReference: {fileID: 11400000, guid: 175196c5cb08b8f44ba8130057202404,
+        type: 2}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a2cb40dad7b77e4b9ec4a4a233328e5,
+        type: 2}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 15c484328e2d20a428a3687ef320f84c,
+        type: 2}
+    - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46,
         type: 2}
     - target: {fileID: 6386857294541809331, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
       propertyPath: listOfDebuffs.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46,
+      objectReference: {fileID: 11400000, guid: 9a2cb40dad7b77e4b9ec4a4a233328e5,
         type: 2}
     - target: {fileID: 7083397131444511046, guid: a88c3d144c9d17445975c35cbbe5d529,
         type: 3}
@@ -24042,12 +24060,17 @@ PrefabInstance:
     - target: {fileID: 3053064806348107541, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: enemyState
-      value: 8
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107541, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}
       propertyPath: startHealth
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053064806348107541, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      propertyPath: ChanceToEvade
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3053064806348107543, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
         type: 3}

@@ -9,6 +9,8 @@ public enum DamageDisplayerType
     ArmorHit = 1 << 1,
     Burned = 1 << 2,
     ArmorPenetration = 1 << 3,
+    Poisoned = 1 << 4,
+    Miss = 1 << 5,
 }
 
 public class DamageDisplayer : MonoBehaviour
@@ -29,29 +31,6 @@ public class DamageDisplayer : MonoBehaviour
     {
         textMesh.fontSize = 5;
     }
-    public static DamageDisplayer Create(Vector3 pos, int amount, bool critical)
-    {
-        Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
-        DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
-        displayer.SetUp(amount, critical);
-        //Debug.Log(critical);
-        return displayer;
-    }
-    public void SetUp(int amount, bool isCrit = false)
-    {
-        textMesh.SetText(amount.ToString());
-        if (isCrit)
-        {
-            textMesh.fontSize += 2;
-            textMesh.color = Color.red;
-            //Debug.Log("Red");
-        }
-        textColor = textMesh.color;
-        disappearTimer = 0.5f;
-
-        //sortingOrder++;
-        //textMesh.sortingOrder = sortingOrder;
-    }
     public static DamageDisplayer Create(Vector3 pos, float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
         Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
@@ -60,12 +39,20 @@ public class DamageDisplayer : MonoBehaviour
         //Debug.Log(critical);
         return displayer;
     }
-    public static void Create(Vector3 pos, string str)
+    public static DamageDisplayer Create(Vector3 pos, string str, DamageDisplayerType type = DamageDisplayerType.Miss)
     {
         Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
-        displayer.SetTextTo(str);
+        displayer.SetUp(str, type);
+        return displayer;
     }
+    public void SetUp(string str, DamageDisplayerType type)
+    {
+        disappearTimer = 1f;
+        textMesh.SetText(str);
+        textColor = textMesh.color;
+    }
+
     public void SetUp(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
         EnableState(type);
@@ -93,19 +80,26 @@ public class DamageDisplayer : MonoBehaviour
                 textMesh.color = Color.yellow;
                 disappearTimer = 0.5f;
                 break;
-            case DamageDisplayerType.ArmorPenetration:
+            case DamageDisplayerType.Poisoned:
+                textMesh.fontSize -= 1;
+                textMesh.color = Color.green;
                 disappearTimer = 0.5f;
+                break;
+            case DamageDisplayerType.ArmorPenetration:
+                textMesh.fontSize += 2;
+                textMesh.color = Color.cyan;
+                disappearTimer = 1f;
                 break;
             default:
                 Debug.LogError("Fuckkkkk!!!");
                 break;
         }
-        if (type.HasFlag(DamageDisplayerType.Critial))
+        /*if (type.HasFlag(DamageDisplayerType.Critial))
         {
             textMesh.fontSize += 2;
             textMesh.color = Color.red;
             //Debug.Log("Red");
-        }
+        }*/
 
         textColor = textMesh.color;
 
@@ -123,6 +117,9 @@ public class DamageDisplayer : MonoBehaviour
             case DamageDisplayerType.Normal:
                 TextGoUpAndDisappear(3f, 4f);
                 break;
+            case DamageDisplayerType.Miss:
+                TextGoUpAndDisappear(2f, 5f);
+                break;
             case DamageDisplayerType.Critial:
                 TextGoUpAndDisappear(2f, 20f);
                 break;
@@ -132,7 +129,11 @@ public class DamageDisplayer : MonoBehaviour
             case DamageDisplayerType.Burned:
                 TextGoUpAndDisappear(1f, 20f);
                 break;
+            case DamageDisplayerType.Poisoned:
+                TextGoUpAndDisappear(1f, 20f);
+                break;
             case DamageDisplayerType.ArmorPenetration:
+                TextGoUpAndDisappear(2f, 10f);
                 break;
             default:
                 break;
@@ -155,7 +156,7 @@ public class DamageDisplayer : MonoBehaviour
             TextGoUpAndDisappear(0.2f, 10f, 5);
         }*/
     }
-    
+
     public void TextGoUpAndDisappear(float YaxisSpeed, float DisappearSpeed)
     {
         transform.position += new Vector3(0, YaxisSpeed) * Time.deltaTime;

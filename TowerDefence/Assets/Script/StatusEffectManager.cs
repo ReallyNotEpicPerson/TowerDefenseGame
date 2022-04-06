@@ -41,12 +41,12 @@ public class StatusEffectManager : MonoBehaviour//, IDamageable<float,float,floa
                 {
                     enemyList[i].DisableState(EnemyState.Slow);
                     //enemyList[i].speed = enemyList[i].startSpeed;
-                    enemyList[i].EnemyColor(Color.white);
+                    //enemyList[i].EnemyColor(Color.white);
                     ListOfMOD[1] = 0;
                     return;
                 }
                 ListOfMOD[0] = ListOfMOD[0] - Time.deltaTime;
-                enemyList[i].EnemyColor(Color.blue);
+                //enemyList[i].EnemyColor(Color.blue);
             }
         }
     }

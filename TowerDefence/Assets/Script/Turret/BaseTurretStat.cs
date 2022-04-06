@@ -40,7 +40,6 @@ public class BaseTurretStat : MonoBehaviour
 {
     public CharacterStat range;//keep at all cost
     public CharacterStat rotationSpeed;//keep at all cost
-
     public Transform target;//keep at all cost
 
     [SerializeField] protected TurretType turretType;

@@ -45,22 +45,25 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(etag);
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
         float shortestDis = Mathf.Infinity;
-        GameObject nearestenemy = null;
-        foreach (GameObject enemy in enemies)//check distance
+        Collider2D nearestCol = null;
+        foreach (Collider2D col in collider)
         {
-            float DisToenenmy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (DisToenenmy < shortestDis)
+            if (col.TryGetComponent<Enemy>(out _))
             {
-                shortestDis = DisToenenmy;
-                nearestenemy = enemy;
+                float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
+                if (DisToenenmy < shortestDis)
+                {
+                    shortestDis = DisToenenmy;
+                    nearestCol = col;
+                }
             }
         }
-        if (nearestenemy != null && shortestDis <= range.value)
+        if (nearestCol != null && shortestDis <= range.value)
         {
-            target = nearestenemy.transform;
-            ene = nearestenemy.GetComponent<Enemy>();
+            target = nearestCol.transform;
+            //Debug.Log("Final " + nearestCol.name);
         }
         else
         {
@@ -92,7 +95,7 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void LazerShoot()
     {
-        if (accuracy * Random.value >= ene.ChanceToEvade * Random.value)
+        if (accuracy * Random.value <= ene.ChanceToEvade * Random.value)
         {
             DamageDisplayer.Create(ene.transform.position, "MISS");
             return;

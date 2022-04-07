@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Bullet : BaseBulletClass
 {
-    private TurretType turretType;
     [SerializeField] EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
     public float accuracy=1;
     float damage;
 
-    public void Seek(Transform _target, TurretType t)
+    public void Seek(Transform _target)
     {
         target = _target;
-        turretType = t;
     }
     void Update()//make bullet move and shit
     {
@@ -62,7 +60,7 @@ public class Bullet : BaseBulletClass
     void Damage(Transform enemy)
     {
         Enemy ene = enemy.GetComponent<Enemy>();
-        if (accuracy * Random.value >= ene.ChanceToEvade * Random.value)
+        if (accuracy * Random.value <= ene.ChanceToEvade * Random.value)
         {
             if (!ene.enemyState.HasFlag(EnemyState.FirstHit))
             {

@@ -13,10 +13,10 @@ public class BulletTypeTurret : BaseTurretStat
     public string etag = "Enemy";
     private float FireCountDown = 0f;
     //private ObjectPooler pool;
-    private void Awake()
+    /*private void Awake()
     {
         //pool = GetComponent<ObjectPooler>();
-    }
+    }*/
     public void OnValidate()
     {
         if (firePoint.Count < 1)
@@ -37,23 +37,27 @@ public class BulletTypeTurret : BaseTurretStat
         //InvokeRepeating("UpdateTarget", 0f, 0.2f);
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
+
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(etag);//tr4m c4m function
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position,range.value);
         float shortestDis = Mathf.Infinity;
-        GameObject nearestenemy = null;
-        foreach (GameObject enemy in enemies)
+        Collider2D nearestCol = null;
+        foreach (Collider2D col in collider)
         {
-            float DisToenenmy = Vector3.Distance(transform.position, enemy.transform.position);//use Distancesquared??
-            if (DisToenenmy < shortestDis)
+            if (col.TryGetComponent<Enemy>(out _))
             {
-                shortestDis = DisToenenmy;
-                nearestenemy = enemy;
+                float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
+                if (DisToenenmy < shortestDis)
+                {
+                    shortestDis = DisToenenmy;
+                    nearestCol = col;
+                }
             }
         }
-        if (nearestenemy != null && shortestDis <= range.baseValue)
+        if (nearestCol != null && shortestDis <= range.value)
         {
-            target = nearestenemy.transform;
+            target = nearestCol.transform;
         }
         else
         {
@@ -80,7 +84,7 @@ public class BulletTypeTurret : BaseTurretStat
         for (int i = 0; i < firePoint.Count; i++)
         {
             Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
-            if (bullet != null) { bullet.Seek(target, turretType); }
+            if (bullet != null) { bullet.Seek(target); }
         }
     }
     private GameObject MakeBullet(int i)

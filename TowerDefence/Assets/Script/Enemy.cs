@@ -144,6 +144,10 @@ public class Enemy : MonoBehaviour
         ogTag = gameObject.tag;
         ogHealthBarColor = healthBar.color;
     }
+    public void Update()
+    {
+        
+    }
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
     {
@@ -316,7 +320,8 @@ public class Enemy : MonoBehaviour
     public void FakeDeath()
     {
         Debug.Log("Sleep");
-        gameObject.tag = "Untagged";
+        //gameObject.tag = "Untagged";
+        GetComponent<Collider2D>().enabled = false;
         if (enemyNavMeshMovement != null)
         {
             GetComponent<NavMeshAI>().Enable(false);
@@ -345,7 +350,8 @@ public class Enemy : MonoBehaviour
                 EnableState(EnemyState.Amored);
             }
         }
-        gameObject.tag = "Enemy";
+        //gameObject.tag = "Enemy";
+        GetComponent<Collider2D>().enabled = true;
         if (enemyNavMeshMovement != null)
         {
             //Debug.Log("Turn back on YOU BITCH");
@@ -455,14 +461,14 @@ public class Enemy : MonoBehaviour
     }
     public void ReverseBlackDad()
     {
-        gameObject.tag = ogTag;
+        GetComponent<Collider2D>().enabled = true;
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a * 2);
     }
-    public void Invisible(string tag = "Untagged")
+    public void Invisible()
     {
-        gameObject.tag = tag;
+        GetComponent<Collider2D>().enabled = false;
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a / 2);
-        Debug.Log(enemyColor.color);
+        //Debug.Log(enemyColor.color);
     }
     void OnMouseEnter()
     {

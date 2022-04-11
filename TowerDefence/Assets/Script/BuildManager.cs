@@ -79,7 +79,7 @@ public class BuildManager : MonoBehaviour
         {
             if(tempTurret.GetComponent<LazerTypeTurret>() != null)
             {
-                tempTurret.GetComponent<LazerTypeTurret>().DestroyLeftoverUI();
+               // tempTurret.GetComponent<LazerTypeTurret>().DestroyLeftoverUI();
             }
             isGone = true;
             Destroy(tempTurret);

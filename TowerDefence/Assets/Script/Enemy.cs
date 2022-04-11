@@ -17,13 +17,12 @@ public enum EnemyState
 public enum EnemyType
 {
     None = 0,//just a normal enemy
-    SpeedBoost = 1 << 1,
-    Revive = 1 << 2,
-    SelfHealing = 1 << 3,
-    MassHealing = 1 << 4,
-    Invisible = 1 << 5,
-    ImmunityToAll = 1 << 6, ImmuneToPoison = 1 << 7, ImmuneToSlow = 1 << 8, ImmuneToFire = 1 << 9, ImmuneToFear = 1 << 10,
-    ImmunityToInsta_Kill = 1 << 11, ImmunityToWeaken = 1 << 12, ImmunityToArmorBreaking = 1 << 12,
+    FirstHitSpeedBoost = 1 << 0,
+    Revive = 1 << 1,
+    Healing = 1 << 2,
+    Invisible = 1 << 3,
+    ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8, ImmuneToFear = 1 << 9,
+    ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
     //teleport?
 }
 public enum MovementType
@@ -65,7 +64,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpecialFX specialFX;
 
     private StatValueType modifier;
-    private string ogTag;
+    //private string ogTag;
     private Color ogHealthBarColor;
     StatUI_InGame statUI;
     #region wait for second List
@@ -141,12 +140,8 @@ public class Enemy : MonoBehaviour
         health = startHealth;
         Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
         Ded.SetActive(false);
-        ogTag = gameObject.tag;
+        //ogTag = gameObject.tag;
         ogHealthBarColor = healthBar.color;
-    }
-    public void Update()
-    {
-        
     }
     #region Damaging
     public bool TakeDamage(float amount, DamageDisplayerType type = DamageDisplayerType.Normal)
@@ -161,6 +156,15 @@ public class Enemy : MonoBehaviour
             if (enemyType.HasFlag(EnemyType.Invisible))
             {
                 fxManager.Invisible(this);
+            }
+            if (enemyType.HasFlag(EnemyType.Healing))
+            {
+                Debug.Log("Activate Heal");
+                GetComponent<Cast>().TurnOn();
+            }
+            if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
+            {
+                fxManager.Slow(this);
             }
         }
         if (enemyState.HasFlag(EnemyState.Amored))
@@ -187,6 +191,8 @@ public class Enemy : MonoBehaviour
                 break;
             case DamageDisplayerType.ArmorPenetration:
                 DamageDisplayer.Create(transform.position, amount, DamageDisplayerType.ArmorPenetration);
+                break;
+            case DamageDisplayerType.NO:
                 break;
             default:
                 Debug.LogError("But How?");
@@ -222,6 +228,16 @@ public class Enemy : MonoBehaviour
             if (enemyType.HasFlag(EnemyType.Invisible))
             {
                 fxManager.Invisible(this);
+            }
+            if (enemyType.HasFlag(EnemyType.Healing))
+            {
+                Debug.Log("Activate Heal");
+                GetComponent<Cast>().TurnOn();
+            }
+            if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
+            {
+                Debug.Log("Yes");
+                fxManager.Slow(this);
             }
         }
         switch (type)
@@ -268,7 +284,8 @@ public class Enemy : MonoBehaviour
     #region Handler
     public void AddDebuff(BaseEffect baseEffect)//use this instead,like EVERY TIME
     {
-        Handler.AddDebuff(baseEffect, this);
+        Handler.AddDebuff(baseEffect, gameObject);
+        //Debug.Log("Yes");
     }
     public bool HaveThis(string ID)
     {
@@ -417,11 +434,6 @@ public class Enemy : MonoBehaviour
             //speed = startSpeed * (1 - slowPtc);
         }
         //Debug.Log("Work!,GOD DAMMIT");
-    }
-    public void ModifyAcceleration(StatModifier mod)
-    {
-        //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
-        enemyNavMeshMovement.AddSpeedMod(mod);
     }
     public void UndoModification(object source)
     {

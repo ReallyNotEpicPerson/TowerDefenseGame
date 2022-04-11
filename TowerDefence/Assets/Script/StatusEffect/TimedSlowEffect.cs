@@ -4,17 +4,21 @@ using UnityEngine;
 public class TimedSlowEffect : TimedEffect
 {
     private readonly Enemy _enemy;
+    private readonly BaseTurretStat _turret;
     private readonly float tempPercentage = 0;
 
     public TimedSlowEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
     {
-        _enemy = obj.GetComponent<Enemy>();
+        obj.TryGetComponent(out _enemy);
+        obj.TryGetComponent(out _turret);
+        //Debug.Log("WHICH "+_enemy + " " + _turret);
     }
+
     #region [idk man ]
     public bool IsThisBetterThan(SlowEffect newSlowEffect)
     {
         SlowEffect ThisSlowEffect = (SlowEffect)Effect;
-        if (newSlowEffect._slowPercentage.value > ThisSlowEffect._slowPercentage.value)
+        if (newSlowEffect._slowPercentage.statValue.value > ThisSlowEffect._slowPercentage.statValue.value)
         {
             return true;
         }
@@ -28,9 +32,23 @@ public class TimedSlowEffect : TimedEffect
     protected override void ApplyEffect()
     {
         SlowEffect slowEffect = (SlowEffect)Effect;
-        //tempPercentage = slowEffect._slowPercentage.value;
         if (effectStacks == slowEffect.stackTime)
         {
+            if (_turret != null)
+            {
+                switch (_turret)
+                {
+                    case BulletTypeTurret bulletTypeTurret:
+                        bulletTypeTurret.UndoModificationToFireRate(this);
+                        break;
+                    case LazerTypeTurret lazerTypeTurret:
+                        lazerTypeTurret.UndoModification(this);
+                        break;
+                    default:
+                        break;
+                }
+                effectStacks = 0;
+            }
             Debug.Log("Reaching maximum stack of " + slowEffect.stackTime);
             return;
         }
@@ -40,33 +58,85 @@ public class TimedSlowEffect : TimedEffect
             switch (slowEffect.increaseRate.modType)
             {
                 case StatModType.Flat:
-                    slowEffect._slowPercentage.AddingOneInstance(new StatModifier(slowEffect.increaseRate.statValue.value * effectStacks, StatModType.Flat, this));
+                    slowEffect._slowPercentage.statValue.AddingOneInstance(new StatModifier(slowEffect.increaseRate.statValue.value * effectStacks, StatModType.Flat, this));
                     break;
                 case StatModType.PercentAdd:
-                    slowEffect._slowPercentage.AddModifier(new StatModifier(slowEffect.increaseRate.statValue.value, StatModType.PercentAdd, this));
+                    slowEffect._slowPercentage.statValue.AddModifier(new StatModifier(slowEffect.increaseRate.statValue.value, StatModType.PercentAdd, this));
                     break;
                 case StatModType.PercentMult:
-                    slowEffect._slowPercentage.AddModifier(new StatModifier(slowEffect.increaseRate.statValue.value, StatModType.PercentMult, this));
+                    slowEffect._slowPercentage.statValue.AddModifier(new StatModifier(slowEffect.increaseRate.statValue.value, StatModType.PercentMult, this));
                     break;
                 default:
                     break;
             }
             //Debug.Log("Stack num "+effectStacks+" Stack value " + slowEffect._slowPercentage.value);
         }
-        _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.value, StatModType.PercentDebuffBest, this));
-        if (!_enemy.ContainFX(Effect.ID))
+        if (_enemy != null)
         {
-            Debug.Log("addFX");
-            _enemy.AddFX(this);
+            switch (slowEffect._slowPercentage.modType)
+            {
+                case StatModType.Flat:
+                    _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.Flat, this));
+                    break;
+                case StatModType.PercentAdd:
+                    _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentAdd, this));
+                    break;
+                case StatModType.PercentMult:
+                    _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
+                    break;
+                case StatModType.PercentDebuffBest:
+                    _enemy.SlowDown(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentDebuffBest, this));
+                    break;
+                default:
+                    break;
+            }       
+            if (Effect.specialFX != null && !_enemy.ContainFX(Effect.ID))
+            {
+                //Debug.Log("addFX");
+                _enemy.AddFX(this);
+            }
         }
+        else if (_turret != null)
+        {
+            //Debug.Log(slowEffect._slowPercentage.value);
+            switch (_turret)
+            {
+                case BulletTypeTurret bulletTypeTurret:
+                    bulletTypeTurret.ReduceRate(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
+                    break;
+                case LazerTypeTurret lazerTypeTurret:
+                    lazerTypeTurret.ReduceRate(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
+                    break;
+                default:
+                    break;
+            }
+        }
+
         //_enemy.AdjustSpeed(slowEffect._slowPercentage.value);
     }
     public override void End()
     {
         SlowEffect slowEffect = (SlowEffect)Effect;
-        slowEffect._slowPercentage.RemoveAllModifiersFromSource(this);
-        _enemy.UndoModification(this);
-        _enemy.RemoveFX(Effect.ID);
+        slowEffect._slowPercentage.statValue.RemoveAllModifiersFromSource(this);
+        if (_enemy != null && Effect.specialFX!=null)
+        {
+            _enemy.UndoModification(this);
+            _enemy.RemoveFX(Effect.ID);
+        }
+        else if (_turret != null)
+        {
+            switch (_turret)
+            {
+                case BulletTypeTurret bulletTypeTurret:
+                    bulletTypeTurret.UndoModificationToFireRate(this);
+                    break;
+                case LazerTypeTurret lazerTypeTurret:
+                    lazerTypeTurret.UndoModification(this);
+                    break;
+                default:
+                    break;
+            }
+        }
         effectStacks = 0;
     }
     public override StringBuilder Display()

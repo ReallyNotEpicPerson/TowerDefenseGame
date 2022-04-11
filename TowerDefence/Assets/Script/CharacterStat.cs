@@ -146,10 +146,13 @@ public class CharacterStat
         // 4 significant digits is usually precise enough, but feel free to change this to fit your needs
         return (float)Math.Round(finalValue, 4);
     }
+    public void RemoveAllModifier()
+    {
+        statModifiers.Clear();
+    }
     public virtual bool RemoveAllModifiersFromSource(object source)
     {
         bool didRemove = false;
-
         for (int i = statModifiers.Count - 1; i >= 0; i--)
         {
             if (statModifiers[i].source == source)

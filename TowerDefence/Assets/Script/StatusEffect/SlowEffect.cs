@@ -4,10 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Slow Effect", menuName = "Slow")]
 public class SlowEffect : BaseEffect
 {
-    public CharacterStat _slowPercentage;
+    public StatValueType _slowPercentage;
+    //public CharacterStat _slowPercentage;
     public StatValueType increaseRate;
-    //public StatModType mod;
-    //public float increaseRate;
     public int stackTime;
 
     public override void OnValidate()
@@ -45,4 +44,5 @@ public class SlowEffect : BaseEffect
     {
         return new TimedSlowEffect(this, obj);
     }
+    
 }

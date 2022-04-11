@@ -47,7 +47,8 @@ public class EntityEffectHandler : MonoBehaviour
         }
         ListAllDebuff();
     }
-    public void AddDebuff(BaseEffect baseEffect, Enemy enemy)// the ultimate function
+
+    public void AddDebuff(BaseEffect baseEffect, GameObject Obj)// the ultimate function
     {
         /*switch (baseEffect)
         {
@@ -82,19 +83,19 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(slowEffect.ID, slowEffect.Init(enemy.gameObject));
+                    _effectList.Add(slowEffect.ID, slowEffect.Init(Obj));
                     _effectList[slowEffect.ID].Activate();
                 }
                 break;
-            case DotsEffect burnEffect:
-                if (_effectList.ContainsKey(burnEffect.ID))
+            case DotsEffect dotsEffect:
+                if (_effectList.ContainsKey(dotsEffect.ID))
                 {
-                    _effectList[burnEffect.ID].Activate();
+                    _effectList[dotsEffect.ID].Activate();
                 }
                 else
                 {
-                    _effectList.Add(burnEffect.ID, burnEffect.Init(enemy.gameObject));
-                    _effectList[burnEffect.ID].Activate();
+                    _effectList.Add(dotsEffect.ID, dotsEffect.Init(Obj));
+                    _effectList[dotsEffect.ID].Activate();
                 }
                 break;
             case FearEffect fearEffect:
@@ -104,7 +105,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(fearEffect.ID, fearEffect.Init(enemy.gameObject));
+                    _effectList.Add(fearEffect.ID, fearEffect.Init(Obj));
                     _effectList[fearEffect.ID].Activate();
                 }
                 break;
@@ -115,7 +116,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(revive.ID, revive.Init(enemy.gameObject));
+                    _effectList.Add(revive.ID, revive.Init(Obj));
                     _effectList[revive.ID].Activate();
                 }
                 break;
@@ -126,7 +127,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(weaken.ID, weaken.Init(enemy.gameObject));
+                    _effectList.Add(weaken.ID, weaken.Init(Obj));
                     _effectList[weaken.ID].Activate();
                 }
                 break;
@@ -137,7 +138,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(disableArmor.ID, disableArmor.Init(enemy.gameObject));
+                    _effectList.Add(disableArmor.ID, disableArmor.Init(Obj));
                     _effectList[disableArmor.ID].Activate();
                 }
                 break;
@@ -148,7 +149,7 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 else
                 {
-                    _effectList.Add(invisible.ID, invisible.Init(enemy.gameObject));
+                    _effectList.Add(invisible.ID, invisible.Init(Obj));
                     _effectList[invisible.ID].Activate();
                 }
                 break;
@@ -161,7 +162,7 @@ public class EntityEffectHandler : MonoBehaviour
     public void RemoveDebuff(string ID)//OG remove
     {
         _effectList.Remove(ID);
-        
+
     }
     /*public void RemoveALLDebuff(int LeType) //Well fuck,there are 2 type of status effect negative=0 and positive=1
     {

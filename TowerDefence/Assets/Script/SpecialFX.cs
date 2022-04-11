@@ -37,6 +37,11 @@ public class SpecialFX : MonoBehaviour
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position, Quaternion.identity, fxParent);
                     SpecialFXDict.Add(fx.Effect.ID, go);
                 }
+                else if (fx.Effect.ID.Contains("HEAL"))
+                {
+                    //go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);
+                    //SpecialFXDict.Add(fx.Effect.ID, go);
+                }
                 else if(fx.Effect.ID.Contains("POI"))
                 {
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);

@@ -8,15 +8,20 @@ public class BulletTypeTurret : BaseTurretStat
 {
     [Header("BulletTypeStat")]
     public List<Transform> firePoint;//keep at all cost
-    public CharacterStat firerate;
+    public CharacterStat fireRate;
     public GameObject BulletPrefab;
-    public string etag = "Enemy";
     private float FireCountDown = 0f;
+    private EntityEffectHandler fxHandler;
+    private EffectManager fxManager;
+    private StatModifier modifier;
+
     //private ObjectPooler pool;
-    /*private void Awake()
+    public override void Awake()
     {
-        //pool = GetComponent<ObjectPooler>();
-    }*/
+        base.Awake();
+        TryGetComponent(out fxHandler);
+        TryGetComponent(out fxManager);
+    }
     public void OnValidate()
     {
         if (firePoint.Count < 1)
@@ -31,6 +36,8 @@ public class BulletTypeTurret : BaseTurretStat
                     continue;
             }
         }
+        transform.GetChild(1).localScale=Vector3.one;
+        transform.GetChild(1).localScale*=range.baseValue;
     }
     void Start()
     {
@@ -40,41 +47,56 @@ public class BulletTypeTurret : BaseTurretStat
 
     void UpdateTarget()
     {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position,range.value);
+        target.Clear();
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
         float shortestDis = Mathf.Infinity;
         Collider2D nearestCol = null;
         foreach (Collider2D col in collider)
         {
             if (col.TryGetComponent<Enemy>(out _))
             {
-                float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
-                if (DisToenenmy < shortestDis)
+                if (shootType.HasFlag(ShootType.SingleTarget))
                 {
-                    shortestDis = DisToenenmy;
-                    nearestCol = col;
+                    float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
+                    if (DisToenenmy < shortestDis)
+                    {
+                        shortestDis = DisToenenmy;
+                        nearestCol = col;
+                    }
+                }
+                else if (shootType.HasFlag(ShootType.MultipleTarget))
+                {
+                    target.Add(col.transform);
+                    if (target.Count == numberOfTarget)
+                    {
+                        return;
+                    }
                 }
             }
         }
-        if (nearestCol != null && shortestDis <= range.value)
+        if (shootType.HasFlag(ShootType.SingleTarget) && nearestCol != null)
         {
-            target = nearestCol.transform;
-        }
-        else
-        {
-            target = null;
+            target.Add(nearestCol.transform);
         }
     }
-    // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (target.Count == 0)
         {
             return;
         }
         RotateToObject();
         if (FireCountDown <= 0f)
         {
-            FireCountDown = 1f / firerate.baseValue;
+            if (passiveAbility.HasFlag(PassiveAbility.IncreaseSpeed))
+            {
+                fxHandler.AddDebuff(fxManager.GetSpeedBoostData(), gameObject);
+            }
+            if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
+            {
+                fxHandler.AddDebuff(fxManager.GetDamageBoostData(), gameObject);
+            }
+            FireCountDown = fireRate.value;
             Shoot();
         }
         FireCountDown -= Time.deltaTime;
@@ -83,8 +105,18 @@ public class BulletTypeTurret : BaseTurretStat
     {
         for (int i = 0; i < firePoint.Count; i++)
         {
-            Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
-            if (bullet != null) { bullet.Seek(target); }
+            for (int j = 0; j < target.Count; j++)
+            {
+                Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
+                if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
+                {
+                    bullet.AddDamageMod(modifier);
+                }
+                if (bullet != null)
+                {
+                    bullet.Seek(target[j]);
+                }
+            }
         }
     }
     private GameObject MakeBullet(int i)
@@ -92,6 +124,16 @@ public class BulletTypeTurret : BaseTurretStat
         return Instantiate(BulletPrefab, firePoint[i].position, firePoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
     }
+    public void ReduceRate(StatModifier mod)
+    {
+        fireRate.AddingOneInstance(mod);
+        Debug.Log("Just added " + fireRate.value);
+    }
+    public void UndoModificationToFireRate(object source)
+    {
+        fireRate.RemoveAllModifiersFromSource(source);
+        Debug.Log("Remove all " + fireRate.value);
+    }    
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

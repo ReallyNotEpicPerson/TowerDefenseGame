@@ -28,6 +28,7 @@ public class StatModifier
         order = Order;
         source = Source; // Assign Source to our new input parameter
     }
+    public StatModifier(float value) : this(value, StatModType.None, 0, null) { }
 
     // Requires Value and Type. Calls the "Main" constructor and sets Order and Source to their default values: (int)type and null, respectively.
     public StatModifier(float value, StatModType type) : this(value, type, (int)type, null) { }

@@ -33,7 +33,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if(!poolDict.ContainsKey(name))
         {
-            Debug.Log("What are you trying to access buddy? + "+name+"Doesn`t exist");
+            Debug.Log("What are you trying to access buddy? "+name+" Doesn`t exist");
             return null;
         }
         GameObject objToSpawn = poolDict[name].Dequeue();

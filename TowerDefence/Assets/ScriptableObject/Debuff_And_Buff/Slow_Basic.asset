@@ -23,7 +23,9 @@ MonoBehaviour:
   chance: 1
   description: Slow a mtf Down
   _slowPercentage:
-    baseValue: 0.3
+    modType: 400
+    statValue:
+      baseValue: 0.3
   increaseRate:
     modType: 0
     statValue:

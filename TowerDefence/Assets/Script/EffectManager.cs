@@ -14,6 +14,30 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         return true;
     }
+    public BaseEffect GetSpeedBoostData()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is SlowEffect && listOfDebuffs[i].ID.Contains("TUR"))
+            {
+                return listOfDebuffs[i];
+            }
+        }
+        Debug.LogError("forget to add eii?");
+        return null;
+    }
+    public BaseEffect GetDamageBoostData()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Weaken && listOfDebuffs[i].ID.Contains("TUR"))
+            {
+                return listOfDebuffs[i];
+            }
+        }
+        Debug.LogError("forget to add eii?");
+        return null;
+    }
     public bool HaveThis(BaseEffect bfx)
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
@@ -76,14 +100,17 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         {
             if (listOfDebuffs[i] is SlowEffect)
             {
+                if (listOfDebuffs[i].ID.Contains("TUR"))
+                {
+                    continue;
+                }
                 if (Random.value <= listOfDebuffs[i].chance)
                 {
                     enemy.AddDebuff(listOfDebuffs[i]);
                 }
-                return;
             }
         }
-        Debug.LogError("nothing");
+        //Debug.LogError("nothing");
     }
     public void Dots(Enemy enemy)
     {
@@ -95,18 +122,17 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
                 {
                     if (enemy.CheckEnemyType(EnemyType.ImmuneToFire) && listOfDebuffs[i].ID.Contains("BU"))
                     {
-                        return;
+                        continue;
                     }
                     if (enemy.CheckEnemyType(EnemyType.ImmuneToPoison) && listOfDebuffs[i].ID.Contains("POI"))
                     {
-                        return;
+                        continue;
                     }
                     enemy.AddDebuff(listOfDebuffs[i]);
                 }
-                return;
             }
         }
-        Debug.LogError("nothing");
+        //Debug.LogError("nothing");
     }
     public void Fear(Enemy enemy)
     {

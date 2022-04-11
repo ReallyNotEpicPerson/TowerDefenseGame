@@ -3,30 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
+public enum ShootType
+{
+    None=0,
+    SingleTarget =1,
+    MultipleTarget = 2,
+}
 [System.Flags]
 public enum PassiveAbility
 {
-    Stun = 1,
-    ExtraShots = 2,
-    Penetration = 4,
-    Splash = 8,
-    DamagePerSecond = 16,
-    SpreadShot = 32,
-    IncreaseDamage = 64,
-    Insta_Kill = 128,
-}
-public enum ActiveAbility
-{
-    CallHitler,
-}
-public enum TurretType
-{
-    NormalBullet,
-    CloseCombat,
-    Group,
-    Energy,
-    Slow,
+    None=0,
+    Penetration = 1<<0,
+    Splash = 1<<1,
+    IncreaseDamage = 1<<2,
+    IncreaseSpeed = 1<<3,
 }
 public enum Direction
 {
@@ -38,13 +28,19 @@ public enum Direction
 [System.Serializable]
 public class BaseTurretStat : MonoBehaviour
 {
+    public ShootType shootType;
+    public PassiveAbility passiveAbility;
+    public int numberOfTarget=1;
     public CharacterStat range;//keep at all cost
     public CharacterStat rotationSpeed;//keep at all cost
-    public Transform target;//keep at all cost
+    [SerializeField] protected List<Transform> target;//keep at all cost
 
-    [SerializeField] protected TurretType turretType;
     protected Direction direction;
 
+    public virtual void Awake()
+    {
+        target = new List<Transform>(numberOfTarget);
+    }
     public virtual void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -68,7 +64,7 @@ public class BaseTurretStat : MonoBehaviour
     }
     public virtual void RotateToObject()
     {
-        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(target[0].transform.position.y - transform.position.y, target[0].transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed.baseValue * Time.deltaTime);
         //Debug.DrawRay(transform.position, target.transform.position);

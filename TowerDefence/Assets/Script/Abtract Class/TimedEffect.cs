@@ -16,6 +16,7 @@ public abstract class TimedEffect
         Effect = fx;
         Target = tar;
     }
+    
     #region Duration
     public float GetDuration()
     {

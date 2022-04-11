@@ -23,7 +23,7 @@ public class CloseCombatTurret : BaseTurretStat
         {
             damageDisplayUI = (GameObject)Resources.Load("Displayer");
         }
-    }
+    }/*
     void Start()
     {
         coolDownDelay = coolDown;
@@ -52,7 +52,7 @@ public class CloseCombatTurret : BaseTurretStat
         {
             target = null;
         }
-    }
+    }*/
     void Update()
     {
         if (target == null)
@@ -65,8 +65,8 @@ public class CloseCombatTurret : BaseTurretStat
             coolDownDelay = coolDown;
         }
         coolDownDelay -= Time.deltaTime;
-        RotateToObject();
-    }
+        //RotateToObject();
+    }/*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Shit");
@@ -81,8 +81,8 @@ public class CloseCombatTurret : BaseTurretStat
         GameObject damdis = Instantiate(damageDisplayUI, collision.transform.position, target.rotation);
         damdis.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text = System.Math.Round(damage.baseValue*modifier, 4).ToString();
         Destroy(damdis, 0.5f);
-    }
-    public override void RotateToObject()
+    }*/
+    /*public override void RotateToObject()
     {
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -116,7 +116,7 @@ public class CloseCombatTurret : BaseTurretStat
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             //Debug.Log(4);
         }
-    }
+    }*/
     void ChangeAnimationState(bool a, bool b, bool c, bool d)
     {
         animator.SetBool("Idle", a);

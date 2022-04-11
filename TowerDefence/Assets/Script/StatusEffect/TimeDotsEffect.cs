@@ -52,6 +52,13 @@ public class TimeDotsEffect : TimedEffect
                     return;
                 }
             }
+            if (Effect.ID.Contains("HEAL"))
+            {
+                if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.NO))
+                {
+                    return;
+                }
+            }
             //sumDamage += tempDamage;
             //Debug.Log(tempDamage);
             timer = tempRate;
@@ -127,7 +134,7 @@ public class TimeDotsEffect : TimedEffect
         {
             _enemy.SetHealthColor(Color.green);
         }
-        if (!_enemy.ContainFX(Effect.ID))
+        if (!_enemy.ContainFX(Effect.ID) && Effect.specialFX != null)
         {
             _enemy.AddFX(this);
         }
@@ -136,7 +143,10 @@ public class TimeDotsEffect : TimedEffect
     {
         DotsEffect burnEffect = (DotsEffect)Effect;
         burnEffect.damagePerRate.RemoveAllModifiersFromSource(this);
-        _enemy.RemoveFX(Effect.ID);
+        if (Effect.specialFX != null)
+        {
+            _enemy.RemoveFX(Effect.ID);
+        }
         if (Effect.ID.Contains("POI"))
         {
             _enemy.SetHealthColor();

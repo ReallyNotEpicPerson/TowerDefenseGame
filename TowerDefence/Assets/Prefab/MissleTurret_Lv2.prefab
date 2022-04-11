@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2978452755516111048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 78}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 5355791171835211342}
   m_RootOrder: 1
@@ -263,24 +263,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0895ce8c9ce213441b54d434a1eea92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootType: 0
+  passiveAbility: 0
+  numberOfTarget: 1
   range:
     baseValue: 8
   rotationSpeed:
     baseValue: 200
-  firePoint: {fileID: 7732038553549845891}
-  target: {fileID: 0}
-  turretType: 2
-  _node: {fileID: 0}
-  turretBluePrint:
-    prefab: {fileID: 0}
-    cost: 0
-    upgradePrefab: {fileID: 0}
-    upgradeCost: 0
-  firerate:
-    baseValue: 0.75
+  target:
+  - {fileID: 0}
+  firePoint:
+  - {fileID: 0}
+  fireRate:
+    baseValue: 0
   BulletPrefab: {fileID: 8474885804518618974, guid: a1815bb6c738f3f45a391f483bf3bae0,
     type: 3}
-  etag: Enemy
 --- !u!61 &232516835289756033
 BoxCollider2D:
   m_ObjectHideFlags: 0

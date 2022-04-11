@@ -1,24 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public enum CastType
-{
-    SingleTarget,
-    MultipleTarget,
-}
 public class Cast : MonoBehaviour
 {
-    public string etag = "Enemy";
-    public Transform[] target;
+    public ShootType castType;
+    protected List<Transform> target;
+    public int numberOfTarget = 1;
     public float castRange;
-    public float repeatRate;
-    private Transform[] castPoint;
+    public float castRate;
+    public float repeatRate = 0.2f;
+    public Transform[] castPoint;
+    public GameObject healingBulletPrefab;
 
-    public void Start()
+    private float timer;
+
+    private void Awake()
+    {
+        target = new List<Transform>();
+        timer = castRate;
+    }
+
+    public void TurnOn()
     {
         InvokeRepeating(nameof(UpdateTarget), 0f, repeatRate);
     }
+
     void UpdateTarget()
     {
+        //Debug.Log("YEP IM CUMMING");
+        target.Clear();
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, castRange);
         float shortestDis = Mathf.Infinity;
         Collider2D nearestCol = null;
@@ -26,43 +36,63 @@ public class Cast : MonoBehaviour
         {
             if (col.TryGetComponent<Enemy>(out _))
             {
-                float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
-                if (DisToenenmy < shortestDis)
+                if (castType.HasFlag(ShootType.SingleTarget))
                 {
-                    shortestDis = DisToenenmy;
-                    nearestCol = col;
+                    float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
+                    if (DisToenenmy < shortestDis)
+                    {
+                        shortestDis = DisToenenmy;
+                        nearestCol = col;
+                    }
                 }
+                else if (castType.HasFlag(ShootType.MultipleTarget))
+                {
+                    target.Add(col.transform); 
+                    if (target.Count == numberOfTarget)
+                    {
+                        return;
+                    }
+                }
+
             }
         }
-        if (nearestCol != null && shortestDis <= castRange)
+        if (castType.HasFlag(ShootType.SingleTarget) && nearestCol != null)
         {
-            target[0] = nearestCol.transform;
-            //Debug.Log("Final " + nearestCol.name);
-        }
-        else
-        {
-            target = null;
+            target.Add(nearestCol.transform);
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (target.Count == 0)
         {
             return;
         }
+        if (timer <= 0f)
+        {
+            timer = castRate;
+            Shoot();
+        }
+        timer -= Time.deltaTime;
     }
-    /*public void Shoot()
-    {      
+    public void Shoot()
+    {
+        Debug.Log("Shoot");
         for (int i = 0; i < castPoint.Length; i++)
         {
-            Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
-            if (bullet != null) { bullet.Seek(target); }
+            for (int j = 0; j < target.Count; j++)
+            {
+                Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
+                if (bullet != null)
+                {
+                    bullet.Seek(target[j]);
+                }
+            }
         }
     }
     private GameObject MakeBullet(int i)
     {
-        return Instantiate(BulletPrefab, firePoint[i].position, firePoint[i].rotation);
+        return Instantiate(healingBulletPrefab, castPoint[i].position, castPoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
-    }*/
+    }
 }

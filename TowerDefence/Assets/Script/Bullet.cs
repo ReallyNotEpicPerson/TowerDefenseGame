@@ -6,8 +6,7 @@ public class Bullet : BaseBulletClass
 {
     [SerializeField] EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
-    public float accuracy=1;
-    float damage;
+    float finalDamage;
 
     public void Seek(Transform _target)
     {
@@ -22,14 +21,15 @@ public class Bullet : BaseBulletClass
             return;
         }
         Vector3 dir = target.position - transform.position;
-        float DistantThisFrame = speed.baseValue * Time.deltaTime;
+        float DistantThisFrame = bulletSpeed.baseValue * Time.deltaTime;
         if (dir.magnitude <= DistantThisFrame)
         {
+            //Debug.Log("hit now");
             HitTarget();
             return;
         }
         transform.Translate(dir.normalized * DistantThisFrame, Space.World);
-        transform.LookAt(target);
+        //transform.LookAt(target);
     }
     void HitTarget()
     {
@@ -42,8 +42,14 @@ public class Bullet : BaseBulletClass
         }
         else
         {
-            Damage(target);
+            if (bulletType.HasFlag(BulletType.Cast))
+            {
+                EnemyCast(target);
+            }
+            else
+                Damage(target);
         }
+        //bulletDamage.RemoveAllModifiersFromSource
         Destroy(gameObject);
     }
     void Explode()
@@ -57,16 +63,28 @@ public class Bullet : BaseBulletClass
             }
         }
     }
+    public void EnemyCast(Transform enemy)
+    {
+        Enemy ene = enemy.GetComponent<Enemy>();
+        if (bulletType.HasFlag(BulletType.SlowPerSecond))
+        {
+            effectManager.Slow(ene);
+        }
+        if (bulletType.HasFlag(BulletType.Dots))
+        {
+            effectManager.Dots(ene);
+        }
+    }
     void Damage(Transform enemy)
     {
         Enemy ene = enemy.GetComponent<Enemy>();
-        if (accuracy * Random.value <= ene.ChanceToEvade * Random.value)
+        if (Random.value <= ene.ChanceToEvade)
         {
             if (!ene.enemyState.HasFlag(EnemyState.FirstHit))
             {
                 ene.EnableState(EnemyState.FirstHit);
             }
-            DamageDisplayer.Create(ene.transform.position, "MISS");
+            DamageDisplayer.Create(ene.transform.position);
             return;
         }
         StatValueType Modifier = ene.GetWeakenValue();
@@ -74,52 +92,49 @@ public class Bullet : BaseBulletClass
         {
             if (Random.value < critChance.value)
             {
-                damage = CritDamage();
+                finalDamage = CritDamage();
                 if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
                     if (Modifier.modType == StatModType.Flat)
                     {
-                        damage += Modifier.statValue.value;
+                        finalDamage += Modifier.statValue.value;
                     }
                     else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentMult)
                     {
-                        damage *= (1 + Modifier.statValue.value);
+                        finalDamage *= (1 + Modifier.statValue.value);
                     }
                 }
+
                 if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    /*if (ene.TakeDamage(damage, DamageDisplayerType.Critial);
-                    {
-                        return;
-                    }*/
-                    ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
+                    ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
-                    ene.TakeDamage(damage, DamageDisplayerType.Critial);
+                    ene.TakeDamage(finalDamage, DamageDisplayerType.Critial);
                 }
             }
             else
             {
-                damage = bulletDamage.value;
+                finalDamage = bulletDamage.value;
                 if (ene.enemyState.HasFlag(EnemyState.Weaken))
                 {
                     if (Modifier.modType == StatModType.Flat)
                     {
-                        damage += Modifier.statValue.value;
+                        finalDamage += Modifier.statValue.value;
                     }
                     else if (Modifier.modType == StatModType.PercentAdd || Modifier.modType == StatModType.PercentAdd)
                     {
-                        damage *= (1 + Modifier.statValue.value);
+                        finalDamage *= (1 + Modifier.statValue.value);
                     }
                 }
                 if (bulletType.HasFlag(BulletType.ArmorPiercing))
                 {
-                    ene.ArmorPiercing(damage,DamageDisplayerType.ArmorPenetration);
+                    ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
                 }
                 else
                 {
-                    ene.TakeDamage(damage);
+                    ene.TakeDamage(finalDamage);
                 }
             }
             //status effect 

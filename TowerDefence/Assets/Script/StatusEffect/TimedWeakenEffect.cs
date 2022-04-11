@@ -3,10 +3,12 @@ using UnityEngine;
 public class TimedWeakenEffect : TimedEffect
 {
     private readonly Enemy _enemy;
+    private readonly BaseTurretStat _turret;
 
     public TimedWeakenEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
     {
-        _enemy = obj.GetComponent<Enemy>();
+        obj.TryGetComponent(out _enemy);
+        obj.TryGetComponent(out _turret);
     }
     public override void End()
     {
@@ -16,7 +18,6 @@ public class TimedWeakenEffect : TimedEffect
     protected override void ApplyEffect()
     {
         Weaken weaken = (Weaken)Effect;
-        //tempPercentage = slowEffect._slowPercentage.value;
         if (effectStacks == weaken.stackTime)
         {
             Debug.Log("Reaching maximum stack of " + weaken.stackTime);
@@ -41,10 +42,27 @@ public class TimedWeakenEffect : TimedEffect
             }
             //Debug.Log("Stack num "+effectStacks+" Stack value " + slowEffect._slowPercentage.value);
         }
-        _enemy.Weaken(weaken.extraDamageTaken);
-        if (!_enemy.ContainFX(Effect.ID))
+        if (_enemy!=null)
         {
-            _enemy.AddFX(this);
-        }
+            _enemy.Weaken(weaken.extraDamageTaken);
+            if (!_enemy.ContainFX(Effect.ID))
+            {
+                _enemy.AddFX(this);
+            }
+        }/*
+        else if (_turret)
+        {
+            switch (_turret)
+            {
+                case BulletTypeTurret bulletTypeTurret:
+                    bulletTypeTurret.IncreaseDamage(new StatModifier(weaken.extraDamageTaken.statValue.value,StatModType.PercentMult, this));
+                    break;
+                case LazerTypeTurret lazerTypeTurret:
+                    //lazerTypeTurret.ReduceRate(new StatModifier(slowEffect._slowPercentage.value, StatModType.PercentMult, this));
+                    break;
+                default:
+                    break;
+            }
+        }*/
     }
 }

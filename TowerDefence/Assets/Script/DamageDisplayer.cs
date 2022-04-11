@@ -11,6 +11,8 @@ public enum DamageDisplayerType
     ArmorPenetration = 1 << 3,
     Poisoned = 1 << 4,
     Miss = 1 << 5,
+    Insta_kill = 1 << 6,
+    NO = 1<<7 ,
 }
 
 public class DamageDisplayer : MonoBehaviour
@@ -39,17 +41,31 @@ public class DamageDisplayer : MonoBehaviour
         //Debug.Log(critical);
         return displayer;
     }
-    public static DamageDisplayer Create(Vector3 pos, string str, DamageDisplayerType type = DamageDisplayerType.Miss)
+    public static DamageDisplayer Create(Vector3 pos, string str="MISS", DamageDisplayerType type = DamageDisplayerType.Miss)
     {
         Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
         displayer.SetUp(str, type);
         return displayer;
     }
-    public void SetUp(string str, DamageDisplayerType type)
+    public void SetUp(string str, DamageDisplayerType type = DamageDisplayerType.Miss)
     {
-        disappearTimer = 1f;
+        EnableState(type);
         textMesh.SetText(str);
+        switch (displayType)
+        {
+            case DamageDisplayerType.Miss:
+                disappearTimer = 1f;
+                textMesh.SetText(str);
+                textColor = textMesh.color;
+                break;
+            case DamageDisplayerType.Insta_kill:
+                disappearTimer = 2f;
+                textMesh.SetText(str);
+                textColor = textMesh.color;
+                break;
+        }
+
         textColor = textMesh.color;
     }
 

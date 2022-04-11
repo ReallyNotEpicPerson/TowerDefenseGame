@@ -23,7 +23,9 @@ MonoBehaviour:
   chance: 1
   description: Slow down enemy more after each shot
   _slowPercentage:
-    baseValue: 0.2
+    modType: 400
+    statValue:
+      baseValue: 0.3
   increaseRate:
     modType: 100
     statValue:

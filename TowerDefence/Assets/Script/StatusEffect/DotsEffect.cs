@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Burn Effect", menuName = "Burn")]
+[CreateAssetMenu(fileName = "DOTS Effect", menuName = "DOTS")]
 public class DotsEffect : BaseEffect
 {
     public CharacterStat damagePerRate;

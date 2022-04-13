@@ -7,7 +7,7 @@ public class TimeDotsEffect : TimedEffect
     private float tempRate = 0;
     private float timer = 0;
     private float tempDamage = 0;
-    private float sumDamage = 0;
+    //private float sumDamage = 0;
 
     public TimeDotsEffect(BaseEffect buff, GameObject obj) : base(buff, obj)
     {
@@ -47,7 +47,7 @@ public class TimeDotsEffect : TimedEffect
             }
             if (Effect.ID.Contains("POI"))
             {
-                if (!_enemy.TakeDamage(tempDamage, DamageDisplayerType.Poisoned))
+                if (!_enemy.ArmorPiercing(tempDamage, DamageDisplayerType.Poisoned))
                 {
                     return;
                 }
@@ -157,7 +157,7 @@ public class TimeDotsEffect : TimedEffect
     {
         sb.Clear();
         sb.Append("Effect ID :" + Effect.ID + "\n");
-        sb.Append("SumDamage :" + sumDamage + "\n");
+        //sb.Append("SumDamage :" + sumDamage + "\n");
         sb.Append("Damage :" + tempDamage + "\n");
         sb.Append("Rate :" + tempRate + "\n");
         sb.Append("Duration :" + _duration + "\n");

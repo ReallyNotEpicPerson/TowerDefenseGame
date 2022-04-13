@@ -163,17 +163,19 @@ public class TileMapManager : MonoBehaviour
     }
     public void CanvasBeGone()
     {
-        RectTransform cv = canvas.GetComponent<RectTransform>();
+        //RectTransform cv = 
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
         //Debug.Log(cv.sizeDelta);
-        cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y + 150);
+        //cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y + 150);
         //Debug.Log(cv.sizeDelta);
         CanvasMoved = true;
     }
     public void CanvasComeBack()
     {
-        RectTransform cv = canvas.GetComponent<RectTransform>();
+        //RectTransform cv = 
+        canvas.transform.GetChild(0).gameObject.SetActive(true);
         //Debug.Log(cv.sizeDelta);
-        cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y - 150);
+        //cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y - 150);
         //Debug.Log(cv.sizeDelta);
         CanvasMoved = false;
     }

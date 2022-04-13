@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0895ce8c9ce213441b54d434a1eea92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootType: 0
+  shootType: 1
   passiveAbility: 0
   numberOfTarget: 1
   range:
@@ -349,3 +349,4 @@ MonoBehaviour:
   listOfDebuffs:
   - {fileID: 11400000, guid: 33e9b97a4e29aa24db43600f8e45cf46, type: 2}
   - {fileID: 11400000, guid: ca9c4b1f8f0d0904c8f3d2d0ed722c33, type: 2}
+  - {fileID: 11400000, guid: 15c484328e2d20a428a3687ef320f84c, type: 2}

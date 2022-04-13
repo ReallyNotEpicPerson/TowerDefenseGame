@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
+//[RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
     private Transform Target;
@@ -12,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private bool turnBack = false;
 
     public CharacterStat startSpeed;
-    [HideInInspector]
+    //[HideInInspector]
     public float speed;
 
     private void Awake()
@@ -29,28 +26,42 @@ public class EnemyMovement : MonoBehaviour
         //Target.position.z *= 0;
         Vector3 dir = Target.position - transform.position;
         transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
-        //if (turnBack == false) { 
+        if (turnBack == false)
+        {
             if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
             {
                 NextWayPoint();
             }
-        //}     
-        /*else
+        }
+        else
         {
             if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
             {
                 PreviousWayPoint();
             }
-        }*/
-        //enemy.speed = enemy.startSpeed;
+        }
     }
-    public void AdjustSpeed(float slowPtc)
+    public void AddSpeedMod(StatModifier mod)
     {
-        speed = startSpeed.value * (1 - slowPtc);
+        startSpeed.AddModifier(mod);
+        speed = startSpeed.value;
+    }
+    public void RemoveMod(object source)
+    {
+        startSpeed.RemoveAllModifiersFromSource(source);
+        speed = startSpeed.value;
     }
     public void Turn()
     {
         turnBack = !turnBack;
+        if (turnBack == false)
+        {
+            NextWayPoint();
+        }
+        else
+        {
+            PreviousWayPoint();
+        }
     }
     private void NextWayPoint()
     {

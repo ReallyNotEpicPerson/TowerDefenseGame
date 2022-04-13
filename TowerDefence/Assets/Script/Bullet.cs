@@ -34,8 +34,7 @@ public class Bullet : BaseBulletClass
     void HitTarget()
     {
         GameObject Fx = Instantiate(ImpactFx, transform.position, target.rotation);
-        Destroy(Fx, 1.5f);
-
+        Destroy(Fx, 1f);
         if (bulletType.HasFlag(BulletType.Explode))
         {
             Explode();
@@ -49,7 +48,7 @@ public class Bullet : BaseBulletClass
             else
                 Damage(target);
         }
-        //bulletDamage.RemoveAllModifiersFromSource
+
         Destroy(gameObject);
     }
     void Explode()
@@ -59,7 +58,14 @@ public class Bullet : BaseBulletClass
         {
             if (col.CompareTag(Taggu))
             {
-                Damage(col.transform);
+                if (bulletType.HasFlag(BulletType.Cast))
+                {
+                    EnemyCast(target);
+                }
+                else
+                {
+                    Damage(col.transform);
+                }
             }
         }
     }

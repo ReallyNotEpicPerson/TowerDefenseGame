@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public string waveName ;
-    public EnemySpawnInfo[] enemy;
+    public string waveName;
+    public EnemySpawnStat[] enemy;
 }

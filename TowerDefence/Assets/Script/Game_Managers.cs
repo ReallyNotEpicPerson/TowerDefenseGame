@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum WinConditions
+{
+    FinsishAllWaves,
+    
+
+}
+
 public class Game_Managers : MonoBehaviour
 {
     public static bool gameHasEnded;
     public GameObject GameOverUI;
-
     public GameObject completeLevelUI;
 
     void Start()
@@ -19,12 +25,7 @@ public class Game_Managers : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKey("o"))
-        {
-            GameEnd();
-        }
-
-        if (PlayerStat.Lives <= 0)
+        if (PlayerStat.Lives <= 0 || Input.GetKey(KeyCode.O))
         {
             GameEnd();
         }
@@ -32,7 +33,6 @@ public class Game_Managers : MonoBehaviour
     void GameEnd()
     {
         gameHasEnded = true;
-
         GameOverUI.SetActive(true);
     }
     public void WinLevel()

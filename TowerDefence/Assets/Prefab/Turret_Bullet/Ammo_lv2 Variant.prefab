@@ -24,6 +24,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
+      propertyPath: ImpactFx
+      value: 
+      objectReference: {fileID: 8241989472945873926, guid: f81a8b5b662668248ad12e6e8431948b,
+        type: 3}
+    - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
       propertyPath: accuracy
       value: 0.8
       objectReference: {fileID: 0}
@@ -72,7 +78,7 @@ PrefabInstance:
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: bulletDamage.baseValue
-      value: -20
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}

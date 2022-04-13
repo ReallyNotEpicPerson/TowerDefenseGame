@@ -312,7 +312,7 @@ MonoBehaviour:
   damageOverTime:
     baseValue: 20
   rate:
-    baseValue: 0.2
+    baseValue: 5
   firePoint: {fileID: 4051587693748109641}
   lazerFX: {fileID: 4914668114188655008}
   effectManager: {fileID: -8232551631418536626}
@@ -337,7 +337,6 @@ LineRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: bc4b9d635035ab0468e1e37493d03b8e, type: 2}
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

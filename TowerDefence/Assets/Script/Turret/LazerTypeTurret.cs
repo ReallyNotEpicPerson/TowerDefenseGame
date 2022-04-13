@@ -45,7 +45,6 @@ public class LazerTypeTurret : BaseTurretStat
     }
     private void Start()
     {
-        timer = rate.baseValue;
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
 
@@ -95,10 +94,11 @@ public class LazerTypeTurret : BaseTurretStat
             return;
         }
         RotateToObject();
+        LazerBeam();
         if (timer <= 0)
         {
             Shoot();
-            timer = rate.value;
+            timer = 1/rate.value;
         }
         timer -= Time.deltaTime;
     }
@@ -107,7 +107,6 @@ public class LazerTypeTurret : BaseTurretStat
         for (int j = 0; j < target.Count; j++)
         {
             LazerShoot(target[j].GetComponent<Enemy>());
-            LazerBeam();
         }
 
     }/*

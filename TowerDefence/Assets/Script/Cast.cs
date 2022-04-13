@@ -17,7 +17,7 @@ public class Cast : MonoBehaviour
     private void Awake()
     {
         target = new List<Transform>();
-        timer = castRate;
+        timer = 1/castRate;
     }
 
     public void TurnOn()
@@ -70,7 +70,7 @@ public class Cast : MonoBehaviour
         }
         if (timer <= 0f)
         {
-            timer = castRate;
+            timer = 1/castRate;
             Shoot();
         }
         timer -= Time.deltaTime;

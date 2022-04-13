@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +42,7 @@ public class Enemy : MonoBehaviour
     public bool UsePathFinding;
     private NavMeshAI enemyNavMeshMovement;
     private EnemyMovement enemyPathMovement;
-    public float ChanceToEvade=0.1f;
+    public float ChanceToEvade = 0.1f;
     //[HideInInspector]
     //public float speed;
     private float health;
@@ -67,25 +66,20 @@ public class Enemy : MonoBehaviour
     //private string ogTag;
     private Color ogHealthBarColor;
     StatUI_InGame statUI;
-    #region wait for second List
-    static readonly Dictionary<int, WaitForSeconds> dictWaitForSecond = new Dictionary<int, WaitForSeconds>();
-    const float FloatToIntRate = 1000;
-    public static WaitForSeconds WaitFor(int seconds)
-    {
-        if (!dictWaitForSecond.TryGetValue(seconds, out WaitForSeconds wfs))
-        {
-            dictWaitForSecond.Add(seconds, wfs = new WaitForSeconds((float)seconds / FloatToIntRate));
-            Debug.Log(seconds + " " + (float)seconds / FloatToIntRate);
-        }
-        return wfs;
-    }
-    #endregion
     #region run in the editor
     private void OnValidate()
     {
         if (healthBar == null)//change
         {
             healthBar = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
+        }
+        if (TryGetComponent(out enemyNavMeshMovement))
+        {
+            UsePathFinding = true;
+        }
+        else if (TryGetComponent(out enemyPathMovement))
+        {
+            UsePathFinding = false;
         }
         if (!TryGetComponent(out armorStat))
         {
@@ -100,24 +94,19 @@ public class Enemy : MonoBehaviour
         {
             DisableState(EnemyState.Amored);
         }
-        if (UsePathFinding)
-        {
-            enemyNavMeshMovement = GetComponent<NavMeshAI>();
-        }
-
         //TryGetComponent(out fxManager);
     }
     #endregion
     private void Awake()
     {
         enemyColor = GetComponent<SpriteRenderer>();
-        if (UsePathFinding)
+        if (TryGetComponent(out enemyNavMeshMovement))
         {
-            enemyNavMeshMovement = GetComponent<NavMeshAI>();
+            UsePathFinding=true;
         }
-        else if (!UsePathFinding)
+        else if (TryGetComponent(out enemyPathMovement))
         {
-            enemyPathMovement = GetComponent<EnemyMovement>();
+            UsePathFinding=false;
         }
         TryGetComponent(out fxManager);
         if (!TryGetComponent(out armorStat))
@@ -401,10 +390,9 @@ public class Enemy : MonoBehaviour
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
             enemyNavMeshMovement.TurnBack(i);
         }
-        else // call enemy movement component instead 
+        else
         {
-            //enemyPathMovement.AdjustSpeed(slowPtc);
-            //speed = startSpeed * (1 - slowPtc);
+            enemyPathMovement.Turn();
         }
     }
     public void IncreaseSpeed(StatModifier mod)
@@ -415,10 +403,9 @@ public class Enemy : MonoBehaviour
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
             enemyNavMeshMovement.AddSpeedMod(mod);
         }
-        else // call enemy movement component instead 
+        else
         {
-            //enemyPathMovement.AdjustSpeed(slowPtc);
-            //speed = startSpeed * (1 - slowPtc);
+            enemyPathMovement.AddSpeedMod(mod);
         }
     }
     public void SlowDown(StatModifier mod)
@@ -428,10 +415,9 @@ public class Enemy : MonoBehaviour
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
             enemyNavMeshMovement.AddSpeedMod(mod);
         }
-        else // call enemy movement component instead 
+        else
         {
-            //enemyPathMovement.AdjustSpeed(slowPtc);
-            //speed = startSpeed * (1 - slowPtc);
+            enemyPathMovement.AddSpeedMod(mod);
         }
         //Debug.Log("Work!,GOD DAMMIT");
     }
@@ -444,7 +430,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            //speed = startSpeed;
+            enemyPathMovement.RemoveMod(source);
         }
     }
     #endregion

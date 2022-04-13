@@ -96,7 +96,7 @@ public class BulletTypeTurret : BaseTurretStat
             {
                 fxHandler.AddDebuff(fxManager.GetDamageBoostData(), gameObject);
             }
-            FireCountDown = fireRate.value;
+            FireCountDown = 1/fireRate.value;
             Shoot();
         }
         FireCountDown -= Time.deltaTime;

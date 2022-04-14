@@ -91,7 +91,6 @@ public class TheSpawner : MonoBehaviour
 
             for (int i = 0; i < wave.enemy[j].count; i++)
             {
-
                 EnemySpawner(wave.enemy[j].path, wave.enemy[j].enemy);
                 yield return new WaitForSeconds(1f / wave.enemy[j].rate);
             }

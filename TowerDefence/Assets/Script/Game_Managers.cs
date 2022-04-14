@@ -4,8 +4,7 @@ using UnityEngine.SceneManagement;
 public enum WinConditions
 {
     FinsishAllWaves,
-    
-
+    Survive,
 }
 
 public class Game_Managers : MonoBehaviour

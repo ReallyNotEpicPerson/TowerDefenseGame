@@ -15,4 +15,3 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: c85e9cf4d1cdcb64186fbaf3dffccdae, type: 2}
   whenPicked: {fileID: 0}
-  upgradeLevel: 1

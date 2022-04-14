@@ -15,6 +15,7 @@ public class LazerTypeTurret : BaseTurretStat
     public Transform firePoint;
 
     public ParticleSystem lazerFX;
+    public ParticleSystem Glow;
     public EffectManager effectManager;
 
     public LineRenderer lineRenderer;
@@ -90,6 +91,7 @@ public class LazerTypeTurret : BaseTurretStat
             {
                 lineRenderer.enabled = false;
                 lazerFX.Stop();
+                Glow.Stop();
             }
             return;
         }
@@ -130,12 +132,13 @@ public class LazerTypeTurret : BaseTurretStat
         {
             lineRenderer.enabled = true;
             lazerFX.Play();
+            Glow.Play();
         }
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target[0].position);
 
-        Vector3 dir = firePoint.position - target[0].position;
-        lazerFX.transform.position = target[0].position + dir.normalized;
+        //Vector3 dir = firePoint.position - target[0].position;
+        lazerFX.transform.position = target[0].position;
     }
     float CritDamage()
     {

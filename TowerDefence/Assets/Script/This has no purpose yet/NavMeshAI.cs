@@ -38,7 +38,10 @@ public class NavMeshAI : MonoBehaviour
             OGPosition = target;
             agent.SetDestination(target.position);
         }
-        CheckDestinationReached();        
+        if (isActiveAndEnabled)
+        {
+            CheckDestinationReached();
+        }
     }
     #region SetDestination
     public void TurnBack(int i)
@@ -49,7 +52,7 @@ public class NavMeshAI : MonoBehaviour
         }
         else if (i == 1)
         {
-            if (isActiveAndEnabled==false) { return; }
+            if (isActiveAndEnabled == false) { return; }
             agent.SetDestination(target.position);
         }
     }
@@ -90,18 +93,18 @@ public class NavMeshAI : MonoBehaviour
     void CheckDestinationReached()
     {
         //Debug.Log(Vector3.SqrMagnitude(transform.position - target.position));
-        if (Vector3.SqrMagnitude(transform.position - target.position) <= 0.1f)
-        {
-            print("Destination reached");
-            gameObject.SetActive(false);
-            EndPath();
-        }
-        /*if (agent.remainingDistance <= 0.1f)
+        /*if (Vector3.SqrMagnitude(transform.position - target.position) <= 0.1f)
         {
             print("Destination reached");
             gameObject.SetActive(false);
             EndPath();
         }*/
+        if (agent.remainingDistance <= 0.1f)
+        {
+            print("Destination reached");
+            gameObject.SetActive(false);
+            EndPath();
+        }
     }
     void EndPath()
     {

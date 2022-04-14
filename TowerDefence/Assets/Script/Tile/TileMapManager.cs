@@ -211,7 +211,7 @@ public class TileMapManager : MonoBehaviour
         this.state = state;
     }
     public NodeTile GetNodeTile()
-    {     
+    {
         dataFromTile.TryGetValue(mainLayer.GetTile(localGridPos), out NodeTile nodeTile);
         return nodeTile;
     }
@@ -233,7 +233,7 @@ public class TileMapManager : MonoBehaviour
         _turret.name = blueprint.prefab.name;
         return true;
     }
-    public bool AcceptablePosition2_0() 
+    public bool AcceptablePosition2_0()
     {
         //maybe loop through the dict or sth then check all layer if there is an accceptable Position
         return true;
@@ -245,6 +245,6 @@ public class TileMapManager : MonoBehaviour
             || prop.HasTile(localGridPos)
             || !dataFromTile.ContainsKey(mainLayer.GetTile(localGridPos))
             || turretOnTheField.ContainsKey(localGridPos)
-            ;        
+            ;
     }
 }

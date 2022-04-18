@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootType: 1
-  passiveAbility: 8
+  passiveAbility: 0
   numberOfTarget: 1
   range:
     baseValue: 5

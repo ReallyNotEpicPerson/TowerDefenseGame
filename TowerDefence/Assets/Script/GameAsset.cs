@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameAsset : MonoBehaviour
 {
+    public static Dictionary<string,GameObject> dict= new Dictionary<string, GameObject>();
     private static GameAsset _i;
     public static GameAsset I
     {
@@ -14,10 +15,15 @@ public class GameAsset : MonoBehaviour
             return _i;
         }
     }
+
     public List<TurretBluePrint> turret;
     public List<GameObject> weaponSprite;
     public Image[] charImg;
 
     public Transform damageDisplayer;
-
+    public GameObject underling;
+    public static void Spawn(string name , Vector3 pos)
+    {
+        Instantiate(dict[name], pos, Quaternion.identity);
+    }
 }

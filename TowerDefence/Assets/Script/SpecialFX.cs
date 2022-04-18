@@ -5,9 +5,12 @@ using UnityEngine.UI;
 public class SpecialFX : MonoBehaviour
 {
     readonly Dictionary<string, GameObject> SpecialFXDict = new Dictionary<string, GameObject>();
-    //public Image image;
     public Transform fxParent;
-
+    private SpriteRenderer spriteRenderer;
+    public void Awake()
+    {
+        TryGetComponent(out spriteRenderer);
+    }
     public bool HaveThisFX(string ID)
     {
         return SpecialFXDict.ContainsKey(ID);
@@ -20,8 +23,8 @@ public class SpecialFX : MonoBehaviour
             case SlowEffect _:
                 if (fx.Effect.ID.Contains("SL"))
                 {
-                    Debug.Log("Slow Animation");
-                    go = Instantiate(fx.Effect.specialFX, fxParent.transform.position- new Vector3(0,0.5f,0), Quaternion.identity, fxParent);
+                    Debug.Log(spriteRenderer.sprite.rect.height/2);
+                    go = Instantiate(fx.Effect.specialFX, fxParent.transform.position- new Vector3(0,0.5f, 0), Quaternion.identity, fxParent);
                     SpecialFXDict.Add(fx.Effect.ID, go);
                 }           
                 else

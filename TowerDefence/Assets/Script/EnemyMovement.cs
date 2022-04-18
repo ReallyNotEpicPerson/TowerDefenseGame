@@ -5,7 +5,6 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform Target;
     private int wpIndex = 0;
-    //private Enemy enemy;
     private bool turnBack = false;
 
     public CharacterStat startSpeed;
@@ -40,6 +39,10 @@ public class EnemyMovement : MonoBehaviour
                 PreviousWayPoint();
             }
         }
+    }
+    public void SetSpeed(float s)
+    {
+        speed = s;
     }
     public void AddSpeedMod(StatModifier mod)
     {

@@ -9,10 +9,10 @@ public class LevelLoader : MonoBehaviour
     private List<string> turret;//wait
     void Start()
     {
-        lvl = SaveSystem.LoadLevel(); //= new LevelUnlocked();
-        levelOpened = lvl.GetLevelList();
+        //lvl = SaveSystem.LoadLevel(); //= new LevelUnlocked();
+        //levelOpened = lvl.GetLevelList();
         //SaveTesting();
-        LevelDisplayer();
+        //LevelDisplayer();
     }
 
     public void SaveTesting()

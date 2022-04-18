@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, FirstHit = 1 << 1, Slow = 1 << 2, Weaken = 1 << 3, Amored = 1 << 4, TakeNoDamage = 1 << 5, Fear = 1 << 6, HealingTime = 1 << 7,
+    None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Amored = 1 << 5, TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8,
 
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -20,6 +20,7 @@ public enum EnemyType
     Revive = 1 << 1,
     Healing = 1 << 2,
     Invisible = 1 << 3,
+    //Necromancy = 1 << 4, //broke
     ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8, ImmuneToFear = 1 << 9,
     ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
     //teleport?
@@ -86,6 +87,10 @@ public class Enemy : MonoBehaviour
             //Debug.LogError("you forgot the armor bro");
             return;
         }
+        /*if (enemyType.HasFlag(EnemyType.Necromancy) && enemyType.HasFlag(EnemyType.Healing))
+        {
+            Debug.LogError("NO,only one buddy");
+        }*/
         if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
         {
             EnableState(EnemyState.Amored);
@@ -100,13 +105,14 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         enemyColor = GetComponent<SpriteRenderer>();
+        GetComponent<Collider2D>().enabled = true;
         if (TryGetComponent(out enemyNavMeshMovement))
         {
-            UsePathFinding=true;
+            UsePathFinding = true;
         }
         else if (TryGetComponent(out enemyPathMovement))
         {
-            UsePathFinding=false;
+            UsePathFinding = false;
         }
         TryGetComponent(out fxManager);
         if (!TryGetComponent(out armorStat))
@@ -127,8 +133,8 @@ public class Enemy : MonoBehaviour
     {
         //speed = startSpeed;
         health = startHealth;
-        Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
-        Ded.SetActive(false);
+        //Ded = Instantiate(dedFX, transform.position, Quaternion.identity);
+        //Ded.SetActive(false);
         //ogTag = gameObject.tag;
         ogHealthBarColor = healthBar.color;
     }
@@ -149,12 +155,17 @@ public class Enemy : MonoBehaviour
             if (enemyType.HasFlag(EnemyType.Healing))
             {
                 Debug.Log("Activate Heal");
-                GetComponent<Cast>().TurnOn();
+                GetComponent<Cast>().FindTarget();
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
             {
                 fxManager.Slow(this);
             }
+            /*if (enemyType.HasFlag(EnemyType.Necromancy))
+            {
+                Debug.Log("Raise underling !");
+                GetComponent<Cast>().SpawnEnemy();
+            }*/
         }
         if (enemyState.HasFlag(EnemyState.Amored))
         {
@@ -195,12 +206,13 @@ public class Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
-            if (fxManager != null && fxManager.Revive(this))
+            if (enemyType.HasFlag(EnemyType.Revive) && fxManager != null)
             {
+                fxManager.Revive(this);
                 Debug.Log("He live this time");
                 return false;
             }
-            Debug.Log("Nope .... he died");
+            //Debug.Log("Nope .... he died");
             Die();
         }
         return true;
@@ -221,13 +233,17 @@ public class Enemy : MonoBehaviour
             if (enemyType.HasFlag(EnemyType.Healing))
             {
                 Debug.Log("Activate Heal");
-                GetComponent<Cast>().TurnOn();
+                GetComponent<Cast>().FindTarget();
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
             {
-                Debug.Log("Yes");
                 fxManager.Slow(this);
             }
+            /*if (enemyType.HasFlag(EnemyType.Necromancy))
+            {
+                Debug.Log("Raise underling !");
+                GetComponent<Cast>().SpawnEnemy();
+            }*/
         }
         switch (type)
         {
@@ -259,12 +275,13 @@ public class Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
         if (health <= 0 && !isDead)
         {
-            if (fxManager != null && fxManager.Revive(this))
+            if (enemyType.HasFlag(EnemyType.Revive) && fxManager != null)
             {
+                fxManager.Revive(this);
                 Debug.Log("He wont die this time");
                 return false;
             }
-            Debug.Log("He ded , oopsie daisy");
+            //Debug.Log("He ded , oopsie daisy");
             Die();
         }
         return true;
@@ -317,10 +334,23 @@ public class Enemy : MonoBehaviour
         RemoveALLDebuff();
         isDead = true;
         PlayerStat.moneyInGame += worth;
-        Ded.SetActive(true);
+        //Ded.SetActive(true);
+        Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 0.5f);
         //WaitFor((int)(2*FloatToIntRate));
         TheSpawner.numOfEnemies--;
-        Ded.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(FadeToBlack());
+        //Ded.SetActive(false);
+        //gameObject.SetActive(false);
+    }
+    public IEnumerator FadeToBlack()
+    {
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
+        {
+            // set color with i as alpha
+            enemyColor.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
         gameObject.SetActive(false);
     }
     public void FakeDeath()
@@ -388,7 +418,8 @@ public class Enemy : MonoBehaviour
         if (UsePathFinding)
         {
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
-            enemyNavMeshMovement.TurnBack(i);
+            enemyNavMeshMovement.TurnBack(i);           
+            enemyColor.flipX = !enemyColor.flipX;     
         }
         else
         {
@@ -397,7 +428,7 @@ public class Enemy : MonoBehaviour
     }
     public void IncreaseSpeed(StatModifier mod)
     {
-        EnableState(EnemyState.Fear);
+        //EnableState(EnemyState.Fear);
         if (UsePathFinding)
         {
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
@@ -432,7 +463,30 @@ public class Enemy : MonoBehaviour
         {
             enemyPathMovement.RemoveMod(source);
         }
+    }/*
+    public void StopForASec()
+    {
+        if (UsePathFinding)
+        {
+            StartCoroutine(Nav_SpeedSetTo0Coroutine());
+        }
+        else
+        {
+            StartCoroutine(Path_Mov_SpeedSetTo0Coroutine());
+        }
     }
+
+    public IEnumerator Nav_SpeedSetTo0Coroutine()
+    {
+        enemyNavMeshMovement.SetSpeed(0);
+        yield return HelperClass.WaitFor(2000);
+        enemyNavMeshMovement.SetSpeed();
+    }
+    public IEnumerator Path_Mov_SpeedSetTo0Coroutine()
+    {
+        enemyPathMovement;
+        yield return HelperClass.WaitFor(2000);
+    }*/
     #endregion
     #region weaken 
     public void Weaken(StatValueType stat)
@@ -468,6 +522,31 @@ public class Enemy : MonoBehaviour
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a / 2);
         //Debug.Log(enemyColor.color);
     }
+    public void EndCast()
+    {
+        if (enemyType.HasFlag(EnemyType.Healing))
+        {
+            GetComponent<Cast>().NoMoreFindTarget();
+        }
+        /*if (enemyType.HasFlag(EnemyType.Necromancy))
+        {
+            GetComponent<Cast>().NoMoreNecromancy();
+        }*/
+        return;
+    }
+    public void ResumeCast()
+    {
+        if (enemyType.HasFlag(EnemyType.Healing))
+        {
+            GetComponent<Cast>().FindTarget();
+        }
+        /*if (enemyType.HasFlag(EnemyType.Necromancy))
+        {
+            GetComponent<Cast>().SpawnEnemy();
+        }*/
+        return;
+    }
+
     void OnMouseEnter()
     {
         //statUI.TransferCharacter(gameObject);
@@ -495,5 +574,4 @@ public class Enemy : MonoBehaviour
         enemyState |= es;
     }
     #endregion
-
 }

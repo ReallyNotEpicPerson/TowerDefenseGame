@@ -100,12 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8550e9f2586324c44ab9a24be9b72951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootType: 0
+  passiveAbility: 0
+  numberOfTarget: 1
   range:
     baseValue: 5
   rotationSpeed:
     baseValue: 200
-  target: {fileID: 0}
-  turretType: 3
+  target: []
   bulletType: 0
   critChance:
     baseValue: 0.2
@@ -113,14 +115,13 @@ MonoBehaviour:
     baseValue: 1
   damageOverTime:
     baseValue: 45
-  accuracy: 0.85
   rate:
     baseValue: 0
   firePoint: {fileID: 6828990122727252777}
-  lineRenderer: {fileID: 6471560523672822142}
   lazerFX: {fileID: 2016529467894117611}
-  etag: Enemy
+  Glow: {fileID: 0}
   effectManager: {fileID: 0}
+  lineRenderer: {fileID: 6471560523672822142}
 --- !u!120 &6471560523672822142
 LineRenderer:
   m_ObjectHideFlags: 0

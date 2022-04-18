@@ -506,9 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
-  enemyState: 0
-  startHealth: 1000
+  enemyType: 0
+  enemyState: 16
+  startHealth: 500
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 1
   ChanceToEvade: 0.1
@@ -575,7 +575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfDebuffs:
-  - {fileID: 11400000, guid: a9f28636a4f338341afe08d5497974df, type: 2}
   - {fileID: 11400000, guid: 590e4f5275fa11b4f9a6d5c6e22cc7b3, type: 2}
   - {fileID: 11400000, guid: 8bd6b9c81f96da5409a80b29aa2010d1, type: 2}
   - {fileID: 11400000, guid: 3e46dbbefd4acf046bf95e8b682650ed, type: 2}
@@ -595,7 +594,8 @@ MonoBehaviour:
   numberOfTarget: 3
   castRange: 4
   castRate: 5
-  repeatRate: 3
+  delay: 5
+  repeatRate: 15
   castPoint:
   - {fileID: 3053064806348107539}
   healingBulletPrefab: {fileID: 6456669023222857168, guid: ad97ba18a56fb2945aaf62a2492462c6,

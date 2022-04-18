@@ -89,7 +89,11 @@ public class TimedSlowEffect : TimedEffect
                     break;
                 default:
                     break;
-            }       
+            }
+            if (slowEffect.ID.Contains("STUN"))
+            {
+                _enemy.EndCast();
+            }
             if (Effect.specialFX != null && !_enemy.ContainFX(Effect.ID))
             {
                 //Debug.Log("addFX");
@@ -111,7 +115,6 @@ public class TimedSlowEffect : TimedEffect
                     break;
             }
         }
-
         //_enemy.AdjustSpeed(slowEffect._slowPercentage.value);
     }
     public override void End()
@@ -136,6 +139,10 @@ public class TimedSlowEffect : TimedEffect
                 default:
                     break;
             }
+        }
+        if (slowEffect.ID.Contains("STUN"))
+        {
+            _enemy.ResumeCast();
         }
         effectStacks = 0;
     }

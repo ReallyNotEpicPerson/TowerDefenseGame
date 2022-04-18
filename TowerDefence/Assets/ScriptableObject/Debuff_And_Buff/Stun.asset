@@ -23,7 +23,9 @@ MonoBehaviour:
   chance: 1
   description: Stun Enemy
   _slowPercentage:
-    baseValue: 1
+    modType: 400
+    statValue:
+      baseValue: 1
   increaseRate:
     modType: 0
     statValue:

@@ -9,6 +9,7 @@ public class NavMeshAI : MonoBehaviour
     private Transform OGPosition;
     [SerializeField] private CharacterStat tempSpeed;
     [SerializeField] private CharacterStat tempAcceleration;
+    private float OGspeed;
     public void OnValidate()
     {
         /*if(target == null || SpawnPoint == null)
@@ -19,17 +20,17 @@ public class NavMeshAI : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        tempSpeed.baseValue = agent.speed;
+        tempAcceleration.baseValue = agent.acceleration;
         //agent.SetDestination(TheSpawner.endPoint.position);
         //target = TheSpawner.endPoint;
-        //spawnPoint = 
     }
     private void Start()
     {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        OGspeed = agent.speed;
         OGPosition = target;
-        tempSpeed.baseValue = agent.speed;
-        tempAcceleration.baseValue = agent.acceleration;
     }
     void Update()
     {
@@ -38,7 +39,7 @@ public class NavMeshAI : MonoBehaviour
             OGPosition = target;
             agent.SetDestination(target.position);
         }
-        if (isActiveAndEnabled)
+        if (agent.isActiveAndEnabled)
         {
             CheckDestinationReached();
         }
@@ -48,12 +49,18 @@ public class NavMeshAI : MonoBehaviour
     {
         if (i == 0)
         {
-            agent.SetDestination(spawnPoint.position);
+            if (agent.isActiveAndEnabled)
+            {
+                agent.SetDestination(spawnPoint.position);
+            }
+
         }
         else if (i == 1)
         {
-            if (isActiveAndEnabled == false) { return; }
-            agent.SetDestination(target.position);
+            if (agent.isActiveAndEnabled)
+            {
+                agent.SetDestination(target.position);
+            }
         }
     }
     public void SetDestination(Transform SpawnPoint, Transform newTarget)
@@ -67,6 +74,19 @@ public class NavMeshAI : MonoBehaviour
         agent.SetDestination(target.position);
     }
     #endregion
+    public void AcceptablePos()
+    {
+        //agent.sa(;
+    }
+    public void SetSpeed(float s)
+    {
+        agent.speed = s;
+    }
+    public void SetSpeed()
+    {
+        agent.speed = OGspeed;
+    }
+
     public void AddAccelerationMod(StatModifier acceleration)
     {
         tempAcceleration.AddModifier(acceleration);

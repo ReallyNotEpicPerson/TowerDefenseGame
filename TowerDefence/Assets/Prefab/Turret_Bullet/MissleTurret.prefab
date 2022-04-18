@@ -263,19 +263,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0895ce8c9ce213441b54d434a1eea92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootType: 0
+  shootType: 1
   passiveAbility: 0
   numberOfTarget: 1
   range:
     baseValue: 5
   rotationSpeed:
     baseValue: 200
-  target:
-  - {fileID: 0}
+  target: []
   firePoint:
   - {fileID: 5139430634396310833}
   fireRate:
-    baseValue: 0
+    baseValue: 1.5
   BulletPrefab: {fileID: 306170266991135396, guid: 6a2a23c6ab494474a8bed149f1b2762c,
     type: 3}
 --- !u!61 &-7467638400847865148

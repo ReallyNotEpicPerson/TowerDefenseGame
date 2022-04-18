@@ -6,5 +6,5 @@ using UnityEngine;
 public class Wave
 {
     public string waveName;
-    public EnemySpawnStat[] enemy;
+    public EnemyGroupStat[] enemy;
 }

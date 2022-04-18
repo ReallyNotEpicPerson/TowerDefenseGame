@@ -13,7 +13,25 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             return false;
         }
         return true;
-    }
+    }/*
+    public bool HaveStatusEffectSlow(BaseEffect Bfx ,out BaseEffect fx)
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if(listOfDebuffs[i] is SlowEffect && Bfx is SlowEffect)
+            {
+                
+                return true;
+            }
+        }
+        if (listOfDebuffs.Count == 0)
+        {
+            Debug.LogError("You forgot sth");
+            out fx;
+            return false;
+        }
+        //return false;
+    }*/
     public BaseEffect GetSpeedBoostData()
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
@@ -92,6 +110,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
                 }
             }
         }
+        Debug.LogError("Forgot them data man");
         return false;
     }
     public void Slow(Enemy enemy)

@@ -107,8 +107,7 @@ MonoBehaviour:
     baseValue: 2
   rotationSpeed:
     baseValue: 200
-  target:
-  - {fileID: 0}
+  target: []
   firePoint:
   - {fileID: 3428752716710890752}
   fireRate:

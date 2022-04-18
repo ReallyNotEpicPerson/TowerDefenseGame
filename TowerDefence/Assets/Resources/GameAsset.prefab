@@ -98,3 +98,5 @@ MonoBehaviour:
   - {fileID: 4874449705774183522, guid: 7225b9a4b108f0b44bb562a3cc12c20b, type: 3}
   damageDisplayer: {fileID: 7861630055729467459, guid: dcf6fbd7753960d41acff7b7d5656a5f,
     type: 3}
+  underling: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+    type: 3}

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Cast : MonoBehaviour
 {
@@ -8,23 +10,57 @@ public class Cast : MonoBehaviour
     public int numberOfTarget = 1;
     public float castRange;
     public float castRate;
+    public float delay;
     public float repeatRate = 0.2f;
     public Transform[] castPoint;
     public GameObject healingBulletPrefab;
+    
 
     private float timer;
 
     private void Awake()
     {
         target = new List<Transform>();
-        timer = 1/castRate;
+        timer = 1 / castRate;
+        //ok.sam
     }
 
-    public void TurnOn()
+    public void FindTarget()
     {
-        InvokeRepeating(nameof(UpdateTarget), 0f, repeatRate);
+        InvokeRepeating(nameof(UpdateTarget), delay, repeatRate);
     }
-
+    public void SpawnEnemy()
+    {
+        InvokeRepeating(nameof(Necromancy), delay, repeatRate);
+    }
+    public void NoMoreNecromancy()
+    {
+        CancelInvoke(nameof(SpawnEnemy));
+    }
+    public void NoMoreFindTarget()
+    {
+        CancelInvoke(nameof(SpawnEnemy));
+        target.Clear();
+    }
+    private void Necromancy()
+    {
+        int i = 0;
+        while (i<numberOfTarget)
+        {
+            if (NavMesh.SamplePosition(transform.position,out NavMeshHit hit,castRange,NavMesh.AllAreas))//transform.position + GetRandomPos())
+            {
+                Debug.Log(hit.position);
+                GameObject underling = Instantiate(GameAsset.I.underling, hit.position,Quaternion.identity);
+                underling.TryGetComponent(out NavMeshAI navMesh);
+                navMesh.SetDestination(TheSpawner.spawnPoint[0], TheSpawner.endPoint[0]);
+                i++;
+            }           
+        }
+        /*for (int i = 0; i < numberOfTarget; i++)
+        {*/
+            
+        //}
+    }
     void UpdateTarget()
     {
         //Debug.Log("YEP IM CUMMING");
@@ -47,13 +83,12 @@ public class Cast : MonoBehaviour
                 }
                 else if (castType.HasFlag(ShootType.MultipleTarget))
                 {
-                    target.Add(col.transform); 
+                    target.Add(col.transform);
                     if (target.Count == numberOfTarget)
                     {
                         return;
                     }
                 }
-
             }
         }
         if (castType.HasFlag(ShootType.SingleTarget) && nearestCol != null)
@@ -70,7 +105,7 @@ public class Cast : MonoBehaviour
         }
         if (timer <= 0f)
         {
-            timer = 1/castRate;
+            timer = 1 / castRate;
             Shoot();
         }
         timer -= Time.deltaTime;
@@ -90,9 +125,20 @@ public class Cast : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GetRandomPos()
+    {
+        return Random.insideUnitCircle * Random.Range(-castRange, castRange);
+    }
     private GameObject MakeBullet(int i)
     {
         return Instantiate(healingBulletPrefab, castPoint[i].position, castPoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
     }
+    void OnDrawGizmosSelected()
+    {
+        Handles.color = Color.green;
+        Handles.DrawWireDisc(transform.position, new Vector3(0, 0, 1), castRange);
+    }
+
 }

@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2635827298627906504
 Transform:
   m_ObjectHideFlags: 0
@@ -99,20 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 10
+  enemyType: 0
+  enemyState: 0
   startHealth: 100
-  startArmor: 0
-  damangeReductionPtc: 0
-  speed: 0
+  armorStat: {fileID: 0}
+  UsePathFinding: 0
+  ChanceToEvade: 0.1
   worth: 20
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 5389080647074171708}
-  armorBar: {fileID: 0}
   Displayer: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
     type: 3}
-  ListOfMOD: []
-  enemyType: 0
-  enemyState: 0
+  Handler: {fileID: 0}
+  fxManager: {fileID: 0}
+  specialFX: {fileID: 0}
 --- !u!114 &1553540118007026632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSpeed:
+    baseValue: 0
+  speed: 0
 --- !u!61 &332872164532205857
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -102,8 +102,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593140085454441324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3053064806348107539}
   m_RootOrder: 0
@@ -355,7 +355,6 @@ GameObject:
   - component: {fileID: 3727310694209542962}
   - component: {fileID: 1985217187315727894}
   - component: {fileID: 1086908084338352726}
-  - component: {fileID: 389460269}
   m_Layer: 0
   m_Name: 'Basic Enemy '
   m_TagString: Enemy
@@ -447,14 +446,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!195 &3053064806348107540
 NavMeshAgent:
@@ -465,8 +464,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 3053064806348107529}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
-  m_Speed: 1
+  m_Radius: 0.05
+  m_Speed: 0.8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -474,8 +473,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.2
-  m_BaseOffset: 0.1
+  m_Height: 0.05
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &8899509522840294181
@@ -506,16 +505,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySprite: {fileID: 21300000, guid: 8fc1416a434ba9143ab48cb386596936, type: 3}
   enemyType: 0
-  enemyState: 16
-  startHealth: 500
+  enemyState: 0
+  startHealth: 70
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 1
-  ChanceToEvade: 0.1
-  worth: 20
+  ChanceToEvade: 0.001
+  worth: 5
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}
-  Displayer: {fileID: 0}
   Handler: {fileID: 3727310694209542962}
   fxManager: {fileID: 1086908084338352726}
   specialFX: {fileID: 1985217187315727894}
@@ -533,7 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorType: 0
   startArmor: 100
-  damangeReductionPtc: 0.9
+  damangeReductionPtc: 0
   MaxLayer: 0
   armorBar: {fileID: 2855143225533144545}
   layerNum: {fileID: 6540034314286165266}
@@ -578,28 +577,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 590e4f5275fa11b4f9a6d5c6e22cc7b3, type: 2}
   - {fileID: 11400000, guid: 8bd6b9c81f96da5409a80b29aa2010d1, type: 2}
   - {fileID: 11400000, guid: 3e46dbbefd4acf046bf95e8b682650ed, type: 2}
---- !u!114 &389460269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053064806348107529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48ff5560aad453344a4753963e03b1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  castType: 1
-  numberOfTarget: 3
-  castRange: 4
-  castRate: 5
-  delay: 5
-  repeatRate: 15
-  castPoint:
-  - {fileID: 3053064806348107539}
-  healingBulletPrefab: {fileID: 6456669023222857168, guid: ad97ba18a56fb2945aaf62a2492462c6,
-    type: 3}
 --- !u!1 &4571930864691467095
 GameObject:
   m_ObjectHideFlags: 0

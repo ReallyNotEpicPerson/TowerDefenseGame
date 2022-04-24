@@ -483,8 +483,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 5368768617105502747}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
-  m_Speed: 1
+  m_Radius: 0.05
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -492,7 +492,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.2
+  m_Height: 0.05
   m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -524,16 +524,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySprite: {fileID: -6098352913220177419, guid: 434c0a33315ec164089721f81c545e51,
+    type: 3}
   enemyType: 0
   enemyState: 16
-  startHealth: 500
+  startHealth: 800
   armorStat: {fileID: 5368768617105502725}
   UsePathFinding: 1
   ChanceToEvade: 0.1
-  worth: 20
+  worth: 25
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 4901645585204776476}
-  Displayer: {fileID: 0}
   Handler: {fileID: 6009219771519288864}
   fxManager: {fileID: 8055358616771395396}
   specialFX: {fileID: 8886710770990228228}

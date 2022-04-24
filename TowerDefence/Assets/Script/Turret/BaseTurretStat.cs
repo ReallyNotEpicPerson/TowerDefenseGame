@@ -1,22 +1,22 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum ShootType
 {
-    None=0,
-    SingleTarget =1,
+    None = 0,
+    SingleTarget = 1,
     MultipleTarget = 2,
 }
 [System.Flags]
 public enum PassiveAbility
 {
-    None=0,
-    Penetration = 1<<0,
-    Splash = 1<<1,
-    IncreaseDamage = 1<<2,
-    IncreaseSpeed = 1<<3,
+    None = 0,
+    Penetration = 1 << 0,
+    Splash = 1 << 1,
+    IncreaseDamage = 1 << 2,
+    IncreaseSpeed = 1 << 3,
+    CanShootWhenBuy = 1 << 4,
 }
 public enum Direction
 {
@@ -30,17 +30,20 @@ public class BaseTurretStat : MonoBehaviour
 {
     public ShootType shootType;
     public PassiveAbility passiveAbility;
-    public int numberOfTarget=1;
+    public int numberOfTarget = 1;
     public CharacterStat range;//keep at all cost
     public CharacterStat rotationSpeed;//keep at all cost
     [SerializeField] protected List<Transform> target;//keep at all cost
-
+    public SpriteRenderer spriteRenderer;
     protected Direction direction;
 
     public virtual void Awake()
     {
         target = new List<Transform>(numberOfTarget);
+        TryGetComponent(out spriteRenderer);
     }
+  
+
     public virtual void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -68,6 +71,18 @@ public class BaseTurretStat : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed.baseValue * Time.deltaTime);
         //Debug.DrawRay(transform.position, target.transform.position);
+    }
+    public void DisableThePewPew()
+    {
+        if (passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy))
+        {
+            return;
+        }
+        enabled = false;
+    }
+    public void FadeAbout(float ptc)
+    {
+        spriteRenderer.Fade(ptc);
     }
 
 }/*

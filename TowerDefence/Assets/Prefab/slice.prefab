@@ -96,21 +96,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed:
-    baseValue: 60
+  bulletSpeed:
+    baseValue: 0
   bulletDamage:
     baseValue: 75
   critChance:
     baseValue: 0
   critDamage:
     baseValue: 0
-  damageDisplayUI: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
   ImpactFx: {fileID: 2627823246568775247}
   Taggu: Enemy
   bulletType: 0
-  passiveAbility: 0
-  slowDownSecond:
-    baseValue: 0
-  slowPtc:
+  fxManager: {fileID: 1322322404890757603, guid: 0903351180797ee44a7d09e42ef6e603,
+    type: 3}
+  effectManager: {fileID: 2377408728514892180, guid: 0903351180797ee44a7d09e42ef6e603,
+    type: 3}
+  explosionRadius:
     baseValue: 0

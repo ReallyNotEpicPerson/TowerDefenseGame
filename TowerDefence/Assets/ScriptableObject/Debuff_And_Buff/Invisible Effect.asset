@@ -20,4 +20,4 @@ MonoBehaviour:
   expirableType: 0
   _duration: 5
   chance: 1
-  description: Enemy invisible for a while
+  description: 'Enemy invisible for '

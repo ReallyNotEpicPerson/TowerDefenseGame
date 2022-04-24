@@ -97,18 +97,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletSpeed:
-    baseValue: 10
+    baseValue: 15
   bulletDamage:
-    baseValue: 20
+    baseValue: 11
   critChance:
-    baseValue: 0.1
+    baseValue: 0.02
   critDamage:
-    baseValue: 1.5
-  ImpactFx: {fileID: 7601149693699062836, guid: b96c124f2589fd74b97f61c400fa155e,
+    baseValue: 3
+  ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
   Taggu: Enemy
-  bulletType: 256
-  effectManager: {fileID: 99656583981239410, guid: b21c6192f7b34654bb77431c04969ae4,
+  bulletType: 0
+  fxManager: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
+    type: 3}
+  effectManager: {fileID: 689252863417060428, guid: b21c6192f7b34654bb77431c04969ae4,
     type: 3}
   explosionRadius:
-    baseValue: 2
+    baseValue: 0

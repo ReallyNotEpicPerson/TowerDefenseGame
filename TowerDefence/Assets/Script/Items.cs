@@ -15,8 +15,8 @@ public class Items : ScriptableObject
 
     private void OnValidate()
     {
-        string path = AssetDatabase.GetAssetPath(this);
-        id = AssetDatabase.AssetPathToGUID(path);
+        //string path = AssetDatabase.GetAssetPath(this);
+        //id = AssetDatabase.AssetPathToGUID(path);
     }
     public virtual Items GetCopy()
     {

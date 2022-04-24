@@ -13,42 +13,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             return false;
         }
         return true;
-    }/*
-    public bool HaveStatusEffectSlow(BaseEffect Bfx ,out BaseEffect fx)
-    {
-        for (int i = 0; i < listOfDebuffs.Count; i++)
-        {
-            if(listOfDebuffs[i] is SlowEffect && Bfx is SlowEffect)
-            {
-                
-                return true;
-            }
-        }
-        if (listOfDebuffs.Count == 0)
-        {
-            Debug.LogError("You forgot sth");
-            out fx;
-            return false;
-        }
-        //return false;
-    }*/
+    }
     public BaseEffect GetSpeedBoostData()
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
             if (listOfDebuffs[i] is SlowEffect && listOfDebuffs[i].ID.Contains("TUR"))
-            {
-                return listOfDebuffs[i];
-            }
-        }
-        Debug.LogError("forget to add eii?");
-        return null;
-    }
-    public BaseEffect GetDamageBoostData()
-    {
-        for (int i = 0; i < listOfDebuffs.Count; i++)
-        {
-            if (listOfDebuffs[i] is Weaken && listOfDebuffs[i].ID.Contains("TUR"))
             {
                 return listOfDebuffs[i];
             }
@@ -202,7 +172,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {
-            if (listOfDebuffs[i] is DisableArmor)
+            if (listOfDebuffs[i] is ArmorBreaking)
             {
                 if (Random.value <= listOfDebuffs[i].chance)
                 {
@@ -213,5 +183,121 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         }
         Debug.LogError("nothing");
     }
-
+    public BaseEffect GetDamageBoostData()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Weaken && listOfDebuffs[i].ID.Contains("TUR"))
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("forget to add eii?");
+        return null;
+    }
+    public BaseEffect GetReviveEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Revive)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetDOTSEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is DotsEffect)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetFearEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is FearEffect)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetWeakenEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Weaken)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetInvisibleEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Invisible)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetArmorDisableEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is ArmorBreaking)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetSlowEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is SlowEffect)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
+    public BaseEffect GetInsta_KillEffect()
+    {
+        for (int i = 0; i < listOfDebuffs.Count; i++)
+        {
+            if (listOfDebuffs[i] is Insta_Kill)
+            {
+                return listOfDebuffs[i];
+            }
+            continue;
+        }
+        Debug.LogError("Oh....Forgot sth?");
+        return null;
+    }
 }

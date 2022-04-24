@@ -131,7 +131,7 @@ public class EntityEffectHandler : MonoBehaviour
                     _effectList[weaken.ID].Activate();
                 }
                 break;
-            case DisableArmor disableArmor:
+            case ArmorBreaking disableArmor:
                 if (_effectList.ContainsKey(disableArmor.ID))
                 {
                     _effectList[disableArmor.ID].Activate();

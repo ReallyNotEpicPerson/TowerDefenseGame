@@ -20,7 +20,7 @@ public class NodeUIBAD : MonoBehaviour
         transform.position = _target.GetBuildPosition();//Set NodeUI position
         if (!target.isUpgraded)//check Upgradable
         {
-            upgradeCost.text ="$"+ target.turretBluePrint.upgradeCost;
+            //upgradeCost.text ="$"+ target.turretBluePrint.upgradeCost;
             upgradeButton.interactable = true;
         }
         else

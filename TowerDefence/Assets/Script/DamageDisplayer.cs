@@ -61,7 +61,7 @@ public class DamageDisplayer : MonoBehaviour
                 break;
             case DamageDisplayerType.Insta_kill:
                 disappearTimer = 2f;
-                textMesh.SetText(str);
+                textMesh.SetText($"<color=Red>{str}</color>");
                 textColor = textMesh.color;
                 break;
         }

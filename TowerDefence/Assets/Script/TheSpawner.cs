@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -14,7 +15,7 @@ public enum SpawnType
 public class TheSpawner : MonoBehaviour
 {
     public static int numOfEnemies;
-    public Wave[] mainWaves;//<----(wave)
+    public Wave[] mainWaves;//<------------------------------------(wave)
 
     public Transform[] SpawnPoint;
     public static Transform[] spawnPoint;
@@ -33,6 +34,40 @@ public class TheSpawner : MonoBehaviour
     public TMP_Text Counter;
     [SerializeField] ObjectPooler objectPooler;
     [SerializeField] StatusEffectDisplayer displayer;
+
+    public GameObject waveDisplayer;
+
+    [SerializeField] private List<StartWaveEnemyDisplay> startWaveEnemyDisplays;
+    [SerializeField] private List<Sprite> imageList = new List<Sprite>();
+    private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
+    //private List<int> numOfEnemy = new List<int>();
+
+    private void OnValidate()
+    {
+        for (int i = 0; i < mainWaves.Length; i++)
+        {
+            for (int j = 0; j < mainWaves[i].enemy.Length; j++)
+            {
+                if (mainWaves[i].enemy[j].enemy != null)
+                {
+                    mainWaves[i].enemy[j].sprite = mainWaves[i].enemy[j].enemy.GetComponent<Enemy>().GetSprite();
+                }
+                if (mainWaves[i].enemy[j].path >= EndPoint.Length)
+                {
+                    mainWaves[i].enemy[j].path = EndPoint.Length - 1;
+                }
+                if (mainWaves[i].enemy[j].path >= SpawnPoint.Length)
+                {
+                    mainWaves[i].enemy[j].path = SpawnPoint.Length - 1;
+                }
+            }
+        }
+        startWaveEnemyDisplays.Clear();
+        for (int i = 0; i < waveDisplayer.transform.childCount; i++)
+        {
+            startWaveEnemyDisplays.Add(waveDisplayer.transform.GetChild(i).GetComponent<StartWaveEnemyDisplay>());
+        }
+    }
     /*
     IEnumerator WaveCount()
     {
@@ -45,6 +80,7 @@ public class TheSpawner : MonoBehaviour
     {
         spawnPoint = SpawnPoint;
         endPoint = EndPoint;
+        waveNum = 0;
     }
     void Start()
     {
@@ -73,21 +109,58 @@ public class TheSpawner : MonoBehaviour
         if (CountDown <= 0)
         {
             StartCoroutine(SpawnWave());
+            waveDisplayer.SetActive(false);
+            imageList.Clear();
+            numOfEnemy.Clear();
             CountDown = TimeBetweenWave;
             //StartCoroutine(WaveCount());
             WaveCounter(mainWaves[waveNum].waveName);
             return;
         }
+        if (!waveDisplayer.activeSelf && waveNum != mainWaves.Length)
+        {
+            waveDisplayer.SetActive(true);
+            EnemyWaveDisplay();
+        }
         CountDown -= Time.deltaTime;
-
         CountDown = Mathf.Clamp(CountDown, 0f, Mathf.Infinity);
 
         leWaveTimer.text = String.Format("{0:00.00}", CountDown);
-
+    }
+    public void EnemyWaveDisplay()
+    {
+        for (int j = 0; j < mainWaves[waveNum].enemy.Length; j++)
+        {
+            if (!imageList.Contains(mainWaves[waveNum].enemy[j].sprite))
+            {
+                imageList.Add(mainWaves[waveNum].enemy[j].sprite);
+            }
+            if (!numOfEnemy.ContainsKey(mainWaves[waveNum].enemy[j].sprite))
+            {
+                numOfEnemy.Add(mainWaves[waveNum].enemy[j].sprite, mainWaves[waveNum].enemy[j].count);
+            }
+            else
+            {
+                numOfEnemy[mainWaves[waveNum].enemy[j].sprite] += mainWaves[waveNum].enemy[j].count;
+            }
+            //img.transform.GetChild(0);
+        }
+        //waveDisplayer.transform.GetChild().GetComponent<Image>();
+        for (int i = 0; i < startWaveEnemyDisplays.Count; i++)
+        {
+            //Debug.Log(i + " " + imageList.Count);
+            if (i >= imageList.Count)
+            {
+                startWaveEnemyDisplays[i].gameObject.SetActive(false);
+                continue;
+            }
+            startWaveEnemyDisplays[i].SetSprite(imageList[i]);
+            startWaveEnemyDisplays[i].SetText(numOfEnemy[imageList[i]].ToString());
+            startWaveEnemyDisplays[i].gameObject.SetActive(true);
+        }
     }
     public void WaveCounter(string num)
     {
-
         Counter.text = "Wave " + num;
     }
     IEnumerator SpawnWave()
@@ -100,7 +173,7 @@ public class TheSpawner : MonoBehaviour
             for (int i = 0; i < wave.enemy[j].count; i++)
             {
                 EnemySpawner(wave.enemy[j].path, wave.enemy[j].enemy);
-                yield return new WaitForSeconds(1f / wave.enemy[j].rate);
+                yield return new WaitForSeconds(wave.enemy[j].startRate);
             }
             if (wave.enemy[j].delayBetweenGroup > 0)
             {
@@ -132,7 +205,7 @@ public class TheSpawner : MonoBehaviour
         //spawn fx now
         Debug.Log(SpawnPoint[path].position + " " + lol.transform.position);
         if (lol.TryGetComponent(out NavMeshAI Navmesh))
-        {        
+        {
             if (EndPoint.Length > 1)
             {
                 Navmesh.SetDestination(SpawnPoint[path], EndPoint[path]);
@@ -148,7 +221,7 @@ public class TheSpawner : MonoBehaviour
     }
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
-    {   
+    {
         if (spawnType.HasFlag(SpawnType.CircleZone))
         {
             Handles.color = Color.blue;

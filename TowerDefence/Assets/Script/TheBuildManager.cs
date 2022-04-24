@@ -34,6 +34,9 @@ public class TheBuildManager : MonoBehaviour
     public void TempTurret(TurretBluePrint turret)
     {
         tempTurret = Instantiate(turret.prefab, cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane)), Quaternion.identity);
+        tempTurret.GetComponentInChildren<BaseTurretStat>().DisableThePewPew();
+        //tempTurret.TryGetComponent(out BaseTurretStat baseTurretStat);
+        //baseTurretStat.DisableThePewPew();
         tempTurret.SetActive(true);
         //tempTurret.transform.GetSiblingIndex;
     }
@@ -50,7 +53,7 @@ public class TheBuildManager : MonoBehaviour
         {
             if (!tileMapManager.BuildTurret(turretToBuild))
             {
-                return; 
+                return;
             }
             Destroy(Instantiate(UpgradeEffect, tileMapManager.GetWorldPosition(Input.mousePosition), Quaternion.identity), 2f);
             Destroy(tempTurret);
@@ -70,6 +73,24 @@ public class TheBuildManager : MonoBehaviour
             tileMapManager.CanvasComeBack();
         }
     }
+    public void UltraUpgrade(RefTurret refTurret, int i)
+    {
+        if (PlayerStat.moneyInGame < refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1])
+        {
+            Debug.Log("Nah U poor!,cant upgrade,lol" + PlayerStat.moneyInGame);
+            return;
+        }
+        PlayerStat.moneyInGame -= refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1];
+        refTurret.treeChoice = i;
+        GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradePrefab[refTurret.UltraUpgradeLevel-1], refTurret.referenceTurret.transform.position, Quaternion.identity);
+        Destroy(refTurret.referenceTurret);
+        refTurret.referenceTurret = upgradePrefab;
+        refTurret.referenceTurret.name = upgradePrefab.name;
+        refTurret.UltraUpgradeLevel++;
+        Debug.Log(refTurret.UltraUpgradeLevel + " ");
+        GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
+        Destroy(Bfx, 2f);
+    }
     public void UpgradeTurret(RefTurret refTurret)
     {
         if (PlayerStat.moneyInGame < refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1])
@@ -79,7 +100,9 @@ public class TheBuildManager : MonoBehaviour
         }
         PlayerStat.moneyInGame -= refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1];
         //old Turret go bye bye 
-        GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.upgradedPrefabs[refTurret.upgradeLevel - 1], refTurret.referenceTurret.transform.position, Quaternion.identity);
+
+        GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.upgradePrefabs[refTurret.upgradeLevel - 1], refTurret.referenceTurret.transform.position, Quaternion.identity);
+        
         Destroy(refTurret.referenceTurret);
         refTurret.referenceTurret = upgradePrefab;
         refTurret.referenceTurret.name = upgradePrefab.name;
@@ -91,7 +114,7 @@ public class TheBuildManager : MonoBehaviour
 
     public void Sell(RefTurret refTurret)
     {
-        PlayerStat.moneyInGame += refTurret.refBlueprint.GetSellAmount(refTurret.upgradeLevel - 1);
+        PlayerStat.moneyInGame += refTurret.refBlueprint.GetSellNormalAmount(refTurret.upgradeLevel - 1);
         GameObject Sellfx = Instantiate(SellFX, transform.position, Quaternion.identity);
         Destroy(Sellfx, 2f);
 

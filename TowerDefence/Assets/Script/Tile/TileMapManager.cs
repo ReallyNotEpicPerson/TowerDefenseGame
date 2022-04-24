@@ -17,24 +17,32 @@ public class RefTurret
     public GameObject referenceTurret;
     [Range(1, 6)]
     public int upgradeLevel = 0;
+    public int treeChoice = -1;
+    public int UltraUpgradeLevel = 0;
 
     public RefTurret()
     {
         refBlueprint = null;
         referenceTurret = null;
         upgradeLevel = 1;
-    }
+        treeChoice = -1;
+        UltraUpgradeLevel = 1;
+}
     public RefTurret(TurretBluePrint bluePrint, GameObject turret)
     {
         refBlueprint = bluePrint;
         referenceTurret = turret;
         upgradeLevel = 1;
+        treeChoice = -1;
+        UltraUpgradeLevel = 1;
     }
     public RefTurret(TurretBluePrint bluePrint, GameObject turret, int level)
     {
         refBlueprint = bluePrint;
         referenceTurret = turret;
         upgradeLevel = level;
+        treeChoice = -1;
+        UltraUpgradeLevel = 1;
     }
     public bool HaveTurret { get { return refBlueprint != null || referenceTurret != null; } }
 

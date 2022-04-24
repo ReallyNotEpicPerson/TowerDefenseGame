@@ -108,6 +108,8 @@ MonoBehaviour:
     type: 3}
   Taggu: Enemy
   bulletType: 520
+  fxManager: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+    type: 3}
   effectManager: {fileID: 1086908084338352726, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
     type: 3}
   explosionRadius:

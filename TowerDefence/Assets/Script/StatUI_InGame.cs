@@ -14,7 +14,7 @@ public class StatUI_InGame : MonoBehaviour
     private BulletTypeTurret spinningTurret;
     private Bullet bullet;
     private Enemy enemy;
-
+    //Fuck
     private void OnValidate()
     {
         

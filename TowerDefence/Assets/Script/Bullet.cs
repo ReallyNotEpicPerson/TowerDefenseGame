@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Bullet : BaseBulletClass
 {
-    [SerializeField] EffectManager effectManager;
+    public GameObject fxManager;
+    [SerializeField] private EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
     float finalDamage;
-
+    public void OnValidate()
+    {      
+        effectManager = fxManager.GetComponentInChildren<EffectManager>();
+        if (fxManager == null || effectManager==null)
+        {
+            Debug.Log(name);
+        }
+    }
     public void Seek(Transform _target)
     {
         target = _target;
@@ -111,7 +119,7 @@ public class Bullet : BaseBulletClass
                     }
                 }
 
-                if (bulletType.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
                     ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -134,7 +142,7 @@ public class Bullet : BaseBulletClass
                         finalDamage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (bulletType.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
                     ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -168,7 +176,7 @@ public class Bullet : BaseBulletClass
             {
                 effectManager.Weaken(ene);
             }
-            if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.DisableArmor))
+            if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.ArmorBreaking))
             {
                 effectManager.DisableArmor(ene);
             }
@@ -176,7 +184,7 @@ public class Bullet : BaseBulletClass
     }
     float CritDamage()
     {
-        return bulletDamage.baseValue * critDamage.baseValue;
+        return bulletDamage.baseValue * critDamage.value;
     }
     /*
     #if UNITY_EDITOR

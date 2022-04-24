@@ -33,6 +33,7 @@ public enum MovementType
 #endregion 
 public class Enemy : MonoBehaviour
 {
+    public Sprite enemySprite;
     public EnemyType enemyType;
     public EnemyState enemyState;
     #region EnemyStat
@@ -57,7 +58,6 @@ public class Enemy : MonoBehaviour
 
     private bool isDead = false;
     private SpriteRenderer enemyColor;
-    [SerializeField] private GameObject Displayer;
 
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
@@ -405,10 +405,8 @@ public class Enemy : MonoBehaviour
     }
     public void When_Insta_kill()//remove soon??
     {
-        GameObject sth = Instantiate(Displayer, transform.position, Quaternion.identity);
-        sth.transform.GetChild(0).GetComponentInChildren<TMP_TextController>().SetText("Insta Kill!!!");
-        Destroy(sth, 0.5f);
         Handler.RemoveALLDebuff();
+        DamageDisplayer.Create(transform.position,"INSTA KILL!!",DamageDisplayerType.Insta_kill);
         Die();//pooling
     }
     #endregion
@@ -546,7 +544,10 @@ public class Enemy : MonoBehaviour
         }*/
         return;
     }
-
+    public Sprite GetSprite()
+    {
+        return enemySprite;
+    }
     void OnMouseEnter()
     {
         //statUI.TransferCharacter(gameObject);

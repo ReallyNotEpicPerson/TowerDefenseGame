@@ -9,9 +9,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
+      propertyPath: fxManager
+      value: 
+      objectReference: {fileID: 5255571582873797314, guid: c3c2030742d97c44b9b9cbfd7e6d3612,
+        type: 3}
+    - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
+        type: 3}
       propertyPath: bulletType
-      value: 33
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
+        type: 3}
+      propertyPath: effectManager
+      value: 
+      objectReference: {fileID: 1840813154396972211, guid: c3c2030742d97c44b9b9cbfd7e6d3612,
+        type: 3}
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
       propertyPath: speed.baseValue
@@ -29,13 +41,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
+      propertyPath: bulletSpeed.baseValue
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
+        type: 3}
       propertyPath: bulletDamage.baseValue
-      value: 25
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
       propertyPath: dotsCoolDown.baseValue
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
+        type: 3}
+      propertyPath: explosionRadius.baseValue
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 306170266991135396, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
@@ -103,12 +125,12 @@ PrefabInstance:
     - target: {fileID: 8139220212796291896, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.26848325
+      value: 0.23529412
       objectReference: {fileID: 0}
     - target: {fileID: 8139220212796291896, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.21026166
+      value: 0.23529412
       objectReference: {fileID: 0}
     - target: {fileID: 8139220212796291896, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}

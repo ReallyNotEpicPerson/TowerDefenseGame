@@ -4,9 +4,9 @@ using UnityEngine;
 public enum EffectType
 {
     None = 0,
-    StackingEffect = 1 << 1,//this effect 
+    StackingEffect = 1 << 1,
     StackableDuration = 1 << 2,
-    LateActivation = 1 << 3,//?when??
+    LateActivation = 1 << 3,
 }
 public enum RemovableType { Removable, NonRemovable };
 //Removable - type : can be remove by being expired || can be remove by using other mean
@@ -49,7 +49,7 @@ public abstract class BaseEffect : ScriptableObject
         {
 
         }*/
-        if(chance > 1 || chance < 0)
+        if( chance > 1 || chance < 0)
         {
             chance = 1;
         }

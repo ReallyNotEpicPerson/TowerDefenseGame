@@ -74,7 +74,7 @@ public class Node : MonoBehaviour
     }
     public void UpgradeTurret()
     {
-        if (PlayerStat.moneyInGame < turretBluePrint.upgradeCost)
+       /* if (PlayerStat.moneyInGame < turretBluePrint.upgradeCost)
         {
             Debug.Log("Nah U poor!,cant upgrade,lol" + PlayerStat.moneyInGame);
             return;
@@ -87,7 +87,7 @@ public class Node : MonoBehaviour
         turret = _turret;
         //turret.GetComponent<BaseTurretStat>().SetNode(this);
 
-        turret.name = turretBluePrint.upgradePrefab.name;
+        turret.name = turretBluePrint.upgradePrefab.name;*/
 
         GameObject Bfx = Instantiate(buildManager.BuildFX, transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);

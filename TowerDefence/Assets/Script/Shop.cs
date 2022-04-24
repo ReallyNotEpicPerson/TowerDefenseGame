@@ -1,50 +1,61 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Shop : MonoBehaviour
 {
     public List<TurretBluePrint> turret;
     [SerializeField] private Button button;
     [SerializeField] private Transform parenting;
-    [SerializeField] private bool isNewShop=false;//get rid of this
 
-    BuildManager buildManager;
+    //BuildManager buildManager;
 
     public TheBuildManager theBuildManager;
 
     //public StatUI statUI;
 
-    void Start()
+    public void Awake()
     {
-        buildManager = BuildManager.instance;
-        if(SetCharacterFormation.characterLineUp != null)
+        NewCreateButton();
+    }
+    /*void Start()
+    {
+        //buildManager = BuildManager.instance;
+
+        //CreateButton();
+    }*/
+    void NewCreateButton()
+    {
+        for (int i = 0; i < GameAsset.I.turret.Count; i++)
         {
-            turret = SetCharacterFormation.characterLineUp;
+            Button temp = Instantiate(button);
+            temp.transform.SetParent(parenting, false);
+            temp.name = "Button " + i;
+            TurretBluePrint tempTurret = GameAsset.I.turret[i];
+            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
+            SetButtonText(temp, i);
         }
-        if(isNewShop==true)
-            CreateButton();
     }
     void CreateButton()
     {
         for (int i = 0; i < turret.Count; i++)
         {
-            Button temp =Instantiate(button);
+            Button temp = Instantiate(button);
             //Image img = Instantiate(turret[i].prefabImage);
-            temp.transform.SetParent(parenting,false);
+            temp.transform.SetParent(parenting, false);
             //img.transform.SetParent(temp.transform,false);
             //img.rectTransform.localPosition = Vector3.zero;
             temp.name = "Button " + i;
             TurretBluePrint tempTurret = turret[i];
-            temp.onClick.AddListener(delegate {NewSelectTurret(tempTurret);});
-            SetButtonText(temp,i);
-        } 
+            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
+            SetButtonText(temp, i);
+        }
     }
-    void SetButtonText(Button temp,int index)
+    void SetButtonText(Button temp, int index)
     {
-        temp.transform.GetChild(1).GetComponent<Text>().text=turret[index].prefab.name;
-        temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += turret[index].cost.ToString()+" $";
+        temp.transform.GetChild(1).GetComponent<Text>().text = GameAsset.I.turret[index].prefab.name;
+        temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += GameAsset.I.turret[index].cost.ToString() + " $";
     }
     public void NewSelectTurret(TurretBluePrint turretBluePrint)
     {
@@ -61,6 +72,7 @@ public class Shop : MonoBehaviour
         theBuildManager.SelectTurretToBuild(turretBluePrint);
         //buildManager.SelectTurretToBuild(turretBluePrint);
     }
+    /*
     public void SelectTurret(TurretBluePrint Character)
     {
         Debug.Log(Character.prefab.name + " selected");
@@ -75,5 +87,5 @@ public class Shop : MonoBehaviour
         }
         buildManager.SelectTurretToBuild(Character);
         //statUI.TransferCharacter(StandardTurret.prefab);
-    }
+    }*/
 }

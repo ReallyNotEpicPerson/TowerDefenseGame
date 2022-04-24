@@ -27,5 +27,9 @@ public static class HelperAndExtensionClass
     {
         return Random.insideUnitCircle * Random.Range(-range, range);
     }
+    public static void Fade(this SpriteRenderer spr,float ptc)
+    {
+        spr.color = new Color(spr.color.r, spr.color.g, spr.color.b,ptc);
+    }
     
 }

@@ -19,5 +19,5 @@ MonoBehaviour:
   removableType: 0
   expirableType: 1
   _duration: 0
-  chance: 1
-  description: 'Enemy Ded '
+  chance: 0.04
+  description: Chance to Insta kill

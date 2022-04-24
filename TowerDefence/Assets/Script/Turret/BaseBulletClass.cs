@@ -11,8 +11,8 @@ public enum BulletType
     Fear = 1 << 4,//done
     Insta_Kill = 1 << 5,//done
     Weaken = 1 << 6,//Done
-    DisableArmor = 1 << 7,//done
-    ArmorPiercing = 1 << 8,//done
+    ArmorBreaking = 1 << 7,//done
+    PiercingShot = 1 << 8,//done
     Cast = 1 << 9,
 }
 

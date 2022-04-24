@@ -1,0 +1,7 @@
+- press X to skip wave 
+- use left mouse to select turret
+- use right mouse to deselect turret 
+- ESC to pause
+- This game is shit, use for testing purpose
+- i have no idea what i`m doing
+- i feel so alone....help

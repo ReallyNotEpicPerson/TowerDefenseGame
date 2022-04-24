@@ -20,8 +20,8 @@ MonoBehaviour:
   removableType: 1
   expirableType: 0
   _duration: 2
-  chance: 1
-  description: Stun Enemy
+  chance: 0.15
+  description: Chance to stun enemy
   _slowPercentage:
     modType: 400
     statValue:

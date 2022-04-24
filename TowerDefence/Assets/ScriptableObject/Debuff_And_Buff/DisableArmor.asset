@@ -19,6 +19,7 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
+  activate: 0
   _duration: 3
   chance: 1
-  description: Disable Enemy Armor for a while
+  description: Disable enemy armor

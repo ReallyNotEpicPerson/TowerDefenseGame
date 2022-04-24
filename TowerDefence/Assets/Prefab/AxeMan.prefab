@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6274871065921345581}
   - component: {fileID: 9117360038570678732}
   - component: {fileID: -2653264987169872706}
+  - component: {fileID: 2377408728514892180}
   m_Layer: 0
   m_Name: AxeMan
   m_TagString: Untagged
@@ -107,12 +108,14 @@ MonoBehaviour:
     baseValue: 200
   target:
   - {fileID: 0}
+  spriteRenderer: {fileID: 0}
   firePoint:
   - {fileID: 0}
   fireRate:
     baseValue: 0
   BulletPrefab: {fileID: 2627823246568775247, guid: 6a01679b20ab4c14ab32780b415806e7,
     type: 3}
+  bu: {fileID: -3792502178238448520, guid: 6a01679b20ab4c14ab32780b415806e7, type: 3}
 --- !u!61 &-2653264987169872706
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,6 +142,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2377408728514892180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322322404890757603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338763577d6538542bad6ff4d94766eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfDebuffs: []
 --- !u!1 &5022214538884291112
 GameObject:
   m_ObjectHideFlags: 0

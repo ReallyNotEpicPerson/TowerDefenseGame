@@ -31,11 +31,13 @@ public class Game_Managers : MonoBehaviour
     }
     void GameEnd()
     {
+        Time.timeScale = 1;
         gameHasEnded = true;
         GameOverUI.SetActive(true);
     }
     public void WinLevel()
     {
+        Time.timeScale = 1;
         gameHasEnded = true;
         completeLevelUI.SetActive(true);
     }

@@ -26,4 +26,12 @@ public class GameAsset : MonoBehaviour
     {
         Instantiate(dict[name], pos, Quaternion.identity);
     }
+    public static void SetCharacterFormation()
+    {
+        dict.Clear();
+    }
+    public void ReadData()
+    {
+        return;
+    }
 }

@@ -21,7 +21,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 3
   chance: 0.1
-  description: make enemy run back in fear
+  description: 'Make enemy run back in fear '
   runBackSpeed:
     modType: 300
     statValue:

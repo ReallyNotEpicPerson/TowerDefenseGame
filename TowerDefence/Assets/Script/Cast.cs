@@ -15,7 +15,6 @@ public class Cast : MonoBehaviour
     public Transform[] castPoint;
     public GameObject healingBulletPrefab;
     
-
     private float timer;
 
     private void Awake()
@@ -135,10 +134,11 @@ public class Cast : MonoBehaviour
         return Instantiate(healingBulletPrefab, castPoint[i].position, castPoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
     }
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         Handles.color = Color.green;
         Handles.DrawWireDisc(transform.position, new Vector3(0, 0, 1), castRange);
     }
-
+#endif
 }

@@ -1,24 +1,26 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 #endif
 using UnityEngine;
 
 public class LazerTypeTurret : BaseTurretStat
-{
+{    
     public BulletType bulletType;
+    [Header("LazerTypeStat")]
     public CharacterStat critChance;
     public CharacterStat critDamage;
     public CharacterStat damageOverTime;
     public CharacterStat rate;
     private float timer;
     public Transform firePoint;
-
+    [Header("Effects")]
     public ParticleSystem lazerFX;
     public ParticleSystem Glow;
-    public EffectManager effectManager;
-
+    public EffectManager fxManager;
     public LineRenderer lineRenderer;
+
     //public GameObject lazerBeam;//Upgrade
     //private List<LineRenderer> lineRenderers = new List<LineRenderer>(); //upgrade 
     //private Enemy ene;
@@ -43,6 +45,11 @@ public class LazerTypeTurret : BaseTurretStat
         {
             lazerFX = transform.GetChild(0).GetComponentInChildren<ParticleSystem>();
         }
+        transform.Find("Range").localScale = Vector3.one;
+        transform.Find("Range").localScale *= range.baseValue;
+        TryGetComponent(out fxManager);
+        //transform.GetChild(1).localScale = Vector3.one;
+        //transform.GetChild(1).localScale *= range.baseValue;
     }
     private void Start()
     {
@@ -168,7 +175,7 @@ public class LazerTypeTurret : BaseTurretStat
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (bulletType.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
                     ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -192,7 +199,7 @@ public class LazerTypeTurret : BaseTurretStat
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (bulletType.HasFlag(BulletType.ArmorPiercing))
+                if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
                     ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -210,27 +217,27 @@ public class LazerTypeTurret : BaseTurretStat
         }
         if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(BulletType.Insta_Kill))
         {
-            effectManager.Insta_kill(ene);
+            fxManager.Insta_kill(ene);
         }
         if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(BulletType.SlowPerSecond))
         {
-            effectManager.Slow(ene);
+            fxManager.Slow(ene);
         }
         if (bulletType.HasFlag(BulletType.Dots))
         {
-            effectManager.Dots(ene);
+            fxManager.Dots(ene);
         }
         if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(BulletType.Fear))
         {
-            effectManager.Fear(ene);
+            fxManager.Fear(ene);
         }
         if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(BulletType.Weaken))
         {
-            effectManager.Weaken(ene);
+            fxManager.Weaken(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.DisableArmor))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.ArmorBreaking))
         {
-            effectManager.DisableArmor(ene);
+            fxManager.DisableArmor(ene);
         }
         //lazerFX.transform.rotation = Quaternion.LookRotation(dir);
     }
@@ -249,11 +256,142 @@ public class LazerTypeTurret : BaseTurretStat
     {
         rate.RemoveAllModifiersFromSource(source);
     }
+    public StringBuilder TurretStat(LazerTypeTurret upgradeVersion)
+    {
+        StringBuilder text = new StringBuilder();
+
+        if (upgradeVersion.damageOverTime.baseValue > this.damageOverTime.baseValue)
+        {
+            text.Append("Damage: " + damageOverTime.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.damageOverTime.baseValue }</color>" + "\n");
+        }
+        if (upgradeVersion.damageOverTime.baseValue < this.damageOverTime.baseValue)
+        {
+            text.Append("Damage: " + damageOverTime.baseValue + "->" + $"<color=#00ff0000>{upgradeVersion.damageOverTime.baseValue }</color>" + "\n");
+        }
+        if (upgradeVersion.critChance.baseValue > this.critChance.baseValue)
+        {
+            text.Append("Crit%: " + critChance.baseValue + "%" + "->" + $"<color=#00ff00ff>{upgradeVersion.critChance.baseValue}</color>" + "%" + "\n");
+        }
+        if (upgradeVersion.critChance.baseValue < this.critChance.baseValue)
+        {
+            text.Append("Crit%: " + critChance.baseValue + "%" + "->" + $"<color=#00ff0000>{upgradeVersion.critChance.baseValue}</color>" + "%" + "\n");
+        }
+        if (upgradeVersion.rate.baseValue > rate.baseValue)
+        {
+            text.Append("Damage rate: " + rate.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.rate.baseValue}</color>" + "\n");
+        }
+        if (upgradeVersion.rate.baseValue < rate.baseValue)
+        {
+            text.Append("Damage rate: " + rate.baseValue + "->" + $"<color=#00ff0000>{upgradeVersion.rate.baseValue}</color>" + "\n");
+        }
+        if (upgradeVersion.range.baseValue > range.baseValue)
+        {
+            text.Append("Range: " + range.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.range.baseValue}</color>" + "\n");
+        }
+        if (upgradeVersion.range.baseValue < range.baseValue)
+        {
+            text.Append("Range: " + range.baseValue + "->" + $"<color=#00ff0000>{upgradeVersion.range.baseValue}</color>" + "\n");
+        }      
+        if (upgradeVersion.bulletType.HasFlag(BulletType.SlowPerSecond))
+        {
+            SlowEffect up_SL = upgradeVersion.fxManager.GetSlowEffect() as SlowEffect;
+            if (bulletType.HasFlag(BulletType.SlowPerSecond))
+            {
+                SlowEffect pre_SL = this.fxManager.GetSlowEffect() as SlowEffect;
+                if (up_SL.chance > pre_SL.chance)
+                {
+                    text.Append("Chance: " + pre_SL.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up_SL.chance * 100}</color>" + "%" + "\n");
+                }
+                if (up_SL.chance < pre_SL.chance)
+                {
+                    text.Append("Chance: " + pre_SL.chance * 100 + "%" + "->" + $"<color=#00ff0000>{up_SL.chance * 100}</color>" + "%" + "\n");
+                }
+                if (up_SL._slowPercentage.statValue.value > pre_SL._slowPercentage.statValue.value)
+                {
+                    if (up_SL.ID.Contains("SL"))
+                    {
+                        text.Append("Slow: ");
+                    }
+                    else if (up_SL.ID.Contains("TUR"))
+                    {
+                        text.Append("SpeedBoost: ");
+                    }
+                    text.Append(pre_SL._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff00ff>{up_SL._slowPercentage.statValue.value * 100}</color>" + "%" + "\n");
+                }
+                if (up_SL._slowPercentage.statValue.value < pre_SL._slowPercentage.statValue.value)
+                {
+                    if (up_SL.ID.Contains("SL"))
+                    {
+                        text.Append("Slow: ");
+                    }
+                    else if (up_SL.ID.Contains("TUR"))
+                    {
+                        text.Append("SpeedBoost: ");
+                    }
+                    text.Append(pre_SL._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff0000>{up_SL._slowPercentage.statValue.value * 100}</color>" + "%" + "\n");
+                }
+                if (up_SL._duration > pre_SL._duration)
+                {
+                    if (up_SL.ID.Contains("SL"))
+                    {
+                        text.Append("Slow: ");
+                    }
+                    else if (up_SL.ID.Contains("TUR"))
+                    {
+                        text.Append("SpeedBoost: ");
+                    }
+                    text.Append(pre_SL._duration + "s" + "->" + $"<color=#00ff00ff>{up_SL._duration}</color>" + "s" + "\n");
+                }
+                if (up_SL._slowPercentage.statValue.value < pre_SL._slowPercentage.statValue.value)
+                {
+                    if (up_SL.ID.Contains("SL"))
+                    {
+                        text.Append("Slow: ");
+                    }
+                    else if (up_SL.ID.Contains("TUR"))
+                    {
+                        text.Append("SpeedBoost: ");
+                    }
+                    text.Append(pre_SL._duration + "s" + "->" + $"<color=#00ff0000>{up_SL._duration}</color>" + "s" + "\n");
+                }
+            }
+            else
+            {
+                if (up_SL.chance < 1)
+                {
+                    text.Append(up_SL.chance * 100 +"%" + " to ");
+                }
+                text.Append(up_SL.description + " " + $"<color=#00ff0000>{up_SL._slowPercentage.statValue.value * 100}</color>" + "%" + " in " + up_SL._duration + "s" + "\n");//+ $"<color=#00ff00ff>{upgradeVersion.range.baseValue}</color>" + "\n");
+                if (up_SL.effectType.HasFlag(EffectType.StackingEffect))
+                {
+                    text.Append("Can stack to " + up_SL.stackTime + "\n");
+                }
+            }
+        }
+        if (upgradeVersion.bulletType.HasFlag(BulletType.Dots))
+        {
+
+        }
+        if (upgradeVersion.bulletType.HasFlag(BulletType.Fear))
+        {
+
+        }
+        if (upgradeVersion.bulletType.HasFlag(BulletType.Weaken))
+        {
+
+        }
+        if (upgradeVersion.bulletType.HasFlag(BulletType.ArmorBreaking))
+        {
+
+        }
+        return text;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.green;
-        Handles.DrawWireDisc(transform.position, new Vector3(0, 0, 1), range.Value);
+        Handles.DrawWireDisc(transform.position, new Vector3(0, 0, 1), range.value);
         /* Gizmos.color = Color.green;
          Gizmos.DrawWireSphere(transform.position, Range);*/
     }

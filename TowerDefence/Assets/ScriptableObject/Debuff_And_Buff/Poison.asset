@@ -21,7 +21,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 3
   chance: 1
-  description: 'Poison Enemy '
+  description: Poison enemy
   damagePerRate:
     baseValue: 20
   rate:

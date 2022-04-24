@@ -20,5 +20,5 @@ MonoBehaviour:
   removableType: 1
   expirableType: 0
   _duration: 4
-  chance: 0.5
-  description: Revive enemy after some time
+  chance: 0.3
+  description: 'Chance to revive enemy '

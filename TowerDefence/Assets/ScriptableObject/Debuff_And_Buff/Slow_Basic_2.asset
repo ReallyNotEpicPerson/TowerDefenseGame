@@ -19,7 +19,7 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 4
+  _duration: 2
   chance: 1
   description: Slow a mtf Down HARDER
   _slowPercentage:

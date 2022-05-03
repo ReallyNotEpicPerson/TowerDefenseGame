@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7910831844611192339, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: m_Speed
-      value: 3
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 7910831844611192339, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: worth
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
@@ -120,7 +120,7 @@ PrefabInstance:
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: startHealth
-      value: 200
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}

@@ -10,6 +10,9 @@ public class NavMeshAI : MonoBehaviour
     [SerializeField] private CharacterStat tempSpeed;
     [SerializeField] private CharacterStat tempAcceleration;
     private float OGspeed;
+    private float distanceRemain;
+    [SerializeField] private float rateOfDistanceUpdate=0.2f;
+    private float rate;
     public void OnValidate()
     {
         /*if(target == null || SpawnPoint == null)
@@ -22,6 +25,7 @@ public class NavMeshAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         tempSpeed.baseValue = agent.speed;
         tempAcceleration.baseValue = agent.acceleration;
+        rate = rateOfDistanceUpdate;
         //agent.SetDestination(TheSpawner.endPoint.position);
         //target = TheSpawner.endPoint;
     }
@@ -43,6 +47,12 @@ public class NavMeshAI : MonoBehaviour
         {
             CheckDestinationReached();
         }
+        if (rate <= 0)
+        {
+            distanceRemain = PathRemainingDistance();
+            rate = rateOfDistanceUpdate;
+        }
+        rate-=Time.deltaTime;
     }
     #region SetDestination
     public void TurnBack(int i)
@@ -53,7 +63,6 @@ public class NavMeshAI : MonoBehaviour
             {
                 agent.SetDestination(spawnPoint.position);
             }
-
         }
         else if (i == 1)
         {
@@ -74,10 +83,6 @@ public class NavMeshAI : MonoBehaviour
         agent.SetDestination(target.position);
     }
     #endregion
-    public void AcceptablePos()
-    {
-        //agent.sa(;
-    }
     public void SetSpeed(float s)
     {
         agent.speed = s;
@@ -86,7 +91,6 @@ public class NavMeshAI : MonoBehaviour
     {
         agent.speed = OGspeed;
     }
-
     public void AddAccelerationMod(StatModifier acceleration)
     {
         tempAcceleration.AddModifier(acceleration);
@@ -109,10 +113,34 @@ public class NavMeshAI : MonoBehaviour
         // Debug.Log("speed mod removed " + speed.value);
         agent.speed = tempSpeed.value;
     }
+    public float GetDistanceFromSpawnPoint()
+    {
+        float ok= Vector3.SqrMagnitude(spawnPoint.position-transform.position);
+        Debug.Log(ok);
+        return ok;
+    }
+    public float GetDistanceRemain()
+    {
+        return distanceRemain;
+    }
+    public float PathRemainingDistance()
+    {
+        //Debug.Log(agent.path.corners[0]+ " " + agent.path.corners[1]);
+        if (agent.pathPending ||
+            agent.pathStatus == NavMeshPathStatus.PathInvalid ||
+            agent.path.corners.Length == 0)
+            return -1f;
 
+        float distance = 0.0f;
+        for (int i = 0; i < agent.path.corners.Length - 1; ++i)
+        {
+            distance += Vector3.SqrMagnitude(agent.path.corners[i]- agent.path.corners[i + 1]);
+        }
+        return distance;
+    }
     void CheckDestinationReached()
     {
-        //Debug.Log(Vector3.SqrMagnitude(transform.position - target.position));
+        //Debug.Log(name+" "+ agent.remainingDistance);
         /*if (Vector3.SqrMagnitude(transform.position - target.position) <= 0.1f)
         {
             print("Destination reached");

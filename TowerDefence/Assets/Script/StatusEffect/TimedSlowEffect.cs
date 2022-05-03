@@ -39,10 +39,10 @@ public class TimedSlowEffect : TimedEffect
                 switch (_turret)
                 {
                     case BulletTypeTurret bulletTypeTurret:
-                        bulletTypeTurret.UndoModificationToFireRate(this);
+                        bulletTypeTurret.UndoRateModification(this);
                         break;
                     case LazerTypeTurret lazerTypeTurret:
-                        lazerTypeTurret.UndoModification(this);
+                        lazerTypeTurret.UndoRateModification(this);
                         break;
                     default:
                         break;
@@ -106,10 +106,10 @@ public class TimedSlowEffect : TimedEffect
             switch (_turret)
             {
                 case BulletTypeTurret bulletTypeTurret:
-                    bulletTypeTurret.ReduceRate(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
+                    bulletTypeTurret.AddingOneInstanceRateMod(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
                     break;
                 case LazerTypeTurret lazerTypeTurret:
-                    lazerTypeTurret.ReduceRate(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
+                    lazerTypeTurret.AddingOneInstanceRateMod(new StatModifier(slowEffect._slowPercentage.statValue.value, StatModType.PercentMult, this));
                     break;
                 default:
                     break;
@@ -131,10 +131,10 @@ public class TimedSlowEffect : TimedEffect
             switch (_turret)
             {
                 case BulletTypeTurret bulletTypeTurret:
-                    bulletTypeTurret.UndoModificationToFireRate(this);
+                    bulletTypeTurret.UndoRateModification(this);
                     break;
                 case LazerTypeTurret lazerTypeTurret:
-                    lazerTypeTurret.UndoModification(this);
+                    lazerTypeTurret.UndoRateModification(this);
                     break;
                 default:
                     break;

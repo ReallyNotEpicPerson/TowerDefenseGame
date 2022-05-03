@@ -9930,14 +9930,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootType: 1
+  targetingType: 0
   passiveAbility: 0
   numberOfTarget: 1
   range:
     baseValue: 3
   rotationSpeed:
     baseValue: 200
-  target: []
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 4264913545566152522}
   bulletType: 2
   critChance:
     baseValue: 0.01

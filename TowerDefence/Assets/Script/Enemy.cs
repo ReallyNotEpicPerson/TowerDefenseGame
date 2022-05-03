@@ -6,7 +6,8 @@ using UnityEngine.UI;
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Amored = 1 << 5, TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8,
+    None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Amored = 1 << 5,
+    TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8,Invisible=1 << 9,
 
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -43,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     public bool UsePathFinding;
     private NavMeshAI enemyNavMeshMovement;
-    private EnemyMovement enemyPathMovement;
+    private EnemyPathMovement enemyPathMovement;
     public float ChanceToEvade = 0.1f;
     //[HideInInspector]
     //public float speed;
@@ -286,6 +287,10 @@ public class Enemy : MonoBehaviour
         }
         return true;
     }
+    public float GetHealthAmount()
+    {
+        return health;
+    }
     #endregion
     #region Handler
     public void AddDebuff(BaseEffect baseEffect)//use this instead,like EVERY TIME
@@ -355,7 +360,6 @@ public class Enemy : MonoBehaviour
     }
     public void FakeDeath()
     {
-        Debug.Log("Sleep");
         //gameObject.tag = "Untagged";
         GetComponent<Collider2D>().enabled = false;
         if (enemyNavMeshMovement != null)
@@ -364,7 +368,7 @@ public class Enemy : MonoBehaviour
         }
         else if (enemyPathMovement != null)
         {
-            GetComponent<EnemyMovement>().enabled = false;
+            GetComponent<EnemyPathMovement>().enabled = false;
         }
         enemyColor.enabled = false;
         EnableState(EnemyState.TakeNoDamage);
@@ -397,7 +401,7 @@ public class Enemy : MonoBehaviour
         }
         else if (enemyPathMovement != null)
         {
-            GetComponent<EnemyMovement>().enabled = true;
+            GetComponent<EnemyPathMovement>().enabled = true;
         }
         enemyColor.enabled = true;
         //gameObject.SetActive(true);
@@ -461,8 +465,19 @@ public class Enemy : MonoBehaviour
         {
             enemyPathMovement.RemoveMod(source);
         }
-    }/*
-    public void StopForASec()
+    }
+    public float RemainingPath()
+    {
+        if (UsePathFinding)
+        {
+            return enemyNavMeshMovement.GetDistanceRemain();
+        }
+        else
+        {
+            return enemyPathMovement.GetDistanceRemain();
+        }
+    }
+    /*public void StopForASec()
     {
         if (UsePathFinding)
         {
@@ -509,14 +524,22 @@ public class Enemy : MonoBehaviour
     {
         healthBar.color = c;
     }
-    public void ReverseBlackDad()
+    public void SetEnemyColor(Color color)
     {
-        GetComponent<Collider2D>().enabled = true;
+        enemyColor.color = color;
+    }
+    public void DeInvisible()
+    {
+        DisableState(EnemyState.Invisible);
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a * 2);
+    }
+    public bool IsInvisible()
+    {
+        return Handler.StillHaveInvisibility();
     }
     public void Invisible()
     {
-        GetComponent<Collider2D>().enabled = false;
+        EnableState(EnemyState.Invisible);
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a / 2);
         //Debug.Log(enemyColor.color);
     }

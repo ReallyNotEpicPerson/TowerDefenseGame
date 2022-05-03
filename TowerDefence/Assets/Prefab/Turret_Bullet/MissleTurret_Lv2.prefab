@@ -100,20 +100,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootType: 1
+  targetingType: 0
   passiveAbility: 0
   numberOfTarget: 1
   range:
     baseValue: 5
   rotationSpeed:
     baseValue: 200
-  target: []
   spriteRenderer: {fileID: 0}
-  firePoint:
-  - {fileID: 7732038553549845891}
   fireRate:
     baseValue: 0.48
+  firePoint:
+  - {fileID: 7732038553549845891}
+  objectToRotate:
+  - {fileID: 0}
+  animator: {fileID: 0}
   BulletPrefab: {fileID: 8474885804518618974, guid: a1815bb6c738f3f45a391f483bf3bae0,
     type: 3}
+  bu: {fileID: 1197845603650200236, guid: a1815bb6c738f3f45a391f483bf3bae0, type: 3}
 --- !u!61 &5490211522427783970
 BoxCollider2D:
   m_ObjectHideFlags: 0

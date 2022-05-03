@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8747716264140433800}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9211612180194233163
 SpriteRenderer:
@@ -114,7 +114,7 @@ PrefabInstance:
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: fireRate.baseValue
-      value: 1.05
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5266428079843986729, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
@@ -176,6 +176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic_Turret_Lv2
       objectReference: {fileID: 0}
+    - target: {fileID: 6357955862906809621, guid: 19962bd01682d534e96bac799dfd6be8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7517695792436027565, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -190,6 +195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517695792436027602, guid: 19962bd01682d534e96bac799dfd6be8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19962bd01682d534e96bac799dfd6be8, type: 3}

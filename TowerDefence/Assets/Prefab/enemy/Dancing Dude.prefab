@@ -512,6 +512,7 @@ MonoBehaviour:
     baseValue: 0
   tempAcceleration:
     baseValue: 0
+  rateOfDistanceUpdate: 0.2
 --- !u!114 &5368768617105502727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,13 +527,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySprite: {fileID: -6098352913220177419, guid: 434c0a33315ec164089721f81c545e51,
     type: 3}
-  enemyType: 0
-  enemyState: 16
-  startHealth: 800
+  enemyType: 32
+  enemyState: 0
+  startHealth: 420
   armorStat: {fileID: 5368768617105502725}
   UsePathFinding: 1
   ChanceToEvade: 0.1
-  worth: 25
+  worth: 9
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 4901645585204776476}
   Handler: {fileID: 6009219771519288864}

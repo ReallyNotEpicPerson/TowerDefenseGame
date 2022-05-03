@@ -16920,7 +16920,7 @@ MonoBehaviour:
   prop: {fileID: 1177016854}
   highlight: {fileID: 1017933240}
   highlightTile: {fileID: 11400000, guid: 1d81a4e90381d5d4bb075774027ad961, type: 2}
-  hoverColor: {r: 0.27058825, g: 0.6862745, b: 0.27058825, a: 0}
+  hoverColor: {r: 0.27058825, g: 0.6862745, b: 0.27058825, a: 1}
   notEnoughMoneyColor: {r: 0.7924528, g: 0.17568529, b: 0.17568529, a: 0}
   hasEnough: 1
   tileDatas:
@@ -19049,28 +19049,33 @@ MonoBehaviour:
   - prefab: {fileID: 0}
     cost: 0
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   button: {fileID: 7128577885090070313, guid: 4b4cbf49533299d4989c9fbd92bc0dc9, type: 3}
   parenting: {fileID: 1284081373}
   theBuildManager: {fileID: 0}
@@ -20023,9 +20028,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1458896289}
-  upgradeCost: {fileID: 1612459453}
-  sellAmount: {fileID: 730155034}
-  upgradeButton: {fileID: 1314620229}
+  normalUpgradeCost: {fileID: 0}
+  ultraUpgradeCost_1: {fileID: 0}
+  ultraUpgradeCost_2: {fileID: 0}
+  sellAmount: {fileID: 0}
+  normalUpgradeButton: {fileID: 0}
+  ultraUpgradeButton_1: {fileID: 0}
+  ultraUpgradeButton_2: {fileID: 0}
+  UpgradeStatPanel: {fileID: 0}
+  upgradeStat: {fileID: 0}
   offset: {x: 0, y: 0.5, z: 0}
   buildManager: {fileID: 1093077259}
 --- !u!114 &1458896291
@@ -22579,39 +22590,44 @@ MonoBehaviour:
       type: 3}
     cost: 50
     sellPtcReduction: 0.5
-    upgradedPrefabs:
-    - {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529, type: 3}
+    upgradePrefabs: []
     upgradeCosts: 32000000
+    ultraUpgrades: []
   - prefab: {fileID: 5139430634388571129, guid: 6b56a90063a6d1d4db4d2d647d33ca1b,
       type: 3}
     cost: 100
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 5826005812112630557, guid: 8c9eaaf07f7550f448e5a934195be047,
       type: 3}
     cost: 150
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 1322322404890757603, guid: 0903351180797ee44a7d09e42ef6e603,
       type: 3}
     cost: 100
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
       type: 3}
     cost: 100
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   - prefab: {fileID: 6929386550393063819, guid: 15fc87e8afa42f642ada9b3da983878b,
       type: 3}
     cost: 50
     sellPtcReduction: 0.5
-    upgradedPrefabs: []
+    upgradePrefabs: []
     upgradeCosts: 
+    ultraUpgrades: []
   button: {fileID: 7128577885090070313, guid: 4b4cbf49533299d4989c9fbd92bc0dc9, type: 3}
   parenting: {fileID: 1864042698}
   theBuildManager: {fileID: 1093077259}

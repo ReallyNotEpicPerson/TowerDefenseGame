@@ -10,10 +10,9 @@ public class TimedInvisible : TimedEffect
     {
         _enemy = obj.GetComponent<Enemy>();
     }
-
     public override void End()
     {
-        _enemy.ReverseBlackDad();
+        _enemy.DeInvisible();
         //_enemy.RemoveFX(Effect.ID);
     }
 

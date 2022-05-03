@@ -7,6 +7,6 @@ public class ArmorBreaking : BaseEffect
 {
     public override TimedEffect Init(GameObject obj)
     {
-        return new TimedDisableArmor(this, obj);
+        return new TimedArmorBreaking(this, obj);
     }
 }

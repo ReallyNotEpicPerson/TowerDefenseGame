@@ -20,7 +20,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 3
   chance: 0.5
-  description: 'Chance to make enemy take extra damage '
+  description: 'make enemy take extra damage '
   extraDamageTaken:
     modType: 100
     statValue:

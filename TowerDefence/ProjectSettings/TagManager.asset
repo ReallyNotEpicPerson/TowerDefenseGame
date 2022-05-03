@@ -10,6 +10,7 @@ TagManager:
   - StatUI
   - FirePoint
   - FlyingEnemy
+  - Invisible
   layers:
   - Default
   - TransparentFX

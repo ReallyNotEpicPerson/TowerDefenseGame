@@ -465,7 +465,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.05
-  m_Speed: 0.8
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -493,6 +493,7 @@ MonoBehaviour:
     baseValue: 0
   tempAcceleration:
     baseValue: 0
+  rateOfDistanceUpdate: 0.2
 --- !u!114 &3053064806348107541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,11 +509,11 @@ MonoBehaviour:
   enemySprite: {fileID: 21300000, guid: 8fc1416a434ba9143ab48cb386596936, type: 3}
   enemyType: 0
   enemyState: 0
-  startHealth: 70
+  startHealth: 50
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 1
   ChanceToEvade: 0.001
-  worth: 5
+  worth: 3
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}
   Handler: {fileID: 3727310694209542962}

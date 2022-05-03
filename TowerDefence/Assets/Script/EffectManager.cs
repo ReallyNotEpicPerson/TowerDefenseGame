@@ -261,7 +261,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         Debug.LogError("Oh....Forgot sth?");
         return null;
     }
-    public BaseEffect GetArmorDisableEffect()
+    public BaseEffect GetArmorBreakEffect()
     {
         for (int i = 0; i < listOfDebuffs.Count; i++)
         {

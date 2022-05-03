@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NodeUI : MonoBehaviour
 {
+    //[SerializeField] private Camera cam;
     public GameObject ui;
     public TMP_Text normalUpgradeCost;
     public TMP_Text ultraUpgradeCost_1;
@@ -23,6 +24,7 @@ public class NodeUI : MonoBehaviour
     private BaseTurretStat present;
 
     [SerializeField] private TheBuildManager buildManager;
+
 
     public void Display(RefTurret target)
     {
@@ -83,19 +85,54 @@ public class NodeUI : MonoBehaviour
             sellAmount.text = "$" + target.refBlueprint.GetSellNormalAmount(target.upgradeLevel - 1);
             ui.SetActive(true);
         }
-
     } 
+    public void ShowPresentTurret()
+    {
+        PresentTurretStat();
+        UpgradeStatPanel.SetActive(true);
+    }
+    public void HidePresentTurret()
+    {
+        UpgradeStatPanel.SetActive(true);
+        upgradeStat.text = "";
+    }
+    public void PresentTurretStat()
+    {
+        StringBuilder Stat = new StringBuilder();
+        BaseTurretStat present = tempRefTurret.referenceTurret.GetComponentInChildren<BaseTurretStat>();
+        switch (present)
+        {
+            case BulletTypeTurret upgradeVersion:
+                //Debug.Log("Yes it is");
+                BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
+                Stat.Append(presentBulletTurretVersion);
+                break;
+            case LazerTypeTurret upgradeVersion:
+                LazerTypeTurret presentLazerTurretVersion = present as LazerTypeTurret;
+                Stat.Append(presentLazerTurretVersion.TurretStat(upgradeVersion));
+                break;
+            default:
+                Debug.Log("how?");
+                break;
+        }
+    }
     public void ShowUpgradePanel(int i)
     {        
-        TurretStat(i);
+        UpgradeTurretStat(i);
+        //var screenPoint =new Vector3(Input.mousePosition.x,Input.mousePosition.y,10);
+        //UpgradeStatPanel.transform.position = cam.ScreenToWorldPoint(screenPoint);
         UpgradeStatPanel.SetActive(true);
+    }
+    public void UpgradePanelPos()
+    {
+       // UpgradeStatPanel.
     }
     public void HideUpgradePanel()
     {
         UpgradeStatPanel.SetActive(false);
         upgradeStat.text = "";
     }
-    public void TurretStat(int treeIndex)
+    public void UpgradeTurretStat(int treeIndex)
     {
         StringBuilder Stat = new StringBuilder();
         //upgradeCost.text = "$" + target.refBlueprint.upgradeCosts[target.upgradeLevel - 1];
@@ -119,7 +156,7 @@ public class NodeUI : MonoBehaviour
         switch (upgrade)
         {
             case BulletTypeTurret upgradeVersion:
-                Debug.Log("Yes it is");
+                //Debug.Log("Yes it is");
                 BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
                 Stat.Append(presentBulletTurretVersion.CompareTurretStat(upgradeVersion));
                 break;

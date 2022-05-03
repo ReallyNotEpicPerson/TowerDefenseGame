@@ -880,6 +880,7 @@ MonoBehaviour:
     baseValue: 0
   tempAcceleration:
     baseValue: 0
+  rateOfDistanceUpdate: 0.2
 --- !u!114 &7523187586792812375
 MonoBehaviour:
   m_ObjectHideFlags: 0

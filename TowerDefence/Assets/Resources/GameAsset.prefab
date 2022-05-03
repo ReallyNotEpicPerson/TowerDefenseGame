@@ -46,29 +46,27 @@ MonoBehaviour:
   turret:
   - prefab: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
       type: 3}
-    cost: 50
+    cost: 75
     sellPtcReduction: 0.25
     upgradePrefabs:
     - {fileID: 8747716264140433802, guid: d2e4d97f23a765d4e9db3108a32f7633, type: 3}
     - {fileID: 6592738224764880434, guid: 6025fafcf4693334db633457ffd3879d, type: 3}
-    upgradeCosts: 4b0000007d000000
+    upgradeCosts: 4b0000006e000000
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529, type: 3}
-      - {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529, type: 3}
-      ultraUpgradeCosts: c800000013010000
+      ultraUpgradeCosts: 96000000
       sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 4222680035136752377, guid: 407c8fe52143de44e847340007216d3a, type: 3}
-      - {fileID: 4222680035136752377, guid: 407c8fe52143de44e847340007216d3a, type: 3}
-      ultraUpgradeCosts: af000000e1000000
+      ultraUpgradeCosts: af000000
       sellPtcReduction: 0.5
   - prefab: {fileID: 5291870584937686922, guid: b342c62d036f7d047b20aaa10b25179a,
       type: 3}
     cost: 100
     sellPtcReduction: 0.25
     upgradePrefabs: []
-    upgradeCosts: e1000000
+    upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
       type: 3}
@@ -90,6 +88,26 @@ MonoBehaviour:
     sellPtcReduction: 0.25
     upgradePrefabs: []
     upgradeCosts: 2c010000
+    ultraUpgrades:
+    - ultraUpgradePrefab:
+      - {fileID: 741333515900032696, guid: e0c3b6fb69525c54596ec9c19465d344, type: 3}
+      ultraUpgradeCosts: 00000000
+      sellPtcReduction: 50
+    - ultraUpgradePrefab:
+      - {fileID: 741333515900032696, guid: e0c3b6fb69525c54596ec9c19465d344, type: 3}
+      ultraUpgradeCosts: 00000000
+      sellPtcReduction: 50
+  - prefab: {fileID: 827330132171800716, guid: d45acfec41d53104f9108206a9b07980, type: 3}
+    cost: 100
+    sellPtcReduction: 0.25
+    upgradePrefabs: []
+    upgradeCosts: 
+    ultraUpgrades: []
+  - prefab: {fileID: 382585485345961780, guid: cd0414fede073d34281f378363ef1b06, type: 3}
+    cost: 250
+    sellPtcReduction: 0.25
+    upgradePrefabs: []
+    upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 382585485345961780, guid: cd0414fede073d34281f378363ef1b06, type: 3}
     cost: 250

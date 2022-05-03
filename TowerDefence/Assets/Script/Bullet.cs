@@ -8,10 +8,10 @@ public class Bullet : BaseBulletClass
     [SerializeField] private EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
     float finalDamage;
-    public void OnValidate()
-    {      
+    public void OnValidate()//taggu
+    {
         effectManager = fxManager.GetComponentInChildren<EffectManager>();
-        if (fxManager == null || effectManager==null)
+        if (fxManager == null || effectManager == null)
         {
             Debug.Log(name);
         }
@@ -51,35 +51,34 @@ public class Bullet : BaseBulletClass
         {
             if (bulletType.HasFlag(BulletType.Cast))
             {
-                EnemyCast(target);
+                EnemyCast(target.GetComponent<Enemy>());
             }
             else
-                Damage(target);
+                Damage(target.GetComponent<Enemy>());
         }
-
         Destroy(gameObject);
     }
     void Explode()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius.baseValue);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius.value);
         foreach (Collider2D col in colliders)
         {
-            if (col.CompareTag(Taggu))
+            if (col.TryGetComponent(out Enemy enemy))
             {
                 if (bulletType.HasFlag(BulletType.Cast))
                 {
-                    EnemyCast(target);
+                    EnemyCast(enemy);
                 }
                 else
                 {
-                    Damage(col.transform);
+                    Damage(enemy);
                 }
             }
         }
     }
-    public void EnemyCast(Transform enemy)
+    public void EnemyCast(Enemy ene)
     {
-        Enemy ene = enemy.GetComponent<Enemy>();
+        //Enemy ene = enemy.GetComponent<Enemy>();
         if (bulletType.HasFlag(BulletType.SlowPerSecond))
         {
             effectManager.Slow(ene);
@@ -89,9 +88,9 @@ public class Bullet : BaseBulletClass
             effectManager.Dots(ene);
         }
     }
-    void Damage(Transform enemy)
+    void Damage(Enemy ene)
     {
-        Enemy ene = enemy.GetComponent<Enemy>();
+        //Enemy ene = enemy.GetComponent<Enemy>();
         if (Random.value <= ene.ChanceToEvade)
         {
             if (!ene.enemyState.HasFlag(EnemyState.FirstHit))

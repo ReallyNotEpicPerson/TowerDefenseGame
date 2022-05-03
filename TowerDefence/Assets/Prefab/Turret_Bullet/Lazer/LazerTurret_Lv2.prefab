@@ -5000,14 +5000,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootType: 1
+  targetingType: 0
   passiveAbility: 0
   numberOfTarget: 1
   range:
     baseValue: 4
   rotationSpeed:
     baseValue: 200
-  target: []
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 8554535057355779964}
   bulletType: 2
   critChance:
     baseValue: 0.02
@@ -5020,7 +5020,7 @@ MonoBehaviour:
   firePoint: {fileID: 6828990122727252777}
   lazerFX: {fileID: 2016529467894117611}
   Glow: {fileID: 1846849702327582164}
-  effectManager: {fileID: 4212602672683184210}
+  fxManager: {fileID: 4212602672683184210}
   lineRenderer: {fileID: 1908381848596713135}
 --- !u!120 &1908381848596713135
 LineRenderer:

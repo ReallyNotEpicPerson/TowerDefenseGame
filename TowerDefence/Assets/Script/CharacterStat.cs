@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using UnityEngine;
 
 [Serializable]
 public class CharacterStat
@@ -145,6 +144,17 @@ public class CharacterStat
         // Rounding gets around dumb float calculation errors (like getting 12.0001f, instead of 12f)
         // 4 significant digits is usually precise enough, but feel free to change this to fit your needs
         return (float)Math.Round(finalValue, 4);
+    }
+    public bool HaveSameType(object source)
+    {
+        for (int i = 0; i < statModifiers.Count; i++)
+        {
+            if (statModifiers[i].source.GetType() == source.GetType())
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void RemoveAllModifier()
     {

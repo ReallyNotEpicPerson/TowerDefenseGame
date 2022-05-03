@@ -82,7 +82,7 @@ public class TheBuildManager : MonoBehaviour
         }
         PlayerStat.moneyInGame -= refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1];
         refTurret.treeChoice = i;
-        GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradePrefab[refTurret.UltraUpgradeLevel-1], refTurret.referenceTurret.transform.position, Quaternion.identity);
+        GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradePrefab[refTurret.UltraUpgradeLevel - 1], refTurret.referenceTurret.transform.position, Quaternion.identity);
         Destroy(refTurret.referenceTurret);
         refTurret.referenceTurret = upgradePrefab;
         refTurret.referenceTurret.name = upgradePrefab.name;
@@ -102,7 +102,7 @@ public class TheBuildManager : MonoBehaviour
         //old Turret go bye bye 
 
         GameObject upgradePrefab = Instantiate(refTurret.refBlueprint.upgradePrefabs[refTurret.upgradeLevel - 1], refTurret.referenceTurret.transform.position, Quaternion.identity);
-        
+
         Destroy(refTurret.referenceTurret);
         refTurret.referenceTurret = upgradePrefab;
         refTurret.referenceTurret.name = upgradePrefab.name;
@@ -115,6 +115,11 @@ public class TheBuildManager : MonoBehaviour
     public void Sell(RefTurret refTurret)
     {
         PlayerStat.moneyInGame += refTurret.refBlueprint.GetSellNormalAmount(refTurret.upgradeLevel - 1);
+        if (refTurret.referenceTurret.TryGetComponent(out BaseTurretStat unknownTurret))
+        {
+            SupportTypeTurret sp = unknownTurret as SupportTypeTurret;
+            sp.MassUndo();
+        }
         GameObject Sellfx = Instantiate(SellFX, transform.position, Quaternion.identity);
         Destroy(Sellfx, 2f);
 

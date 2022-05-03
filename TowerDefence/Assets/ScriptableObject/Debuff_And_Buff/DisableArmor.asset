@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0797d767484c5b847bddff9f07e6dea4, type: 3}
+  m_Script: {fileID: 11500000, guid: c6b17a9bf56f063458e1e405e1a024f0, type: 3}
   m_Name: DisableArmor
   m_EditorClassIdentifier: 
-  ID: DISA
-  Icon: {fileID: 21300000, guid: 3d5c2bcd85f0fe64a8e5610fe5e90702, type: 3}
+  ID: AR_BR
+  Icon: {fileID: 0}
   specialFX: {fileID: 7235947678086242264, guid: ca363cf8e458e3d47b4e660f2cb4f67b,
     type: 3}
-  effectType: 0
+  effectType: 4
   removableType: 0
   expirableType: 0
-  activate: 0
-  _duration: 3
-  chance: 1
-  description: Disable enemy armor
+  _duration: 5
+  chance: 0.5
+  description: break armor

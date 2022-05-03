@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 8371154531913433653}
   - component: {fileID: 6636803257755887377}
   - component: {fileID: 5225082394582268753}
+  - component: {fileID: 1092742543033887188}
   m_Layer: 0
   m_Name: Leg man
   m_TagString: Enemy
@@ -670,7 +671,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 60ae813e1bfe832449861d1f2f7e3532, type: 3}
+  m_Sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -698,7 +700,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1.0019531}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -717,7 +719,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.05
-  m_Speed: 1.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -745,6 +747,7 @@ MonoBehaviour:
     baseValue: 0
   tempAcceleration:
     baseValue: 0
+  rateOfDistanceUpdate: 0.2
 --- !u!114 &8265412206029175015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,14 +760,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySprite: {fileID: 21300000, guid: 60ae813e1bfe832449861d1f2f7e3532, type: 3}
+  enemySprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+    type: 3}
   enemyType: 0
   enemyState: 0
-  startHealth: 40
+  startHealth: 35
   armorStat: {fileID: 7910831844611192336}
   UsePathFinding: 1
-  ChanceToEvade: 0.08
-  worth: 3
+  ChanceToEvade: 0.05
+  worth: 2
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 7156076364990073353}
   Handler: {fileID: 8371154531913433653}
@@ -826,6 +830,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfDebuffs: []
+--- !u!95 &1092742543033887188
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265412206029175033}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42f48658fbba04d48a6dc3988170d5f6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8711231616251431504
 GameObject:
   m_ObjectHideFlags: 0

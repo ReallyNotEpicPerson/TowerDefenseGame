@@ -25,7 +25,8 @@ public class BaseBulletClass : MonoBehaviour
     public CharacterStat critDamage;
     public GameObject ImpactFx;
 
-    [SerializeField] protected string Taggu = "Enemy";
+   // [SerializeField] protected string taggu = "Enemy";
+    [SerializeField] protected string specialTag = "Invisible";
 
     public BulletType bulletType;
     //public PassiveAbility passiveAbility;

@@ -19,6 +19,6 @@ MonoBehaviour:
   effectType: 8
   removableType: 1
   expirableType: 0
-  _duration: 4
-  chance: 0.3
+  _duration: 5
+  chance: 0.5
   description: 'Chance to revive enemy '

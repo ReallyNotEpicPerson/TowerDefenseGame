@@ -8,15 +8,25 @@ public enum ShootType
     SingleTarget = 1,
     MultipleTarget = 2,
 }
+public enum TargetingType
+{
+    None = 0,
+    Closest = 1,
+    First = 2,
+    LeastHealth = 4,
+    MostHealth = 8,
+    Random = 16,
+}
 [System.Flags]
 public enum PassiveAbility
 {
     None = 0,
-    Penetration = 1 << 0,
+    Penetration = 1,
     Splash = 1 << 1,
     IncreaseDamage = 1 << 2,
     IncreaseSpeed = 1 << 3,
     CanShootWhenBuy = 1 << 4,
+    CanSeeInvisibleUnit = 1 << 5,
 }
 public enum Direction
 {
@@ -29,21 +39,32 @@ public enum Direction
 public class BaseTurretStat : MonoBehaviour
 {
     public ShootType shootType;
+    public TargetingType targetingType;
     public PassiveAbility passiveAbility;
     public int numberOfTarget = 1;
     public CharacterStat range;//keep at all cost
     public CharacterStat rotationSpeed;//keep at all cost
-    [SerializeField] protected List<Transform> target;//keep at all cost
+    protected List<Transform> target;//keep at all cost
     public SpriteRenderer spriteRenderer;
-    protected Direction direction;
+    //protected Direction direction;
 
     public virtual void Awake()
     {
-        target = new List<Transform>(numberOfTarget);
+        if (this is SupportTypeTurret)
+        {
+            target = new List<Transform>();
+        }
+        else { target = new List<Transform>(numberOfTarget); }
         TryGetComponent(out spriteRenderer);
     }
-  
-
+    public virtual void Start()
+    {
+        if (this is SupportTypeTurret)
+        {
+            return;
+        }
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
+    }
     public virtual void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -78,14 +99,97 @@ public class BaseTurretStat : MonoBehaviour
         {
             return;
         }
+        if (TryGetComponent(out Collider2D col))
+        {
+            col.enabled = false;
+        }
         enabled = false;
     }
     public void FadeAbout(float ptc)
     {
         spriteRenderer.Fade(ptc);
     }
+    void UpdateTarget()
+    {
+        target.Clear();
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
+        float shortestDistance = Mathf.Infinity;
+        float pathCovered = Mathf.Infinity;
+        float leasthealth = Mathf.Infinity;
+        float mostHealth = Mathf.NegativeInfinity;
+        Collider2D ChosenCol = null;
+        foreach (Collider2D col in collider)
+        {
+            if (col.TryGetComponent(out Enemy enemy))
+            {
+                if (enemy.enemyState.HasFlag(EnemyState.Invisible) && !passiveAbility.HasFlag(PassiveAbility.CanSeeInvisibleUnit))
+                {
+                    continue;
+                }
+                if (shootType.HasFlag(ShootType.SingleTarget))
+                {
 
-}/*
+                    if (targetingType.HasFlag(TargetingType.Closest))
+                    {
+                        float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
+                        if (DisToenenmy < shortestDistance)
+                        {
+                            shortestDistance = DisToenenmy;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.First))
+                    {
+                        float p = enemy.RemainingPath();
+                        // Debug.Log("path " + p);
+                        if (p < pathCovered)
+                        {
+                            pathCovered = p;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.LeastHealth))
+                    {
+                        float h = enemy.GetHealthAmount();
+                        if (h < leasthealth)
+                        {
+                            leasthealth = h;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.MostHealth))
+                    {
+                        float h = enemy.GetHealthAmount();
+                        if (h > mostHealth)
+                        {
+                            mostHealth = h;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.Random))
+                    {
+                        ChosenCol = collider[collider.Length - 1];
+                        break;
+                    }
+                }
+                else if (shootType.HasFlag(ShootType.MultipleTarget))
+                {
+                    target.Add(col.transform);
+                    if (target.Count == numberOfTarget)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+        if (shootType.HasFlag(ShootType.SingleTarget) && ChosenCol != null)
+        {
+            target.Add(ChosenCol.transform);
+        }
+    }
+}
+
+/*
 public struct Name : IEquatable<Name>
 {
     private TurretType _turretType;

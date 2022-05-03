@@ -201,7 +201,10 @@ public class EntityEffectHandler : MonoBehaviour
             Debug.Log("WTF");
         }
     }
-
+    public bool StillHaveInvisibility()
+    {
+        return _effectList.ContainsKey("INVI");       
+    }
     public void ListAllDebuff()
     {
         //Debug.Log(_effectList.Count());

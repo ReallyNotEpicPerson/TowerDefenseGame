@@ -251,7 +251,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.05
-  m_Speed: 1.25
+  m_Speed: 1.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -279,6 +279,7 @@ MonoBehaviour:
     baseValue: 0
   tempAcceleration:
     baseValue: 0
+  rateOfDistanceUpdate: 0.2
 --- !u!114 &8377878605666632079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,12 +295,12 @@ MonoBehaviour:
   enemySprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
     type: 3}
   enemyType: 0
-  enemyState: 0
-  startHealth: 400
+  enemyState: 32
+  startHealth: 320
   armorStat: {fileID: 8377878605666632078}
   UsePathFinding: 1
-  ChanceToEvade: 0.1
-  worth: 10
+  ChanceToEvade: 0.05
+  worth: 8
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 8377878606126889874}
   Handler: {fileID: 8377878605666632113}
@@ -317,10 +318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244dd234a63e3d84eb8dc6d4a3340daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorType: 0
-  startArmor: 100
-  damangeReductionPtc: 0.9
-  MaxLayer: 0
+  armorType: 1
+  startArmor: 200
+  damangeReductionPtc: 0.5
+  MaxLayer: 1
   armorBar: {fileID: 8377878605689292544}
   layerNum: {fileID: 8377878606882052106}
 --- !u!114 &8377878605666632113
@@ -478,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8377878606083106091
 RectTransform:
   m_ObjectHideFlags: 0

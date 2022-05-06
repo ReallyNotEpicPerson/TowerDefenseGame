@@ -21,11 +21,15 @@ public class Bullet : BaseBulletClass
         target = _target;
     }
     void Update()//make bullet move and shit
-    {
+    {       
         if (target == null)
         {
             Destroy(gameObject);
             //Bullet.SetActive(false);
+            return;
+        }
+        if (bulletType.HasFlag(BulletType.JustStoodStill))
+        {
             return;
         }
         Vector3 dir = target.position - transform.position;
@@ -90,6 +94,7 @@ public class Bullet : BaseBulletClass
     }
     void Damage(Enemy ene)
     {
+        //Debug.Log("Mod num " + bulletDamage.StatModifiers.Count + " Damage after mod " + bulletDamage.value);
         //Enemy ene = enemy.GetComponent<Enemy>();
         if (Random.value <= ene.ChanceToEvade)
         {
@@ -183,7 +188,7 @@ public class Bullet : BaseBulletClass
     }
     float CritDamage()
     {
-        return bulletDamage.baseValue * critDamage.value;
+        return bulletDamage.value * critDamage.value;
     }
     /*
     #if UNITY_EDITOR

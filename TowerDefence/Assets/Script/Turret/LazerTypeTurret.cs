@@ -110,7 +110,7 @@ public class LazerTypeTurret : BaseTurretStat
     }
     float CritDamage()
     {
-        return damageOverTime.value * critDamage.baseValue;
+        return damageOverTime.value * critDamage.value;
     }
     void LazerShoot(Enemy ene)
     {

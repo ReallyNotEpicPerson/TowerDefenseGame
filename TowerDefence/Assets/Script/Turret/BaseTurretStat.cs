@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -46,6 +47,7 @@ public class BaseTurretStat : MonoBehaviour
     public CharacterStat rotationSpeed;//keep at all cost
     protected List<Transform> target;//keep at all cost
     public SpriteRenderer spriteRenderer;
+    private float rangeTimer;
     //protected Direction direction;
 
     public virtual void Awake()

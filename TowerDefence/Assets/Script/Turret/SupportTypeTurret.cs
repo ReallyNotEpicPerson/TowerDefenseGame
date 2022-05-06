@@ -1,18 +1,17 @@
-using UnityEditor;
 using UnityEngine;
 
 public class SupportTypeTurret : BaseTurretStat
 {
-    public StatModType damageType;
-    [SerializeField] private float damageIncreaseMod=0;
-    public StatModType rofType;
-    [SerializeField] private float rateOfFireIncreaseMod=0;
-    public StatModType rangeType;
-    [SerializeField] private float rangeIncreaseMod=0;
-    public StatModType critDamageType;
-    [SerializeField] private float critDamageIncreaseMod=0;
-    public StatModType critChanceType;
-    [SerializeField] private float critChanceIncreaseMod=0;
+    [SerializeField] private float damageIncreaseMod = 0;
+    [SerializeField] private float damageMax = 0.2f;//max += 50%/5
+    [SerializeField] private float rateOfFireIncreaseMod = 0;
+    [SerializeField] private float rateMax = 0.2f;//max += 30%/5
+    [SerializeField] private float rangeIncreaseMod = 0;
+    [SerializeField] private float rangeMax = 0.2f;//max += 30%/5
+    [SerializeField] private float critDamageIncreaseMod = 0;
+    [SerializeField] private float critDamageMax = 0.2f;//max += 60%/5
+    [SerializeField] private float critChanceIncreaseMod = 0;
+    [SerializeField] private float critChanceMax = 0.2f;//max += 20%/5
 
     private void OnValidate()
     {
@@ -24,7 +23,8 @@ public class SupportTypeTurret : BaseTurretStat
     public override void Awake()
     {
         base.Awake();
-        UpdateTurret();
+
+        //UpdateTurret();
     }
     public void UpdateTurret()
     {
@@ -39,45 +39,45 @@ public class SupportTypeTurret : BaseTurretStat
                     case LazerTypeTurret lazerTypeTurret:
                         if (!lazerTypeTurret.CheckDamageModsource(this) && damageIncreaseMod != 0)
                         {
-                            lazerTypeTurret.AddDamageMod(new StatModifier(damageIncreaseMod, damageType, this));
+                            lazerTypeTurret.AddDamageMod(new StatModifier(damageIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!lazerTypeTurret.CheckRateModsource(this) && rateOfFireIncreaseMod != 0)
                         {
-                            lazerTypeTurret.AddRateMod(new StatModifier(rateOfFireIncreaseMod, rofType, this));
+                            lazerTypeTurret.AddRateMod(new StatModifier(rateOfFireIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!lazerTypeTurret.CheckRangeModsource(this) && rangeIncreaseMod != 0)
                         {
-                            lazerTypeTurret.AddRangeMod(new StatModifier(rangeIncreaseMod, rangeType, this));
+                            lazerTypeTurret.AddRangeMod(new StatModifier(rangeIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!lazerTypeTurret.CheckCritDamageModsource(this) && critDamageIncreaseMod != 0)
                         {
-                            lazerTypeTurret.AddCritDamageMod(new StatModifier(critDamageIncreaseMod, critDamageType, this));
+                            lazerTypeTurret.AddCritDamageMod(new StatModifier(critDamageIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!lazerTypeTurret.CheckCritChanceModsource(this) && critChanceIncreaseMod != 0)
                         {
-                            lazerTypeTurret.AddCritChanceMod(new StatModifier(critChanceIncreaseMod, critChanceType, this));
+                            lazerTypeTurret.AddCritChanceMod(new StatModifier(critChanceIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         break;
                     case BulletTypeTurret bulletTypeTurret:
-                        if (!bulletTypeTurret.CheckDamageModsource(this) && damageIncreaseMod != 0)
+                        if (damageIncreaseMod != 0)
                         {
-                            bulletTypeTurret.AddDamageMod(new StatModifier(damageIncreaseMod, damageType, this));
+                            bulletTypeTurret.AddDamageMod(new StatModifier(damageIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!bulletTypeTurret.CheckRateModsource(this) && rateOfFireIncreaseMod != 0)
                         {
-                            bulletTypeTurret.AddRateMod(new StatModifier(rateOfFireIncreaseMod, rofType, this));
+                            bulletTypeTurret.AddRateMod(new StatModifier(rateOfFireIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         if (!bulletTypeTurret.CheckRangeModsource(this) && rangeIncreaseMod != 0)
                         {
-                            bulletTypeTurret.AddRangeMod(new StatModifier(rangeIncreaseMod, rangeType, this));
+                            bulletTypeTurret.AddRangeMod(new StatModifier(rangeIncreaseMod, StatModType.PercentBuffBest, this));
                         }
-                        if (!bulletTypeTurret.CheckCritDamageModsource(this) && critDamageIncreaseMod != 0)
+                        if (critDamageIncreaseMod != 0)
                         {
-                            bulletTypeTurret.AddCritDamageMod(new StatModifier(critDamageIncreaseMod, critDamageType, this));
+                            bulletTypeTurret.AddCritDamageMod(new StatModifier(critDamageIncreaseMod, StatModType.PercentBuffBest, this));
                         }
-                        if (!bulletTypeTurret.CheckCritChanceModsource(this) && critChanceIncreaseMod != 0)
+                        if (critChanceIncreaseMod != 0)
                         {
-                            bulletTypeTurret.AddCritChanceMod(new StatModifier(critChanceIncreaseMod, critChanceType, this));
+                            bulletTypeTurret.AddCritChanceMod(new StatModifier(critChanceIncreaseMod, StatModType.PercentBuffBest, this));
                         }
                         break;
                     default:
@@ -92,7 +92,30 @@ public class SupportTypeTurret : BaseTurretStat
         }
         Debug.Log("Turret in range :" + target.Count);
     }
-
+    public void upgrade(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                damageIncreaseMod += damageMax / 5;
+                break;
+            case 1:
+                rateOfFireIncreaseMod += rateMax / 5;
+                break;
+            case 2:
+                rangeIncreaseMod += rangeMax / 5;
+                break;
+            case 3:
+                critDamageIncreaseMod += critDamageMax / 5;
+                break;
+            case 4:
+                critChanceIncreaseMod += critChanceMax / 5;
+                break;
+            default:
+                break;
+        }
+        UpdateTurret();
+    }
     public void MassUndo()
     {
         for (int i = 0; i < target.Count; i++)
@@ -101,6 +124,7 @@ public class SupportTypeTurret : BaseTurretStat
             switch (turret)
             {
                 case LazerTypeTurret lazerTypeTurret:
+                    lazerTypeTurret.spriteRenderer.color = Color.red;
                     lazerTypeTurret.UndoDamageModification(this);
                     lazerTypeTurret.UndoRateModification(this);
                     lazerTypeTurret.UndoRangeModification(this);
@@ -108,6 +132,7 @@ public class SupportTypeTurret : BaseTurretStat
                     lazerTypeTurret.UndoCritChanceModification(this);
                     break;
                 case BulletTypeTurret bulletTypeTurret:
+                    bulletTypeTurret.spriteRenderer.color = Color.red;
                     bulletTypeTurret.UndoDamageModification(this);
                     bulletTypeTurret.UndoRateModification(this);
                     bulletTypeTurret.UndoRangeModification(this);
@@ -119,10 +144,18 @@ public class SupportTypeTurret : BaseTurretStat
             }
         }
     }
+    public override void OnMouseEnter()
+    {
+        return;
+    }
+    public override void OnMouseExit()
+    {
+        return;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("You`re in range");
-        if(collision.TryGetComponent(out Enemy ene))
+        if (collision.TryGetComponent(out Enemy ene))
         {
             if (!ene.enemyType.HasFlag(EnemyType.Invisible))
             {
@@ -133,7 +166,7 @@ public class SupportTypeTurret : BaseTurretStat
         }
         else if (collision.TryGetComponent(out BaseTurretStat _))
         {
-            Debug.Log("A MTF turret");
+            Debug.Log("A MTF turret " + collision.transform.position);
             UpdateTurret();
         }
     }
@@ -150,7 +183,7 @@ public class SupportTypeTurret : BaseTurretStat
             {
                 ene.Invisible();
             }
-        }        
+        }
     }
 }
 

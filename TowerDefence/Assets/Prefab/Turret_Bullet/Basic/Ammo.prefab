@@ -106,7 +106,7 @@ MonoBehaviour:
     baseValue: 2
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
-  Taggu: Enemy
+  specialTag: Invisible
   bulletType: 0
   fxManager: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
     type: 3}

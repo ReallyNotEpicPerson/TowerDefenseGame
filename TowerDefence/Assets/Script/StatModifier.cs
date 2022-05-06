@@ -4,7 +4,8 @@ public enum StatModType
     Flat = 100,
     PercentAdd = 200,
     PercentMult = 300,
-    PercentDebuffBest = 400,
+    PercentBuffBest = 400,
+    PercentDebuffBest = 500,
 }
 [System.Serializable]
 public class StatValueType

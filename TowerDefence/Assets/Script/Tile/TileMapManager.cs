@@ -19,7 +19,7 @@ public class RefTurret
     public int upgradeLevel = 0;
     public int treeChoice = -1;
     public int UltraUpgradeLevel = 0;
-
+    public bool isSupportTurret;
     public RefTurret()
     {
         refBlueprint = null;
@@ -27,7 +27,8 @@ public class RefTurret
         upgradeLevel = 1;
         treeChoice = -1;
         UltraUpgradeLevel = 1;
-}
+        isSupportTurret = false;
+    }
     public RefTurret(TurretBluePrint bluePrint, GameObject turret)
     {
         refBlueprint = bluePrint;
@@ -35,6 +36,7 @@ public class RefTurret
         upgradeLevel = 1;
         treeChoice = -1;
         UltraUpgradeLevel = 1;
+        isSupportTurret = false;
     }
     public RefTurret(TurretBluePrint bluePrint, GameObject turret, int level)
     {
@@ -43,6 +45,7 @@ public class RefTurret
         upgradeLevel = level;
         treeChoice = -1;
         UltraUpgradeLevel = 1;
+        isSupportTurret = false;
     }
     public bool HaveTurret { get { return refBlueprint != null || referenceTurret != null; } }
 
@@ -235,9 +238,13 @@ public class TileMapManager : MonoBehaviour
         PlayerStat.moneyInGame -= blueprint.cost;
         GameObject _turret = Instantiate(blueprint.prefab, mainLayer.GetCellCenterWorld(localGridPos), Quaternion.identity);//nah , get from pool???
         RefTurret refTurret = new RefTurret(blueprint, _turret);
+        if(_turret.TryGetComponent(out SupportTypeTurret _))
+        {
+            refTurret.treeChoice = -69;
+            refTurret.isSupportTurret = true;
+        }
         turretOnTheField.Add(localGridPos, refTurret);
         //Debug.Log(localGridPos);
-
         _turret.name = blueprint.prefab.name;
         return true;
     }

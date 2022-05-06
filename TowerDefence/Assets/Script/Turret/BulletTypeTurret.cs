@@ -21,12 +21,11 @@ public class BulletTypeTurret : BaseTurretStat
     public GameObject[] objectToRotate;
     [SerializeField] private Animator animator;
     public GameObject BulletPrefab;
-    [SerializeField] private Bullet bu;
-    //public string PewPewAnimation;
-    //private ObjectPooler pool;
+    private Bullet bu;
+    private Dictionary<int, Dictionary<object, StatModifier>> bulletMod = new Dictionary<int, Dictionary<object, StatModifier>>();
+
     public void OnValidate()
     {
-        BulletPrefab.TryGetComponent(out bu);
         TryGetComponent(out fxManager);
         TryGetComponent(out fxHandler);
         if (firePoint.Count < 1)
@@ -41,62 +40,43 @@ public class BulletTypeTurret : BaseTurretStat
                     continue;
             }
         }
+
         transform.Find("Range").localScale = Vector3.one;
         transform.Find("Range").localScale *= range.value;
+
     }
     public override void Awake()
     {
         base.Awake();
+        BulletPrefab.TryGetComponent(out bu);
+        //bu.Seek(transform);
+        //bu.bulletType |= BulletType.JustStoodStill;
         TryGetComponent(out fxHandler);
         TryGetComponent(out fxManager);
-        //BulletPrefab.TryGetComponent(out bu);
+        bulletMod.Add(0, new Dictionary<object, StatModifier>());//Weaken value?
+        bulletMod.Add(1, new Dictionary<object, StatModifier>());//Damage
+        bulletMod.Add(2, new Dictionary<object, StatModifier>());//critdamage
+        bulletMod.Add(3, new Dictionary<object, StatModifier>());//critchance
     }
 
     public override void Start()
     {
+
         base.Start();
         FireCountDown = 1 / fireRate.value;
+
     }
-    /*void UpdateTarget()
-    {
-        target.Clear();
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
-        float shortestDis = Mathf.Infinity;
-        Collider2D nearestCol = null;
-        foreach (Collider2D col in collider)
-        {
-            if (col.TryGetComponent<Enemy>(out _))
-            {
-                if (shootType.HasFlag(ShootType.SingleTarget))
-                {
-                    float DisToenenmy = Vector3.Distance(transform.position, col.transform.position);//use Distancesquared??
-                    if (DisToenenmy < shortestDis)
-                    {
-                        shortestDis = DisToenenmy;
-                        nearestCol = col;
-                    }
-                }
-                else if (shootType.HasFlag(ShootType.MultipleTarget))
-                {
-                    target.Add(col.transform);
-                    if (target.Count == numberOfTarget)
-                    {
-                        return;
-                    }
-                }
-            }
-        }
-        if (shootType.HasFlag(ShootType.SingleTarget) && nearestCol != null)
-        {
-            target.Add(nearestCol.transform);
-        }
-    }*/
     void Update()
     {
         if (target.Count == 0)
         {
             return;
         }
+        /*if (tempBullet == null)
+        {
+            tempBullet = Instantiate(BulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
+            tempBullet.TryGetComponent(out bu);
+        }*/
         RotateToObject();
         if (FireCountDown <= 0f)
         {
@@ -121,7 +101,42 @@ public class BulletTypeTurret : BaseTurretStat
         {
             for (int j = 0; j < target.Count; j++)
             {
+                //bu.Seek(target[j]);
+                //bu.bulletType &= ~BulletType.JustStoodStill;
+                /*if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
+                {
+                    bu.AddDamageMod(modifier);
+                }
+                bu.bulletDamage.baseValue += 10;
+                Debug.Log("Mod num " + bu.bulletDamage.StatModifiers.Count+" Damage after mod " + bu.bulletDamage.value);
+                Instantiate(bu.gameObject, firePoint[i].position, firePoint[i].rotation).GetComponent<Bullet>().Seek(target[j]);
+                
+                //bu.bulletType |= BulletType.JustStoodStill;
+                */
+                //
                 Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
+                foreach (var outerKVP in bulletMod)
+                {
+                    foreach (var innerKVP in bulletMod[outerKVP.Key])
+                    {
+                        var moddedValue = bulletMod[outerKVP.Key][innerKVP.Key];
+                        if (outerKVP.Key == 1)
+                        {
+                            bullet.bulletDamage.AddModifier(moddedValue);
+                            //Debug.Log(bullet.bulletDamage.value);
+                        }
+                        else if (outerKVP.Key == 2)
+                        {
+                            bullet.critDamage.AddModifier(moddedValue);
+                            //Debug.Log(bullet.bulletDamage.value);
+                        }
+                        else if (outerKVP.Key == 3)
+                        {
+                            bullet.critChance.AddModifier(moddedValue);
+                        }
+                    }
+                }
+
                 if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
                 {
                     bullet.AddDamageMod(modifier);
@@ -130,11 +145,13 @@ public class BulletTypeTurret : BaseTurretStat
                 {
                     bullet.Seek(target[j]);
                 }
+                //Debug.Log("Final Bullet Damage " + bullet.bulletDamage.value);
             }
         }
     }
     private GameObject MakeBullet(int i)
     {
+        //Debug.Log(bu.bulletDamage.value);
         return Instantiate(BulletPrefab, firePoint[i].position, firePoint[i].rotation);
         //pool.SpawnFromPool(BulletPrefab.name, firePoint[i].position, firePoint[i].rotation);
     }
@@ -149,7 +166,7 @@ public class BulletTypeTurret : BaseTurretStat
     }
     #region function for making changes to turret stat
     //check if another support turret is here
-    public bool CheckDamageModsource(object source)
+    public bool CheckDamageModsource(object source)//Mod later
     {
         return bu.bulletDamage.HaveSameType(source);
     }
@@ -161,20 +178,23 @@ public class BulletTypeTurret : BaseTurretStat
     {
         return range.HaveSameType(source);
     }
-    public bool CheckCritDamageModsource(object source)
+    public bool CheckCritDamageModsource(object source)//Mod later
     {
         return bu.critDamage.HaveSameType(source);
     }
-    public bool CheckCritChanceModsource(object source)
+    public bool CheckCritChanceModsource(object source)//Mod later
     {
         return bu.critChance.HaveSameType(source);
     }
     //Add mod
-    public void AddDamageMod(StatModifier mod)
+    public void AddDamageMod(StatModifier mod)//Now add to a dict
     {
+        if (!bulletMod[1].ContainsKey(mod.source))
+        {
+            bulletMod[1].Add(mod.source, mod);
+        }
         bu.bulletDamage.AddModifier(mod);
-        Debug.Log("Damage" + bu.bulletDamage.value);
-
+        Debug.Log("Damage " + bu.bulletDamage.value + " At " + name + " and at" + transform.position);
     }
     public void AddRateMod(StatModifier mod)
     {
@@ -188,17 +208,26 @@ public class BulletTypeTurret : BaseTurretStat
     }
     public void AddCritDamageMod(StatModifier mod)
     {
+        if (!bulletMod[2].ContainsKey(mod.source))
+        {
+            bulletMod[2].Add(mod.source, mod);
+        }
         bu.critDamage.AddModifier(mod);
         Debug.Log("Crit damage" + fireRate.value);
     }
     public void AddCritChanceMod(StatModifier mod)
     {
+        if (!bulletMod[3].ContainsKey(mod.source))
+        {
+            bulletMod[3].Add(mod.source, mod);
+        }
         bu.critChance.AddModifier(mod);
         Debug.Log("Crit chance" + fireRate.value);
     }
     //undo
     public void UndoDamageModification(object source)
     {
+        bulletMod[1].Remove(source);
         bu.bulletDamage.RemoveAllModifiersFromSource(source);
     }
     public void UndoRateModification(object source)
@@ -212,10 +241,12 @@ public class BulletTypeTurret : BaseTurretStat
     }
     public void UndoCritDamageModification(object source)
     {
+        bulletMod[2].Remove(source);
         bu.critDamage.RemoveAllModifiersFromSource(source);
     }
     public void UndoCritChanceModification(object source)
     {
+        bulletMod[3].Remove(source);
         bu.critChance.RemoveAllModifiersFromSource(source);
     }
     //gay method
@@ -237,7 +268,7 @@ public class BulletTypeTurret : BaseTurretStat
 
         text.Append("Damage:" + bu.bulletDamage.value + "\n");
         text.Append("Fire rate:" + fireRate.value + "\n");
-        text.Append("Range:" + range.baseValue + "\n");
+        text.Append("Range:" + range.value + "\n");
         /*if (upgradeVersion.bu.bulletType.HasFlag(BulletType.SlowPerSecond))
         {
             SlowEffect up = upgradeVersion.fxManager.GetSlowEffect() as SlowEffect;

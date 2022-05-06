@@ -95,7 +95,6 @@ MonoBehaviour:
   animator: {fileID: 6935826553713676846}
   BulletPrefab: {fileID: 4394771486470521805, guid: 4d16f1cee8cca9e41829883bbc4dc63c,
     type: 3}
-  bu: {fileID: 1169582925279033831, guid: 4d16f1cee8cca9e41829883bbc4dc63c, type: 3}
 --- !u!61 &7756151012699825830
 BoxCollider2D:
   m_ObjectHideFlags: 0

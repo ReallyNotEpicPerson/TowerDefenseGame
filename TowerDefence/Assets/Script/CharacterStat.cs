@@ -9,7 +9,7 @@ public class CharacterStat
     protected bool isDirty = true;
     protected float lastBaseValue = float.MinValue;
     protected float _value;
-
+    
     protected readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
@@ -93,8 +93,13 @@ public class CharacterStat
     {
         float finalValue = baseValue;
         float sumPercentAdd = 0; // This will hold the sum of our "PercentAdd" modifiers
-        float preDebuff = baseValue;
+        //Best debuff
+        float preDebuff = baseValue; 
         float BestDebuff = float.PositiveInfinity;
+        //Best Buff
+        float preBuff = baseValue;
+        float BestBuff = float.NegativeInfinity;        
+
         for (int i = 0; i < statModifiers.Count; i++)
         {
             StatModifier mod = statModifiers[i];
@@ -120,6 +125,24 @@ public class CharacterStat
             {
                 finalValue *= (1 + mod.value);
                 //Debug.Log("Statcount:"+statModifiers.Count+" value : " + mod.value + " % mul : " + finalValue);
+            }
+            else if(mod.type == StatModType.PercentBuffBest)
+            {
+                if (i == 0 || (i - 1 >= 0 && statModifiers[i - 1].type != StatModType.PercentBuffBest))
+                {
+                    preBuff = finalValue;
+                    //Debug.Log("Pre Debuff value " + preDebuff + "\n" + "Number Of Mod " + statModifiers.Count);
+                }
+                if (BestBuff < preBuff * (1 + mod.value))
+                {
+                    BestBuff = preBuff * (1 + mod.value);
+                    //Debug.Log(BestBuff);
+                    finalValue = preBuff * (1 + mod.value);
+                }
+                else
+                {
+                    continue;
+                }
             }
             else if (mod.type == StatModType.PercentDebuffBest)
             {

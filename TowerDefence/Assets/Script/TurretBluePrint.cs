@@ -64,40 +64,30 @@ public class TurretBluePrint
 
     public UltraUpgrade[] ultraUpgrades;
 
-    public int GetSellNormalAmount(int i)
+    public int GetNormalSellAmount(int index)
     {
-        //Debug.Log(i);
-        if (i < upgradeCosts.Length)
+        float amount = cost;
+        for (int i = 0; i < index; i++)
         {
-            if (sellPtcReduction > 1)
-            {
-                return (int)Mathf.Abs(upgradeCosts[i] * sellPtcReduction);
-            }
-            return (int)Mathf.Abs(upgradeCosts[i] * sellPtcReduction);
+            amount += upgradeCosts[i];
         }
-        else
+        return (int)Mathf.Abs(amount*=sellPtcReduction);
+    }
+    public int GetUltraUpgradeSellAmount(int index,int tree)
+    {
+        float amount = cost;
+        for (int i = 0; i < upgradeCosts.Length; i++)
         {
-            int costSum = SumOfCost();
-            if (sellPtcReduction > 1)
-            {
-                return (int)Mathf.Abs(costSum * sellPtcReduction);
-            }
-            return (int)Mathf.Abs(costSum * sellPtcReduction);
+            amount += upgradeCosts[i];
         }
+        for (int i = 0; i < index; i++)
+        {
+            amount += ultraUpgrades[tree].ultraUpgradeCosts[i];
+        }
+        return (int)Mathf.Abs(amount *= sellPtcReduction);
     }
     
-
-    public int SumOfCost()
-    {
-        int costSum = 0;
-        for (int j = 0; j < upgradeCosts.Length; j++)
-        {
-            costSum += upgradeCosts[j];
-        }
-        return costSum;
-    }
-    
-    public void RedudeCost(float ptc)
+    public void RedudeCost(float ptc)//Could be use in the future
     {
         cost = (int)Mathf.Ceil(cost * (1 - ptc));
         for (int i = 0; i < cost; i++)
@@ -105,7 +95,7 @@ public class TurretBluePrint
             upgradeCosts[i] = (int)Mathf.Ceil(upgradeCosts[i] * (1 - ptc));
         }
     }
-    public void RedudeUpgradeCost(float ptc,int i)
+    public void RedudeUpgradeCost(float ptc,int i)//Could be use in the future
     {
         upgradeCosts[i] = (int)Mathf.Ceil(upgradeCosts[i] * (1 - ptc));
     }

@@ -36,7 +36,7 @@ public class TheSpawner : MonoBehaviour
     [SerializeField] StatusEffectDisplayer displayer;
 
     public GameObject waveDisplayer;
-
+    private bool DoneWithSpawning = true;
     [SerializeField] private List<StartWaveEnemyDisplay> startWaveEnemyDisplays;
     [SerializeField] private List<Sprite> imageList = new List<Sprite>();
     private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
@@ -89,7 +89,7 @@ public class TheSpawner : MonoBehaviour
     }
     void Update()
     {
-        if (numOfEnemies > 0)
+        if (numOfEnemies > 0 || !DoneWithSpawning)
         {
             return;
         }
@@ -108,6 +108,7 @@ public class TheSpawner : MonoBehaviour
         }
         if (CountDown <= 0)
         {
+            DoneWithSpawning = false;
             StartCoroutine(SpawnWave());
             waveDisplayer.SetActive(false);
             imageList.Clear();
@@ -180,7 +181,8 @@ public class TheSpawner : MonoBehaviour
                 yield return new WaitForSeconds(wave.enemy[j].delayBetweenGroup);
             }
         }
-        waveNum++;
+        waveNum++;        
+        DoneWithSpawning = true;
     }
     /*public Vector3 RandomPos(this TheSpawner theSpawner,float range)
     {

@@ -23,13 +23,13 @@ public class SpecialFX : MonoBehaviour
             case SlowEffect _:
                 if (fx.Effect.ID.Contains("SL"))
                 {
-                    Debug.Log(spriteRenderer.sprite.rect.height/2);
+                    //Debug.Log(spriteRenderer.sprite.rect.height/2);
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position- new Vector3(0,0.2f, 0), Quaternion.identity, fxParent);
                     SpecialFXDict.Add(fx.Effect.ID, go);
                 }           
                 else
                 {
-                    Debug.Log(spriteRenderer.sprite.rect.height / 2);
+                    //Debug.Log(spriteRenderer.sprite.rect.height / 2);
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity, fxParent);
                     SpecialFXDict.Add(fx.Effect.ID, go);
                 }

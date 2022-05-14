@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySprite: {fileID: 7046093432801577004, guid: 79c32c4229ac12542b373ac24d2ad715,
+  enemySprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
     type: 3}
   enemyType: 8
   enemyState: 0

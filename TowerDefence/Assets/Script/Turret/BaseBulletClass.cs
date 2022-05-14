@@ -29,7 +29,7 @@ public class BaseBulletClass : MonoBehaviour
     public GameObject ImpactFx;
 
    // [SerializeField] protected string taggu = "Enemy";
-    [SerializeField] protected string specialTag = "Invisible";
+    //[SerializeField] protected string specialTag = "Invisible";
 
     public BulletType bulletType;
     //public PassiveAbility passiveAbility;

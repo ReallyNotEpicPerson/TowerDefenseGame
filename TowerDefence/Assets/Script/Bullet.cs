@@ -10,7 +10,10 @@ public class Bullet : BaseBulletClass
     float finalDamage;
     public void OnValidate()//taggu
     {
-        effectManager = fxManager.GetComponentInChildren<EffectManager>();
+        if (effectManager == null)
+        {
+            effectManager = fxManager.GetComponentInChildren<EffectManager>();
+        }
         if (fxManager == null || effectManager == null)
         {
             Debug.Log(name);
@@ -98,10 +101,10 @@ public class Bullet : BaseBulletClass
         //Enemy ene = enemy.GetComponent<Enemy>();
         if (Random.value <= ene.ChanceToEvade)
         {
-            if (!ene.enemyState.HasFlag(EnemyState.FirstHit))
+            /*if (!ene.enemyState.HasFlag(EnemyState.FirstHit))
             {
                 ene.EnableState(EnemyState.FirstHit);
-            }
+            }*/
             DamageDisplayer.Create(ene.transform.position);
             return;
         }

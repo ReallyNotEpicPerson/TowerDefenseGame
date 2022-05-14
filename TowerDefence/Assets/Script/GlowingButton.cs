@@ -41,7 +41,7 @@ public class GlowingButton : MonoBehaviour
     }
     public void SetRewardMoney()
     {
-        _dontDestroyOnLoad.GetComponent<SetCharacterFormation>().SetRewardMoney(rewardMoney);
+        _dontDestroyOnLoad.GetComponent<CharacterFormation>().SetRewardMoney(rewardMoney);
     }
     private void OnMouseEnter()
     {

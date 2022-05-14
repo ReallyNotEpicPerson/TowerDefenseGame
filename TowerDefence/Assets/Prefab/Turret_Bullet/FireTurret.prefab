@@ -338,6 +338,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   BulletPrefab: {fileID: 575377132187066983, guid: 44f3fd93800fbee4cb1ff87572955103,
     type: 3}
+  bu: {fileID: 3598932451251357239, guid: 44f3fd93800fbee4cb1ff87572955103, type: 3}
 --- !u!114 &4421968182766029736
 MonoBehaviour:
   m_ObjectHideFlags: 0

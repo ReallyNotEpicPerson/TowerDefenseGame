@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9117360038570678732
@@ -117,6 +117,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   BulletPrefab: {fileID: 2627823246568775247, guid: 6a01679b20ab4c14ab32780b415806e7,
     type: 3}
+  bu: {fileID: -3792502178238448520, guid: 6a01679b20ab4c14ab32780b415806e7, type: 3}
 --- !u!61 &-2653264987169872706
 BoxCollider2D:
   m_ObjectHideFlags: 0

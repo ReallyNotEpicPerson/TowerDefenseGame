@@ -43,14 +43,13 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         {
             if (listOfDebuffs[i] is Insta_Kill)
             {
-                Insta_Kill insta_kill = listOfDebuffs[i] as Insta_Kill;
-                if (insta_kill.CanKYS())
+                if (listOfDebuffs[i].CanDie())
                 {
                     enemy.When_Insta_kill();
+                    break;
                 }
             }
         }
-        Debug.LogError("nothing");
     }
     public void Cleanse(Enemy enemy)
     {
@@ -75,12 +74,12 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 if (Random.value <= listOfDebuffs[i].chance)
                 {
+                    Debug.Log("He live this time");
                     enemy.AddDebuff(listOfDebuffs[i]);
                     return true;
                 }
             }
         }
-        Debug.LogError("Forgot them data man");
         return false;
     }
     public void Slow(Enemy enemy)

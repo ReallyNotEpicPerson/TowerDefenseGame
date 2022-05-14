@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -61,10 +60,6 @@ public class BaseTurretStat : MonoBehaviour
     }
     public virtual void Start()
     {
-        if (this is SupportTypeTurret)
-        {
-            return;
-        }
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
     }
     public virtual void OnMouseDown()
@@ -88,6 +83,7 @@ public class BaseTurretStat : MonoBehaviour
         else
             transform.GetChild(0).gameObject.SetActive(false);
     }
+
     public virtual void RotateToObject()
     {
         float angle = Mathf.Atan2(target[0].transform.position.y - transform.position.y, target[0].transform.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -111,7 +107,7 @@ public class BaseTurretStat : MonoBehaviour
     {
         spriteRenderer.Fade(ptc);
     }
-    void UpdateTarget()
+    public virtual void UpdateTarget()
     {
         target.Clear();
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
@@ -120,6 +116,7 @@ public class BaseTurretStat : MonoBehaviour
         float leasthealth = Mathf.Infinity;
         float mostHealth = Mathf.NegativeInfinity;
         Collider2D ChosenCol = null;
+        List<Transform> ChosenCols = new List<Transform>(numberOfTarget);
         foreach (Collider2D col in collider)
         {
             if (col.TryGetComponent(out Enemy enemy))
@@ -130,7 +127,6 @@ public class BaseTurretStat : MonoBehaviour
                 }
                 if (shootType.HasFlag(ShootType.SingleTarget))
                 {
-
                     if (targetingType.HasFlag(TargetingType.Closest))
                     {
                         float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
@@ -176,11 +172,44 @@ public class BaseTurretStat : MonoBehaviour
                 }
                 else if (shootType.HasFlag(ShootType.MultipleTarget))
                 {
-                    target.Add(col.transform);
-                    if (target.Count == numberOfTarget)
+                    /*if (targetingType.HasFlag(TargetingType.Random))
+                    {*/
+                        target.Add(col.transform);
+                        if (target.Count == numberOfTarget)
+                        {
+                            return;
+                        }
+                    //}
+                    /*else if (targetingType.HasFlag(TargetingType.Closest))
                     {
-                        return;
+                        float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
+                        if (DisToenenmy < shortestDistance)
+                        {
+                            shortestDistance = DisToenenmy;
+                            ChosenCol = col;
+                        }
                     }
+                    else if (targetingType.HasFlag(TargetingType.First))
+                    {
+                        float p = enemy.RemainingPath();
+                        // Debug.Log("path " + p);
+                        if (p < pathCovered)
+                        {
+                            pathCovered = p;
+                            if (target[0] == null)
+                            {
+                                target[0] = col.transform;
+                            }
+                            else
+                            {
+                                for (int i = 1; i < target.Count; i++)
+                                {
+                                    target[i] = target[i-1];
+                                }
+                                target[0] = col.transform;
+                            }
+                        }
+                    }*/
                 }
             }
         }
@@ -188,6 +217,10 @@ public class BaseTurretStat : MonoBehaviour
         {
             target.Add(ChosenCol.transform);
         }
+        /*else if (shootType.HasFlag(ShootType.MultipleTarget))
+        {
+            target = ChosenCols;
+        }*/
     }
 }
 

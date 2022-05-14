@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
-    public Button[] levelButton;
-    [SerializeField] private GameObject characterSelection;
-    [SerializeField] private GameObject levelSelectionScreen;
+    [SerializeField] private GameObject turretSelection;
+    private GameObject levelSelectionScreen;
     [SerializeField] private GameObject button; 
     private string nextlevel;
+    private string CurrentLevel;
 
     public void DisableLevelSelectionScreen()
     {
@@ -18,13 +18,13 @@ public class LevelSelector : MonoBehaviour
     {
         levelSelectionScreen.SetActive(true);
     }
-    public void DisableCharacterSelection()
+    public void DisableTurretSelection()
     {
-        characterSelection.SetActive(false);
+        turretSelection.SetActive(false);
     }
-    public void EnableCharacterSelection() 
+    public void EnableTurretSelection() 
     {
-        characterSelection.SetActive(true);
+        turretSelection.SetActive(true);
     }
     public void SelectMainMenu(string LvName)
     {
@@ -33,7 +33,7 @@ public class LevelSelector : MonoBehaviour
     public void Select(string LvName)
     {
         nextlevel = LvName;
-        characterSelection.SetActive(true);
+        turretSelection.SetActive(true);
         levelSelectionScreen.SetActive(false);
     }
     public string LevelName()
@@ -42,12 +42,13 @@ public class LevelSelector : MonoBehaviour
     }
     public void LoadScence()
     {
-        GlowingButton gb= button.GetComponent<GlowingButton>();
-        gb.LoadLevel();
+        SceneManager.LoadScene(CurrentLevel);
     }
-    public void LoadScence(string LvName)
+    public void EnableTurretSelection(string LvName)//The one usisng right now
     {
-        SceneManager.LoadScene(LvName);
+        //SceneManager.LoadScene(LvName);
+        CurrentLevel = LvName;
+        EnableTurretSelection();
     }
     public void ResetAll()
     {

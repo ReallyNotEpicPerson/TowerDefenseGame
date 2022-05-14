@@ -20,7 +20,7 @@ public static class HelperAndExtensionClass
     {
         handler.AddDebuff(fx,target);
     }
-    public static void shit(this EffectManager fxManager)
+    public static void Shit(this EffectManager fxManager)
     {
         return;
     }

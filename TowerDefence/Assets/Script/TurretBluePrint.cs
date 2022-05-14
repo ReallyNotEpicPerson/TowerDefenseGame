@@ -5,7 +5,7 @@ public class UltraUpgrade
 {
     public GameObject[] ultraUpgradePrefab;
     public int[] ultraUpgradeCosts;
-    [SerializeField] private float sellPtcReduction = 0.25f;
+    [SerializeField] private float sellPtcReduction = 0.75f;
 
     public int GetSellAmount(int i)
     {
@@ -58,7 +58,7 @@ public class TurretBluePrint
     public GameObject prefab;
     public int cost;
 
-    [SerializeField] private float sellPtcReduction = 0.25f;
+    [SerializeField] private float sellPtcReduction = 0.75f;
     public GameObject[] upgradePrefabs;
     public int[] upgradeCosts;
 
@@ -84,7 +84,7 @@ public class TurretBluePrint
         {
             amount += ultraUpgrades[tree].ultraUpgradeCosts[i];
         }
-        return (int)Mathf.Abs(amount *= sellPtcReduction);
+        return (int)Mathf.Abs(amount*= sellPtcReduction);
     }
     
     public void RedudeCost(float ptc)//Could be use in the future

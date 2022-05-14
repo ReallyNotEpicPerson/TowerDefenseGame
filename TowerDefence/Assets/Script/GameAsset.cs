@@ -15,10 +15,12 @@ public class GameAsset : MonoBehaviour
             return _i;
         }
     }
+    public CharacterFormation formation;
 
     public List<TurretBluePrint> turret;
     public List<GameObject> weaponSprite;
-    public Image[] charImg;
+    public List<Image> charImg;
+    public List<Sprite> turretSprite;
 
     public Transform damageDisplayer;
     public GameObject underling;

@@ -91,18 +91,18 @@ public class TheBuildManager : MonoBehaviour
         GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
     }
-    public void UpgradeSupportTurret(RefTurret refTurret,int i)
+    public void UpgradeSupportTurret(RefTurret refTurret,int treeIndex)
     {
-        if (PlayerStat.moneyInGame < refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1])
+        if (PlayerStat.moneyInGame < refTurret.refBlueprint.ultraUpgrades[treeIndex].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1])
         {
             Debug.Log("Nah U poor!,cant upgrade,lol" + PlayerStat.moneyInGame);
             return;
         }
-        PlayerStat.moneyInGame -= refTurret.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1];
+        PlayerStat.moneyInGame -= refTurret.refBlueprint.ultraUpgrades[treeIndex].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1];
         refTurret.referenceTurret.TryGetComponent(out BaseTurretStat turret) ;
         SupportTypeTurret spTurret = turret as SupportTypeTurret;
-        spTurret.upgrade(i);
-        refTurret.treeChoice = i;
+        spTurret.upgrade(treeIndex);
+        refTurret.treeChoice = treeIndex;
         refTurret.UltraUpgradeLevel++;
         GameObject Bfx = Instantiate(UpgradeEffect, refTurret.referenceTurret.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);

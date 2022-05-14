@@ -21,13 +21,17 @@ public class BulletTypeTurret : BaseTurretStat
     public GameObject[] objectToRotate;
     [SerializeField] private Animator animator;
     public GameObject BulletPrefab;
-    private Bullet bu;
+    [SerializeField] private Bullet bu;
     private Dictionary<int, Dictionary<object, StatModifier>> bulletMod = new Dictionary<int, Dictionary<object, StatModifier>>();
 
     public void OnValidate()
     {
         TryGetComponent(out fxManager);
         TryGetComponent(out fxHandler);
+        if (bu == null)
+        {
+            BulletPrefab.TryGetComponent(out bu);
+        }
         if (firePoint.Count < 1)
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -40,7 +44,6 @@ public class BulletTypeTurret : BaseTurretStat
                     continue;
             }
         }
-
         transform.Find("Range").localScale = Vector3.one;
         transform.Find("Range").localScale *= range.value;
 
@@ -48,7 +51,10 @@ public class BulletTypeTurret : BaseTurretStat
     public override void Awake()
     {
         base.Awake();
-        BulletPrefab.TryGetComponent(out bu);
+        /*if (bu == null)
+        {
+            BulletPrefab.TryGetComponent(out bu);
+        }*/
         //bu.Seek(transform);
         //bu.bulletType |= BulletType.JustStoodStill;
         TryGetComponent(out fxHandler);
@@ -58,13 +64,10 @@ public class BulletTypeTurret : BaseTurretStat
         bulletMod.Add(2, new Dictionary<object, StatModifier>());//critdamage
         bulletMod.Add(3, new Dictionary<object, StatModifier>());//critchance
     }
-
     public override void Start()
     {
-
         base.Start();
         FireCountDown = 1 / fireRate.value;
-
     }
     void Update()
     {
@@ -90,30 +93,22 @@ public class BulletTypeTurret : BaseTurretStat
             }
             FireCountDown = 1 / fireRate.value;
             //animator.Play("Turret Layer."+PewPewAnimation);
+
             Shoot();
         }
         FireCountDown -= Time.deltaTime;
     }
     public void Shoot()
     {
-        animator.SetTrigger("Shoot");
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot");
+        }
         for (int i = 0; i < firePoint.Count; i++)
         {
+
             for (int j = 0; j < target.Count; j++)
             {
-                //bu.Seek(target[j]);
-                //bu.bulletType &= ~BulletType.JustStoodStill;
-                /*if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
-                {
-                    bu.AddDamageMod(modifier);
-                }
-                bu.bulletDamage.baseValue += 10;
-                Debug.Log("Mod num " + bu.bulletDamage.StatModifiers.Count+" Damage after mod " + bu.bulletDamage.value);
-                Instantiate(bu.gameObject, firePoint[i].position, firePoint[i].rotation).GetComponent<Bullet>().Seek(target[j]);
-                
-                //bu.bulletType |= BulletType.JustStoodStill;
-                */
-                //
                 Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
                 foreach (var outerKVP in bulletMod)
                 {
@@ -136,7 +131,6 @@ public class BulletTypeTurret : BaseTurretStat
                         }
                     }
                 }
-
                 if (passiveAbility.HasFlag(PassiveAbility.IncreaseDamage))
                 {
                     bullet.AddDamageMod(modifier);
@@ -165,45 +159,28 @@ public class BulletTypeTurret : BaseTurretStat
         }
     }
     #region function for making changes to turret stat
-    //check if another support turret is here
-    public bool CheckDamageModsource(object source)//Mod later
-    {
-        return bu.bulletDamage.HaveSameType(source);
-    }
-    public bool CheckRateModsource(object source)
-    {
-        return fireRate.HaveSameType(source);
-    }
-    public bool CheckRangeModsource(object source)
-    {
-        return range.HaveSameType(source);
-    }
-    public bool CheckCritDamageModsource(object source)//Mod later
-    {
-        return bu.critDamage.HaveSameType(source);
-    }
-    public bool CheckCritChanceModsource(object source)//Mod later
-    {
-        return bu.critChance.HaveSameType(source);
-    }
     //Add mod
     public void AddDamageMod(StatModifier mod)//Now add to a dict
     {
-        if (!bulletMod[1].ContainsKey(mod.source))
+        if (!bulletMod[1].ContainsKey(mod.source))//no key yet
         {
             bulletMod[1].Add(mod.source, mod);
         }
-        bu.bulletDamage.AddModifier(mod);
-        Debug.Log("Damage " + bu.bulletDamage.value + " At " + name + " and at" + transform.position);
+        else if (bulletMod[1][mod.source].value < mod.value)
+        {
+            bulletMod[1][mod.source] = mod;
+        }
+        //bu.bulletDamage.AddModifier(mod);
+        Debug.Log("Damage " + bu.bulletDamage.value);
     }
     public void AddRateMod(StatModifier mod)
     {
-        fireRate.AddModifier(mod);
+        fireRate.AddingOneInstance(mod);
         Debug.Log("Fire rate" + fireRate.value);
     }
     public void AddRangeMod(StatModifier mod)
     {
-        range.AddModifier(mod);
+        range.AddingOneInstance(mod);
         Debug.Log("Range" + range.value);
     }
     public void AddCritDamageMod(StatModifier mod)
@@ -212,7 +189,11 @@ public class BulletTypeTurret : BaseTurretStat
         {
             bulletMod[2].Add(mod.source, mod);
         }
-        bu.critDamage.AddModifier(mod);
+        else if (bulletMod[2][mod.source].value < mod.value)
+        {
+            bulletMod[2][mod.source] = mod;
+        }
+        //bu.critDamage.AddModifier(mod);
         Debug.Log("Crit damage" + fireRate.value);
     }
     public void AddCritChanceMod(StatModifier mod)
@@ -221,14 +202,18 @@ public class BulletTypeTurret : BaseTurretStat
         {
             bulletMod[3].Add(mod.source, mod);
         }
-        bu.critChance.AddModifier(mod);
+        else if (bulletMod[3][mod.source].value < mod.value)
+        {
+            bulletMod[3][mod.source] = mod;
+        }
+        //bu.critChance.AddModifier(mod);
         Debug.Log("Crit chance" + fireRate.value);
     }
     //undo
     public void UndoDamageModification(object source)
     {
         bulletMod[1].Remove(source);
-        bu.bulletDamage.RemoveAllModifiersFromSource(source);
+        //bu.bulletDamage.RemoveAllModifiersFromSource(source);
     }
     public void UndoRateModification(object source)
     {
@@ -242,12 +227,12 @@ public class BulletTypeTurret : BaseTurretStat
     public void UndoCritDamageModification(object source)
     {
         bulletMod[2].Remove(source);
-        bu.critDamage.RemoveAllModifiersFromSource(source);
+        //bu.critDamage.RemoveAllModifiersFromSource(source);
     }
     public void UndoCritChanceModification(object source)
     {
         bulletMod[3].Remove(source);
-        bu.critChance.RemoveAllModifiersFromSource(source);
+        //bu.critChance.RemoveAllModifiersFromSource(source);
     }
     //gay method
     public void AddingOneInstanceRateMod(StatModifier mod)
@@ -262,114 +247,79 @@ public class BulletTypeTurret : BaseTurretStat
     {
         return bu;
     }
-    public StringBuilder GetCurrentStat()
+    public StringBuilder GetDamage()
     {
         StringBuilder text = new StringBuilder();
-
         text.Append("Damage:" + bu.bulletDamage.value + "\n");
+        return text;
+    }
+    public StringBuilder GetROF()
+    {
+        StringBuilder text = new StringBuilder();
         text.Append("Fire rate:" + fireRate.value + "\n");
+        return text;
+    }
+    public StringBuilder GetRange()
+    {
+        StringBuilder text = new StringBuilder();
         text.Append("Range:" + range.value + "\n");
-        /*if (upgradeVersion.bu.bulletType.HasFlag(BulletType.SlowPerSecond))
+        return text;
+    }
+    public StringBuilder GetStatusEffect()
+    {
+        StringBuilder text = new StringBuilder();
+        if (bu.bulletType.HasFlag(BulletType.SlowPerSecond))
         {
-            SlowEffect up = upgradeVersion.fxManager.GetSlowEffect() as SlowEffect;
-            if (bu.bulletType.HasFlag(BulletType.SlowPerSecond))
+            SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+            /*
+            if (SE._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
             {
-                SlowEffect pre = this.fxManager.GetSlowEffect() as SlowEffect;
-                if (up.chance > pre.chance)//better
+                if (SE.ID.Contains("SL"))
                 {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
+                    text.Append("Slow:");
                 }
-                if (up.chance < pre.chance)
+                else if (SE.ID.Contains("TUR"))
                 {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
+                    text.Append("SpeedBoost:");
                 }
-                if (up._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff00ff>{up._slowPercentage.statValue.value * 100 + "%" }</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#ff0000ff>{up._slowPercentage.statValue.value * 100 + "%"}</color>" + "\n");
-                }
-                if (up._duration > pre._duration)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#00ff00ff>{up._duration + "s" }</color>" + "\n");
-                }
-                if (up._duration < pre._duration)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{up._duration + "s"}</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#00ff00ff>{up._duration + "s"}</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{up._duration + "s"}</color>" + "\n");
-                }
+                text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%" }</color>" + "\n");
             }
-            else
+            if (SE._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
             {
-                if (up.chance < 1)
+                if (SE.ID.Contains("SL"))
                 {
-                    text.Append(up.chance * 100 + "%" + " to ");
+                    text.Append("Slow:");
                 }
-                text.Append(up.description + " " + $"<color=#00ff00ff>{up._slowPercentage.statValue.value * 100 + "%"}</color>" + " in " + $"<color=#00ff00ff>{ up._duration + "s"}</color>" + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
+                else if (SE.ID.Contains("TUR"))
                 {
-                    text.Append("Can stack to " + up.stackTime + "\n");
+                    text.Append("SpeedBoost:");
                 }
+                text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#ff0000ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "\n");
+            }
+
+            if (SE._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
+            {
+                if (SE.ID.Contains("SL"))
+                {
+                    text.Append("Slow:");
+                }
+                else if (SE.ID.Contains("TUR"))
+                {
+                    text.Append("SpeedBoost:");
+                }
+                text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{SE._duration + "s"}</color>" + "\n");
+            }*/
+            if (SE.chance < 1)
+            {
+                text.Append(SE.chance * 100 + "%" + " to ");
+            }
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " in " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+            if (SE.effectType.HasFlag(EffectType.StackingEffect))
+            {
+                text.Append("Can stack to " + SE.stackTime + "\n");
             }
         }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Dots))
+        /*if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Dots))
         {
             DotsEffect up = upgradeVersion.fxManager.GetDOTSEffect() as DotsEffect;
             if (bu.bulletType.HasFlag(BulletType.Dots))

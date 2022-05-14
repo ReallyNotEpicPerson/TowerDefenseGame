@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NodeUI : MonoBehaviour
 {
-    //[SerializeField] private Camera cam;
+    [SerializeField] private Camera cam;
     public GameObject ui;
     public TMP_Text normalUpgradeCost;
     public TMP_Text ultraUpgradeCost_1;
@@ -26,6 +26,13 @@ public class NodeUI : MonoBehaviour
 
     [SerializeField] private TheBuildManager buildManager;
 
+    private void OnValidate()
+    {
+        if (cam == null)
+        {
+            cam = FindObjectOfType<Camera>();
+        }
+    }
     public void Display(RefTurret target)
     {
         tempRefTurret = target;
@@ -37,6 +44,7 @@ public class NodeUI : MonoBehaviour
             normalUpgradeButton.gameObject.SetActive(true);
             ultraUpgradeButton_1.gameObject.SetActive(false);
             ultraUpgradeButton_2.gameObject.SetActive(false);
+            SupportTowerUpgrade.SetActive(false);
             normalUpgradeCost.text = "$" + target.refBlueprint.upgradeCosts[target.upgradeLevel - 1];
             normalUpgradeButton.interactable = true;
 
@@ -45,24 +53,38 @@ public class NodeUI : MonoBehaviour
         }
         else
         {
+            Debug.Log(target.treeChoice);
             normalUpgradeButton.gameObject.SetActive(false);
             if (target.treeChoice == -69 && target.refBlueprint.ultraUpgrades.Length > 0)
             {
+                ui.SetActive(true);
+                for (int i = 0; i < SupportTowerUpgrade.transform.childCount; i++)
+                {
+                    SupportTowerUpgrade.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text =
+                    "$" + target.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[target.UltraUpgradeLevel - 1];
+                }
                 SupportTowerUpgrade.SetActive(true);
             }
-            else if (target.isSupportTurret)
+            else if (target.isSupportTurret && target.UltraUpgradeLevel <= target.refBlueprint.ultraUpgrades[target.treeChoice].ultraUpgradeCosts.Length)
             {
                 for (int i = 0; i < SupportTowerUpgrade.transform.childCount; i++)
                 {
-                    if(i == target.treeChoice)
+                    if (i == target.treeChoice)
                     {
+                        SupportTowerUpgrade.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text =
+                        "$" + target.refBlueprint.ultraUpgrades[i].ultraUpgradeCosts[target.UltraUpgradeLevel - 1];
                         continue;
                     }
                     SupportTowerUpgrade.transform.GetChild(i).gameObject.SetActive(false);
                 }
+                sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.upgradeLevel - 1, target.treeChoice);
+                ui.SetActive(true);
             }
-            else if (target.treeChoice == -1 && target.refBlueprint.ultraUpgrades.Length > 0)
+            else if (target.treeChoice == -1 && target.refBlueprint.ultraUpgrades.Length > 0
+                && target.refBlueprint.ultraUpgrades[0].ultraUpgradeCosts.Length > 0
+                && target.refBlueprint.ultraUpgrades[1].ultraUpgradeCosts.Length > 0)
             {
+                SupportTowerUpgrade.SetActive(false);
                 ultraUpgradeButton_1.gameObject.SetActive(true);
                 ultraUpgradeButton_2.gameObject.SetActive(true);
                 ultraUpgradeCost_1.text = "$" + target.refBlueprint.ultraUpgrades[0].ultraUpgradeCosts[target.UltraUpgradeLevel - 1];
@@ -80,7 +102,7 @@ public class NodeUI : MonoBehaviour
                 ultraUpgradeCost_1.text = "$" + target.refBlueprint.ultraUpgrades[0].ultraUpgradeCosts[target.UltraUpgradeLevel - 1];
                 ultraUpgradeButton_1.interactable = true;
 
-                sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.upgradeLevel - 1, 0);
+                sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.UltraUpgradeLevel - 1, 0);
                 ui.SetActive(true);
             }
             else if (target.treeChoice == 1 && target.UltraUpgradeLevel <= target.refBlueprint.ultraUpgrades[1].ultraUpgradeCosts.Length)
@@ -89,7 +111,7 @@ public class NodeUI : MonoBehaviour
                 ultraUpgradeButton_2.gameObject.SetActive(true);
                 ultraUpgradeCost_2.text = "$" + target.refBlueprint.ultraUpgrades[1].ultraUpgradeCosts[target.UltraUpgradeLevel - 1];
                 ultraUpgradeButton_2.interactable = true;
-                sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.upgradeLevel - 1, 1);
+                sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.UltraUpgradeLevel - 1, 1);
                 ui.SetActive(true);
             }
             else// nothing is here
@@ -97,10 +119,18 @@ public class NodeUI : MonoBehaviour
                 normalUpgradeButton.gameObject.SetActive(false);
                 ultraUpgradeButton_1.gameObject.SetActive(false);
                 ultraUpgradeButton_2.gameObject.SetActive(false);
-                sellAmount.text = "$" + target.refBlueprint.GetNormalSellAmount(target.upgradeLevel - 1);
+                if (target.upgradeLevel < target.refBlueprint.upgradeCosts.Length)
+                {
+                    sellAmount.text = "$" + target.refBlueprint.GetNormalSellAmount(target.upgradeLevel - 1);
+                }
+                else
+                {
+                    sellAmount.text = "$" + target.refBlueprint.GetUltraUpgradeSellAmount(target.UltraUpgradeLevel - 1, target.treeChoice);
+                }
                 ui.SetActive(true);
             }
         }
+        ShowPresentTurret();
     }
     public void ShowPresentTurret()
     {
@@ -118,30 +148,31 @@ public class NodeUI : MonoBehaviour
         BaseTurretStat present = tempRefTurret.referenceTurret.GetComponentInChildren<BaseTurretStat>();
         switch (present)
         {
-            case BulletTypeTurret upgradeVersion:
-                //Debug.Log("Yes it is");
-                BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
-                Stat.Append(presentBulletTurretVersion);
+            case BulletTypeTurret CurrentTurret:
+                Stat.Append(CurrentTurret.GetDamage());
+                Stat.Append(CurrentTurret.GetROF());
+                Stat.Append(CurrentTurret.GetRange());
+                Stat.Append(CurrentTurret.GetStatusEffect()+"\n");
                 break;
-            case LazerTypeTurret upgradeVersion:
-                LazerTypeTurret presentLazerTurretVersion = present as LazerTypeTurret;
-                Stat.Append(presentLazerTurretVersion.TurretStat(upgradeVersion));
+            case LazerTypeTurret CurrentTurret:
+                Stat.Append(CurrentTurret.GetDamage());
+                Stat.Append(CurrentTurret.GetROF());
+                Stat.Append(CurrentTurret.GetRange());
+                Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             default:
                 Debug.Log("how?");
                 break;
         }
+        upgradeStat.text = Stat.ToString();
     }
     public void ShowUpgradePanel(int i)
     {
+        HidePresentTurret();
         UpgradeTurretStat(i);
-        //var screenPoint =new Vector3(Input.mousePosition.x,Input.mousePosition.y,10);
-        //UpgradeStatPanel.transform.position = cam.ScreenToWorldPoint(screenPoint);
+        var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+        UpgradeStatPanel.transform.position = cam.ScreenToWorldPoint(screenPoint);
         UpgradeStatPanel.SetActive(true);
-    }
-    public void UpgradePanelPos()
-    {
-        // UpgradeStatPanel.
     }
     public void HideUpgradePanel()
     {
@@ -192,23 +223,27 @@ public class NodeUI : MonoBehaviour
         Debug.Log("sp turret Upgrade");
         buildManager.UpgradeSupportTurret(tempRefTurret, i);
         ui.SetActive(false);
+        HidePresentTurret();
     }
     public void Upgrade(int i)
     {
         Debug.Log("ultra Upgrade");
         buildManager.UltraUpgrade(tempRefTurret, i);
         ui.SetActive(false);
+        HidePresentTurret();
     }
     public void Upgrade()
     {
         Debug.Log("Upgrade");
         buildManager.UpgradeTurret(tempRefTurret);
         ui.SetActive(false);
+        HidePresentTurret();
     }
     public void Sell()
     {
         buildManager.Sell(tempRefTurret);
         ui.SetActive(false);
+        HidePresentTurret();
     }
     /*
     public void DisableState(NodeState n)

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96140199a7278454faeafa44f7d9cf42, type: 3}
   m_Name: Install_Kill
   m_EditorClassIdentifier: 
-  ID: IK_BS
+  ID: IK_BS_1
   Icon: {fileID: 0}
   specialFX: {fileID: 0}
   effectType: 0
   removableType: 0
   expirableType: 1
   _duration: 0
-  chance: 0.04
+  chance: 0.025
   description: Chance to Insta kill

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933750adfcc63848ac2be7e09c11083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySprite: {fileID: 0}
   enemyType: 0
   enemyState: 0
   startHealth: 100
@@ -108,8 +109,6 @@ MonoBehaviour:
   worth: 20
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 5389080647074171708}
-  Displayer: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
   Handler: {fileID: 0}
   fxManager: {fileID: 0}
   specialFX: {fileID: 0}
@@ -128,6 +127,7 @@ MonoBehaviour:
   startSpeed:
     baseValue: 0
   speed: 0
+  rateOfUpdateDistance: 0.2
 --- !u!61 &332872164532205857
 BoxCollider2D:
   m_ObjectHideFlags: 0

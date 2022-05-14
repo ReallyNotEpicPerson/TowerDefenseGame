@@ -9,8 +9,8 @@ public class Progression : MonoBehaviour
     public static Data saveData;
     private void Awake()
     {
-        LoadsaveData();
-        SetMoney();
+        //LoadsaveData();
+        //SetMoney();
     }
     public static void LoadsaveData()
     {

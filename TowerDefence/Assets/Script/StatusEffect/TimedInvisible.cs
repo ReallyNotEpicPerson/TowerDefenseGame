@@ -15,7 +15,6 @@ public class TimedInvisible : TimedEffect
         _enemy.DeInvisible();
         //_enemy.RemoveFX(Effect.ID);
     }
-
     protected override void ApplyEffect()
     {
         _enemy.Invisible();

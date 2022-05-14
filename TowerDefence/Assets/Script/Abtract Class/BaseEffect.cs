@@ -55,6 +55,14 @@ public abstract class BaseEffect : ScriptableObject
         }
     }
     public abstract TimedEffect Init(GameObject obj);
+    public bool CanDie()
+    {
+        if (chance > Random.value)
+        {
+            return true;
+        }
+        return false;
+    }
     #region state control
     public void DisableState(EffectType et)
     {

@@ -594,10 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338763577d6538542bad6ff4d94766eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfDebuffs:
-  - {fileID: 11400000, guid: 590e4f5275fa11b4f9a6d5c6e22cc7b3, type: 2}
-  - {fileID: 11400000, guid: 8bd6b9c81f96da5409a80b29aa2010d1, type: 2}
-  - {fileID: 11400000, guid: 3e46dbbefd4acf046bf95e8b682650ed, type: 2}
+  listOfDebuffs: []
 --- !u!114 &6980325294884269119
 MonoBehaviour:
   m_ObjectHideFlags: 0

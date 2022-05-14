@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: bulletType
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
@@ -27,12 +27,17 @@ PrefabInstance:
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: critChance.baseValue
-      value: 0.09
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: critDamage.baseValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: bulletSpeed.baseValue
-      value: 22
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}

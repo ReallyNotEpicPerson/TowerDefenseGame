@@ -27,14 +27,16 @@ public class Shop : MonoBehaviour
     }*/
     void NewCreateButton()
     {
-        for (int i = 0; i < GameAsset.I.turret.Count; i++)
+        for (int i = 0; i < GameAsset.I.formation.characterLineUp.Length; i++)
         {
-            Button temp = Instantiate(button);
-            temp.transform.SetParent(parenting, false);
-            temp.name = "Button " + i;
-            TurretBluePrint tempTurret = GameAsset.I.turret[i];
-            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
-            SetButtonText(temp, i);
+            //if(Shithappen)
+                Button temp = Instantiate(button);
+                temp.transform.SetParent(parenting, false);
+                temp.name = "Button " + i;
+                TurretBluePrint tempTurret = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[i]];
+                temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
+                temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite[GameAsset.I.formation.characterLineUp[i]];
+                SetButtonText(temp, GameAsset.I.formation.characterLineUp[i]);
         }
     }
     void CreateButton()

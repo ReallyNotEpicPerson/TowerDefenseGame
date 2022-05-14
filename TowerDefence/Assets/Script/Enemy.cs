@@ -209,9 +209,8 @@ public class Enemy : MonoBehaviour
         {
             if (enemyType.HasFlag(EnemyType.Revive) && fxManager != null)
             {
-                fxManager.Revive(this);
-                Debug.Log("He live this time");
-                return false;
+                if (fxManager.Revive(this))
+                    return false;
             }
             //Debug.Log("Nope .... he died");
             Die();
@@ -278,9 +277,8 @@ public class Enemy : MonoBehaviour
         {
             if (enemyType.HasFlag(EnemyType.Revive) && fxManager != null)
             {
-                fxManager.Revive(this);
-                Debug.Log("He wont die this time");
-                return false;
+                if (fxManager.Revive(this))
+                    return false;
             }
             //Debug.Log("He ded , oopsie daisy");
             Die();
@@ -531,7 +529,7 @@ public class Enemy : MonoBehaviour
     public void DeInvisible()
     {
         DisableState(EnemyState.Invisible);
-        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a * 2);
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, 1);
     }
     public bool IsInvisible()
     {
@@ -540,7 +538,7 @@ public class Enemy : MonoBehaviour
     public void Invisible()
     {
         EnableState(EnemyState.Invisible);
-        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, enemyColor.color.a / 2);
+        enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, 0.5f);
         //Debug.Log(enemyColor.color);
     }
     public void EndCast()

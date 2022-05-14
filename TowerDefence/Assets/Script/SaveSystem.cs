@@ -106,7 +106,7 @@ public static class SaveSystem
 
     public static Data LoadData()
     {
-        string SaveFilePath = Application.persistentDataPath + "/SaveFile.json";
+        //string SaveFilePath = Application.persistentDataPath + "/SaveFile.json";
         /* if (File.Exists(SaveFile) && PlayerPrefs.HasKey("Key"))
          {
              byte[] savedKey = System.Convert.FromBase64String(PlayerPrefs.GetString("Key"));
@@ -128,9 +128,10 @@ public static class SaveSystem
              Data dat = JsonUtility.FromJson<Data>(txt);
              return dat;
          }*/
-        string json = File.ReadAllText(SaveFilePath);
-        Data dat = JsonUtility.FromJson<Data>(json);
-        return dat;
+        //string json = File.ReadAllText(SaveFilePath);
+        //Data dat = JsonUtility.FromJson<Data>(json);
+        //return dat;
+        return null;
     }
     public static Equipment LoadEquipment()
     {

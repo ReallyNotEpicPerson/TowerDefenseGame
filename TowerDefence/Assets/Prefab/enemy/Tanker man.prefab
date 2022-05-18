@@ -47,15 +47,30 @@ PrefabInstance:
       propertyPath: startHealth
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      propertyPath: UsePathFinding
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: m_Name
       value: Tanker man
       objectReference: {fileID: 0}
+    - target: {fileID: 5101970841542106915, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101970841542106915, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      propertyPath: startSpeed.baseValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5166099960482906221, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: m_Speed
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5166099960482906221, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}

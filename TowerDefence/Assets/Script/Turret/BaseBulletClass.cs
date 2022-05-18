@@ -30,8 +30,11 @@ public class BaseBulletClass : MonoBehaviour
 
    // [SerializeField] protected string taggu = "Enemy";
     //[SerializeField] protected string specialTag = "Invisible";
-
     public BulletType bulletType;
+
+    protected AudioSource audioSource;
+
+
     //public PassiveAbility passiveAbility;
     public void AddDamageMod(StatModifier mod)
     {

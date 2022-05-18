@@ -18,6 +18,11 @@ public class Bullet : BaseBulletClass
         {
             Debug.Log(name);
         }
+        if (!TryGetComponent(out audioSource))
+        {
+            gameObject.AddComponent(typeof(AudioSource));
+            TryGetComponent(out audioSource);
+        }
     }
     public void Seek(Transform _target)
     {

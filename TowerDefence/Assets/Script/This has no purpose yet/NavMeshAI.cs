@@ -13,6 +13,7 @@ public class NavMeshAI : MonoBehaviour
     private float distanceRemain;
     [SerializeField] private float rateOfDistanceUpdate=0.2f;
     private float rate;
+    private AudioSource audioSource;
     public void OnValidate()
     {
         /*if(target == null || SpawnPoint == null)
@@ -106,6 +107,7 @@ public class NavMeshAI : MonoBehaviour
     public void Enable(bool b)
     {
         agent.enabled = b;
+        enabled = b;
     }
     public void RemoveMod(object source)
     {
@@ -156,6 +158,7 @@ public class NavMeshAI : MonoBehaviour
     }
     void EndPath()
     {
+        audioSource.PlayOneShot(GameAsset.I.whenEnemyPassThrough);
         PlayerStat.Lives--;
         Destroy(gameObject);
         TheSpawner.numOfEnemies--;

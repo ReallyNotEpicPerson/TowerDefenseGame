@@ -1,55 +1,94 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 //[RequireComponent(typeof(Enemy))]
 public class EnemyPathMovement : MonoBehaviour
 {
     private Transform Target;
+    [Range(0, 3)]
+    public int pathIndex = 0;
     private int wpIndex = 0;
     private bool turnBack = false;
     public CharacterStat startSpeed;
     [HideInInspector]
     public float speed;
     private float distanceRemain;
-    public float rateOfUpdateDistance=0.2f;
+    public float rateOfUpdateDistance = 0.2f;
     private float rate;
+    private AudioSource audioSource;
 
-    private void Awake()
+    public void Start()
     {
-        //enemy = GetComponent<Enemy>();
-        Target = WayPoint.Points[0];
-    }
-    private void Start()
-    {
+        TryGetComponent(out audioSource);
+        if (pathIndex == 0)
+        {
+            Target = WayPoint.Points[0];
+        }
+        else if (pathIndex == 1)
+        {
+            Target = WayPoint.Points2[0];
+        }
         speed = startSpeed.value;
     }
     void Update()
     {
-        //Target.position.z *= 0;
-        Vector3 dir = Target.position - transform.position;
-        transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
-        //DistantCovered += Vector3.Distance()
+        if (pathIndex == 0)
+        {
+            Vector3 dir = Target.position - transform.position;
+            transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
+            //DistantCovered += Vector3.Distance()
 
-        if (turnBack == false)
-        {
-            if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+            if (turnBack == false)
             {
-                NextWayPoint();
+                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                {
+                    NextWayPoint_0();
+                }
             }
-        }
-        else
-        {
-            if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+            else
             {
-                PreviousWayPoint();
+                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                {
+                    PreviousWayPoint_0();
+                }
             }
+            if (rate <= 0)
+            {
+                distanceRemain = PathRemainingDistanceFirstPath();
+                rate = rateOfUpdateDistance;
+            }
+            rate -= Time.deltaTime;
         }
-        if (rate <= 0)
-        {        
-            distanceRemain = PathRemainingDistance();
-            rate = rateOfUpdateDistance;
+        else if (pathIndex == 1)
+        {
+            Vector3 dir = Target.position - transform.position;
+            transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
+            //DistantCovered += Vector3.Distance()
+
+            if (turnBack == false)
+            {
+                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                {
+                    NextWayPoint_1();
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                {
+                    PreviousWayPoint_1();
+                }
+            }
+            if (rate <= 0)
+            {
+                distanceRemain = PathRemainingDistanceSecondPath();
+                rate = rateOfUpdateDistance;
+            }
+            rate -= Time.deltaTime;
         }
-        rate -= Time.deltaTime;
+    }
+    public void SetPathIndex(int i)
+    {
+        pathIndex = i;
     }
     public void SetSpeed(float s)
     {
@@ -65,19 +104,33 @@ public class EnemyPathMovement : MonoBehaviour
         startSpeed.RemoveAllModifiersFromSource(source);
         speed = startSpeed.value;
     }
-    public void Turn()
+    public void Turn_0()
     {
         turnBack = !turnBack;
         if (turnBack == false)
         {
-            NextWayPoint();
+            if (pathIndex == 0)
+            {
+                NextWayPoint_0();
+            }
+            else if (pathIndex == 1)
+            {
+                NextWayPoint_1();
+            }
         }
         else
         {
-            PreviousWayPoint();
+            if (pathIndex == 0)
+            {
+                PreviousWayPoint_0();
+            }
+            else if (pathIndex == 1)
+            {
+                PreviousWayPoint_1();
+            }
         }
     }
-    private void NextWayPoint()
+    private void NextWayPoint_0()
     {
         if (wpIndex >= WayPoint.Points.Length - 1)
         {
@@ -87,7 +140,17 @@ public class EnemyPathMovement : MonoBehaviour
         wpIndex++;
         Target = WayPoint.Points[wpIndex];
     }
-    private void PreviousWayPoint()
+    private void NextWayPoint_1()
+    {
+        if (wpIndex >= WayPoint.Points2.Length - 1)
+        {
+            EndPath();
+            return;
+        }
+        wpIndex++;
+        Target = WayPoint.Points2[wpIndex];
+    }
+    private void PreviousWayPoint_0()
     {
         if (wpIndex == 0)
         {
@@ -97,8 +160,20 @@ public class EnemyPathMovement : MonoBehaviour
         wpIndex--;
         Target = WayPoint.Points[wpIndex];
     }
+    private void PreviousWayPoint_1()
+    {
+        if (wpIndex == 0)
+        {
+            //EndPath();
+            return;
+        }
+        wpIndex--;
+        Target = WayPoint.Points2[wpIndex];
+    }
     void EndPath()
     {
+        Debug.Log("THEY PASSSSS through Dumbass");
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.whenEnemyPassThrough);
         PlayerStat.Lives--;
         Destroy(gameObject);
         TheSpawner.numOfEnemies--;
@@ -109,19 +184,33 @@ public class EnemyPathMovement : MonoBehaviour
     }
     public float GetDistanceFromSpawnPoint()
     {
-        return Vector3.SqrMagnitude(WayPoint.Points[0].position-transform.position);
+        return Vector3.SqrMagnitude(WayPoint.Points[0].position - transform.position);
     }
-    public float PathRemainingDistance()
+    public float PathRemainingDistanceFirstPath()
     {
         float distance = 0.0f;
         for (int i = wpIndex; i < WayPoint.Points.Length - 2; ++i)
         {
             if (i == wpIndex)
             {
-                distance += Vector3.SqrMagnitude(transform.position- WayPoint.Points[i].position);
+                distance += Vector3.SqrMagnitude(transform.position - WayPoint.Points[i].position);
                 continue;
             }
-            distance += Vector3.SqrMagnitude(WayPoint.Points[i].position - WayPoint.Points[i+1].position);
+            distance += Vector3.SqrMagnitude(WayPoint.Points[i].position - WayPoint.Points[i + 1].position);
+        }
+        return distance;
+    }
+    public float PathRemainingDistanceSecondPath()
+    {
+        float distance = 0.0f;
+        for (int i = wpIndex; i < WayPoint.Points2.Length - 2; ++i)
+        {
+            if (i == wpIndex)
+            {
+                distance += Vector3.SqrMagnitude(transform.position - WayPoint.Points2[i].position);
+                continue;
+            }
+            distance += Vector3.SqrMagnitude(WayPoint.Points2[i].position - WayPoint.Points2[i + 1].position);
         }
         return distance;
     }

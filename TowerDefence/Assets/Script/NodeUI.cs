@@ -149,15 +149,17 @@ public class NodeUI : MonoBehaviour
         switch (present)
         {
             case BulletTypeTurret CurrentTurret:
-                Stat.Append(CurrentTurret.GetDamage());
-                Stat.Append(CurrentTurret.GetROF());
-                Stat.Append(CurrentTurret.GetRange());
-                Stat.Append(CurrentTurret.GetStatusEffect()+"\n");
+                upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = CurrentTurret.name;
+                Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
+                Stat.Append("Fire rate:" + CurrentTurret.GetROF() + "\n");
+                Stat.Append("Range" + CurrentTurret.GetRange() + "\n");
+                Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case LazerTypeTurret CurrentTurret:
-                Stat.Append(CurrentTurret.GetDamage());
-                Stat.Append(CurrentTurret.GetROF());
-                Stat.Append(CurrentTurret.GetRange());
+                upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = CurrentTurret.name;
+                Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
+                Stat.Append("Rate:" + CurrentTurret.GetROF() + "\n");
+                Stat.Append("Range" + CurrentTurret.GetRange() + "\n");
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             default:
@@ -203,13 +205,24 @@ public class NodeUI : MonoBehaviour
         switch (upgrade)
         {
             case BulletTypeTurret upgradeVersion:
+                upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = upgradeVersion.name;
                 //Debug.Log("Yes it is");
-                BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
-                Stat.Append(presentBulletTurretVersion.CompareTurretStat(upgradeVersion));
+                //BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
+                //Stat.Append(presentBulletTurretVersion.CompareTurretStat(upgradeVersion));
+
+                Stat.Append("Damage:" + upgradeVersion.GetDamage() + "\n");
+                Stat.Append("Fire rate:" + upgradeVersion.GetROF() + "\n");
+                Stat.Append("Range" + upgradeVersion.GetRange() + "\n");
+
                 break;
             case LazerTypeTurret upgradeVersion:
-                LazerTypeTurret presentLazerTurretVersion = present as LazerTypeTurret;
-                Stat.Append(presentLazerTurretVersion.TurretStat(upgradeVersion));
+                upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = upgradeVersion.name;
+
+                //LazerTypeTurret presentLazerTurretVersion = present as LazerTypeTurret;
+                //Stat.Append(presentLazerTurretVersion.TurretStat(upgradeVersion));
+                Stat.Append("Damage:" + upgradeVersion.GetDamage() + "\n");
+                Stat.Append("Rate:" + upgradeVersion.GetROF() + "\n");
+                Stat.Append("Range" + upgradeVersion.GetRange() + "\n");
                 break;
             default:
                 Debug.Log("how?");

@@ -6,7 +6,6 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private GameObject lv;
     private Dictionary<string, int> levelOpened;
     private LevelUnlocked lvl;
-    private List<string> turret;//wait
     void Start()
     {
         //lvl = SaveSystem.LoadLevel(); //= new LevelUnlocked();

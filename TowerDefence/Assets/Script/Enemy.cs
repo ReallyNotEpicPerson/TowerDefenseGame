@@ -3,6 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 #region ENUM
+public enum AudioType
+{
+    None=0,
+    PlayAtAwake = 1,
+    PlayAtStart = 2,
+}
 [System.Flags]
 public enum EnemyState
 {
@@ -37,6 +43,7 @@ public class Enemy : MonoBehaviour
     public Sprite enemySprite;
     public EnemyType enemyType;
     public EnemyState enemyState;
+    public AudioType audioType;
     #region EnemyStat
     //public float startSpeed = 10f;
     public float startHealth = 100f;
@@ -65,6 +72,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpecialFX specialFX;
 
     private StatValueType modifier;
+    private AudioSource audioSource;
+    private Animator animator;
     //private string ogTag;
     private Color ogHealthBarColor;
     StatUI_InGame statUI;
@@ -75,18 +84,27 @@ public class Enemy : MonoBehaviour
         {
             healthBar = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
         }
-        if (TryGetComponent(out enemyNavMeshMovement))
+        if (UsePathFinding)
         {
-            UsePathFinding = true;
+            TryGetComponent(out enemyNavMeshMovement);
+            
         }
-        else if (TryGetComponent(out enemyPathMovement))
+        else if (!UsePathFinding)
         {
-            UsePathFinding = false;
+            TryGetComponent(out enemyPathMovement);
         }
         if (!TryGetComponent(out armorStat))
         {
             //Debug.LogError("you forgot the armor bro");
             return;
+        }
+        if (!TryGetComponent(out audioSource))
+        {
+            gameObject.AddComponent(typeof(AudioSource));
+        }
+        if (!TryGetComponent(out animator))
+        {
+            gameObject.AddComponent(typeof(Animator));
         }
         /*if (enemyType.HasFlag(EnemyType.Necromancy) && enemyType.HasFlag(EnemyType.Healing))
         {
@@ -105,17 +123,27 @@ public class Enemy : MonoBehaviour
     #endregion
     private void Awake()
     {
-        enemyColor = GetComponent<SpriteRenderer>();
+        TryGetComponent(out enemyColor);
+        TryGetComponent(out audioSource);
+        TryGetComponent(out animator);
         GetComponent<Collider2D>().enabled = true;
-        if (TryGetComponent(out enemyNavMeshMovement))
+        if (UsePathFinding)
         {
-            UsePathFinding = true;
+            TryGetComponent(out enemyNavMeshMovement);
+            GetComponent<EnemyPathMovement>().enabled = false;
+            enemyNavMeshMovement.Enable(true);
         }
-        else if (TryGetComponent(out enemyPathMovement))
+        else if (!UsePathFinding)
         {
-            UsePathFinding = false;
+            TryGetComponent(out enemyPathMovement);
+            GetComponent<NavMeshAI>().Enable(false);
+            enemyPathMovement.enabled = true;
         }
         TryGetComponent(out fxManager);
+        if (audioType.HasFlag(AudioType.PlayAtAwake))
+        {
+            audioSource.Play();
+        }
         if (!TryGetComponent(out armorStat))
         {
             //Debug.LogError("you forgot the armor bro");
@@ -341,8 +369,22 @@ public class Enemy : MonoBehaviour
         Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 0.5f);
         //WaitFor((int)(2*FloatToIntRate));
         TheSpawner.numOfEnemies--;
+        if (UsePathFinding)
+        {
+            //GetComponent<NavMeshAI>().Enable(false);
+            enemyNavMeshMovement.Enable(false);
+        }
+        else
+        {
+            enemyPathMovement.enabled = false;
+        }
         GetComponent<Collider2D>().enabled = false;
+        if (animator != null && animator.isActiveAndEnabled)
+        {
+            animator.SetTrigger("Die");
+        }
         StartCoroutine(FadeToBlack());
+        
         //Ded.SetActive(false);
         //gameObject.SetActive(false);
     }
@@ -360,13 +402,13 @@ public class Enemy : MonoBehaviour
     {
         //gameObject.tag = "Untagged";
         GetComponent<Collider2D>().enabled = false;
-        if (enemyNavMeshMovement != null)
+        if (UsePathFinding)
         {
-            GetComponent<NavMeshAI>().Enable(false);
+            enemyNavMeshMovement.Enable(false);
         }
-        else if (enemyPathMovement != null)
+        else if (!UsePathFinding)
         {
-            GetComponent<EnemyPathMovement>().enabled = false;
+            enemyPathMovement.enabled = false;
         }
         enemyColor.enabled = false;
         EnableState(EnemyState.TakeNoDamage);
@@ -376,6 +418,7 @@ public class Enemy : MonoBehaviour
     public void Revive()
     {
         Debug.Log("wake");
+        audioSource.PlayOneShot(GameAsset.I.revive);
         RemoveALLDebuff();
         DisableState(EnemyState.TakeNoDamage);
         health = startHealth;
@@ -390,16 +433,15 @@ public class Enemy : MonoBehaviour
         }
         //gameObject.tag = "Enemy";
         GetComponent<Collider2D>().enabled = true;
-        if (enemyNavMeshMovement != null)
+        if (UsePathFinding)
         {
             //Debug.Log("Turn back on YOU BITCH");
-            NavMeshAI nmAI = GetComponent<NavMeshAI>();
-            nmAI.Enable(true);
-            nmAI.SetDestination();
+            enemyNavMeshMovement.Enable(true);
+            enemyNavMeshMovement.SetDestination();
         }
-        else if (enemyPathMovement != null)
+        else if (!UsePathFinding)
         {
-            GetComponent<EnemyPathMovement>().enabled = true;
+            enemyPathMovement.enabled = true;
         }
         enemyColor.enabled = true;
         //gameObject.SetActive(true);
@@ -423,7 +465,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            enemyPathMovement.Turn();
+            enemyPathMovement.Turn_0();
         }
     }
     public void IncreaseSpeed(StatModifier mod)
@@ -514,6 +556,14 @@ public class Enemy : MonoBehaviour
         DisableState(EnemyState.Weaken);
     }
     #endregion
+    public void  SetDestination(Transform spawnPoint,Transform endPoint)
+    {
+        enemyNavMeshMovement.SetDestination(spawnPoint,endPoint);
+    }
+    public void SetDestination(int path)
+    {
+        enemyPathMovement.SetPathIndex(path);
+    }
     public void SetHealthColor()
     {
         healthBar.color = ogHealthBarColor;
@@ -569,7 +619,7 @@ public class Enemy : MonoBehaviour
     {
         return enemySprite;
     }
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
         //statUI.TransferCharacter(gameObject);
         //statUI.enabled = true;
@@ -577,7 +627,7 @@ public class Enemy : MonoBehaviour
     void OnMouseExit()
     {
         //statUI.enabled = false;
-    }
+    }*/
     #region flag checking/Manipulation
     public bool CheckEnemyType(EnemyType et)
     {

@@ -173,7 +173,7 @@ public class TheSpawner : MonoBehaviour
             numOfEnemies += wave.enemy[j].count;
             for (int i = 0; i < wave.enemy[j].count; i++)
             {
-                EnemySpawner(wave.enemy[j].path, wave.enemy[j].enemy);
+                EnemySpawner(wave.enemy[j].path, wave.enemy[j].enemy, j);
                 yield return new WaitForSeconds(wave.enemy[j].startRate);
             }
             if (wave.enemy[j].delayBetweenGroup > 0)
@@ -181,7 +181,7 @@ public class TheSpawner : MonoBehaviour
                 yield return new WaitForSeconds(wave.enemy[j].delayBetweenGroup);
             }
         }
-        waveNum++;        
+        waveNum++;
         DoneWithSpawning = true;
     }
     /*public Vector3 RandomPos(this TheSpawner theSpawner,float range)
@@ -200,13 +200,34 @@ public class TheSpawner : MonoBehaviour
         }
         return Vector3.zero;
     }
-    void EnemySpawner(int path, GameObject enemy)
+    void EnemySpawner(int path, GameObject enemy, int enemyIndex)
     {
         //move all the enemy to a enemylist soon
         GameObject lol = Instantiate(enemy, SpawnPoint[path].position + RandomCoordinate(path), Quaternion.identity);//,"EnemyList")
         //spawn fx now
         Debug.Log(SpawnPoint[path].position + " " + lol.transform.position);
-        if (lol.TryGetComponent(out NavMeshAI Navmesh))
+        if (lol.TryGetComponent(out Enemy ene))
+        {
+            if (mainWaves[waveNum].enemy[enemyIndex].useNavmesh == true)
+            {
+                ene.UsePathFinding = true;
+                if (EndPoint.Length > 1)
+                {
+                    ene.SetDestination(SpawnPoint[path], EndPoint[path]);
+                }
+                else
+                {
+                    ene.SetDestination(SpawnPoint[path], EndPoint[0]);
+                }
+            }
+            else
+            {
+                ene.UsePathFinding = false;
+                if (spawnPoint.Length > 1) { ene.SetDestination(path); }
+                else { ene.SetDestination(0); }
+            }
+        }
+        /*if (lol.TryGetComponent(out NavMeshAI Navmesh))
         {
             if (EndPoint.Length > 1)
             {
@@ -216,7 +237,7 @@ public class TheSpawner : MonoBehaviour
             {
                 Navmesh.SetDestination(SpawnPoint[path], EndPoint[0]);
             }
-        }
+        }*/
         //displayer.SetObject(lol);
         //GameObject enemyScript = objectPooler.SpawnFromPool(enemy.name, SpawnPoint.position, SpawnPoint.rotation);
         //statusEffectManager.AddEnemy(enemyScript.GetComponent<Enemy>());

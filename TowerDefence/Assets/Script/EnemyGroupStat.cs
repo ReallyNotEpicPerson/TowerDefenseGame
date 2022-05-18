@@ -17,5 +17,6 @@ public class EnemyGroupStat//do not change anything too dramatic or else you die
     public float endRate;
     [Range(0, 4)]
     public int path;
+    public bool useNavmesh = false;
     public float delayBetweenGroup;
 }

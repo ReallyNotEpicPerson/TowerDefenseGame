@@ -23,6 +23,7 @@ public class BulletTypeTurret : BaseTurretStat
     public GameObject BulletPrefab;
     [SerializeField] private Bullet bu;
     private Dictionary<int, Dictionary<object, StatModifier>> bulletMod = new Dictionary<int, Dictionary<object, StatModifier>>();
+    private AudioSource audioSource;
 
     public void OnValidate()
     {
@@ -59,6 +60,7 @@ public class BulletTypeTurret : BaseTurretStat
         //bu.bulletType |= BulletType.JustStoodStill;
         TryGetComponent(out fxHandler);
         TryGetComponent(out fxManager);
+        TryGetComponent(out audioSource);
         bulletMod.Add(0, new Dictionary<object, StatModifier>());//Weaken value?
         bulletMod.Add(1, new Dictionary<object, StatModifier>());//Damage
         bulletMod.Add(2, new Dictionary<object, StatModifier>());//critdamage
@@ -71,15 +73,10 @@ public class BulletTypeTurret : BaseTurretStat
     }
     void Update()
     {
-        if (target.Count == 0)
+        if (  target.Count == 0 || target[0]==null)
         {
             return;
         }
-        /*if (tempBullet == null)
-        {
-            tempBullet = Instantiate(BulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
-            tempBullet.TryGetComponent(out bu);
-        }*/
         RotateToObject();
         if (FireCountDown <= 0f)
         {
@@ -104,9 +101,9 @@ public class BulletTypeTurret : BaseTurretStat
         {
             animator.SetTrigger("Shoot");
         }
+        audioSource.Play();
         for (int i = 0; i < firePoint.Count; i++)
         {
-
             for (int j = 0; j < target.Count; j++)
             {
                 Bullet bullet = MakeBullet(i).GetComponent<Bullet>();
@@ -250,19 +247,22 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetDamage()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Damage:" + bu.bulletDamage.value + "\n");
+        text.Append(bu.bulletDamage.value);
+        //text.Append("Damage:" + bu.bulletDamage.value + "\n");
         return text;
     }
     public StringBuilder GetROF()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Fire rate:" + fireRate.value + "\n");
+        text.Append(fireRate.value);
+        //text.Append("Fire rate:" + fireRate.value + "\n");
         return text;
     }
     public StringBuilder GetRange()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Range:" + range.value + "\n");
+        text.Append(range.value);
+        //text.Append("Range:" + range.value + "\n");
         return text;
     }
     public StringBuilder GetStatusEffect()

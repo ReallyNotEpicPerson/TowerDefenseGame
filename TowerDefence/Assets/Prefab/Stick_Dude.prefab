@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6929386550393063822}
   - component: {fileID: 6929386550393063821}
-  - component: {fileID: 6929386550393063824}
   - component: {fileID: 8591110064602245011}
   - component: {fileID: -4035111944938301268}
   - component: {fileID: 6929386550393063823}
@@ -87,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6929386550393063824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929386550393063819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ab1239a5e41e3468143e69fe98ca53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range:
-    baseValue: 2
-  rotationSpeed:
-    baseValue: 200
-  firePoint: {fileID: 0}
-  target: {fileID: 0}
-  turretType: 1
-  animator: {fileID: 8591110064602245011}
-  damage:
-    baseValue: 50
-  coolDown: 1
-  etag: Enemy
-  damageDisplayUI: {fileID: 8302091124255718198, guid: e008f03489171f54090ec93ce328cbe1,
-    type: 3}
 --- !u!95 &8591110064602245011
 Animator:
   serializedVersion: 3

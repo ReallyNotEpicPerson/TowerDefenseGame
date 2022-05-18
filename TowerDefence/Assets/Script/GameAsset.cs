@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameAsset : MonoBehaviour
 {
     public static Dictionary<string,GameObject> dict= new Dictionary<string, GameObject>();
+    public AudioSource audioSource;
+
     private static GameAsset _i;
     public static GameAsset I
     {
@@ -24,6 +26,16 @@ public class GameAsset : MonoBehaviour
 
     public Transform damageDisplayer;
     public GameObject underling;
+    [Header("SOUND")]
+    public AudioClip PewPew_1;
+    public AudioClip k;
+    public AudioClip revive;
+    public AudioClip whenEnemyPassThrough;
+
+    public void PlaySound(AudioClip clip,float volume)
+    {
+        audioSource.PlayOneShot(clip,volume);
+    }
     public static void Spawn(string name , Vector3 pos)
     {
         Instantiate(dict[name], pos, Quaternion.identity);

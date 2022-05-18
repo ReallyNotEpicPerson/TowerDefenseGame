@@ -20,6 +20,7 @@ public class LazerTypeTurret : BaseTurretStat
     public EffectManager fxManager;
     public LineRenderer lineRenderer;
 
+    private AudioSource audioSource;
     //public GameObject lazerBeam;//Upgrade
     //private List<LineRenderer> lineRenderers = new List<LineRenderer>(); //upgrade 
     private float damage;
@@ -31,7 +32,11 @@ public class LazerTypeTurret : BaseTurretStat
             lineRenderers.Enqueue(Instantiate(lazerBeam, gameObject.transform).GetComponent<LineRenderer>());
         }
     }*/
-
+    public override void Awake()
+    {
+        base.Awake();
+        TryGetComponent(out audioSource);
+    }
     public void OnValidate()
     {
         if (lineRenderer == null)
@@ -53,13 +58,14 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void Update()
     {
-        if (target.Count == 0)
+        if (target.Count == 0 || target[0]==null)
         {
             if (lineRenderer.enabled)
             {
                 lineRenderer.enabled = false;
                 lazerFX.Stop();
                 Glow.Stop();
+                audioSource.Stop();
             }
             return;
         }
@@ -101,6 +107,7 @@ public class LazerTypeTurret : BaseTurretStat
             lineRenderer.enabled = true;
             lazerFX.Play();
             Glow.Play();
+            audioSource.Play();
         }
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target[0].position);
@@ -284,19 +291,22 @@ public class LazerTypeTurret : BaseTurretStat
     public StringBuilder GetDamage()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Damage:" + damageOverTime.value + "\n");
+        text.Append(damageOverTime.value);
+        //text.Append("Damage:" + damageOverTime.value + "\n");
         return text;
     }
     public StringBuilder GetROF()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Rate:" + rate.value + "\n");
+        text.Append(rate.value);
+        //text.Append("Rate:" + rate.value + "\n");
         return text;
     }
     public StringBuilder GetRange()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Range:" + range.value + "\n");
+        text.Append(range.value);
+        //text.Append("Range:" + range.value + "\n");
         return text;
     }
     public StringBuilder GetStatusEffect()

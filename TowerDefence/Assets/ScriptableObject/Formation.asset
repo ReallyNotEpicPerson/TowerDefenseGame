@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99735d844dd024b43b6dfb2820581ea4, type: 3}
   m_Name: Formation
   m_EditorClassIdentifier: 
-  characterLineUp: 02000000010000000000000004000000
+  characterLineUp: 0200000001000000000000000400000003000000
   moneyEachMatch: 0

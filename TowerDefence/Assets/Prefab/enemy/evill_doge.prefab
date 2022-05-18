@@ -656,12 +656,14 @@ GameObject:
   - component: {fileID: 8706395518216621397}
   - component: {fileID: 8706395518216621399}
   - component: {fileID: 2957904093619745126}
+  - component: {fileID: 4300188369288890778}
   - component: {fileID: 8706395518216621398}
   - component: {fileID: 8706395518216621396}
   - component: {fileID: 7005331145342925169}
   - component: {fileID: 5260510407227792469}
   - component: {fileID: 6744289972574355477}
   - component: {fileID: 5948690901605569390}
+  - component: {fileID: 1825458550731618312}
   m_Layer: 0
   m_Name: evill_doge
   m_TagString: Enemy
@@ -820,6 +822,23 @@ MonoBehaviour:
   tempAcceleration:
     baseValue: 0
   rateOfDistanceUpdate: 0.2
+--- !u!114 &4300188369288890778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706395518216621386}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathIndex: 0
+  startSpeed:
+    baseValue: 1.5
+  speed: 0
+  rateOfUpdateDistance: 0.2
 --- !u!114 &8706395518216621398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +857,7 @@ MonoBehaviour:
   enemyState: 0
   startHealth: 500
   armorStat: {fileID: 8706395518216621396}
-  UsePathFinding: 1
+  UsePathFinding: 0
   ChanceToEvade: 0.05
   worth: 9
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
@@ -924,3 +943,99 @@ MonoBehaviour:
   - {fileID: 8706395518216621392}
   healingBulletPrefab: {fileID: 6456669023222857168, guid: ad97ba18a56fb2945aaf62a2492462c6,
     type: 3}
+--- !u!82 &1825458550731618312
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706395518216621386}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

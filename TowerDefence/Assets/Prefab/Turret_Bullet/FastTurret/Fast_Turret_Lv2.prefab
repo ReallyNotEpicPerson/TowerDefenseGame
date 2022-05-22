@@ -201,7 +201,7 @@ MonoBehaviour:
     baseValue: 250
   spriteRenderer: {fileID: 2606175427658999817}
   fireRate:
-    baseValue: 1.2
+    baseValue: 1.01
   firePoint:
   - {fileID: 6380624998359712318}
   objectToRotate:
@@ -643,6 +643,11 @@ PrefabInstance:
     - target: {fileID: 73454084388115184, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
       propertyPath: numberOfTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 73454084388115184, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: fireRate.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 73454084388115184, guid: b21c6192f7b34654bb77431c04969ae4,

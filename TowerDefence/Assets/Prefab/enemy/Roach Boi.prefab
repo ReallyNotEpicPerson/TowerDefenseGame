@@ -916,6 +916,7 @@ MonoBehaviour:
   enemySprite: {fileID: 21300000, guid: ee0b2f0396b60524fb28f264ce0664eb, type: 3}
   enemyType: 0
   enemyState: 32
+  audioType: 0
   startHealth: 450
   armorStat: {fileID: 505748313974270357}
   UsePathFinding: 0

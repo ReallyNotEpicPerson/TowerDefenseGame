@@ -57,7 +57,14 @@ public class Shop : MonoBehaviour
     void SetButtonText(Button temp, int index)
     {
         temp.transform.GetChild(1).GetComponent<TMP_Text>().text = GameAsset.I.turret[index].prefab.name;
-        temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += GameAsset.I.turret[index].cost.ToString() + " $";
+        if (GameAsset.I.turret[index].cost < 1)
+        {
+            temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += "Free";
+        }
+        else
+        {
+            temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += GameAsset.I.turret[index].cost.ToString() + " $";
+        }
     }
     public void NewSelectTurret(TurretBluePrint turretBluePrint)
     {

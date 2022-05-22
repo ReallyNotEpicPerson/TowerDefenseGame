@@ -1,0 +1,14 @@
+Name,count,randomRateRange,startRate,endRate,path,useNavmesh,delayBetweenGroup
+Golem,2,FALSE,4,0,0,FALSE,2
+Slime,4,FALSE,4,0,0,FALSE,1
+Leg Man,5,FALSE,4,0,0,FALSE,0
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,

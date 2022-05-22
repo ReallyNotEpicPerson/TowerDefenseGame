@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 //[ExecuteInEditMode]
-public class TurretSetup : MonoBehaviour 
+public class TurretSetup : MonoBehaviour
 {
     //private List<TurretBluePrint> character;
     public Transform lineUp;
@@ -15,12 +16,16 @@ public class TurretSetup : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private LevelSelector levelSelector;
     [SerializeField] private GameObject turretToolTips;
+    [SerializeField] private GameObject Icons;
+    [SerializeField] private GameObject SupportTurretText;
+    [SerializeField] private GameObject SupportTurretIcon;
+
     [SerializeField] private Transform turretStat;
     private List<BaseTurretStat> turretStatsList = new List<BaseTurretStat>();
     private Dictionary<BaseTurretStat, BaseBulletClass> bullet = new Dictionary<BaseTurretStat, BaseBulletClass>();
     private List<TMP_Text> statText = new List<TMP_Text>();
 
-    private bool doneLerping=false;
+    private bool doneLerping = false;
 
     void Start()
     {
@@ -84,37 +89,51 @@ public class TurretSetup : MonoBehaviour
             //UnityEventTools.AddPersistentListener(delegate{ Deselect(but); });
         }
     }
-
     public void StatHovering(Button but)
     {
-        if(but.transform.childCount == 0 || !but.transform.GetChild(0).gameObject.activeSelf)
+        if (but.transform.childCount == 0 || !but.transform.GetChild(0).gameObject.activeSelf)
         {
             return;
         }
+        //turretToolTips.transform.Find("Icon").gameObject.SetActive(true);
         turretToolTips.SetActive(true);
         turretToolTips.transform.GetChild(0).GetComponent<TMP_Text>().text = turretStatsList[but.transform.GetSiblingIndex()].name;
         turretStat.parent.gameObject.transform.position = but.transform.position;
 
-        Debug.Log("Hovering");
+
         if (turretStatsList[but.transform.GetSiblingIndex()] is BulletTypeTurret)
         {
             //Debug.Log("Is BulletTypeTurret");
+            SupportTurretText.SetActive(false);
+            SupportTurretIcon.SetActive(false);
+
             BulletTypeTurret bulTurret = turretStatsList[but.transform.GetSiblingIndex()] as BulletTypeTurret;
             statText[0].text = bulTurret.GetDamage().ToString();
             statText[1].text = bulTurret.GetROF().ToString();
             statText[2].text = bulTurret.GetRange().ToString();
+            StringBuilder text = bulTurret.GetStatusEffect();
+            //statText[3].text = ;
         }
         else if (turretStatsList[but.transform.GetSiblingIndex()] is LazerTypeTurret)
         {
             //Debug.Log("Is LazerTypeTurret");
+            SupportTurretText.SetActive(false);
+            SupportTurretIcon.SetActive(false);
             LazerTypeTurret LazTurret = turretStatsList[but.transform.GetSiblingIndex()] as LazerTypeTurret;
             statText[0].text = LazTurret.GetDamage().ToString();
             statText[1].text = LazTurret.GetROF().ToString();
             statText[2].text = LazTurret.GetRange().ToString();
+            statText[3].text = LazTurret.GetStatusEffect().ToString();
         }
         else
         {
+            turretToolTips.transform.Find("Stats").gameObject.SetActive(false);
+            Icons.SetActive(false);
+            SupportTurretText.SetActive(true);
+            SupportTurretIcon.SetActive(true);
 
+            //turretToolTips. transform.Find("Icon").gameObject.SetActive(false);
+            //statText[0].text = "Increase Damage , Fire rate , Range ,  and Critical chance ";            
         }
     }
     public void Hide()
@@ -135,7 +154,7 @@ public class TurretSetup : MonoBehaviour
                     checkExistString.Add(button.transform.GetChild(0).GetChild(0).name);
                     button.transform.GetChild(0).SetParent(lineUp.transform.GetChild(i));
                     RectTransform startPosition = lineUp.transform.GetChild(i).GetChild(0).GetComponent<RectTransform>();
-                    doneLerping = false ;
+                    doneLerping = false;
                     StartCoroutine(ButtonLerping(startPosition, Vector3.zero, duration));
                     checkExistInt.Push(button.transform.GetSiblingIndex());
                     //SetCharacterFormation.characterLineUp.Add(character[button.transform.GetSiblingIndex()]);

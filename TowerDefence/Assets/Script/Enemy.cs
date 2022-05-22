@@ -57,6 +57,7 @@ public class Enemy : MonoBehaviour
     //public float speed;
     private float health;
     public int worth = 20;
+    private int reviveTime = 0;
     #endregion
 
     public GameObject dedFX;
@@ -123,6 +124,7 @@ public class Enemy : MonoBehaviour
     #endregion
     private void Awake()
     {
+        reviveTime = 0;
         TryGetComponent(out enemyColor);
         TryGetComponent(out audioSource);
         TryGetComponent(out animator);
@@ -360,7 +362,7 @@ public class Enemy : MonoBehaviour
     {
         return isDead;
     }
-    void Die()
+    public void Die()
     {
         RemoveALLDebuff();
         isDead = true;
@@ -384,7 +386,7 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Die");
         }
         StartCoroutine(FadeToBlack());
-        
+
         //Ded.SetActive(false);
         //gameObject.SetActive(false);
     }
@@ -396,7 +398,8 @@ public class Enemy : MonoBehaviour
             enemyColor.color = new Color(1, 1, 1, i);
             yield return null;
         }
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     public void FakeDeath()
     {
@@ -444,14 +447,18 @@ public class Enemy : MonoBehaviour
             enemyPathMovement.enabled = true;
         }
         enemyColor.enabled = true;
+        reviveTime++;
         //gameObject.SetActive(true);
-        //throw new NotImplementedException();
     }
     public void When_Insta_kill()//remove soon??
     {
         Handler.RemoveALLDebuff();
         DamageDisplayer.Create(transform.position,"INSTA KILL!!",DamageDisplayerType.Insta_kill);
         Die();//pooling
+    }
+    public int GetReviveTime()
+    {
+        return reviveTime;
     }
     #endregion
     #region for adjusting speed

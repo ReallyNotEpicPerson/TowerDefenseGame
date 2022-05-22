@@ -526,8 +526,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathIndex: 0
   startSpeed:
     baseValue: 3
+  distanceChangingWayPoint: 0.25
   speed: 0
   rateOfUpdateDistance: 0.2
 --- !u!114 &4981961317854357715
@@ -546,10 +548,11 @@ MonoBehaviour:
     type: 3}
   enemyType: 0
   enemyState: 0
+  audioType: 0
   startHealth: 25
   armorStat: {fileID: 4981961317854357713}
   UsePathFinding: 0
-  ChanceToEvade: 0.25
+  ChanceToEvade: 0.15
   worth: 2
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 5450742309842490568}

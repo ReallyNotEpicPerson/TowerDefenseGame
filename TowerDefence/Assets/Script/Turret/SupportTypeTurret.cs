@@ -4,13 +4,13 @@ using UnityEngine;
 public class SupportTypeTurret : BaseTurretStat
 {
     [SerializeField] private float damageIncreaseMod = 0;
-    [SerializeField] private float damageMax = 0.2f;//max += 50%/5
+    [SerializeField] private float damageMax = 0.5f;//max += 50%/5
     [SerializeField] private float rateOfFireIncreaseMod = 0;
-    [SerializeField] private float rateMax = 0.2f;//max += 30%/5
+    [SerializeField] private float rateMax = 0.3f;//max += 30%/5
     [SerializeField] private float rangeIncreaseMod = 0;
-    [SerializeField] private float rangeMax = 0.2f;//max += 30%/5
+    [SerializeField] private float rangeMax = 0.3f;//max += 30%/5
     [SerializeField] private float critDamageIncreaseMod = 0;
-    [SerializeField] private float critDamageMax = 0.2f;//max += 60%/5
+    [SerializeField] private float critDamageMax = 0.6f;//max += 60%/5
     [SerializeField] private float critChanceIncreaseMod = 0;
     [SerializeField] private float critChanceMax = 0.2f;//max += 20%/5
     private List<Collider2D> enemyList = new List<Collider2D>();
@@ -201,6 +201,26 @@ public class SupportTypeTurret : BaseTurretStat
                 enemyList.RemoveAt(i);
             }
         }
+    }
+    public float DamageIncrease()
+    {
+        return damageMax / 5;
+    }
+    public float RateOfFireIncrease()
+    {
+        return rateMax / 5;
+    }
+    public float RangeIncrease()
+    {
+        return rangeMax / 5;
+    }
+    public float CritDamageIncrease()
+    {
+        return critDamageMax / 5;
+    }
+    public float CritChanceIncrease()
+    {
+        return critChanceMax / 5;
     }
 }
 

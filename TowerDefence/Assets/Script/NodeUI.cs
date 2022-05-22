@@ -152,15 +152,23 @@ public class NodeUI : MonoBehaviour
                 upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = CurrentTurret.name;
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Fire rate:" + CurrentTurret.GetROF() + "\n");
-                Stat.Append("Range" + CurrentTurret.GetRange() + "\n");
+                Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case LazerTypeTurret CurrentTurret:
                 upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = CurrentTurret.name;
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Rate:" + CurrentTurret.GetROF() + "\n");
-                Stat.Append("Range" + CurrentTurret.GetRange() + "\n");
+                Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
+                break;
+            case SupportTypeTurret CurrentTurret:
+                upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = CurrentTurret.name;
+                Stat.Append("Damage:" + CurrentTurret.DamageIncrease() + "\n");
+                Stat.Append("Rate of fire:" + CurrentTurret.RateOfFireIncrease() + "\n");
+                Stat.Append("Range:" + CurrentTurret.RangeIncrease() + "\n");
+                Stat.Append("CritChance:" + CurrentTurret.CritChanceIncrease() + "\n");
+                Stat.Append("CritDamage:" + CurrentTurret.CritDamageIncrease() + "\n");
                 break;
             default:
                 Debug.Log("how?");
@@ -172,8 +180,8 @@ public class NodeUI : MonoBehaviour
     {
         HidePresentTurret();
         UpgradeTurretStat(i);
-        var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-        UpgradeStatPanel.transform.position = cam.ScreenToWorldPoint(screenPoint);
+        //var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+        //UpgradeStatPanel.transform.position = cam.ScreenToWorldPoint(screenPoint);
         UpgradeStatPanel.SetActive(true);
     }
     public void HideUpgradePanel()
@@ -207,28 +215,24 @@ public class NodeUI : MonoBehaviour
             case BulletTypeTurret upgradeVersion:
                 upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = upgradeVersion.name;
                 //Debug.Log("Yes it is");
-                //BulletTypeTurret presentBulletTurretVersion = present as BulletTypeTurret;
-                //Stat.Append(presentBulletTurretVersion.CompareTurretStat(upgradeVersion));
-
                 Stat.Append("Damage:" + upgradeVersion.GetDamage() + "\n");
                 Stat.Append("Fire rate:" + upgradeVersion.GetROF() + "\n");
-                Stat.Append("Range" + upgradeVersion.GetRange() + "\n");
-
+                Stat.Append("Range:" + upgradeVersion.GetRange() + "\n");
+                Stat.Append(upgradeVersion.GetStatusEffect() + "\n");
                 break;
             case LazerTypeTurret upgradeVersion:
                 upgradeStat.transform.parent.Find("Name").GetComponent<TMP_Text>().text = upgradeVersion.name;
-
-                //LazerTypeTurret presentLazerTurretVersion = present as LazerTypeTurret;
-                //Stat.Append(presentLazerTurretVersion.TurretStat(upgradeVersion));
                 Stat.Append("Damage:" + upgradeVersion.GetDamage() + "\n");
                 Stat.Append("Rate:" + upgradeVersion.GetROF() + "\n");
-                Stat.Append("Range" + upgradeVersion.GetRange() + "\n");
+                Stat.Append("Range:" + upgradeVersion.GetRange() + "\n");
+                Stat.Append(upgradeVersion.GetStatusEffect() + "\n");
+                break;
+            case SupportTypeTurret upgradeVersion:
                 break;
             default:
                 Debug.Log("how?");
                 break;
         }
-        //Stat.Append("GEI");
         upgradeStat.text = Stat.ToString();
     }
     public void SupportTurretUpgrade(int i)

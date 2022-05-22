@@ -52,12 +52,12 @@ MonoBehaviour:
   passiveAbility: 0
   numberOfTarget: 1
   range:
-    baseValue: 3
+    baseValue: 3.5
   rotationSpeed:
     baseValue: 250
   spriteRenderer: {fileID: 757579695089883395}
   fireRate:
-    baseValue: 1.25
+    baseValue: 1.215
   firePoint:
   - {fileID: 4335083091487607380}
   objectToRotate:
@@ -316,12 +316,12 @@ MonoBehaviour:
   passiveAbility: 0
   numberOfTarget: 1
   range:
-    baseValue: 3
+    baseValue: 3.5
   rotationSpeed:
     baseValue: 250
   spriteRenderer: {fileID: 7155925367419306950}
   fireRate:
-    baseValue: 1.25
+    baseValue: 1.21
   firePoint:
   - {fileID: 5247798683001591596}
   objectToRotate:
@@ -492,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 5319760653419966975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_Children: []
   m_Father: {fileID: 2343590425587155072}
   m_RootOrder: 0
@@ -606,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 5730087591925918207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.06, y: -0.22, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_Children: []
   m_Father: {fileID: 3731947106113389616}
   m_RootOrder: 0
@@ -1004,8 +1004,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 73454084388115184, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
+      propertyPath: range.baseValue
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 73454084388115184, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
       propertyPath: fireRate.baseValue
-      value: 1.25
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1417081888062188752, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
@@ -1086,6 +1091,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fast_Turret_tree_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428752716536030899, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428752716536030899, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428752716536030899, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3428752716536030899, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}

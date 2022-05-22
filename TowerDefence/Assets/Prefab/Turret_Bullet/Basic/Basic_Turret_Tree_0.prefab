@@ -387,7 +387,7 @@ MonoBehaviour:
     baseValue: 200
   spriteRenderer: {fileID: 2924406562392101156}
   fireRate:
-    baseValue: 1.25
+    baseValue: 1.2
   firePoint:
   - {fileID: 7104437715986213567}
   objectToRotate:

@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2949ec4d4e583f744bae0ab6f03d8b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathIndex: 0
   startSpeed:
     baseValue: 1.5
   speed: 0
@@ -530,11 +531,12 @@ MonoBehaviour:
     type: 3}
   enemyType: 0
   enemyState: 0
+  audioType: 0
   startHealth: 120
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 0
   ChanceToEvade: 0.001
-  worth: 4
+  worth: 5
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}
   Handler: {fileID: 3727310694209542962}

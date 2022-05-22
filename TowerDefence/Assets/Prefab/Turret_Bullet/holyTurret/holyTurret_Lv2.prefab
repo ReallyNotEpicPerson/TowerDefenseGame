@@ -116,6 +116,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7421036807190492632, guid: 900c929befa94cd44ad28b13c4c8b669,
         type: 3}
+    - target: {fileID: 6095913599911107032, guid: b342c62d036f7d047b20aaa10b25179a,
+        type: 3}
+      propertyPath: fireRate.baseValue
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6360027323224681239, guid: b342c62d036f7d047b20aaa10b25179a,
         type: 3}
       propertyPath: m_RootOrder

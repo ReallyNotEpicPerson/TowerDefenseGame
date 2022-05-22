@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 1092742543033887188}
   - component: {fileID: -7411040791109626361}
   m_Layer: 0
-  m_Name: Leg man
+  m_Name: Leg Man
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,6 +765,7 @@ MonoBehaviour:
   pathIndex: 0
   startSpeed:
     baseValue: 2.5
+  distanceChangingWayPoint: 0.2
   speed: 0
   rateOfUpdateDistance: 0.2
 --- !u!114 &8265412206029175015
@@ -783,11 +784,12 @@ MonoBehaviour:
     type: 3}
   enemyType: 0
   enemyState: 0
+  audioType: 0
   startHealth: 35
   armorStat: {fileID: 7910831844611192336}
   UsePathFinding: 0
   ChanceToEvade: 0.05
-  worth: 2
+  worth: 4
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 7156076364990073353}
   Handler: {fileID: 8371154531913433653}

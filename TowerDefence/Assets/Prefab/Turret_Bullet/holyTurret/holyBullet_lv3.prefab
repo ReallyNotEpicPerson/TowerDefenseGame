@@ -81,6 +81,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7496929160817794295, guid: 4798507d9cfef2a45a67d937779b6804,
         type: 3}
+      propertyPath: critChance.baseValue
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496929160817794295, guid: 4798507d9cfef2a45a67d937779b6804,
+        type: 3}
       propertyPath: bulletDamage.baseValue
       value: 39
       objectReference: {fileID: 0}

@@ -9,6 +9,7 @@ public class EnemyPathMovement : MonoBehaviour
     private int wpIndex = 0;
     private bool turnBack = false;
     public CharacterStat startSpeed;
+    public float distanceChangingWayPoint = 0.1f;
     [HideInInspector]
     public float speed;
     private float distanceRemain;
@@ -27,6 +28,14 @@ public class EnemyPathMovement : MonoBehaviour
         {
             Target = WayPoint.Points2[0];
         }
+        else if (pathIndex == 2)
+        {
+            Target = WayPoint.Points3[0];
+        }
+        /*else if (pathIndex == 3)
+        {
+            Target = WayPoint.Points4[0];
+        }*/
         speed = startSpeed.value;
     }
     void Update()
@@ -39,14 +48,14 @@ public class EnemyPathMovement : MonoBehaviour
 
             if (turnBack == false)
             {
-                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     NextWayPoint_0();
                 }
             }
             else
             {
-                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     PreviousWayPoint_0();
                 }
@@ -66,14 +75,14 @@ public class EnemyPathMovement : MonoBehaviour
 
             if (turnBack == false)
             {
-                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     NextWayPoint_1();
                 }
             }
             else
             {
-                if (Vector3.Distance(transform.position, Target.position) <= 0.1f)
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     PreviousWayPoint_1();
                 }
@@ -81,6 +90,33 @@ public class EnemyPathMovement : MonoBehaviour
             if (rate <= 0)
             {
                 distanceRemain = PathRemainingDistanceSecondPath();
+                rate = rateOfUpdateDistance;
+            }
+            rate -= Time.deltaTime;
+        }
+        else if (pathIndex == 2)
+        {
+            Vector3 dir = Target.position - transform.position;
+            transform.Translate(speed * Time.deltaTime * dir.normalized, Space.World);
+            //DistantCovered += Vector3.Distance()
+
+            if (turnBack == false)
+            {
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
+                {
+                    NextWayPoint_2();
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
+                {
+                    PreviousWayPoint_2();
+                }
+            }
+            if (rate <= 0)
+            {
+                distanceRemain = PathRemainingDistanceThirdPath();
                 rate = rateOfUpdateDistance;
             }
             rate -= Time.deltaTime;
@@ -117,6 +153,10 @@ public class EnemyPathMovement : MonoBehaviour
             {
                 NextWayPoint_1();
             }
+            else if (pathIndex == 2)
+            {
+                NextWayPoint_2();
+            }
         }
         else
         {
@@ -127,6 +167,10 @@ public class EnemyPathMovement : MonoBehaviour
             else if (pathIndex == 1)
             {
                 PreviousWayPoint_1();
+            }
+            else if (pathIndex == 2)
+            {
+                PreviousWayPoint_2();
             }
         }
     }
@@ -150,6 +194,16 @@ public class EnemyPathMovement : MonoBehaviour
         wpIndex++;
         Target = WayPoint.Points2[wpIndex];
     }
+    private void NextWayPoint_2()
+    {
+        if (wpIndex >= WayPoint.Points3.Length - 1)
+        {
+            EndPath();
+            return;
+        }
+        wpIndex++;
+        Target = WayPoint.Points3[wpIndex];
+    }
     private void PreviousWayPoint_0()
     {
         if (wpIndex == 0)
@@ -169,6 +223,16 @@ public class EnemyPathMovement : MonoBehaviour
         }
         wpIndex--;
         Target = WayPoint.Points2[wpIndex];
+    }
+    private void PreviousWayPoint_2()
+    {
+        if (wpIndex == 0)
+        {
+            //EndPath();
+            return;
+        }
+        wpIndex--;
+        Target = WayPoint.Points3[wpIndex];
     }
     void EndPath()
     {
@@ -211,6 +275,20 @@ public class EnemyPathMovement : MonoBehaviour
                 continue;
             }
             distance += Vector3.SqrMagnitude(WayPoint.Points2[i].position - WayPoint.Points2[i + 1].position);
+        }
+        return distance;
+    }
+    public float PathRemainingDistanceThirdPath()
+    {
+        float distance = 0.0f;
+        for (int i = wpIndex; i < WayPoint.Points3.Length - 2; ++i)
+        {
+            if (i == wpIndex)
+            {
+                distance += Vector3.SqrMagnitude(transform.position - WayPoint.Points3[i].position);
+                continue;
+            }
+            distance += Vector3.SqrMagnitude(WayPoint.Points3[i].position - WayPoint.Points3[i + 1].position);
         }
         return distance;
     }

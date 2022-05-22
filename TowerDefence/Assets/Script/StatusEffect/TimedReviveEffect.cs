@@ -12,7 +12,13 @@ public class TimedReviveEffect : TimedEffect
     public override void End()
     {        
         _enemy.OneOffFX(this);
-        _enemy.Revive();
+        Revive revive = Effect as Revive;
+        if(_enemy.GetReviveTime() < revive.reviveTime )
+            _enemy.Revive();
+        else
+        {
+            _enemy.Die();
+        }
     }
     protected override void ApplyEffect()
     {

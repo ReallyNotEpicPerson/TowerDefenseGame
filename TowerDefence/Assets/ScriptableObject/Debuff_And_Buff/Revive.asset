@@ -22,3 +22,4 @@ MonoBehaviour:
   _duration: 5
   chance: 0.5
   description: 'Chance to revive enemy '
+  reviveTime: 1

@@ -102,7 +102,7 @@ MonoBehaviour:
   bulletDamage:
     baseValue: 25
   critChance:
-    baseValue: 0.02
+    baseValue: 0
   critDamage:
     baseValue: 2
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,

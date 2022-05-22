@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1531857793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 3.2, y: 3.2, z: 3.2}
   m_Children: []
   m_Father: {fileID: 7795383519892621620}
   m_RootOrder: 1
@@ -10069,13 +10069,13 @@ MonoBehaviour:
   passiveAbility: 0
   numberOfTarget: 1
   range:
-    baseValue: 3
+    baseValue: 3.2
   rotationSpeed:
     baseValue: 200
   spriteRenderer: {fileID: 4264913545566152522}
   bulletType: 2
   critChance:
-    baseValue: 0.01
+    baseValue: 0
   critDamage:
     baseValue: 2
   damageOverTime:

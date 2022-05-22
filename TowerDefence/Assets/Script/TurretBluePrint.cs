@@ -57,7 +57,7 @@ public class TurretBluePrint
 {
     public GameObject prefab;
     public int cost;
-
+    public bool CanBeBuild = true;
     [SerializeField] private float sellPtcReduction = 0.75f;
     public GameObject[] upgradePrefabs;
     public int[] upgradeCosts;

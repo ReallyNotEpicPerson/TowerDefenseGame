@@ -32387,6 +32387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondPath: {fileID: 1435464070}
+  thirdPath: {fileID: 0}
 --- !u!1 &1964679994
 GameObject:
   m_ObjectHideFlags: 0
@@ -33500,22 +33501,11 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 2
     enemy:
-    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+    - sprite: {fileID: -6897147555146677718, guid: b270c6dd3f7f7d246bbfd82a5e7c6513,
         type: 3}
-      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+      enemy: {fileID: 262966061738052319, guid: 421de2aaeac77ef41a80fd4d5321daf7,
         type: 3}
-      count: 4
-      randomRateRange: 0
-      startRate: 3
-      endRate: 0
-      path: 0
-      useNavmesh: 0
-      delayBetweenGroup: 1
-    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
-        type: 3}
-      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
-        type: 3}
-      count: 4
+      count: 3
       randomRateRange: 0
       startRate: 3
       endRate: 0
@@ -33535,7 +33525,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 3
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 3
@@ -33591,7 +33582,8 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 3
@@ -33684,7 +33676,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 7
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 7
@@ -33727,7 +33720,8 @@ MonoBehaviour:
       path: 1
       useNavmesh: 0
       delayBetweenGroup: 1
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 6
@@ -33739,7 +33733,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 8
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 8
@@ -33749,7 +33744,8 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 8
@@ -33794,7 +33790,8 @@ MonoBehaviour:
       path: 1
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 5
@@ -33806,7 +33803,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 10
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 5
@@ -33838,7 +33836,8 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 5
@@ -33918,7 +33917,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 12
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 4
@@ -33928,7 +33928,8 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 2
@@ -34008,7 +34009,8 @@ MonoBehaviour:
       delayBetweenGroup: 0
   - waveName: 14
     enemy:
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 5
@@ -34018,7 +34020,8 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
-    - sprite: {fileID: 21300000, guid: 28d8e61e2c691414ab88ad82a9008d32, type: 3}
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       count: 5

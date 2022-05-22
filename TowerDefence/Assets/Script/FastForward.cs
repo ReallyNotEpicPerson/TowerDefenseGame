@@ -11,6 +11,13 @@ public class FastForward : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Increase();
+        }
+    }
     public void Increase() 
     {
         i++;
@@ -21,6 +28,6 @@ public class FastForward : MonoBehaviour
         }
         Time.timeScale = i;    
     }
-
+    
 
 }

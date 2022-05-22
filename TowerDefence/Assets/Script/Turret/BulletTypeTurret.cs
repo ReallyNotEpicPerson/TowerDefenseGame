@@ -69,11 +69,11 @@ public class BulletTypeTurret : BaseTurretStat
     public override void Start()
     {
         base.Start();
-        FireCountDown = 1 / fireRate.value;
+        FireCountDown = 0;
     }
     void Update()
     {
-        if (  target.Count == 0 || target[0]==null)
+        if (target.Count == 0 || target[0] == null)
         {
             return;
         }
@@ -265,530 +265,147 @@ public class BulletTypeTurret : BaseTurretStat
         //text.Append("Range:" + range.value + "\n");
         return text;
     }
+    public void GetSlow()
+    {
+        StringBuilder text = new StringBuilder();
+
+        SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+        if (SE.chance < 1)
+        {
+            text.Append(SE.chance * 100 + "% chance" + " to ");
+        }
+        if (SE.ID.Contains("SL"))
+        {
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+        }
+        else if (SE.ID.Contains("STUN"))
+        {
+            text.Append(SE.description + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+        }
+        else if (SE.ID.Contains("TUR"))
+        {
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "each shot" + "\n");
+        }
+        if (SE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + SE.stackTime + "\n");
+        }
+
+    }
+    public void GetDOTS()
+    {
+        StringBuilder text = new StringBuilder();
+
+        DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
+
+        if (DE.chance < 1)
+        {
+            text.Append(DE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value}</color>" + " per " + DE.rate.value + "s" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
+        if (DE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + DE.stackTime + "\n");
+            text.Append("Damage increase rate :" + DE.damageIncreaseRate.statValue.value + "\n");
+            text.Append("time reduction rate :" + "-" + DE.rateIncrease.statValue.value + "s" + "\n");
+        }
+
+    }
+    public void GetFear()
+    {
+        StringBuilder text = new StringBuilder();
+        FearEffect FE = fxManager.GetFearEffect() as FearEffect;
+        if (FE.chance < 1)
+        {
+            text.Append(FE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE._duration + "s"}</color>" + "\n");
+        if (FE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + FE.stackTime + "\n");
+        }
+
+    }
+    public void GetWeaken()
+    {
+        StringBuilder text = new StringBuilder();
+
+        Weaken WE = fxManager.GetWeakenEffect() as Weaken;
+        if (WE.chance < 1)
+        {
+            text.Append(WE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(WE.description);
+        if (WE.extraDamageTaken.modType.HasFlag(StatModType.Flat))
+        {
+            text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value}</color>" + " Damage " + "\n");
+        }
+        else if (WE.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || WE.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
+        {
+            text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value + "%"}</color>" + " Damage " + "\n");
+        }
+        if (WE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + WE.stackTime + "\n");
+            text.Append("Extra Damage taken rate :" + " +" + WE.increaseRate.statValue.value + "\n");
+            //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
+        }
+    }
+    public void GetArmorBreaking()
+    {
+        StringBuilder text = new StringBuilder();
+
+        ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
+        if (ABE.chance < 1)
+        {
+            text.Append(ABE.chance * 100 + " to ");
+        }
+        text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
+
+    }
     public StringBuilder GetStatusEffect()
     {
         StringBuilder text = new StringBuilder();
-        if (bu.bulletType.HasFlag(BulletType.SlowPerSecond))
-        {
-            SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
-            /*
-            if (SE._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
-            {
-                if (SE.ID.Contains("SL"))
-                {
-                    text.Append("Slow:");
-                }
-                else if (SE.ID.Contains("TUR"))
-                {
-                    text.Append("SpeedBoost:");
-                }
-                text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%" }</color>" + "\n");
-            }
-            if (SE._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-            {
-                if (SE.ID.Contains("SL"))
-                {
-                    text.Append("Slow:");
-                }
-                else if (SE.ID.Contains("TUR"))
-                {
-                    text.Append("SpeedBoost:");
-                }
-                text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#ff0000ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "\n");
-            }
 
-            if (SE._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-            {
-                if (SE.ID.Contains("SL"))
-                {
-                    text.Append("Slow:");
-                }
-                else if (SE.ID.Contains("TUR"))
-                {
-                    text.Append("SpeedBoost:");
-                }
-                text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{SE._duration + "s"}</color>" + "\n");
-            }*/
-            if (SE.chance < 1)
-            {
-                text.Append(SE.chance * 100 + "%" + " to ");
-            }
-            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " in " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
-            if (SE.effectType.HasFlag(EffectType.StackingEffect))
-            {
-                text.Append("Can stack to " + SE.stackTime + "\n");
-            }
-        }
-        /*if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Dots))
+        if (bu.bulletType.HasFlag(BulletType.ArmorBreaking))
         {
-            DotsEffect up = upgradeVersion.fxManager.GetDOTSEffect() as DotsEffect;
-            if (bu.bulletType.HasFlag(BulletType.Dots))
+            ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
+            if (ABE.chance < 1)
             {
-                DotsEffect pre = this.fxManager.GetDOTSEffect() as DotsEffect;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.damagePerRate.value > pre.damagePerRate.value)//Better
-                {
-                    if (up.ID.Contains("POI"))
-                    {
-                        text.Append("Poison damage:");
-                    }
-                    else if (up.ID.Contains("BU"))
-                    {
-                        text.Append("Burn damage:");
-                    }
-                    text.Append(pre.damagePerRate.value + "->" + $"<color=#00ff00ff>{up.damagePerRate.value}</color>" + "\n");
-                }
-                if (up.damagePerRate.value < pre.damagePerRate.value)
-                {
-                    if (up.ID.Contains("POI"))
-                    {
-                        text.Append("Poison damage:");
-                    }
-                    else if (up.ID.Contains("BU"))
-                    {
-                        text.Append("Burn damage:");
-                    }
-                    text.Append(pre.damagePerRate.value + "->" + $"<color=#ff0000ff>{up.damagePerRate.value}</color>" + "\n");
-                }
-                if (up.rate.value > pre.rate.value)//Better
-                {
-                    text.Append("rate:" + pre.rate.value + "s" + "->" + $"<color=#00ff00ff>{up.rate.value + "s" }</color>" + "\n");
-                }
-                if (up.rate.value > pre.rate.value)
-                {
-                    text.Append("rate:" + pre.rate.value + "s" + "->" + $"<color=#ff0000ff>{up.rate.value + "s"}</color>" + "\n");
-                }
+                text.Append(ABE.chance * 100 + " to ");
             }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + " " + $"<color=#00ff00ff>{up.damagePerRate.value }</color>" + " damage per " + $"<color=#00ff00ff>{ up.rate.value + "s"}</color>" + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    text.Append("Damage increase rate :" + up.damageIncreaseRate.statValue.value + "\n");
-                    text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
+            text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
         }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Fear))
-        {
-            FearEffect up = upgradeVersion.fxManager.GetFearEffect() as FearEffect;
-            if (bu.bulletType.HasFlag(BulletType.Fear))
-            {
-                FearEffect pre = fxManager.GetFearEffect() as FearEffect;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    //text.Append("Damage increase rate :" + up.damageIncreaseRate.statValue.value + "\n");
-                    //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Weaken))
-        {
-            Weaken up = upgradeVersion.fxManager.GetWeakenEffect() as Weaken;
-            if (bu.bulletType.HasFlag(BulletType.Fear))
-            {
-                Weaken pre = fxManager.GetWeakenEffect() as Weaken;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description);
-                //+ $"<color=#00ff00ff>{up.extraDamageTaken.statValue}</color>");
-                if (up.extraDamageTaken.modType.HasFlag(StatModType.Flat))
-                {
-                    text.Append($"<color=#00ff00ff>{"+" + up.extraDamageTaken.statValue.value}</color>" + "\n");
-                }
-                else if (up.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || up.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
-                {
-                    text.Append($"<color=#00ff00ff>{up.extraDamageTaken.statValue.value + "%"}</color>" + "\n");
-                }
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    text.Append("Extra Damage taken rate :" + " +" + up.increaseRate.statValue.value + "\n");
-                    //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.ArmorBreaking))
-        {
-            ArmorBreaking up = upgradeVersion.fxManager.GetWeakenEffect() as ArmorBreaking;
-            if (bu.bulletType.HasFlag(BulletType.ArmorBreaking))
-            {
-                ArmorBreaking pre = fxManager.GetArmorBreakEffect() as ArmorBreaking;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + "\n");
-            }
-        }*/
         return text;
     }
-    public StringBuilder CompareTurretStat(BulletTypeTurret upgradeVersion)
+    public Sprite StatusEffectSprite()
     {
-        StringBuilder text = new StringBuilder();
-        if (upgradeVersion.bu.bulletDamage.baseValue > this.bu.bulletDamage.baseValue)
+        switch (bu.bulletType)
         {
-            text.Append("Damage:" + bu.bulletDamage.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.bu.bulletDamage.baseValue }</color>" + "\n");
+            case BulletType.SlowPerSecond:
+                SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+                return SE.Icon;
+            case BulletType.Dots:
+                DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
+                return DE.Icon;
+            case BulletType.Fear:
+                FearEffect FE = fxManager.GetFearEffect() as FearEffect;
+                return FE.Icon;
+            case BulletType.Insta_Kill:
+                break;
+            case BulletType.Weaken:
+                Weaken WE = fxManager.GetWeakenEffect() as Weaken;
+                return WE.Icon;
+            case BulletType.ArmorBreaking:
+                ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
+                return ABE.Icon;
+            case BulletType.PiercingShot:
+                break;
+            default:
+                break;
         }
-        if (upgradeVersion.bu.bulletDamage.baseValue < this.bu.bulletDamage.baseValue)
-        {
-            text.Append("Damage:" + bu.bulletDamage.baseValue + "->" + $"<color=#ff0000ff>{upgradeVersion.bu.bulletDamage.baseValue }</color>" + "\n");
-        }
-        if (upgradeVersion.bu.critChance.baseValue > this.bu.critChance.baseValue)
-        {
-            text.Append("Crit%:" + bu.critChance.baseValue + "%" + "->" + $"<color=#00ff00ff>{upgradeVersion.bu.critChance.baseValue + "%"}</color>" + "\n");
-        }
-        if (upgradeVersion.bu.critChance.baseValue < this.bu.critChance.baseValue)
-        {
-            text.Append("Crit%:" + bu.critChance.baseValue + "%" + "->" + $"<color=#ff0000ff>{upgradeVersion.bu.critChance.baseValue + "%"}</color>" + "\n");
-        }
-        if (upgradeVersion.fireRate.baseValue > fireRate.baseValue)
-        {
-            text.Append("Fire rate:" + fireRate.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.fireRate.baseValue}</color>" + "\n");
-        }
-        if (upgradeVersion.fireRate.baseValue < fireRate.baseValue)
-        {
-            text.Append("Fire rate:" + fireRate.baseValue + "->" + $"<color=#ff0000ff>{upgradeVersion.fireRate.baseValue}</color>" + "\n");
-        }
-        if (upgradeVersion.range.baseValue > range.baseValue)
-        {
-            text.Append("Range:" + range.baseValue + "->" + $"<color=#00ff00ff>{upgradeVersion.range.baseValue}</color>" + "\n");
-        }
-        if (upgradeVersion.range.baseValue < range.baseValue)
-        {
-            text.Append("Range:" + range.baseValue + "->" + $"<color=#ff0000ff>{upgradeVersion.range.baseValue}</color>" + "\n");
-        }
-        //StatusEffect 
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Insta_Kill))
-        {
-            Insta_Kill up = upgradeVersion.fxManager.GetInsta_KillEffect() as Insta_Kill;
-            if (bu.bulletType.HasFlag(BulletType.Insta_Kill))
-            {
-                Insta_Kill pre = this.fxManager.GetInsta_KillEffect() as Insta_Kill;
-                if (up.chance > pre.chance)
-                {
-                    text.Append("Insta-kill Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%"}</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Insta-kill Chance:" + pre.chance * 100 + " %" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                text.Append(up.description + " " + $"<color=#2596beff>{up.chance * 100 + " %"}</color>" + "\n");
-            }
-            //+ $"<color=#00ff00ff>{upgradeVersion.range.baseValue}</color>" + "\n");
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.SlowPerSecond))
-        {
-            SlowEffect up = upgradeVersion.fxManager.GetSlowEffect() as SlowEffect;
-            if (bu.bulletType.HasFlag(BulletType.SlowPerSecond))
-            {
-                SlowEffect pre = this.fxManager.GetSlowEffect() as SlowEffect;
-                if (up.chance > pre.chance)//better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#00ff00ff>{up._slowPercentage.statValue.value * 100 + "%" }</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._slowPercentage.statValue.value * 100 + "%" + "->" + $"<color=#ff0000ff>{up._slowPercentage.statValue.value * 100 + "%"}</color>" + "\n");
-                }
-                if (up._duration > pre._duration)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#00ff00ff>{up._duration + "s" }</color>" + "\n");
-                }
-                if (up._duration < pre._duration)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("Duration:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{up._duration + "s"}</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value > pre._slowPercentage.statValue.value)//better
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#00ff00ff>{up._duration + "s"}</color>" + "\n");
-                }
-                if (up._slowPercentage.statValue.value < pre._slowPercentage.statValue.value)
-                {
-                    if (up.ID.Contains("SL"))
-                    {
-                        text.Append("Slow:");
-                    }
-                    else if (up.ID.Contains("TUR"))
-                    {
-                        text.Append("SpeedBoost:");
-                    }
-                    text.Append(pre._duration + "s" + "->" + $"<color=#ff0000ff>{up._duration + "s"}</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + "%" + " to ");
-                }
-                text.Append(up.description + " " + $"<color=#00ff00ff>{up._slowPercentage.statValue.value * 100 + "%"}</color>" + " in " + $"<color=#00ff00ff>{ up._duration + "s"}</color>" + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Dots))
-        {
-            DotsEffect up = upgradeVersion.fxManager.GetDOTSEffect() as DotsEffect;
-            if (bu.bulletType.HasFlag(BulletType.Dots))
-            {
-                DotsEffect pre = this.fxManager.GetDOTSEffect() as DotsEffect;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.damagePerRate.value > pre.damagePerRate.value)//Better
-                {
-                    if (up.ID.Contains("POI"))
-                    {
-                        text.Append("Poison damage:");
-                    }
-                    else if (up.ID.Contains("BU"))
-                    {
-                        text.Append("Burn damage:");
-                    }
-                    text.Append(pre.damagePerRate.value + "->" + $"<color=#00ff00ff>{up.damagePerRate.value}</color>" + "\n");
-                }
-                if (up.damagePerRate.value < pre.damagePerRate.value)
-                {
-                    if (up.ID.Contains("POI"))
-                    {
-                        text.Append("Poison damage:");
-                    }
-                    else if (up.ID.Contains("BU"))
-                    {
-                        text.Append("Burn damage:");
-                    }
-                    text.Append(pre.damagePerRate.value + "->" + $"<color=#ff0000ff>{up.damagePerRate.value}</color>" + "\n");
-                }
-                if (up.rate.value > pre.rate.value)//Better
-                {
-                    text.Append("rate:" + pre.rate.value + "s" + "->" + $"<color=#00ff00ff>{up.rate.value + "s" }</color>" + "\n");
-                }
-                if (up.rate.value > pre.rate.value)
-                {
-                    text.Append("rate:" + pre.rate.value + "s" + "->" + $"<color=#ff0000ff>{up.rate.value + "s"}</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + " " + $"<color=#00ff00ff>{up.damagePerRate.value }</color>" + " damage per " + $"<color=#00ff00ff>{ up.rate.value + "s"}</color>" + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    text.Append("Damage increase rate :" + up.damageIncreaseRate.statValue.value + "\n");
-                    text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Fear))
-        {
-            FearEffect up = upgradeVersion.fxManager.GetFearEffect() as FearEffect;
-            if (bu.bulletType.HasFlag(BulletType.Fear))
-            {
-                FearEffect pre = fxManager.GetFearEffect() as FearEffect;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + "\n");
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    //text.Append("Damage increase rate :" + up.damageIncreaseRate.statValue.value + "\n");
-                    //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.Weaken))
-        {
-            Weaken up = upgradeVersion.fxManager.GetWeakenEffect() as Weaken;
-            if (bu.bulletType.HasFlag(BulletType.Fear))
-            {
-                Weaken pre = fxManager.GetWeakenEffect() as Weaken;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description);
-                //+ $"<color=#00ff00ff>{up.extraDamageTaken.statValue}</color>");
-                if (up.extraDamageTaken.modType.HasFlag(StatModType.Flat))
-                {
-                    text.Append($"<color=#00ff00ff>{"+" + up.extraDamageTaken.statValue.value}</color>" + "\n");
-                }
-                else if (up.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || up.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
-                {
-                    text.Append($"<color=#00ff00ff>{up.extraDamageTaken.statValue.value + "%"}</color>" + "\n");
-                }
-                if (up.effectType.HasFlag(EffectType.StackingEffect))
-                {
-                    text.Append("Can stack to " + up.stackTime + "\n");
-                    text.Append("Extra Damage taken rate :" + " +" + up.increaseRate.statValue.value + "\n");
-                    //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-                }
-            }
-        }
-        if (upgradeVersion.bu.bulletType.HasFlag(BulletType.ArmorBreaking))
-        {
-            ArmorBreaking up = upgradeVersion.fxManager.GetWeakenEffect() as ArmorBreaking;
-            if (bu.bulletType.HasFlag(BulletType.ArmorBreaking))
-            {
-                ArmorBreaking pre = fxManager.GetArmorBreakEffect() as ArmorBreaking;
-                if (up.chance > pre.chance)//Better
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#00ff00ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-                if (up.chance < pre.chance)
-                {
-                    text.Append("Chance:" + pre.chance * 100 + "%" + "->" + $"<color=#ff0000ff>{up.chance * 100 + "%" }</color>" + "\n");
-                }
-            }
-            else
-            {
-                if (up.chance < 1)
-                {
-                    text.Append(up.chance * 100 + " to ");
-                }
-                text.Append(up.description + "\n");
-            }
-        }
-        return text;
+        Debug.LogError("OH FUCK FUCK FUCK NO Sprite");
+        return null;
     }
 
 #if UNITY_EDITOR

@@ -295,6 +295,7 @@ MonoBehaviour:
     type: 3}
   enemyType: 0
   enemyState: 0
+  audioType: 0
   startHealth: 50
   armorStat: {fileID: 262966061738052289}
   UsePathFinding: 0

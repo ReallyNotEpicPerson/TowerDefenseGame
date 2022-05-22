@@ -28,5 +28,5 @@ MonoBehaviour:
   increaseRate:
     modType: 100
     statValue:
-      baseValue: -0.05
+      baseValue: 0.05
   stackTime: 5

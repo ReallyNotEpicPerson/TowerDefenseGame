@@ -19,9 +19,9 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 2
+  _duration: 3
   chance: 1
-  description: BURN SHIZ UP!!!
+  description: Burn enemy
   damagePerRate:
     baseValue: 5
   rate:

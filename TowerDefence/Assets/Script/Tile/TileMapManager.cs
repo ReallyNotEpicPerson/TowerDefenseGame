@@ -228,7 +228,7 @@ public class TileMapManager : MonoBehaviour
     }
     public bool BuildTurret(TurretBluePrint blueprint)
     {
-        if (PlayerStat.moneyInGame < blueprint.cost || AcceptablePosition())
+        if (PlayerStat.moneyInGame < blueprint.cost || AcceptablePosition() || !blueprint.CanBeBuild)
         {
             Debug.Log("Nah U poor! or that spot is not okay!! >:-<");
 

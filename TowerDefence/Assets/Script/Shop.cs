@@ -29,14 +29,14 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < GameAsset.I.formation.characterLineUp.Length; i++)
         {
-            //if(Shithappen)
-                Button temp = Instantiate(button);
-                temp.transform.SetParent(parenting, false);
-                temp.name = "Button " + i;
-                TurretBluePrint tempTurret = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[i]];
-                temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
-                temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite[GameAsset.I.formation.characterLineUp[i]];
-                SetButtonText(temp, GameAsset.I.formation.characterLineUp[i]);
+            Button temp = Instantiate(button);
+            temp.transform.SetParent(parenting, false);
+            temp.name = "Button " + i;
+            TurretBluePrint tempTurret = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[i]];
+            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
+            temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite[GameAsset.I.formation.characterLineUp[i]];
+            SetButtonText(temp, GameAsset.I.formation.characterLineUp[i]);
+            temp.onClick.AddListener(delegate { PlaySound(); });
         }
     }
     void CreateButton()
@@ -80,6 +80,10 @@ public class Shop : MonoBehaviour
         }
         theBuildManager.SelectTurretToBuild(turretBluePrint);
         //buildManager.SelectTurretToBuild(turretBluePrint);
+    }
+    public void PlaySound()
+    {
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.clickClack);
     }
     /*
     public void SelectTurret(TurretBluePrint Character)

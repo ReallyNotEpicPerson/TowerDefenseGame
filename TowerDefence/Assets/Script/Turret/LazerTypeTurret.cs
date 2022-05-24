@@ -58,7 +58,7 @@ public class LazerTypeTurret : BaseTurretStat
     }
     void Update()
     {
-        if (target.Count == 0 || target[0]==null)
+        if (target.Count == 0 || target[0] == null)
         {
             if (lineRenderer.enabled)
             {
@@ -400,6 +400,107 @@ public class LazerTypeTurret : BaseTurretStat
         }
         return text;
     }
+    public StringBuilder GetSlow()
+    {
+        StringBuilder text = new StringBuilder();
+
+        SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+        if (SE.chance < 1)
+        {
+            text.Append(SE.chance * 100 + "% chance" + " to ");
+        }
+        if (SE.ID.Contains("SL"))
+        {
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+        }
+        else if (SE.ID.Contains("STUN"))
+        {
+            text.Append(SE.description + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+        }
+        else if (SE.ID.Contains("TUR"))
+        {
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "each shot" + "\n");
+        }
+        if (SE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + SE.stackTime + "\n");
+        }
+        return text;
+    }
+    public StringBuilder GetDOTS()
+    {
+        StringBuilder text = new StringBuilder();
+
+        DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
+
+        if (DE.chance < 1)
+        {
+            text.Append(DE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value}</color>" + " per " + DE.rate.value + "s" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
+        if (DE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + DE.stackTime + "\n");
+            text.Append("Damage increase rate :" + DE.damageIncreaseRate.statValue.value + "\n");
+            text.Append("time reduction rate :" + "-" + DE.rateIncrease.statValue.value + "s" + "\n");
+        }
+        return text;
+    }
+    public StringBuilder GetFear()
+    {
+        StringBuilder text = new StringBuilder();
+        FearEffect FE = fxManager.GetFearEffect() as FearEffect;
+        if (FE.chance < 1)
+        {
+            text.Append(FE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE._duration + "s"}</color>" + "\n");
+        if (FE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + FE.stackTime + "\n");
+        }
+        return text;
+    }
+    public StringBuilder GetWeaken()
+    {
+        StringBuilder text = new StringBuilder();
+
+        Weaken WE = fxManager.GetWeakenEffect() as Weaken;
+        if (WE.chance < 1)
+        {
+            text.Append(WE.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(WE.description);
+        if (WE.extraDamageTaken.modType.HasFlag(StatModType.Flat))
+        {
+            text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value}</color>" + " Damage " + "\n");
+        }
+        else if (WE.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || WE.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
+        {
+            text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value + "%"}</color>" + " Damage " + "\n");
+        }
+        if (WE.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + WE.stackTime + "\n");
+            text.Append("Extra Damage taken rate :" + " +" + WE.increaseRate.statValue.value + "\n");
+            //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
+        }
+        return text;
+    }
+    public StringBuilder GetArmorBreaking()
+    {
+        StringBuilder text = new StringBuilder();
+
+        ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
+        if (ABE.chance < 1)
+        {
+            text.Append(ABE.chance * 100 + " to ");
+        }
+        text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
+
+        return text;
+    }
+
     public Sprite StatusEffectSprite()
     {
         switch (bulletType)

@@ -14,9 +14,9 @@ public enum BulletType
     ArmorBreaking = 1 << 7,//done
     PiercingShot = 1 << 8,//done
     Cast = 1 << 9,
-    
-    
+        
     JustStoodStill = 1 << 12,//IDK man, dont delete
+    RemoveAll = ~(-1 << 13)
 }
 
 public class BaseBulletClass : MonoBehaviour

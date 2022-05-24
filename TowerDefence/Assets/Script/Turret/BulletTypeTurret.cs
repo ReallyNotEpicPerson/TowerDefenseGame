@@ -11,7 +11,7 @@ public class BulletTypeTurret : BaseTurretStat
     public CharacterStat fireRate;
     [Header("List of Fire Point")]
     public List<Transform> firePoint;//keep at all cost
-
+    public float chanceToQuadrupleDamage = 0;
     private float FireCountDown = 0f;
     private EntityEffectHandler fxHandler;
     private EffectManager fxManager;
@@ -132,6 +132,10 @@ public class BulletTypeTurret : BaseTurretStat
                 {
                     bullet.AddDamageMod(modifier);
                 }
+                if (passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage) && Random.value <= chanceToQuadrupleDamage)
+                {
+                    bullet.quadrupleDamage = true;
+                }
                 if (bullet != null)
                 {
                     bullet.Seek(target[j]);
@@ -239,7 +243,6 @@ public class BulletTypeTurret : BaseTurretStat
 
     }
     #endregion
-
     public Bullet BulletStat()
     {
         return bu;
@@ -265,7 +268,7 @@ public class BulletTypeTurret : BaseTurretStat
         //text.Append("Range:" + range.value + "\n");
         return text;
     }
-    public void GetSlow()
+    public StringBuilder GetSlow()
     {
         StringBuilder text = new StringBuilder();
 
@@ -290,9 +293,9 @@ public class BulletTypeTurret : BaseTurretStat
         {
             text.Append("Can stack to " + SE.stackTime + "\n");
         }
-
+        return text;
     }
-    public void GetDOTS()
+    public StringBuilder GetDOTS()
     {
         StringBuilder text = new StringBuilder();
 
@@ -309,9 +312,9 @@ public class BulletTypeTurret : BaseTurretStat
             text.Append("Damage increase rate :" + DE.damageIncreaseRate.statValue.value + "\n");
             text.Append("time reduction rate :" + "-" + DE.rateIncrease.statValue.value + "s" + "\n");
         }
-
+        return text;
     }
-    public void GetFear()
+    public StringBuilder GetFear()
     {
         StringBuilder text = new StringBuilder();
         FearEffect FE = fxManager.GetFearEffect() as FearEffect;
@@ -324,9 +327,24 @@ public class BulletTypeTurret : BaseTurretStat
         {
             text.Append("Can stack to " + FE.stackTime + "\n");
         }
-
+        return text;
     }
-    public void GetWeaken()
+    public StringBuilder GetInstaKill()
+    {
+        StringBuilder text = new StringBuilder();
+        FearEffect IK = fxManager.GetInsta_KillEffect() as FearEffect;
+        if (IK.chance < 1)
+        {
+            text.Append(IK.chance * 100 + "% chance" + " to ");
+        }
+        text.Append(IK.description + " for " + $"<color=#00ff00ff>{ IK._duration + "s"}</color>" + "\n");
+        if (IK.effectType.HasFlag(EffectType.StackingEffect))
+        {
+            text.Append("Can stack to " + IK.stackTime + "\n");
+        }
+        return text;
+    }
+    public StringBuilder GetWeaken()
     {
         StringBuilder text = new StringBuilder();
 
@@ -350,8 +368,9 @@ public class BulletTypeTurret : BaseTurretStat
             text.Append("Extra Damage taken rate :" + " +" + WE.increaseRate.statValue.value + "\n");
             //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
         }
+        return text;
     }
-    public void GetArmorBreaking()
+    public StringBuilder GetArmorBreaking()
     {
         StringBuilder text = new StringBuilder();
 
@@ -362,19 +381,50 @@ public class BulletTypeTurret : BaseTurretStat
         }
         text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
 
+        return text;
     }
     public StringBuilder GetStatusEffect()
-    {
+    {//Slow+DOTS+Fear+Weaken+.ArmorBreaking+Insta_Kill+Piercingshot+
         StringBuilder text = new StringBuilder();
-
+        if (bu.bulletType.HasFlag(BulletType.SlowPerSecond))
+        {
+            text.Append(GetSlow());
+        }
+        if (bu.bulletType.HasFlag(BulletType.Dots))
+        {
+            text.Append(GetDOTS());
+        }
+        if (bu.bulletType.HasFlag(BulletType.Fear))
+        {
+            text.Append(GetFear());
+        }
+        if (bu.bulletType.HasFlag(BulletType.Weaken))
+        {
+            text.Append(GetWeaken());
+        }
+        if (bu.bulletType.HasFlag(BulletType.Insta_Kill))
+        {
+            text.Append(GetInstaKill());
+        }
         if (bu.bulletType.HasFlag(BulletType.ArmorBreaking))
         {
-            ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
-            if (ABE.chance < 1)
-            {
-                text.Append(ABE.chance * 100 + " to ");
-            }
-            text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
+            text.Append(GetArmorBreaking());
+        }
+        if (bu.bulletType.HasFlag(BulletType.PiercingShot))
+        {
+            text.Append("Ignore ememy armor" + "\n");
+        }
+        if (passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy))
+        {
+            text.Append("Cant be place on the field,but can shoot when bought" + "\n");
+        }
+        if (passiveAbility.HasFlag(PassiveAbility.CanSeeInvisibleUnit))
+        {
+            text.Append("Can see invisible enemy" + "\n");
+        }
+        if (passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage))
+        {
+            text.Append("Have " + $"<color=#00ff00ff>{chanceToQuadrupleDamage *100}</color>" + "% chance to quadruple damage"+"\n");
         }
         return text;
     }

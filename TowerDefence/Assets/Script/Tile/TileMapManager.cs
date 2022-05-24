@@ -231,7 +231,7 @@ public class TileMapManager : MonoBehaviour
         if (PlayerStat.moneyInGame < blueprint.cost || AcceptablePosition() || !blueprint.CanBeBuild)
         {
             Debug.Log("Nah U poor! or that spot is not okay!! >:-<");
-
+            GameAsset.I.audioSource.PlayOneShot(GameAsset.I.notEnoughMoney);
             //call something that tell you poor af
             return false;
         }

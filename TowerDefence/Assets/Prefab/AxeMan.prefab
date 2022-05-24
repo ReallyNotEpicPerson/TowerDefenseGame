@@ -112,6 +112,7 @@ MonoBehaviour:
     baseValue: 0
   firePoint:
   - {fileID: 0}
+  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 0}
   animator: {fileID: 0}

@@ -8,6 +8,7 @@ public class Bullet : BaseBulletClass
     [SerializeField] private EffectManager effectManager;
     [SerializeField] private CharacterStat explosionRadius;
     float finalDamage;
+    public bool quadrupleDamage = false;
     public void OnValidate()//taggu
     {
         if (effectManager == null)
@@ -29,7 +30,7 @@ public class Bullet : BaseBulletClass
         target = _target;
     }
     void Update()//make bullet move and shit
-    {       
+    {
         if (target == null)
         {
             Destroy(gameObject);
@@ -133,11 +134,28 @@ public class Bullet : BaseBulletClass
 
                 if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
-                    ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
+                    if (quadrupleDamage)
+                    {
+                        ene.ArmorPiercing(finalDamage * 4, DamageDisplayerType.ArmorPenetration);
+                        quadrupleDamage = false;
+                    }
+                    else
+                    {
+                        ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
+                    }
                 }
                 else
                 {
-                    ene.TakeDamage(finalDamage, DamageDisplayerType.Critial);
+                    if (quadrupleDamage)
+                    {
+                        ene.TakeDamage(finalDamage * 4, DamageDisplayerType.Critial);
+                        quadrupleDamage = false;
+                    }
+                    else
+                    {
+                        ene.TakeDamage(finalDamage, DamageDisplayerType.Critial);
+                    }
+
                 }
             }
             else
@@ -156,11 +174,29 @@ public class Bullet : BaseBulletClass
                 }
                 if (bulletType.HasFlag(BulletType.PiercingShot))
                 {
-                    ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
+                    if (quadrupleDamage)
+                    {
+                        ene.ArmorPiercing(finalDamage * 4, DamageDisplayerType.ArmorPenetration);
+                        quadrupleDamage = false;
+                    }
+                    else
+                    {
+                        ene.ArmorPiercing(finalDamage, DamageDisplayerType.ArmorPenetration);
+                        quadrupleDamage = false;
+                    }
                 }
                 else
                 {
-                    ene.TakeDamage(finalDamage);
+                    if (quadrupleDamage)
+                    {
+                        ene.TakeDamage(finalDamage * 4);
+                        quadrupleDamage = false;
+                    }
+                    else
+                    {
+                        ene.TakeDamage(finalDamage);
+                        quadrupleDamage = false;
+                    }
                 }
             }
             //status effect 

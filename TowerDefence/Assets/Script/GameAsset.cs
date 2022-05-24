@@ -31,6 +31,8 @@ public class GameAsset : MonoBehaviour
     public AudioClip k;
     public AudioClip revive;
     public AudioClip whenEnemyPassThrough;
+    public AudioClip notEnoughMoney;
+    public AudioClip clickClack;
 
     public void PlaySound(AudioClip clip,float volume)
     {

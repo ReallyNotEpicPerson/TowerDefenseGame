@@ -307,6 +307,7 @@ MonoBehaviour:
     baseValue: 1
   firePoint:
   - {fileID: 2901893776483517357}
+  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 0}
   animator: {fileID: 0}

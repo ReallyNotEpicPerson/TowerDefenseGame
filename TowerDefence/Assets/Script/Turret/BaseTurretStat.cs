@@ -27,6 +27,10 @@ public enum PassiveAbility
     IncreaseSpeed = 1 << 3,
     CanShootWhenBuy = 1 << 4,
     CanSeeInvisibleUnit = 1 << 5,
+    QuadrupleDamage = 1 << 6,
+
+    RemoveAll = ~(-1 << 7)
+
 }
 public enum Direction
 {
@@ -174,11 +178,11 @@ public class BaseTurretStat : MonoBehaviour
                 {
                     /*if (targetingType.HasFlag(TargetingType.Random))
                     {*/
-                        target.Add(col.transform);
-                        if (target.Count == numberOfTarget)
-                        {
-                            return;
-                        }
+                    target.Add(col.transform);
+                    if (target.Count == numberOfTarget)
+                    {
+                        return;
+                    }
                     //}
                     /*else if (targetingType.HasFlag(TargetingType.Closest))
                     {

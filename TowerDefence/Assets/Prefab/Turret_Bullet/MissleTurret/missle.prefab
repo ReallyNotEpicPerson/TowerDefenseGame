@@ -102,7 +102,7 @@ MonoBehaviour:
   bulletDamage:
     baseValue: 12
   critChance:
-    baseValue: 0.01
+    baseValue: 0
   critDamage:
     baseValue: 2
   ImpactFx: {fileID: 8241989472945873926, guid: f81a8b5b662668248ad12e6e8431948b,
@@ -113,7 +113,7 @@ MonoBehaviour:
   effectManager: {fileID: 7087544868952847348, guid: 6b56a90063a6d1d4db4d2d647d33ca1b,
     type: 3}
   explosionRadius:
-    baseValue: 3.5
+    baseValue: 3
 --- !u!82 &7188095702590147429
 AudioSource:
   m_ObjectHideFlags: 0

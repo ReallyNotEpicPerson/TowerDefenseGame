@@ -431,6 +431,7 @@ MonoBehaviour:
   pathIndex: 0
   startSpeed:
     baseValue: 1.3
+  distanceChangingWayPoint: 0.1
   speed: 0
   rateOfUpdateDistance: 0.2
 --- !u!114 &1230297672343561559
@@ -448,7 +449,7 @@ MonoBehaviour:
   enemySprite: {fileID: 7046093432801577004, guid: 79c32c4229ac12542b373ac24d2ad715,
     type: 3}
   enemyType: 0
-  enemyState: 0
+  enemyState: 32
   audioType: 1
   startHealth: 450
   armorStat: {fileID: 1230297672343561557}
@@ -472,10 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244dd234a63e3d84eb8dc6d4a3340daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorType: 0
-  startArmor: 100
-  damangeReductionPtc: 0.9
-  MaxLayer: 0
+  armorType: 1
+  startArmor: 300
+  damangeReductionPtc: 0.8
+  MaxLayer: 1
   armorBar: {fileID: 2077231279826474915}
   layerNum: {fileID: 7029716579407587152}
 --- !u!114 &645807092627198320
@@ -515,10 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338763577d6538542bad6ff4d94766eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfDebuffs:
-  - {fileID: 11400000, guid: 590e4f5275fa11b4f9a6d5c6e22cc7b3, type: 2}
-  - {fileID: 11400000, guid: 8bd6b9c81f96da5409a80b29aa2010d1, type: 2}
-  - {fileID: 11400000, guid: 3e46dbbefd4acf046bf95e8b682650ed, type: 2}
+  listOfDebuffs: []
 --- !u!114 &4272877510893615983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +549,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dddb54ffbe2bad545b0c3801fffaf4d5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -654,7 +652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2905781661455918244
 RectTransform:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public enum AudioType
 public enum EnemyState
 {
     None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Amored = 1 << 5,
-    TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8,Invisible=1 << 9,
+    TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8 , Invisible=1 << 9, YouEarnNothing = 1<<10
 
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -366,7 +366,10 @@ public class Enemy : MonoBehaviour
     {
         RemoveALLDebuff();
         isDead = true;
-        PlayerStat.moneyInGame += worth;
+        if (!enemyState.HasFlag(EnemyState.YouEarnNothing))
+        {
+            PlayerStat.moneyInGame += worth;
+        }
         //Ded.SetActive(true);
         Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 0.5f);
         //WaitFor((int)(2*FloatToIntRate));

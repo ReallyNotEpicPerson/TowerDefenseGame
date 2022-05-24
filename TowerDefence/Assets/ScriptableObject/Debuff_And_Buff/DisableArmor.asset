@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DisableArmor
   m_EditorClassIdentifier: 
   ID: AR_BR
-  Icon: {fileID: 0}
+  Icon: {fileID: -8203148886003480573, guid: b1bb19470f2b680479a7947643f4c230, type: 3}
   specialFX: {fileID: 7235947678086242264, guid: ca363cf8e458e3d47b4e660f2cb4f67b,
     type: 3}
   effectType: 4

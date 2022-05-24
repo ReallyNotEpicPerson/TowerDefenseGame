@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 262966061738052291, guid: 421de2aaeac77ef41a80fd4d5321daf7,
         type: 3}
       propertyPath: worth
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 262966061738052291, guid: 421de2aaeac77ef41a80fd4d5321daf7,
         type: 3}

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +23,8 @@ public class TurretSetup : MonoBehaviour
     private List<BaseTurretStat> turretStatsList = new List<BaseTurretStat>();
     private Dictionary<BaseTurretStat, BaseBulletClass> bullet = new Dictionary<BaseTurretStat, BaseBulletClass>();
     private List<TMP_Text> statText = new List<TMP_Text>();
+    private BulletType flag;
+    private PassiveAbility passiveAbility;
 
     private bool doneLerping = false;
 
@@ -65,7 +66,14 @@ public class TurretSetup : MonoBehaviour
                 //_image.transform.SetParent(transform.GetChild(i).transform);
                 //_image.transform.localScale = Vector3.one;
                 TMP_Text text = _image.GetComponentInChildren<TMP_Text>();
-                text.text = GameAsset.I.turret[i].cost + "$";
+                if (GameAsset.I.turret[i].cost < 1)
+                {
+                    text.text = "Free";
+                }
+                else
+                {
+                    text.text = GameAsset.I.turret[i].cost + "$";
+                }
             }
             else
             {
@@ -106,39 +114,184 @@ public class TurretSetup : MonoBehaviour
             //Debug.Log("Is BulletTypeTurret");
             SupportTurretText.SetActive(false);
             SupportTurretIcon.SetActive(false);
-
+            EnableState(BulletType.RemoveAll);
+            passiveAbility |= PassiveAbility.RemoveAll;
             BulletTypeTurret bulTurret = turretStatsList[but.transform.GetSiblingIndex()] as BulletTypeTurret;
             statText[0].text = bulTurret.GetDamage().ToString();
             statText[1].text = bulTurret.GetROF().ToString();
             statText[2].text = bulTurret.GetRange().ToString();
-            StringBuilder text = bulTurret.GetStatusEffect();
-            //statText[3].text = ;
+            Bullet bu = bulTurret.BulletStat();
+            DisableState(BulletType.RemoveAll);
+            passiveAbility &= ~PassiveAbility.RemoveAll;
+            for (int i = 3; i < statText.Count; i++)
+            {
+                if (bu.bulletType.HasFlag(BulletType.SlowPerSecond) && !flag.HasFlag(BulletType.SlowPerSecond))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetSlow().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.SlowPerSecond);
+                    continue;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.Dots) && !flag.HasFlag(BulletType.Dots))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetDOTS().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Dots);
+                    continue;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.Fear) && !flag.HasFlag(BulletType.Fear))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetFear().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Fear);
+                    continue;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.Insta_Kill) && !flag.HasFlag(BulletType.Insta_Kill))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetInstaKill().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Fear);
+                    continue;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.Weaken) && !flag.HasFlag(BulletType.Weaken))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetWeaken().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Weaken);
+                    continue;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.ArmorBreaking) && !flag.HasFlag(BulletType.ArmorBreaking))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = bulTurret.GetArmorBreaking().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = bulTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.ArmorBreaking);
+                    continue;
+                }
+                else if (bulTurret.passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy) && !passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy))
+                {
+                    statText[i].text = "Cant be place on the field,but can shoot when bought";
+                    statText[i].gameObject.SetActive(true);
+                    Icons.transform.GetChild(i).gameObject.SetActive(false);
+                    passiveAbility |= PassiveAbility.CanShootWhenBuy;
+                }
+                else if (bu.bulletType.HasFlag(BulletType.PiercingShot) && !flag.HasFlag(BulletType.PiercingShot))
+                {
+                    statText[i].text = "Ignore Ememy Armor";
+                    statText[i].gameObject.SetActive(true);
+                    Icons.transform.GetChild(i).gameObject.SetActive(false);
+                    EnableState(BulletType.PiercingShot);
+                }
+                else if (bulTurret.passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage) && !passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage))
+                {
+                    statText[i].text = "Have "+bulTurret.chanceToQuadrupleDamage+"% chance to quadruple damage";
+                    statText[i].gameObject.SetActive(true);
+                    Icons.transform.GetChild(i).gameObject.SetActive(false);
+                    passiveAbility |= PassiveAbility.QuadrupleDamage;
+                }
+                else
+                {
+                    Icons.transform.GetChild(i).gameObject.SetActive(false);
+                    statText[i].text = "";
+                }
+
+            }
+            //StringBuilder text = bulTurret.GetStatusEffect();
         }
         else if (turretStatsList[but.transform.GetSiblingIndex()] is LazerTypeTurret)
         {
             //Debug.Log("Is LazerTypeTurret");
             SupportTurretText.SetActive(false);
             SupportTurretIcon.SetActive(false);
+            EnableState(BulletType.RemoveAll);
             LazerTypeTurret LazTurret = turretStatsList[but.transform.GetSiblingIndex()] as LazerTypeTurret;
             statText[0].text = LazTurret.GetDamage().ToString();
             statText[1].text = LazTurret.GetROF().ToString();
             statText[2].text = LazTurret.GetRange().ToString();
-            statText[3].text = LazTurret.GetStatusEffect().ToString();
-        }
-        else
-        {
-            turretToolTips.transform.Find("Stats").gameObject.SetActive(false);
-            Icons.SetActive(false);
-            SupportTurretText.SetActive(true);
-            SupportTurretIcon.SetActive(true);
+            DisableState(BulletType.RemoveAll);
+            for (int i = 3; i < statText.Count; i++)
+            {
+                if (LazTurret.bulletType.HasFlag(BulletType.SlowPerSecond) && !flag.HasFlag(BulletType.SlowPerSecond))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = LazTurret.GetSlow().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = LazTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.SlowPerSecond);
+                    continue;
+                }
+                else if (LazTurret.bulletType.HasFlag(BulletType.Dots) && !flag.HasFlag(BulletType.Dots))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = LazTurret.GetDOTS().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = LazTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Dots);
+                    continue;
+                }
+                else if (LazTurret.bulletType.HasFlag(BulletType.Fear) && !flag.HasFlag(BulletType.Fear))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = LazTurret.GetFear().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = LazTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Fear);
+                    continue;
+                }
+                
+                else if (LazTurret.bulletType.HasFlag(BulletType.Weaken) && !flag.HasFlag(BulletType.Weaken))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = LazTurret.GetWeaken().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = LazTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    EnableState(BulletType.Weaken);
+                    continue;
+                }
+                else if (LazTurret.bulletType.HasFlag(BulletType.ArmorBreaking) && !flag.HasFlag(BulletType.ArmorBreaking))
+                {
+                    statText[i].gameObject.SetActive(true);
+                    statText[i].text = LazTurret.GetArmorBreaking().ToString();
+                    Icons.transform.GetChild(i).GetComponent<Image>().sprite = LazTurret.StatusEffectSprite();
+                    Icons.transform.GetChild(i).gameObject.SetActive(true);
+                    statText[i].gameObject.SetActive(true);
+                    EnableState(BulletType.ArmorBreaking);
+                    continue;
+                }
+                else
+                {
+                    Icons.transform.GetChild(i).gameObject.SetActive(false);
+                    statText[i].text = "";
+                }
+            }
+            /*else
+            {
+                turretToolTips.transform.Find("Stats").gameObject.SetActive(false);
+                Icons.SetActive(false);
+                SupportTurretText.SetActive(true);
+                SupportTurretIcon.SetActive(true);
 
-            //turretToolTips. transform.Find("Icon").gameObject.SetActive(false);
-            //statText[0].text = "Increase Damage , Fire rate , Range ,  and Critical chance ";            
+                //turretToolTips. transform.Find("Icon").gameObject.SetActive(false);
+                //statText[0].text = "Increase Damage , Fire rate , Range ,  and Critical chance ";            
+            }*/
         }
     }
     public void Hide()
     {
         turretStat.transform.parent.gameObject.SetActive(false);
+        DisableState(BulletType.RemoveAll);
+        passiveAbility &= ~PassiveAbility.RemoveAll;
     }
     public void Selected(Button button)
     {
@@ -234,13 +387,12 @@ public class TurretSetup : MonoBehaviour
         GameAsset.I.formation.SetLineUp(checkExistInt.ToArray());
     }
 
-    /*void ShowStat()
-{
-   //CharacterInfo characterInfo;
-   //characterInfo.ShowStat();
-}
-void SortFunction()
-{
-   character.Sort();
-}*/
+    public void DisableState(BulletType bt)
+    {
+        flag &= ~bt;
+    }
+    public void EnableState(BulletType bt)
+    {
+        flag |= bt;
+    }
 }

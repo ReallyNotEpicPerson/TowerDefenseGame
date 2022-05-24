@@ -20,12 +20,12 @@ MonoBehaviour:
   removableType: 1
   expirableType: 0
   _duration: 3
-  chance: 1
+  chance: 0.25
   description: Poison enemy
   damagePerRate:
-    baseValue: 20
+    baseValue: 8
   rate:
-    baseValue: 0.4
+    baseValue: 0.5
   damageIncreaseRate:
     modType: 0
     statValue:

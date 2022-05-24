@@ -35,11 +35,15 @@ public class TheSpawner : MonoBehaviour
     [SerializeField] ObjectPooler objectPooler;
     [SerializeField] StatusEffectDisplayer displayer;
 
+    public bool PlayerGainNothing=false;
+    public bool SurviveInTime = false;
+    public float timeToSurvive = 60;
     public GameObject waveDisplayer;
     private bool DoneWithSpawning = true;
     [SerializeField] private List<StartWaveEnemyDisplay> startWaveEnemyDisplays;
     [SerializeField] private List<Sprite> imageList = new List<Sprite>();
     private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
+    private bool win=false;
     //private List<int> numOfEnemy = new List<int>();
 
     private void OnValidate()
@@ -78,6 +82,11 @@ public class TheSpawner : MonoBehaviour
     }*/
     private void Awake()
     {
+        if (SurviveInTime ==true)
+        {
+            StartCoroutine(Timer());
+        }
+        win = false;
         spawnPoint = SpawnPoint;
         endPoint = EndPoint;
         waveNum = 0;
@@ -93,7 +102,7 @@ public class TheSpawner : MonoBehaviour
         {
             return;
         }
-        if (waveNum == mainWaves.Length)
+        if (waveNum == mainWaves.Length || win==true)
         {
             game_Managers.WinLevel();
             enabled = false;
@@ -208,6 +217,10 @@ public class TheSpawner : MonoBehaviour
         Debug.Log(SpawnPoint[path].position + " " + lol.transform.position);
         if (lol.TryGetComponent(out Enemy ene))
         {
+            if (PlayerGainNothing)
+            {
+                ene.EnableState(EnemyState.YouEarnNothing);
+            }
             if (mainWaves[waveNum].enemy[enemyIndex].useNavmesh == true)
             {
                 ene.UsePathFinding = true;
@@ -241,6 +254,10 @@ public class TheSpawner : MonoBehaviour
         //displayer.SetObject(lol);
         //GameObject enemyScript = objectPooler.SpawnFromPool(enemy.name, SpawnPoint.position, SpawnPoint.rotation);
         //statusEffectManager.AddEnemy(enemyScript.GetComponent<Enemy>());
+    }
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(timeToSurvive);
     }
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()

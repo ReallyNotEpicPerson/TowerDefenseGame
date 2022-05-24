@@ -24,7 +24,7 @@ public class Game_Managers : MonoBehaviour
         {
             return;
         }
-        if (PlayerStat.Lives <= 0 || Input.GetKey(KeyCode.O))
+        if (PlayerStat.Lives <= 0 )
         {
             GameEnd();
         }

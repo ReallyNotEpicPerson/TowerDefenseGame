@@ -136,6 +136,13 @@ public class NodeUI : MonoBehaviour
     {
         PresentTurretStat();
         UpgradeStatPanel.SetActive(true);
+        Vector3 tmpPos = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        Debug.Log(tmpPos);
+        if (tmpPos.x > Screen.width / 2)
+        {
+            UpgradeStatPanel.transform.localPosition = new Vector3(UpgradeStatPanel.transform.localPosition.x * -1,
+                UpgradeStatPanel.transform.localPosition.y, UpgradeStatPanel.transform.localPosition.z);
+        }
     }
     public void HidePresentTurret()
     {

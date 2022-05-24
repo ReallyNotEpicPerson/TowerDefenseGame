@@ -3819,30 +3819,35 @@ MonoBehaviour:
   turret:
   - prefab: {fileID: 0}
     cost: 0
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 0}
     cost: 0
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -17145,6 +17150,7 @@ MonoBehaviour:
   - prefab: {fileID: 2901893777028136064, guid: 5f08e7d4d204bee48afffb5444cc9cd6,
       type: 3}
     cost: 50
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 32000000
@@ -17152,6 +17158,7 @@ MonoBehaviour:
   - prefab: {fileID: 5139430634388571129, guid: 6b56a90063a6d1d4db4d2d647d33ca1b,
       type: 3}
     cost: 100
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -17159,6 +17166,7 @@ MonoBehaviour:
   - prefab: {fileID: 5826005812112630557, guid: 8c9eaaf07f7550f448e5a934195be047,
       type: 3}
     cost: 150
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -17166,6 +17174,7 @@ MonoBehaviour:
   - prefab: {fileID: 1322322404890757603, guid: 0903351180797ee44a7d09e42ef6e603,
       type: 3}
     cost: 100
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -17173,6 +17182,7 @@ MonoBehaviour:
   - prefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
       type: 3}
     cost: 100
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -17180,6 +17190,7 @@ MonoBehaviour:
   - prefab: {fileID: 6929386550393063819, guid: 15fc87e8afa42f642ada9b3da983878b,
       type: 3}
     cost: 50
+    CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs: []
     upgradeCosts: 
@@ -18335,7 +18346,7 @@ PrefabInstance:
     - target: {fileID: 5172533770419662321, guid: 08cd6e2981b633242b2015d48edad1b4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5172533770419662334, guid: 08cd6e2981b633242b2015d48edad1b4,
         type: 3}

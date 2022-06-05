@@ -7,6 +7,7 @@ public enum ShootType
     None = 0,
     SingleTarget = 1,
     MultipleTarget = 2,
+    ArmoredTarget = 4,
 }
 public enum TargetingType
 {
@@ -16,20 +17,21 @@ public enum TargetingType
     LeastHealth = 4,
     MostHealth = 8,
     Random = 16,
+    Armored = 32,
 }
 [System.Flags]
 public enum PassiveAbility
 {
     None = 0,
-    Penetration = 1,
-    Splash = 1 << 1,
-    IncreaseDamage = 1 << 2,
-    IncreaseSpeed = 1 << 3,
+    Penetration = 1,//nope
+    Splash = 1 << 1,//nope
+    IncreaseDamage = 1 << 2,//maybe
+    IncreaseSpeed = 1 << 3,//maybe
     CanShootWhenBuy = 1 << 4,
     CanSeeInvisibleUnit = 1 << 5,
     QuadrupleDamage = 1 << 6,
-
-    RemoveAll = ~(-1 << 7)
+    InfiniteRange = 1 << 7,
+    RemoveAll = ~(-1 << 9)
 
 }
 public enum Direction
@@ -114,7 +116,15 @@ public class BaseTurretStat : MonoBehaviour
     public virtual void UpdateTarget()
     {
         target.Clear();
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, range.value);
+        Collider2D[] collider;
+        if (passiveAbility.HasFlag(PassiveAbility.InfiniteRange))
+        {
+            collider = Physics2D.OverlapCircleAll(transform.position, 50);
+        }
+        else
+        {
+            collider = Physics2D.OverlapCircleAll(transform.position, range.value);
+        }
         float shortestDistance = Mathf.Infinity;
         float pathCovered = Mathf.Infinity;
         float leasthealth = Mathf.Infinity;
@@ -170,7 +180,7 @@ public class BaseTurretStat : MonoBehaviour
                     }
                     else if (targetingType.HasFlag(TargetingType.Random))
                     {
-                        ChosenCol = collider[collider.Length - 1];
+                        ChosenCol = collider[Random.Range(0, collider.Length - 1)];
                         break;
                     }
                 }
@@ -215,9 +225,59 @@ public class BaseTurretStat : MonoBehaviour
                         }
                     }*/
                 }
+                else if (targetingType.HasFlag(TargetingType.Armored))
+                {
+                    if (enemy.enemyState.HasFlag(EnemyState.Armored))
+                    {
+                        ChosenCol = col;
+                        break;
+                    }
+                    if (targetingType.HasFlag(TargetingType.Closest))
+                    {
+                        float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
+                        if (DisToenenmy < shortestDistance)
+                        {
+                            shortestDistance = DisToenenmy;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.First))
+                    {
+                        float p = enemy.RemainingPath();
+                        // Debug.Log("path " + p);
+                        if (p < pathCovered)
+                        {
+                            pathCovered = p;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.LeastHealth))
+                    {
+                        float h = enemy.GetHealthAmount();
+                        if (h < leasthealth)
+                        {
+                            leasthealth = h;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.MostHealth))
+                    {
+                        float h = enemy.GetHealthAmount();
+                        if (h > mostHealth)
+                        {
+                            mostHealth = h;
+                            ChosenCol = col;
+                        }
+                    }
+                    else if (targetingType.HasFlag(TargetingType.Random))
+                    {
+                        ChosenCol = collider[Random.Range(0, collider.Length - 1)];
+                        break;
+                    }
+                }
             }
         }
-        if (shootType.HasFlag(ShootType.SingleTarget) && ChosenCol != null)
+        if ((shootType.HasFlag(ShootType.SingleTarget) || targetingType.HasFlag(TargetingType.Armored)) && ChosenCol != null)
         {
             target.Add(ChosenCol.transform);
         }

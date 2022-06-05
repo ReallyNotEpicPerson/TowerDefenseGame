@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -129,6 +130,32 @@ public class Armor : MonoBehaviour
         armorBar.transform.parent.gameObject.SetActive(state);
         //Debug.Log(armorBar.transform.parent.name);
     }
+    public StringBuilder GetArmorHeath()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(startArmor);
+        return text;
+    }
+    public StringBuilder GetArmorDamageRedution()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(damangeReductionPtc);
+        return text;
+    }
+    public StringBuilder GetArmorLayer()
+    {
+        StringBuilder text = new StringBuilder();
+        if (armorType.HasFlag(ArmorType.Single))
+        {
+            text.Append("Single");
+        }
+        else
+        {
+            text.Append("Stack:"+MaxLayer);
+        }
+        return text;
+    }
+
     public void DisableState(ArmorType es)
     {
         armorType &= ~es;

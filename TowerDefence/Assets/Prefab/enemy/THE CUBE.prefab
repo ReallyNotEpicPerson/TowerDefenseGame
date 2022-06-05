@@ -321,7 +321,7 @@ MonoBehaviour:
   armorStat: {fileID: 8377878605666632078}
   UsePathFinding: 0
   ChanceToEvade: 0.05
-  worth: 8
+  worth: 9
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 8377878606126889874}
   Handler: {fileID: 8377878605666632113}
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorType: 1
   startArmor: 200
-  damangeReductionPtc: 0.5
+  damangeReductionPtc: 0.4
   MaxLayer: 1
   armorBar: {fileID: 8377878605689292544}
   layerNum: {fileID: 8377878606882052106}

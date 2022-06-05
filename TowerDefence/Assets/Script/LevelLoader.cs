@@ -6,6 +6,14 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private GameObject lv;
     private Dictionary<string, int> levelOpened;
     private LevelUnlocked lvl;
+    public Setting Setting;
+    void Awake()
+    {
+        /*for (int i = 0; i < Setting.LevelOpened.Length; i++)
+        {
+            lv.transform.GetChild(Setting.LevelOpened[i]).gameObject.SetActive(true);
+        }*/
+    }
     void Start()
     {
         //lvl = SaveSystem.LoadLevel(); //= new LevelUnlocked();

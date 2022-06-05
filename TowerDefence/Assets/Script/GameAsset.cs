@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameAsset : MonoBehaviour
 {
-    public static Dictionary<string,GameObject> dict= new Dictionary<string, GameObject>();
+    public static Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
     public AudioSource audioSource;
 
     private static GameAsset _i;
@@ -17,15 +16,28 @@ public class GameAsset : MonoBehaviour
             return _i;
         }
     }
-    public CharacterFormation formation;
-
-    public List<TurretBluePrint> turret;
+    public Setting formation;
     public List<GameObject> weaponSprite;
     public List<Image> charImg;
-    public List<Sprite> turretSprite;
-
     public Transform damageDisplayer;
     public GameObject underling;
+
+    [TextArea(1, 6)]
+    public string[] description;
+    [TextArea(1, 4)]
+    public string[] turretDescription;
+
+    [Header("Turret")]
+    public List<TurretBluePrint> turret;
+    public List<Sprite> turretSprite;
+    public List<Sprite> upgradeTurret_2;
+    public List<Sprite> upgradeTurret_3;
+    public List<Sprite> upgradeTurret_Tree_0;
+    public List<Sprite> upgradeTurret_Tree_1;
+
+    [Header("MAP")]
+    public Sprite[] Map;
+
     [Header("SOUND")]
     public AudioClip PewPew_1;
     public AudioClip k;
@@ -34,11 +46,11 @@ public class GameAsset : MonoBehaviour
     public AudioClip notEnoughMoney;
     public AudioClip clickClack;
 
-    public void PlaySound(AudioClip clip,float volume)
+    public void PlaySound(AudioClip clip, float volume)
     {
-        audioSource.PlayOneShot(clip,volume);
+        audioSource.PlayOneShot(clip, volume);
     }
-    public static void Spawn(string name , Vector3 pos)
+    public static void Spawn(string name, Vector3 pos)
     {
         Instantiate(dict[name], pos, Quaternion.identity);
     }

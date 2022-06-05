@@ -19,6 +19,6 @@ MonoBehaviour:
   effectType: 4
   removableType: 0
   expirableType: 0
-  _duration: 5
-  chance: 0.5
+  _duration: 3
+  chance: 1
   description: break armor

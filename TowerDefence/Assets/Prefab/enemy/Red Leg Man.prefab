@@ -141,17 +141,17 @@ PrefabInstance:
     - target: {fileID: 8265412206029175012, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.21466713
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175012, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.21466713
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175012, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.6862745
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175013, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
@@ -226,13 +226,19 @@ PrefabInstance:
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: worth
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: enemyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      propertyPath: enemySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92,
+        type: 3}
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: startHealth
@@ -251,7 +257,7 @@ PrefabInstance:
     - target: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: m_Name
-      value: Leg man Red
+      value: Red Leg Man
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b04ac38db6b314b9752213e707ac57, type: 3}

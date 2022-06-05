@@ -12,7 +12,8 @@ public enum DamageDisplayerType
     Poisoned = 1 << 4,
     Miss = 1 << 5,
     Insta_kill = 1 << 6,
-    NO = 1<<7 ,
+    NO = 1 << 7,
+    Non_Damage_Display = 1 << 8,
 }
 
 public class DamageDisplayer : MonoBehaviour
@@ -41,7 +42,7 @@ public class DamageDisplayer : MonoBehaviour
         //Debug.Log(critical);
         return displayer;
     }
-    public static DamageDisplayer Create(Vector3 pos, string str="MISS", DamageDisplayerType type = DamageDisplayerType.Miss)
+    public static DamageDisplayer Create(Vector3 pos, string str = "MISS", DamageDisplayerType type = DamageDisplayerType.Miss)
     {
         Transform DamagePopUp = Instantiate(GameAsset.I.damageDisplayer, pos, Quaternion.identity);
         DamageDisplayer displayer = DamagePopUp.GetComponent<DamageDisplayer>();
@@ -64,8 +65,13 @@ public class DamageDisplayer : MonoBehaviour
                 textMesh.SetText($"<color=#ff0000ff>{str}</color>");
                 textColor = textMesh.color;
                 break;
+            case DamageDisplayerType.Non_Damage_Display:
+                disappearTimer = 0.5f;
+                textMesh.fontSize += 45;
+                textMesh.color = Color.yellow;
+                disappearTimer = 1f;
+                break;
         }
-
         textColor = textMesh.color;
     }
 
@@ -105,7 +111,7 @@ public class DamageDisplayer : MonoBehaviour
                 textMesh.fontSize += 2;
                 textMesh.color = Color.cyan;
                 disappearTimer = 1f;
-                break;
+                break;           
             default:
                 Debug.LogError("Fuckkkkk!!!");
                 break;
@@ -153,6 +159,9 @@ public class DamageDisplayer : MonoBehaviour
                 break;
             case DamageDisplayerType.ArmorPenetration:
                 TextGoUpAndDisappear(2f, 10f);
+                break;
+            case DamageDisplayerType.Non_Damage_Display:
+                TextGoUpAndDisappear(0, 1f);
                 break;
             default:
                 break;

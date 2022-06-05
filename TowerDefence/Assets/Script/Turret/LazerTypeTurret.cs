@@ -309,94 +309,56 @@ public class LazerTypeTurret : BaseTurretStat
         //text.Append("Range:" + range.value + "\n");
         return text;
     }
+    public StringBuilder GetCritChance()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(critChance.value * 100 + "%");
+        return text;
+    }
+    public StringBuilder GetCritDamage()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append("+" + critDamage.value * 100 + "%");
+        return text;
+    }
     public StringBuilder GetStatusEffect()
     {
         StringBuilder text = new StringBuilder();
         if (bulletType.HasFlag(BulletType.SlowPerSecond))
         {
-            SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
-            if (SE.chance < 1)
-            {
-                text.Append(SE.chance * 100 + "% chance" + " to ");
-            }
-            if (SE.ID.Contains("SL"))
-            {
-                text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
-            }
-            else if (SE.ID.Contains("STUN"))
-            {
-                text.Append(SE.description + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
-            }
-            else if (SE.ID.Contains("TUR"))
-            {
-                text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "each shot" + "\n");
-            }
-            if (SE.effectType.HasFlag(EffectType.StackingEffect))
-            {
-                text.Append("Can stack to " + SE.stackTime + "\n");
-            }
+            text.Append(GetSlow());
         }
         if (bulletType.HasFlag(BulletType.Dots))
         {
-            DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
-
-            if (DE.chance < 1)
-            {
-                text.Append(DE.chance * 100 + "% chance" + " to ");
-            }
-            text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value}</color>" + " per " + DE.rate.value + "s" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
-            if (DE.effectType.HasFlag(EffectType.StackingEffect))
-            {
-                text.Append("Can stack to " + DE.stackTime + "\n");
-                text.Append("Damage increase rate :" + DE.damageIncreaseRate.statValue.value + "\n");
-                text.Append("time reduction rate :" + "-" + DE.rateIncrease.statValue.value + "s" + "\n");
-            }
+            text.Append(GetDOTS());
         }
         if (bulletType.HasFlag(BulletType.Fear))
         {
-            FearEffect FE = fxManager.GetFearEffect() as FearEffect;
-
-            if (FE.chance < 1)
-            {
-                text.Append(FE.chance * 100 + "% chance" + " to ");
-            }
-            text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE._duration + "s"}</color>" + "\n");
-            if (FE.effectType.HasFlag(EffectType.StackingEffect))
-            {
-                text.Append("Can stack to " + FE.stackTime + "\n");
-            }
+            text.Append(GetFear());
         }
         if (bulletType.HasFlag(BulletType.Weaken))
         {
-            Weaken WE = fxManager.GetWeakenEffect() as Weaken;
-            if (WE.chance < 1)
-            {
-                text.Append(WE.chance * 100 + "% chance" + " to ");
-            }
-            text.Append(WE.description);
-            if (WE.extraDamageTaken.modType.HasFlag(StatModType.Flat))
-            {
-                text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value}</color>" + " Damage " + "\n");
-            }
-            else if (WE.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || WE.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
-            {
-                text.Append($"<color=#00ff00ff>{"+" + WE.extraDamageTaken.statValue.value + "%"}</color>" + " Damage " + "\n");
-            }
-            if (WE.effectType.HasFlag(EffectType.StackingEffect))
-            {
-                text.Append("Can stack to " + WE.stackTime + "\n");
-                text.Append("Extra Damage taken rate :" + " +" + WE.increaseRate.statValue.value + "\n");
-                //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
-            }
+            text.Append(GetWeaken());
         }
         if (bulletType.HasFlag(BulletType.ArmorBreaking))
         {
-            ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
-            if (ABE.chance < 1)
-            {
-                text.Append(ABE.chance * 100 + " to ");
-            }
-            text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
+            text.Append(GetArmorBreaking());
+        }
+        if (bulletType.HasFlag(BulletType.PiercingShot))
+        {
+            text.Append("Ignore ememy armor" + "\n");
+        }
+        if (passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy))
+        {
+            text.Append("Cant be place on the field,but can shoot when bought" + "\n");
+        }
+        if (passiveAbility.HasFlag(PassiveAbility.CanSeeInvisibleUnit))
+        {
+            text.Append("Can see invisible enemy" + "\n");
+        }
+        if (text.Length == 0)
+        {
+            text.Append("Ability" + "\n" + "None" + "\n");
         }
         return text;
     }
@@ -407,7 +369,7 @@ public class LazerTypeTurret : BaseTurretStat
         SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
         if (SE.chance < 1)
         {
-            text.Append(SE.chance * 100 + "% chance" + " to ");
+            text.Append($"<color=#00ff00ff>{SE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
         if (SE.ID.Contains("SL"))
         {
@@ -419,7 +381,7 @@ public class LazerTypeTurret : BaseTurretStat
         }
         else if (SE.ID.Contains("TUR"))
         {
-            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + "each shot" + "\n");
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " each shot" + "\n");
         }
         if (SE.effectType.HasFlag(EffectType.StackingEffect))
         {
@@ -435,14 +397,14 @@ public class LazerTypeTurret : BaseTurretStat
 
         if (DE.chance < 1)
         {
-            text.Append(DE.chance * 100 + "% chance" + " to ");
+            text.Append($"<color=#00ff00ff>{DE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
-        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value}</color>" + " per " + DE.rate.value + "s" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
+        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value/DE.rate.value}</color>" + " per second" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
         if (DE.effectType.HasFlag(EffectType.StackingEffect))
         {
-            text.Append("Can stack to " + DE.stackTime + "\n");
-            text.Append("Damage increase rate :" + DE.damageIncreaseRate.statValue.value + "\n");
-            text.Append("time reduction rate :" + "-" + DE.rateIncrease.statValue.value + "s" + "\n");
+            text.Append("Can stack to " + $"<color=#00ff00ff>{DE.stackTime}</color>" + "\n");
+            text.Append("Damage increase rate :" + $"<color=#00ff00ff>{DE.damageIncreaseRate.statValue.value}</color>" + "\n");
+            text.Append("time reduction rate :" + "-" + $"<color=#00ff00ff>{DE.rateIncrease.statValue.value}</color>" + "s" + "\n");
         }
         return text;
     }
@@ -452,12 +414,12 @@ public class LazerTypeTurret : BaseTurretStat
         FearEffect FE = fxManager.GetFearEffect() as FearEffect;
         if (FE.chance < 1)
         {
-            text.Append(FE.chance * 100 + "% chance" + " to ");
+            text.Append($"<color=#00ff00ff>{FE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
         text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE._duration + "s"}</color>" + "\n");
         if (FE.effectType.HasFlag(EffectType.StackingEffect))
         {
-            text.Append("Can stack to " + FE.stackTime + "\n");
+            text.Append("Can stack to " + $"<color=#00ff00ff>{FE.stackTime}</color>" + "\n");
         }
         return text;
     }
@@ -468,7 +430,7 @@ public class LazerTypeTurret : BaseTurretStat
         Weaken WE = fxManager.GetWeakenEffect() as Weaken;
         if (WE.chance < 1)
         {
-            text.Append(WE.chance * 100 + "% chance" + " to ");
+            text.Append($"<color=#00ff00ff>{WE.chance * 100 + "%"}</ color > " + " chance" + " to ");
         }
         text.Append(WE.description);
         if (WE.extraDamageTaken.modType.HasFlag(StatModType.Flat))
@@ -481,7 +443,7 @@ public class LazerTypeTurret : BaseTurretStat
         }
         if (WE.effectType.HasFlag(EffectType.StackingEffect))
         {
-            text.Append("Can stack to " + WE.stackTime + "\n");
+            text.Append("Can stack to " + $"<color=#00ff00ff>{WE.stackTime}</color>" + "\n");
             text.Append("Extra Damage taken rate :" + " +" + WE.increaseRate.statValue.value + "\n");
             //text.Append("time reduction rate :" + "-" + up.rateIncrease.statValue.value + "s" + "\n");
         }
@@ -529,6 +491,31 @@ public class LazerTypeTurret : BaseTurretStat
         }
         Debug.LogError("OH FUCK FUCK FUCK NO Sprite");
         return null;
+    }
+    public StringBuilder GetTargetingType()
+    {
+        StringBuilder text = new StringBuilder();
+        switch (targetingType)
+        {
+            case TargetingType.Closest:
+                text.Append("Target the closest Enemy" + "\n");
+                break;
+            case TargetingType.First:
+                text.Append("Target the first Enemy" + "\n");
+                break;
+            case TargetingType.LeastHealth:
+                text.Append("Target the weakest Enemy" + "\n");
+                break;
+            case TargetingType.MostHealth:
+                text.Append("Target the strongest Enemy" + "\n");
+                break;
+            case TargetingType.Random:
+                text.Append("Target random Enemy" + "\n");
+                break;
+            default:
+                break;
+        }
+        return text;
     }
 
 #if UNITY_EDITOR

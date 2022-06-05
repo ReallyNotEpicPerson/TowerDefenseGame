@@ -137,7 +137,6 @@ public class NodeUI : MonoBehaviour
         PresentTurretStat();
         UpgradeStatPanel.SetActive(true);
         Vector3 tmpPos = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        Debug.Log(tmpPos);
         if (tmpPos.x > Screen.width / 2)
         {
             UpgradeStatPanel.transform.localPosition = new Vector3(UpgradeStatPanel.transform.localPosition.x * -1,
@@ -160,6 +159,7 @@ public class NodeUI : MonoBehaviour
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Fire rate:" + CurrentTurret.GetROF() + "\n");
                 Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
+                Stat.Append(CurrentTurret.GetTargetingType());
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case LazerTypeTurret CurrentTurret:
@@ -167,6 +167,7 @@ public class NodeUI : MonoBehaviour
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Rate:" + CurrentTurret.GetROF() + "\n");
                 Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
+                Stat.Append(CurrentTurret.GetTargetingType());
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case SupportTypeTurret CurrentTurret:

@@ -25,9 +25,9 @@ public class TurretSetup : MonoBehaviour
     private List<TMP_Text> statText = new List<TMP_Text>();
     private BulletType flag;
     private PassiveAbility passiveAbility;
-
-    private bool doneLerping = false;
-
+    //private TMP_Text statusEffect;
+    //private bool doneLerping = false;
+    
     void Start()
     {
         //character = GameAsset.I.turret;
@@ -45,7 +45,7 @@ public class TurretSetup : MonoBehaviour
                 bullet.Add(baseTurret, pewpewpew.BulletPrefab.GetComponent<BaseBulletClass>());
             }
         }
-        slotOpened = 4;//change according to data
+        slotOpened = 5;//change according to data
         GenerateButton1(slotOpened);
         SetButton(GameAsset.I.turretSprite.Count);
         //GenerateButton2(GameAsset.I.charImg.Length);
@@ -55,7 +55,7 @@ public class TurretSetup : MonoBehaviour
     }
     public void SetButton(int num)
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount-1; i++)
         {
             if (i < num)
             {
@@ -307,7 +307,7 @@ public class TurretSetup : MonoBehaviour
                     checkExistString.Add(button.transform.GetChild(0).GetChild(0).name);
                     button.transform.GetChild(0).SetParent(lineUp.transform.GetChild(i));
                     RectTransform startPosition = lineUp.transform.GetChild(i).GetChild(0).GetComponent<RectTransform>();
-                    doneLerping = false;
+                    //doneLerping = false;
                     StartCoroutine(ButtonLerping(startPosition, Vector3.zero, duration));
                     checkExistInt.Push(button.transform.GetSiblingIndex());
                     //SetCharacterFormation.characterLineUp.Add(character[button.transform.GetSiblingIndex()]);
@@ -338,7 +338,7 @@ public class TurretSetup : MonoBehaviour
             yield return null;
         }
         a.localPosition = b;
-        doneLerping = true;
+        //doneLerping = true;
     }
     public void Deselect(Button button)
     {
@@ -365,7 +365,7 @@ public class TurretSetup : MonoBehaviour
         {
             button.interactable = false;
             button.transform.GetChild(0).SetParent(transform.GetChild(checkExistInt.Peek()));
-            doneLerping = false;
+            //doneLerping = false;
             StartCoroutine(ButtonLerping(transform.GetChild(checkExistInt.Peek()).GetChild(0).GetComponent<RectTransform>(), Vector3.zero, 3));
             //SetCharacterFormation.characterLineUp.Remove(character[checkExistInt.Peek()]);
             checkExistString.Remove(transform.GetChild(checkExistInt.Peek()).GetChild(0).GetChild(0).name);

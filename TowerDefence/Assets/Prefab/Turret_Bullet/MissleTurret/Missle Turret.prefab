@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootType: 1
-  targetingType: 1
+  targetingType: 4
   passiveAbility: 0
   numberOfTarget: 1
   range:

@@ -20,6 +20,6 @@ public class StartWaveEnemyDisplay : MonoBehaviour
     }
     public void SetText(string str)
     {
-        numOfEnemy.text =" X " + str;
+        numOfEnemy.text ="X " + str;
     }
 }

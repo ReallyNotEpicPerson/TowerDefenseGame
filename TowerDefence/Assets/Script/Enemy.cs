@@ -1,19 +1,20 @@
 ﻿using System.Collections;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 #region ENUM
 public enum AudioType
 {
-    None=0,
+    None = 0,
     PlayAtAwake = 1,
     PlayAtStart = 2,
 }
 [System.Flags]
 public enum EnemyState
 {
-    None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Amored = 1 << 5,
-    TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8 , Invisible=1 << 9, YouEarnNothing = 1<<10
+    None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Armored = 1 << 5,
+    TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8, Invisible = 1 << 9, YouEarnNothing = 1 << 10
 
     //ArmorBurn = Slow | Amored,
     //Slow2=1<<2,?
@@ -88,7 +89,7 @@ public class Enemy : MonoBehaviour
         if (UsePathFinding)
         {
             TryGetComponent(out enemyNavMeshMovement);
-            
+
         }
         else if (!UsePathFinding)
         {
@@ -113,11 +114,11 @@ public class Enemy : MonoBehaviour
         }*/
         if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
         {
-            EnableState(EnemyState.Amored);
+            EnableState(EnemyState.Armored);
         }
         else if (armorStat.armorType.HasFlag(ArmorType.None))
         {
-            DisableState(EnemyState.Amored);
+            DisableState(EnemyState.Armored);
         }
         //TryGetComponent(out fxManager);
     }
@@ -153,11 +154,11 @@ public class Enemy : MonoBehaviour
         }
         if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
         {
-            EnableState(EnemyState.Amored);
+            EnableState(EnemyState.Armored);
         }
         else if (armorStat.armorType.HasFlag(ArmorType.None))
         {
-            DisableState(EnemyState.Amored);
+            DisableState(EnemyState.Armored);
         }
     }
     void Start()
@@ -198,11 +199,11 @@ public class Enemy : MonoBehaviour
                 GetComponent<Cast>().SpawnEnemy();
             }*/
         }
-        if (enemyState.HasFlag(EnemyState.Amored))
+        if (enemyState.HasFlag(EnemyState.Armored))
         {
             if (armorStat.DamageArmor(amount) == false)
             {
-                DisableState(EnemyState.Amored);
+                DisableState(EnemyState.Armored);
             }
             return true;
         }
@@ -434,7 +435,7 @@ public class Enemy : MonoBehaviour
             armorStat.RestoreArmor();
             if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
             {
-                EnableState(EnemyState.Amored);
+                EnableState(EnemyState.Armored);
             }
         }
         //gameObject.tag = "Enemy";
@@ -456,7 +457,7 @@ public class Enemy : MonoBehaviour
     public void When_Insta_kill()//remove soon??
     {
         Handler.RemoveALLDebuff();
-        DamageDisplayer.Create(transform.position,"INSTA KILL!!",DamageDisplayerType.Insta_kill);
+        DamageDisplayer.Create(transform.position, "INSTA KILL!!", DamageDisplayerType.Insta_kill);
         Die();//pooling
     }
     public int GetReviveTime()
@@ -470,8 +471,8 @@ public class Enemy : MonoBehaviour
         if (UsePathFinding)
         {
             //Debug.Log("Mod value: "+ mod.value+" mod type :"+mod.type);
-            enemyNavMeshMovement.TurnBack(i);           
-            enemyColor.flipX = !enemyColor.flipX;     
+            enemyNavMeshMovement.TurnBack(i);
+            enemyColor.flipX = !enemyColor.flipX;
         }
         else
         {
@@ -566,9 +567,9 @@ public class Enemy : MonoBehaviour
         DisableState(EnemyState.Weaken);
     }
     #endregion
-    public void  SetDestination(Transform spawnPoint,Transform endPoint)
+    public void SetDestination(Transform spawnPoint, Transform endPoint)
     {
-        enemyNavMeshMovement.SetDestination(spawnPoint,endPoint);
+        enemyNavMeshMovement.SetDestination(spawnPoint, endPoint);
     }
     public void SetDestination(int path)
     {
@@ -625,19 +626,111 @@ public class Enemy : MonoBehaviour
         }*/
         return;
     }
+    #region function to get stats
     public Sprite GetSprite()
     {
         return enemySprite;
     }
-    /*void OnMouseEnter()
+    public StringBuilder GetHealth()
     {
-        //statUI.TransferCharacter(gameObject);
-        //statUI.enabled = true;
+        StringBuilder text = new StringBuilder();
+        text.Append(startHealth);
+        return text;
     }
-    void OnMouseExit()
+    public StringBuilder GetSpeed()
     {
-        //statUI.enabled = false;
-    }*/
+        StringBuilder text = new StringBuilder();
+        text.Append(enemyPathMovement.startSpeed.value);
+        return text;
+    }
+    public StringBuilder GetChaceToInvade()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(ChanceToEvade * 100 + "%");
+        return text;
+    }
+    public StringBuilder GetWorth()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(worth);
+        return text;
+    }
+    public StringBuilder GetArmorHealth()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(armorStat.GetArmorHeath());
+        return text;
+    }
+    public StringBuilder GetArmorDamageReduction()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(armorStat.GetArmorDamageRedution()+"%");
+        return text;
+    }
+    public StringBuilder GetArmorLayer()
+    {
+        StringBuilder text = new StringBuilder();
+        text.Append(armorStat.GetArmorLayer());
+        return text;
+    }
+
+    public StringBuilder Ability()
+    {
+        StringBuilder text = new StringBuilder();
+        if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
+        {
+            text.Append($"<color=#00ff00ff>{"Speed boost: "}</color>" + "Increase speed after first hit");
+        }
+        if (enemyType.HasFlag(EnemyType.Revive))
+        {
+            Revive RE = fxManager.GetReviveEffect() as Revive;
+            text.Append($"<color=#00ff00ff>{"Revive: "}</color>" + "Have a " + RE.chance*100 + "% chance to revive after death");
+        }
+        if (enemyType.HasFlag(EnemyType.Invisible))
+        {
+            text.Append($"<color=#00ff00ff>{"Invisibility: "}</color>" +
+                "Become completely invisible to the naked eye for " + fxManager.GetInvisibleEffect()._duration + "s");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmunityToAll))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to all status effect");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmuneToSlow))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Slow");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmuneToPoison))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Poison");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmuneToFire))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Fire");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmunityToArmorBreaking))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Armor breaking");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmunityToWeaken))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Weaken");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmuneToFear))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Fear");
+        }
+        if (enemyType.HasFlag(EnemyType.ImmunityToInsta_Kill))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Insta_kill");
+        }
+        if (text.Length == 0)
+        {
+            text.Append($"<color=#ffffffff>{"Special Ability"}</color>" + "\n" + "None" + "\n");
+        }
+        return text;
+    }
+    #endregion
+
     #region flag checking/Manipulation
     public bool CheckEnemyType(EnemyType et)
     {

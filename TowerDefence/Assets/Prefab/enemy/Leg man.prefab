@@ -789,7 +789,7 @@ MonoBehaviour:
   armorStat: {fileID: 7910831844611192336}
   UsePathFinding: 0
   ChanceToEvade: 0.05
-  worth: 4
+  worth: 3
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 7156076364990073353}
   Handler: {fileID: 8371154531913433653}

@@ -15,6 +15,13 @@ public class GameOver : MonoBehaviour
     {
         roundsText.text = PlayerStat.rounds.ToString(); 
     }
+    private void OnValidate()
+    {
+        if (sceneFader == null)
+        {
+            sceneFader = FindObjectOfType<SceneFader>(true);
+        }
+    }
     public void Retry()
     {
         sceneFader.FadeTo(SceneManager.GetActiveScene().name);

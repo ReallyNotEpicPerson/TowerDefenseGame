@@ -25,6 +25,30 @@ public class Shop : MonoBehaviour
 
         //CreateButton();
     }*/
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)|| Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            Debug.Log("Yes");
+            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[0]]);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[1]]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[2]]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[3]]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[4]]);
+        }
+    }
     void NewCreateButton()
     {
         for (int i = 0; i < GameAsset.I.formation.characterLineUp.Length; i++)

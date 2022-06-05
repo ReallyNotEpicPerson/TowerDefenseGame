@@ -20,4 +20,4 @@ MonoBehaviour:
   expirableType: 1
   _duration: 0
   chance: 0.025
-  description: Chance to Insta kill
+  description: insta kill enemy

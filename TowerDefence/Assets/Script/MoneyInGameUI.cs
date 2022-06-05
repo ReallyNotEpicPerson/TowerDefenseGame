@@ -6,7 +6,8 @@ using TMPro;
 public class MoneyInGameUI : MonoBehaviour
 {
     public bool isTmp = true;
-
+    public Vector3 moneyGainedPosition;
+    public static Vector3 pos;
     public Text Money;
     public TMP_Text money_Text;
 
@@ -20,6 +21,11 @@ public class MoneyInGameUI : MonoBehaviour
         {
             isTmp = false;
         }
+    }
+    private void Awake()
+    {
+        pos = moneyGainedPosition;
+        pos.z = 0;
     }
     void Update()
     {

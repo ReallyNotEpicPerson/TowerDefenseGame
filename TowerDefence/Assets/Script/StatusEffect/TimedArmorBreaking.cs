@@ -12,16 +12,16 @@ public class TimedArmorBreaking : TimedEffect
     {
         if (haveArmorAtStart || _enemy.armorStat.HaveArmor())
         {
-            _enemy.EnableState(EnemyState.Amored);
+            _enemy.EnableState(EnemyState.Armored);
         }
         _enemy.RemoveFX(Effect.ID);
     }
 
     public override void Tick()
     {
-        if (_enemy.enemyState.HasFlag(EnemyState.Amored) && haveArmorAtStart == false)
+        if (_enemy.enemyState.HasFlag(EnemyState.Armored) && haveArmorAtStart == false)
         {
-            _enemy.DisableState(EnemyState.Amored);
+            _enemy.DisableState(EnemyState.Armored);
         }
         if (Effect.expirableType.HasFlag(ExpirableType.NonExpireable))
         {
@@ -39,10 +39,10 @@ public class TimedArmorBreaking : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        if (_enemy.enemyState.HasFlag(EnemyState.Amored))
+        if (_enemy.enemyState.HasFlag(EnemyState.Armored))
         {
             haveArmorAtStart = true;
-            _enemy.DisableState(EnemyState.Amored);
+            _enemy.DisableState(EnemyState.Armored);
         }
         else
         {

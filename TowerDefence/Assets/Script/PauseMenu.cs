@@ -7,10 +7,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject ui;
 
     public SceneFader sceneFader;
-
     public string mainMenuSceneName= "MainMenu";
     private float timeScale;
+    public static bool uiState=false;
 
+    private void Start()
+    {
+        uiState = false;
+    }
     void Update()
     {
         if (Game_Managers.gameHasEnded)
@@ -34,7 +38,9 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = timeScale;
         }
+        uiState = ui.activeSelf;
     }
+
     public void Retry()
     {
         GameToggle();

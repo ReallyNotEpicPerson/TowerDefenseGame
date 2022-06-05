@@ -9,7 +9,13 @@ public class CompleteLevel : MonoBehaviour
     public int levelToUnlock = 2;
 
     public SceneFader sceneFader;
-
+    private void OnValidate()
+    {
+        if (sceneFader == null)
+        {
+            sceneFader = FindObjectOfType<SceneFader>(true);
+        }
+    }
     public void Continue()
     {
         PlayerPrefs.SetInt("LevelReached", levelToUnlock);

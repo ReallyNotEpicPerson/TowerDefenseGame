@@ -46,6 +46,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: -5479834351035917023}
   formation: {fileID: 11400000, guid: e8b20599ff3e11f4fbfc16a8e174a248, type: 2}
+  weaponSprite: []
+  charImg:
+  - {fileID: 5165142716011584292, guid: 6ff774e397df58743a18a774bb2ac0aa, type: 3}
+  - {fileID: 7115903880381199470, guid: 4068d71f7ce82f44fb3ec6c10786e0b4, type: 3}
+  - {fileID: 2846784767227669150, guid: d042d2c5c95c17b4c98cf6a7a2ead054, type: 3}
+  - {fileID: 4874449705774183522, guid: 7225b9a4b108f0b44bb562a3cc12c20b, type: 3}
+  - {fileID: 7436772537051650074, guid: cca10a3945f60ca4dbacc0659155d86e, type: 3}
+  damageDisplayer: {fileID: 7861630055729467459, guid: dcf6fbd7753960d41acff7b7d5656a5f,
+    type: 3}
+  underling: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+    type: 3}
+  description:
+  - "Extremely fast , but have low health , can fly through all sort of terrain and
+    love to get to the end of that path right there.\n\"Please , he`s is being very
+    polite here\"\r"
+  - "Slime seems to be lost , he said his home is at the end of the path right there.\n\"We
+    should hel-...Wait a minute.....\"\r"
+  - "Being one of the few crab that can walk straight . Crab said he would love to
+    find the sea, which is at the end of the path right over there! \n\".....Hold
+    on... \r\""
+  - "A strange leg with incredible speed despite not being connected to anything.
+    It just run...somehow\n\"Is this yours?\"\r"
+  - 'Another strange leg with unexplained speed , more durable than the first one
+    , he seems a bit red?
+
+    "What do you mean not yours?"'
+  - "\"This is the fastest leg i have seen,yet....It can boost itself to great distance
+    in a matter of seconds. \nIm pretty sure this is yours\"\r"
+  - "Strong, however lacking in speed, the Golem`s life has been rocky lately , he
+    has been looking for his lover the Red Golem since that \"day\" to no avail ,she
+    might be at the end of the path right there.\r"
+  - "Stronger than a normal golem , the Red golem has a dirty secret ... she has
+    been cheating on Golem with the Blue Golem ever since that day...she left out
+    of guilt, never to be seen again\r"
+  - 'Blue Golem is a NTR enthusiast strangely enough
+
+    "Man....i have no idea
+    where to go with this story "
+
+'
+  - '"Another one? Haven`t we got enough Balls already ...I mean 2 is MORE than enough
+    . Wait where did it go?"'
+  - "Despite his look, he`s still a really really really really really good boy!!!Who
+    want nothing but to be pet , belly rub and get to the end of the path , in that
+    order\r"
+  - "A good boy that can be revive with a certain chance after death .\nApparently
+    there is a dog heaven and we could get there\u2026.if we let him get to the end
+    of the path.\n\"That`s. Very.Tempting\""
+  - "\"A cube with additional armor that reduce incoming damage . \nWhat the hell
+    is this cube doing here all of the sudden ? I thought is is a 2D Game?\"\r"
+  - "\"A Sphere with additional armor that reduce incoming damage \nWeird\u2026ball?
+    3D? Or is that a 2D image of 3D ball? . we don`t know....\"\r"
+  - "\"He Just kept Dancing, never stopping , And WHY on earth is he 3D?.Seriously?
+    This.Is.A.2D.Game\r...to be honest idk anymore\""
+  - 'Boss Slime might appear more than once... To kill you
+
+    "he just a bit angry
+    at you , just a tini tiny bit "'
+  - "Boss Crab ate too much , thats why he sooo big \n\"Did you expect somthing more
+    to this story?\""
+  - 'This leg is like no other, definately yours...No? Dang it!
+
+'
+  turretDescription: []
   turret:
   - prefab: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
       type: 3}
@@ -131,11 +195,11 @@ MonoBehaviour:
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 741333515900032696, guid: e0c3b6fb69525c54596ec9c19465d344, type: 3}
-      ultraUpgradeCosts: fa000000
+      ultraUpgradeCosts: e1000000
       sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 3353924651515865828, guid: 6875ee6c54b3f4d418c2dc058d64ba5e, type: 3}
-      ultraUpgradeCosts: fa000000
+      ultraUpgradeCosts: e1000000
       sellPtcReduction: 0.5
   - prefab: {fileID: 525667416562004112, guid: e45d6f2358c358444b64dbe755cdde35, type: 3}
     cost: 0
@@ -145,19 +209,50 @@ MonoBehaviour:
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 382585485345961780, guid: cd0414fede073d34281f378363ef1b06, type: 3}
+    cost: 160
+    CanBeBuild: 1
+    sellPtcReduction: 0.5
+    upgradePrefabs:
+    - {fileID: 7056486356234093800, guid: 2d4441361b2bea34087113df8a8a6c86, type: 3}
+    - {fileID: 5137339787193338788, guid: eaa9184550a61084fa1d7bc99bb83930, type: 3}
+    upgradeCosts: 8c000000be000000
+    ultraUpgrades:
+    - ultraUpgradePrefab:
+      - {fileID: 7748943488595122275, guid: 7b5da0c265116924bb10cf5ee7c5ae57, type: 3}
+      ultraUpgradeCosts: f0000000
+      sellPtcReduction: 0.5
+    - ultraUpgradePrefab:
+      - {fileID: 8485852054697804859, guid: e95e8fb88f7b28a4da4359109b8f4002, type: 3}
+      ultraUpgradeCosts: b4000000
+      sellPtcReduction: 0.5
+  - prefab: {fileID: 6821397518981287459, guid: 1e203ea8723d77443a5a421af47e538f,
+      type: 3}
     cost: 200
-    CanBeBuild: 0
-    sellPtcReduction: 1
-    upgradePrefabs: []
-    upgradeCosts: 
+    CanBeBuild: 1
+    sellPtcReduction: 0.5
+    upgradePrefabs:
+    - {fileID: 6926505079866910515, guid: 44f4fbeac4cb89342817a482639984fe, type: 3}
+    - {fileID: 4136117717993565787, guid: dfbd5c2c54876af40a7dc62f8a1258c8, type: 3}
+    upgradeCosts: af000000eb000000
+    ultraUpgrades:
+    - ultraUpgradePrefab:
+      - {fileID: 846017217396804514, guid: ef13b0592d0edc444897fc61f61b916b, type: 3}
+      ultraUpgradeCosts: 22010000
+      sellPtcReduction: 0.5
+    - ultraUpgradePrefab:
+      - {fileID: 7763437311502007712, guid: 0d44f44b656e5d04986d58c564f6c2fd, type: 3}
+      ultraUpgradeCosts: 22010000
+      sellPtcReduction: 0.5
+  - prefab: {fileID: 8965921113538872230, guid: 2664bcd7a1b906f4aad0a76ce8d8941f,
+      type: 3}
+    cost: 400
+    CanBeBuild: 1
+    sellPtcReduction: 0.5
+    upgradePrefabs:
+    - {fileID: 8933316092586181040, guid: c032b79545be804439baf4e3a0a690fd, type: 3}
+    - {fileID: 0}
+    upgradeCosts: f401000058020000
     ultraUpgrades: []
-  weaponSprite: []
-  charImg:
-  - {fileID: 5165142716011584292, guid: 6ff774e397df58743a18a774bb2ac0aa, type: 3}
-  - {fileID: 7115903880381199470, guid: 4068d71f7ce82f44fb3ec6c10786e0b4, type: 3}
-  - {fileID: 2846784767227669150, guid: d042d2c5c95c17b4c98cf6a7a2ead054, type: 3}
-  - {fileID: 4874449705774183522, guid: 7225b9a4b108f0b44bb562a3cc12c20b, type: 3}
-  - {fileID: 7436772537051650074, guid: cca10a3945f60ca4dbacc0659155d86e, type: 3}
   turretSprite:
   - {fileID: 21300000, guid: ee095c2891df8834193836c595ec89b4, type: 3}
   - {fileID: 21300000, guid: 061cfb5c61cf01f45bdfb8e96d140cda, type: 3}
@@ -166,10 +261,59 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a99114d54de061541bdc3f9ec2194b82, type: 3}
   - {fileID: 21300000, guid: 1b8ef162e4f494149b39b20e869ca9b8, type: 3}
   - {fileID: 21300000, guid: 1f94f401bb35c0348b0bd15e492f0dc2, type: 3}
-  damageDisplayer: {fileID: 7861630055729467459, guid: dcf6fbd7753960d41acff7b7d5656a5f,
-    type: 3}
-  underling: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
-    type: 3}
+  - {fileID: 21300000, guid: 4317a93e6bf22814c9ad23c32d167c9c, type: 3}
+  - {fileID: 21300000, guid: 025db7405c6560a4d86d75fba495aebe, type: 3}
+  upgradeTurret_2:
+  - {fileID: 21300000, guid: 93f342a0263edc640ba6cc8065bc2227, type: 3}
+  - {fileID: 21300000, guid: f82c7608de838b74d8e06f0e18cdf647, type: 3}
+  - {fileID: 21300000, guid: 3eae10126768fd64f9a99b5bc513c711, type: 3}
+  - {fileID: 21300000, guid: 405439b41479b034c8bf5ead48b31a95, type: 3}
+  - {fileID: 21300000, guid: 22f382c416487b34c80409a554b5d65d, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 518a1ce842d3cfb469bee9c1ff5b4e87, type: 3}
+  - {fileID: 21300000, guid: 736335101df184d498c0fbd15c689e06, type: 3}
+  - {fileID: 21300000, guid: baf40e9142c88874c8e2b579c55ba2a1, type: 3}
+  upgradeTurret_3:
+  - {fileID: 21300000, guid: 86d991a98933ad64cbe166aac6283070, type: 3}
+  - {fileID: 21300000, guid: 20d39203452dd834aa6123c1cdd0144d, type: 3}
+  - {fileID: 21300000, guid: 91317154d8495a04785aa60c7d9ee134, type: 3}
+  - {fileID: 21300000, guid: 84a5fd971da1e5f4789581203008f85e, type: 3}
+  - {fileID: 21300000, guid: 9f3edcf8e5843e343b4b67c721693f48, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 0c2ade405cba4b74e996c978e826b90c, type: 3}
+  - {fileID: 21300000, guid: 5a070a1c62134b243a30b9970ad1e6c3, type: 3}
+  - {fileID: 21300000, guid: dfd8a8cb1b80325448c777de32b1bc9e, type: 3}
+  upgradeTurret_Tree_0:
+  - {fileID: 21300000, guid: 15872ee01b3676343b8a792ae966f654, type: 3}
+  - {fileID: 21300000, guid: 81c2626ba7c63f745a3580c6aec5b964, type: 3}
+  - {fileID: 21300000, guid: 79d201200293b544f8ceff07f4356865, type: 3}
+  - {fileID: 21300000, guid: 0079b2601519be64192ba3b84800ffc2, type: 3}
+  - {fileID: 21300000, guid: 8720d2733296f034fb8db11c5e8d28d3, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 1c8a5da0631a99c408899f20780588c4, type: 3}
+  - {fileID: 21300000, guid: bcb2714b8655f7d42bf8600664cbc0b1, type: 3}
+  - {fileID: 21300000, guid: e2c2c368fb342d841bbe8cb7bde90ec6, type: 3}
+  upgradeTurret_Tree_1:
+  - {fileID: 21300000, guid: 2a26a9d4e9adc314b8d2b82891ac064d, type: 3}
+  - {fileID: 21300000, guid: 5306967df0f81b6469f7fc465149253e, type: 3}
+  - {fileID: 21300000, guid: 3cc6319596a654742bd3a09a540ee91d, type: 3}
+  - {fileID: 21300000, guid: 384f6b4a692938848906e2716bb14284, type: 3}
+  - {fileID: 21300000, guid: e648ba471e35ccf4f9daf52996de84ec, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 0b2522c45ddeda54dbd85392dafc0a91, type: 3}
+  - {fileID: 21300000, guid: a1c44c2e404412e46bd9d2c3a0e665a2, type: 3}
+  - {fileID: 21300000, guid: a1c44c2e404412e46bd9d2c3a0e665a2, type: 3}
+  Map:
+  - {fileID: 21300000, guid: b5dfb77547f4a2d4fad77ed543058aaf, type: 3}
+  - {fileID: 21300000, guid: 2a512ecadd18cb948a94cea830047a62, type: 3}
+  - {fileID: 21300000, guid: fb7fab1a971bb5947ad32e99d30f3971, type: 3}
+  - {fileID: 21300000, guid: 8ecea068106cde94eac6c6512368e236, type: 3}
+  - {fileID: 21300000, guid: 61fb6a1de39457141ab6738afdd4d573, type: 3}
+  - {fileID: 21300000, guid: 2d41b7cfe6cc56c4bb44f8736bce8e77, type: 3}
+  - {fileID: 21300000, guid: 11d55576f509322478be7c1d69a584b5, type: 3}
+  - {fileID: 21300000, guid: b15c31704db533b4bbaaf8c280c66ca3, type: 3}
+  - {fileID: 21300000, guid: 5f977b304123f3b4884b2509dd71b014, type: 3}
+  - {fileID: 21300000, guid: 9d1cafb4095e6f649a90874dc5e49264, type: 3}
   PewPew_1: {fileID: 0}
   k: {fileID: 0}
   revive: {fileID: 8300000, guid: 5c6d3b1b195ad2446834003c33a7f12d, type: 3}

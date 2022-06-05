@@ -9,6 +9,12 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private GameObject button; 
     private string nextlevel;
     private string CurrentLevel;
+    [SerializeField] private Image map;
+
+    public void SetMap(Sprite leMap)
+    {
+        map.sprite = leMap;
+    }
 
     public void DisableLevelSelectionScreen()
     {
@@ -43,6 +49,10 @@ public class LevelSelector : MonoBehaviour
     public void LoadScence()
     {
         SceneManager.LoadScene(CurrentLevel);
+    }
+    public void LoadScence(string name)
+    {
+        SceneManager.LoadScene(name);
     }
     public void EnableTurretSelection(string LvName)//The one usisng right now
     {

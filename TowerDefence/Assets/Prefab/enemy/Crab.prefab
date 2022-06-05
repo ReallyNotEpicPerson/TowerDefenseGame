@@ -513,6 +513,7 @@ MonoBehaviour:
   pathIndex: 0
   startSpeed:
     baseValue: 1.5
+  distanceChangingWayPoint: 0.1
   speed: 0
   rateOfUpdateDistance: 0.2
 --- !u!114 &3053064806348107541
@@ -536,7 +537,7 @@ MonoBehaviour:
   armorStat: {fileID: 3053064806348107543}
   UsePathFinding: 0
   ChanceToEvade: 0.001
-  worth: 5
+  worth: 6
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2655219906333152014}
   Handler: {fileID: 3727310694209542962}

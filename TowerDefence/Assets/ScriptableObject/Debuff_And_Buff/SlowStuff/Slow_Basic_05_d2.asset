@@ -21,7 +21,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 2
   chance: 1
-  description: Slow enemy
+  description: Slow down enemy
   _slowPercentage:
     modType: 500
     statValue:

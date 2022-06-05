@@ -20,7 +20,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 4
   chance: 1
-  description: 'Enemy go Brrrrrr '
+  description: 'boost enemy speed '
   _slowPercentage:
     modType: 100
     statValue:

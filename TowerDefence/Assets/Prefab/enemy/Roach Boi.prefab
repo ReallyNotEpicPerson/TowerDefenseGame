@@ -899,6 +899,7 @@ MonoBehaviour:
   pathIndex: 0
   startSpeed:
     baseValue: 1.5
+  distanceChangingWayPoint: 0.1
   speed: 0
   rateOfUpdateDistance: 0.2
 --- !u!114 &7523187586792812375

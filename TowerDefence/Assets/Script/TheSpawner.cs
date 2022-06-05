@@ -35,15 +35,17 @@ public class TheSpawner : MonoBehaviour
     [SerializeField] ObjectPooler objectPooler;
     [SerializeField] StatusEffectDisplayer displayer;
 
-    public bool PlayerGainNothing=false;
+    public bool PlayerGainNothing = false;
     public bool SurviveInTime = false;
     public float timeToSurvive = 60;
+    public int moneyBetweenWave = 25;
     public GameObject waveDisplayer;
+    public GameObject waveButton;
     private bool DoneWithSpawning = true;
     [SerializeField] private List<StartWaveEnemyDisplay> startWaveEnemyDisplays;
     [SerializeField] private List<Sprite> imageList = new List<Sprite>();
     private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
-    private bool win=false;
+    private bool win = false;
     //private List<int> numOfEnemy = new List<int>();
 
     private void OnValidate()
@@ -67,7 +69,7 @@ public class TheSpawner : MonoBehaviour
             }
         }
         startWaveEnemyDisplays.Clear();
-        for (int i = 0; i < waveDisplayer.transform.childCount; i++)
+        for (int i = 2; i < waveDisplayer.transform.childCount; i++)
         {
             startWaveEnemyDisplays.Add(waveDisplayer.transform.GetChild(i).GetComponent<StartWaveEnemyDisplay>());
         }
@@ -82,7 +84,7 @@ public class TheSpawner : MonoBehaviour
     }*/
     private void Awake()
     {
-        if (SurviveInTime ==true)
+        if (SurviveInTime == true)
         {
             StartCoroutine(Timer());
         }
@@ -95,6 +97,7 @@ public class TheSpawner : MonoBehaviour
     {
         numOfEnemies = 0;
         //objectPooler = ObjectPooler.instance;
+        WaveButtonToggle();
     }
     void Update()
     {
@@ -102,40 +105,125 @@ public class TheSpawner : MonoBehaviour
         {
             return;
         }
-        if (waveNum == mainWaves.Length || win==true)
+        if (numOfEnemies == 0)
+        {
+            waveButton.SetActive(true);
+        }
+        if (waveNum == mainWaves.Length || win == true)
         {
             game_Managers.WinLevel();
             enabled = false;
         }
-        if (Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.X))
+        if ((Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.X)) && !PauseMenu.uiState)
         {
-            CountDown = 0f;
-            leWaveTimer.text = String.Format("{0:00.00}", CountDown);
-            //StartCoroutine(WaveCount());
-            WaveCounter(mainWaves[waveNum].waveName);
+            SkipWaitingTime();
             return;
         }
         if (CountDown <= 0)
         {
             DoneWithSpawning = false;
             StartCoroutine(SpawnWave());
-            waveDisplayer.SetActive(false);
-            imageList.Clear();
-            numOfEnemy.Clear();
             CountDown = TimeBetweenWave;
+            waveButton.SetActive(false);
+            HideWaveDisplayer();
             //StartCoroutine(WaveCount());
             WaveCounter(mainWaves[waveNum].waveName);
             return;
         }
-        if (!waveDisplayer.activeSelf && waveNum != mainWaves.Length)
-        {
-            waveDisplayer.SetActive(true);
-            EnemyWaveDisplay();
-        }
         CountDown -= Time.deltaTime;
         CountDown = Mathf.Clamp(CountDown, 0f, Mathf.Infinity);
-
         leWaveTimer.text = String.Format("{0:00.00}", CountDown);
+    }
+
+    public void SkipWaitingTime()
+    {
+        if (!PlayerGainNothing && CountDown > 1 && waveNum != 0)
+        {
+            int moneyAdd = Mathf.CeilToInt(CountDown / 20 * moneyBetweenWave);
+            Debug.Log(moneyAdd);
+            if (moneyAdd > moneyBetweenWave)
+            {
+                PlayerStat.moneyInGame += moneyBetweenWave;
+                MoneyGained(moneyBetweenWave);
+            }
+            else
+            {
+                PlayerStat.moneyInGame += moneyAdd;
+                MoneyGained(moneyAdd);
+            }
+        }
+        CountDown = 0f;
+        leWaveTimer.text = String.Format("{0:00.00}", CountDown);
+        //StartCoroutine(WaveCount());
+        WaveCounter(mainWaves[waveNum].waveName);
+
+        return;
+    }
+    public void MoneyGained(float amount)
+    {
+        DamageDisplayer.Create(MoneyInGameUI.pos, "+" + amount.ToString(), DamageDisplayerType.Non_Damage_Display);
+    }
+    public void EnemyWaveDisplay(int path)
+    {
+        for (int j = 0; j < mainWaves[waveNum].enemy.Length; j++)
+        {
+            if (mainWaves[waveNum].enemy[j].path != path)
+            {
+                continue;
+            }
+            if (!imageList.Contains(mainWaves[waveNum].enemy[j].sprite))
+            {
+                imageList.Add(mainWaves[waveNum].enemy[j].sprite);
+            }
+            if (!numOfEnemy.ContainsKey(mainWaves[waveNum].enemy[j].sprite))
+            {
+                numOfEnemy.Add(mainWaves[waveNum].enemy[j].sprite, mainWaves[waveNum].enemy[j].count);
+            }
+            else
+            {
+                numOfEnemy[mainWaves[waveNum].enemy[j].sprite] += mainWaves[waveNum].enemy[j].count;
+            }
+            //img.transform.GetChild(0);
+        }
+        //waveDisplayer.transform.GetChild().GetComponent<Image>();
+        for (int i = 0; i < startWaveEnemyDisplays.Count; i++)
+        {
+            //Debug.Log(i + " " + imageList.Count);
+            if (i >= imageList.Count)
+            {
+                startWaveEnemyDisplays[i].gameObject.SetActive(false);
+                continue;
+            }
+            startWaveEnemyDisplays[i].SetSprite(imageList[i]);
+            startWaveEnemyDisplays[i].SetText(numOfEnemy[imageList[i]].ToString());
+            startWaveEnemyDisplays[i].gameObject.SetActive(true);
+        }
+    }
+    public void WaveButtonToggle()
+    {
+        waveButton.transform.GetChild(0).gameObject.SetActive(false);
+        waveButton.transform.GetChild(1).gameObject.SetActive(false);
+        waveButton.transform.GetChild(2).gameObject.SetActive(false);
+        for (int i = 0; i < mainWaves[waveNum].enemy.Length; i++)
+        {
+            if (mainWaves[waveNum].enemy[i].path == 0 && !waveButton.transform.GetChild(0).gameObject.activeSelf)
+            {
+                waveButton.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else if (mainWaves[waveNum].enemy[i].path == 1 && !waveButton.transform.GetChild(1).gameObject.activeSelf)
+            {
+                waveButton.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else if (mainWaves[waveNum].enemy[i].path == 2 && !waveButton.transform.GetChild(2).gameObject.activeSelf)
+            {
+                waveButton.transform.GetChild(2).gameObject.SetActive(true);
+            }
+            /*else if (mainWaves[waveNum].enemy[i].path == 3)
+            {
+                waveButton.transform.GetChild(3).gameObject.SetActive(true);
+
+            }*/
+        }
     }
     public void EnemyWaveDisplay()
     {
@@ -169,6 +257,39 @@ public class TheSpawner : MonoBehaviour
             startWaveEnemyDisplays[i].gameObject.SetActive(true);
         }
     }
+    public void ShowWaveDisplayer(int path)
+    {
+        //Vector3 tmpPos = Camera.main.ScreenToWorldPoint();
+        //tmpPos.z = 0;
+        //Debug.Log(tmpPos);
+        waveDisplayer.transform.position = Input.mousePosition;
+        RectTransform rect = waveDisplayer.GetComponent<RectTransform>();
+        if (numOfEnemy.Count < 4)
+        {
+            rect.sizeDelta = new Vector2(130,42);
+            waveDisplayer.transform.Find("Frame").GetComponent<RectTransform>().sizeDelta= new Vector2(230,142);
+        }
+        else if (numOfEnemy.Count < 9)
+        {
+            rect.sizeDelta = new Vector2(130,84);
+            waveDisplayer.transform.Find("Frame").GetComponent<RectTransform>().sizeDelta = new Vector2(230, 184);
+        }
+        else
+        {
+            rect.sizeDelta = new Vector2(130, 126);
+            waveDisplayer.transform.Find("Frame").GetComponent<RectTransform>().sizeDelta = new Vector2(230, 225);
+        }
+        imageList.Clear();
+        numOfEnemy.Clear();
+        EnemyWaveDisplay(path);
+        waveDisplayer.SetActive(true);
+    }
+    public void HideWaveDisplayer()
+    {
+        imageList.Clear();
+        numOfEnemy.Clear();
+        waveDisplayer.SetActive(false);
+    }
     public void WaveCounter(string num)
     {
         Counter.text = "Wave " + num;
@@ -192,6 +313,10 @@ public class TheSpawner : MonoBehaviour
         }
         waveNum++;
         DoneWithSpawning = true;
+        if (waveNum < mainWaves.Length)
+        {
+            WaveButtonToggle();
+        }
     }
     /*public Vector3 RandomPos(this TheSpawner theSpawner,float range)
     {

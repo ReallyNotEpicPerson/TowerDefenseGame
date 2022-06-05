@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpecialFX : MonoBehaviour
 {
@@ -24,9 +23,9 @@ public class SpecialFX : MonoBehaviour
                 if (fx.Effect.ID.Contains("SL"))
                 {
                     //Debug.Log(spriteRenderer.sprite.rect.height/2);
-                    go = Instantiate(fx.Effect.specialFX, fxParent.transform.position- new Vector3(0,0.2f, 0), Quaternion.identity, fxParent);
+                    go = Instantiate(fx.Effect.specialFX, fxParent.transform.position - new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);
                     SpecialFXDict.Add(fx.Effect.ID, go);
-                }           
+                }
                 else
                 {
                     //Debug.Log(spriteRenderer.sprite.rect.height / 2);
@@ -45,10 +44,10 @@ public class SpecialFX : MonoBehaviour
                     //go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);
                     //SpecialFXDict.Add(fx.Effect.ID, go);
                 }
-                else if(fx.Effect.ID.Contains("POI"))
+                else if (fx.Effect.ID.Contains("POI"))
                 {
                     go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, fxParent);
-                    SpecialFXDict.Add(fx.Effect.ID, go);                    
+                    SpecialFXDict.Add(fx.Effect.ID, go);
                 }
                 else// if(fx.Effect.ID.Contains("POI"))
                 {
@@ -69,7 +68,7 @@ public class SpecialFX : MonoBehaviour
                 break;
             case ArmorBreaking _:
                 go = Instantiate(fx.Effect.specialFX, fxParent.transform.position + new Vector3(0, 1, 0), Quaternion.identity, fxParent);
-                SpecialFXDict.Add(fx.Effect.ID, go); 
+                SpecialFXDict.Add(fx.Effect.ID, go);
                 break;
             default:
                 break;
@@ -77,7 +76,10 @@ public class SpecialFX : MonoBehaviour
     }
     public void RemoveFX(string ID)
     {
-        Destroy(SpecialFXDict[ID]);
+        if (SpecialFXDict.ContainsKey(ID))
+        {
+            Destroy(SpecialFXDict[ID]);
+        }
         SpecialFXDict.Remove(ID);
     }
     public void RemoveAllFX()

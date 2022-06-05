@@ -20,7 +20,7 @@ MonoBehaviour:
   expirableType: 0
   _duration: 2
   chance: 1
-  description: 'Heal Enemy '
+  description: heal enemy
   damagePerRate:
     baseValue: -50
   rate:

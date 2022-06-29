@@ -5,8 +5,6 @@ using UnityEngine;
 public class EntityEffectHandler : MonoBehaviour
 {
     public Dictionary<string, TimedEffect> _effectList = new Dictionary<string, TimedEffect>();
-
-    #region Update Effect
     public void Update()
     {
         HandleDebuff();
@@ -27,53 +25,12 @@ public class EntityEffectHandler : MonoBehaviour
             }
         }
     }
-    #endregion
     public bool Contain(string ID)
     {
         return _effectList.ContainsKey(ID);
     }
-    public void ActivateDebuff(TimedEffect timedEffect)
+    public void AddDebuff(BaseEffect baseEffect, GameObject Obj)
     {
-
-        if (_effectList.ContainsKey(timedEffect.Effect.ID))
-        {
-            _effectList[timedEffect.Effect.ID].Activate();
-        }
-        else
-        {
-            _effectList.Add(timedEffect.Effect.ID, timedEffect);
-            _effectList[timedEffect.Effect.ID].Activate();
-
-        }
-        ListAllDebuff();
-    }
-
-    public void AddDebuff(BaseEffect baseEffect, GameObject Obj)// the ultimate function
-    {
-        /*switch (baseEffect)
-        {
-            case SlowEffect slowEffect:
-                ActivateDebuff(slowEffect.Init(enemy.gameObject));
-                break;
-            case BurnEffect burnEffect:
-                ActivateDebuff(burnEffect.Init(enemy.gameObject));
-                break;
-            case FearEffect fearEffect:
-                ActivateDebuff(fearEffect.Init(enemy.gameObject));
-                break;
-            case Revive revive:
-                ActivateDebuff(revive.Init(enemy.gameObject));
-                break;
-            case Weaken weaken:
-                ActivateDebuff(weaken.Init(enemy.gameObject));
-                break;
-            case DisableArmor disableArmor:
-                ActivateDebuff(disableArmor.Init(enemy.gameObject));
-                break;
-            default:
-                Debug.LogError("wait what the fuck is this?");
-                break;
-        }*/
         switch (baseEffect)
         {
             case SlowEffect slowEffect:
@@ -154,16 +111,62 @@ public class EntityEffectHandler : MonoBehaviour
                 }
                 break;
             default:
-                Debug.LogError("wait what the fuck is this?");
+                Debug.LogError("wait what the heck is this?");
                 break;
         }
     }
-
-    public void RemoveDebuff(string ID)//OG remove
+    public void RemoveDebuff(string ID)
     {
         _effectList.Remove(ID);
-
     }
+    public void RemoveALLDebuff()
+    {
+        _effectList.Clear();
+        Debug.Log("No Debuff left right? " + _effectList.Count());
+        if (_effectList.Count > 0)
+        {
+            Debug.Log("WTF");
+        }
+    }
+    public bool StillHaveInvisibility()
+    {
+        return _effectList.ContainsKey("INVI");       
+    }
+    public void ActivateDebuff(TimedEffect timedEffect)
+    {
+        if (_effectList.ContainsKey(timedEffect.Effect.ID))
+        {
+            _effectList[timedEffect.Effect.ID].Activate();
+        }
+        else
+        {
+            _effectList.Add(timedEffect.Effect.ID, timedEffect);
+            _effectList[timedEffect.Effect.ID].Activate();
+
+        }
+        ListAllDebuff();
+    }
+
+    public void ListAllDebuff()
+    {
+        //Debug.Log(_effectList.Count());
+        foreach (KeyValuePair<string, TimedEffect> pair in _effectList)
+        {
+            Debug.Log(pair + "\n");
+        }
+    }
+    public void RemoveAllDebuffExcept()//string name="Revive")
+    {
+        foreach (KeyValuePair<string, TimedEffect> effect in _effectList)
+        {
+            if (effect.Value is TimedReviveEffect)
+            {
+                continue;
+            }
+            _effectList.Remove(effect.Key);
+        }
+    }
+
     /*public void RemoveALLDebuff(int LeType) //Well fuck,there are 2 type of status effect negative=0 and positive=1
     {
         if (LeType == 0)
@@ -181,36 +184,4 @@ public class EntityEffectHandler : MonoBehaviour
             }
         }
     }*/
-    public void RemoveAllDebuffExcept()//string name="Revive")
-    {
-        foreach (KeyValuePair<string, TimedEffect> effect in _effectList)
-        {
-            if (effect.Value is TimedReviveEffect)
-            {
-                continue;
-            }
-            _effectList.Remove(effect.Key);
-        }
-    }
-    public void RemoveALLDebuff()
-    {
-        _effectList.Clear();
-        Debug.Log("No Debuff left right? " + _effectList.Count());
-        if (_effectList.Count > 0)
-        {
-            Debug.Log("WTF");
-        }
-    }
-    public bool StillHaveInvisibility()
-    {
-        return _effectList.ContainsKey("INVI");       
-    }
-    public void ListAllDebuff()
-    {
-        //Debug.Log(_effectList.Count());
-        foreach (KeyValuePair<string, TimedEffect> pair in _effectList)
-        {
-            Debug.Log(pair + "\n");
-        }
-    }
 }

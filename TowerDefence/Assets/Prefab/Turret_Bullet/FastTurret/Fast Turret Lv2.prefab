@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 834631408073918478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.379, y: 0.376, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 497703350345525369}
   m_RootOrder: 4
@@ -198,19 +198,19 @@ MonoBehaviour:
   range:
     baseValue: 3
   rotationSpeed:
-    baseValue: 250
+    baseValue: 380
   spriteRenderer: {fileID: 2606175427658999817}
   fireRate:
     baseValue: 1.01
   firePoint:
   - {fileID: 6380624998359712318}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 2722620133455497604}
   animator: {fileID: 4536510345818818678}
   BulletPrefab: {fileID: 65829975155039150, guid: c9fcd6721ee145845b8792f5751cf37e,
     type: 3}
   bu: {fileID: 8434460745869372263, guid: c9fcd6721ee145845b8792f5751cf37e, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!61 &7462624579042812833
 BoxCollider2D:
   m_ObjectHideFlags: 0

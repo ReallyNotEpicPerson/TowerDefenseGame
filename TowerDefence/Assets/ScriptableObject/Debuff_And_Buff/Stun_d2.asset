@@ -19,7 +19,7 @@ MonoBehaviour:
   effectType: 4
   removableType: 1
   expirableType: 0
-  _duration: 2
+  duration: 2
   chance: 0.02
   description: stun enemy
   _slowPercentage:

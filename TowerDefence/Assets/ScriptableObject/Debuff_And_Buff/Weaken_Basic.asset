@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: WE_BS
   Icon: {fileID: 21300000, guid: 45dea61616902dc478ad262fd6f5d152, type: 3}
-  specialFX: {fileID: 0}
+  specialFX: {fileID: 4293055480931936953, guid: 06251a203157fe8408a98b8e2cfe7507,
+    type: 3}
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 3
+  duration: 3
   chance: 0.5
   description: make enemy take extra
   extraDamageTaken:

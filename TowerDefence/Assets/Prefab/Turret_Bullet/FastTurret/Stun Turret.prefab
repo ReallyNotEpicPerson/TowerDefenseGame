@@ -54,19 +54,19 @@ MonoBehaviour:
   range:
     baseValue: 3.5
   rotationSpeed:
-    baseValue: 250
+    baseValue: 380
   spriteRenderer: {fileID: 757579695089883395}
   fireRate:
     baseValue: 1.215
   firePoint:
   - {fileID: 4335083091487607380}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 5668496248576172007}
   animator: {fileID: 4562304437002659788}
   BulletPrefab: {fileID: 7550667614939711936, guid: 55ec6e91f47304248bbe1da2bb85cd1c,
     type: 3}
   bu: {fileID: 2102483316676655369, guid: 55ec6e91f47304248bbe1da2bb85cd1c, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!61 &512652539790916519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -319,19 +319,19 @@ MonoBehaviour:
   range:
     baseValue: 3.5
   rotationSpeed:
-    baseValue: 250
+    baseValue: 380
   spriteRenderer: {fileID: 7155925367419306950}
   fireRate:
     baseValue: 1.21
   firePoint:
   - {fileID: 5247798683001591596}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 3793344277171324384}
   animator: {fileID: 8674309836335442788}
   BulletPrefab: {fileID: 7550667614939711936, guid: 55ec6e91f47304248bbe1da2bb85cd1c,
     type: 3}
   bu: {fileID: 2102483316676655369, guid: 55ec6e91f47304248bbe1da2bb85cd1c, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!61 &3697670862836504657
 BoxCollider2D:
   m_ObjectHideFlags: 0

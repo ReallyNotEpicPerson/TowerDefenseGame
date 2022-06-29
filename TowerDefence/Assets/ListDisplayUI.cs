@@ -9,25 +9,33 @@ public class ListDisplayUI : MonoBehaviour
     public GameObject enemies;
     public Transform turretList;
     public Transform enemyList;
-    private List<Image> upgradeImageList = new List<Image>();
+    private List<Image> TurretUpgradeImageList = new List<Image>();
     public Transform turretStatInfo;
     public Transform enemyStatInfo;
     //private List<BaseTurretStat> turretList;
     public List<Enemy> enemy;
+    //private Dictionary
     private TurretBluePrint clickedTurret;
     private BaseTurretStat extractedTurret;
-
+    [Header("Enemy")]
     private TMP_Text enemyName;
     private Transform enemyStats;
     private Transform enemyIcons;
     private List<TMP_Text> enemyStat = new List<TMP_Text>();
     private TMP_Text description;
-
+    [Header("Turret")]
     private TMP_Text turretName;
     private Transform turretStats;
     private Transform turretIcons;
     private List<TMP_Text> turretStat = new List<TMP_Text>();
     private TMP_Text statusEffect;
+    [Header("SpriteImage")]
+    public List<Image> image;
+
+    public Animator enemyUI;
+    public Animator turretUI;
+    public Transform levelInfo;
+    public TMP_Text wave;
     private void OnValidate()
     {
         for (int i = 0; i < enemyList.childCount; i++)
@@ -37,11 +45,23 @@ public class ListDisplayUI : MonoBehaviour
     }
     private void Awake()
     {
+        LevelProgession savedEnemySprite = SaveSystem.LoadLevelProgression();
+        for (int i = 0; i < image.Count; i++)
+        {
+            if (savedEnemySprite.enemyList.Contains(enemy[i].name))
+            {
+                image[i].sprite = enemy[i].enemySprite;
+            }
+            else
+            {
+                image[i].sprite = GameAsset.I.questionMarkSprite;
+                image[i].GetComponent<Button>().interactable = false;
+            }
+        }//*/
         for (int i = 0; i < turretList.childCount; i++)
         {
-            upgradeImageList.Add(turretList.GetChild(i).GetChild(0).GetComponent<Image>());
+            TurretUpgradeImageList.Add(turretList.GetChild(i).GetChild(0).GetComponent<Image>());
         }
-
         turretStatInfo.Find("Name").TryGetComponent(out turretName);
         turretStats = turretStatInfo.Find("Stats");
         turretStatInfo.Find("StatusEffect").TryGetComponent(out statusEffect);
@@ -67,36 +87,36 @@ public class ListDisplayUI : MonoBehaviour
     public void GetBaseTurret(int index)
     {
         clickedTurret = GameAsset.I.turret[index];
-        for (int i = 0; i < upgradeImageList.Count; i++)
+        for (int i = 0; i < TurretUpgradeImageList.Count; i++)
         {
             if (i == 0)//lv1
             {
-                upgradeImageList[i].sprite = GameAsset.I.turretSprite[index];
-                upgradeImageList[i].transform.parent.gameObject.SetActive(true);
+                TurretUpgradeImageList[i].sprite = GameAsset.I.turretSprite[index];
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(true);
             }
             else if (i == 1 && GameAsset.I.upgradeTurret_2[index] != null)//lv2
             {
-                upgradeImageList[i].sprite = GameAsset.I.upgradeTurret_2[index];
-                upgradeImageList[i].transform.parent.gameObject.SetActive(true);
+                TurretUpgradeImageList[i].sprite = GameAsset.I.upgradeTurret_2[index];
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(true);
             }
             else if (i == 2 && GameAsset.I.upgradeTurret_3[index] != null)//lv3
             {
-                upgradeImageList[i].sprite = GameAsset.I.upgradeTurret_3[index];
-                upgradeImageList[i].transform.parent.gameObject.SetActive(true);
+                TurretUpgradeImageList[i].sprite = GameAsset.I.upgradeTurret_3[index];
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(true);
             }
             else if (i == 3 && GameAsset.I.upgradeTurret_Tree_0[index] != null)//tree 0
             {
-                upgradeImageList[i].sprite = GameAsset.I.upgradeTurret_Tree_0[index];
-                upgradeImageList[i].transform.parent.gameObject.SetActive(true);
+                TurretUpgradeImageList[i].sprite = GameAsset.I.upgradeTurret_Tree_0[index];
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(true);
             }
             else if (i == 4 && GameAsset.I.upgradeTurret_Tree_1[index] != null)//tree 1
             {
-                upgradeImageList[i].sprite = GameAsset.I.upgradeTurret_Tree_1[index];
-                upgradeImageList[i].transform.parent.gameObject.SetActive(true);
+                TurretUpgradeImageList[i].sprite = GameAsset.I.upgradeTurret_Tree_1[index];
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(true);
             }
             else
             {
-                upgradeImageList[i].transform.parent.gameObject.SetActive(false);
+                TurretUpgradeImageList[i].transform.parent.gameObject.SetActive(false);
             }
             /*
             else if (i == 5)//tree 0_lv2
@@ -119,7 +139,7 @@ public class ListDisplayUI : MonoBehaviour
         //all image of that turret then find by index supa simple,set them accordingly to the child turretImage......is hard af 
         //check condition to set if != null
         //
-    }
+    }//show
     public void GetFullEnemyStat(int i)
     {
         enemyName.text = enemy[i].name;
@@ -144,7 +164,7 @@ public class ListDisplayUI : MonoBehaviour
             enemyIcons.GetChild(4).gameObject.SetActive(false);
             enemyIcons.GetChild(5).gameObject.SetActive(false);
         }
-        description.text = $"<color=#ffffffff>{"description:"}</color>" + 
+        description.text = $"<color=#ffffffff>{"description:"}</color>" +
             GameAsset.I.description[i] + "\n" + enemy[i].Ability() + "\n";
     }
     public void RemoveAllEnemyStat()
@@ -195,7 +215,8 @@ public class ListDisplayUI : MonoBehaviour
                 turretStat[5].text = bulletTurret.GetBulletSpeed() + "\n";
                 turretStat[5].gameObject.SetActive(true);
                 turretIcons.GetChild(5).gameObject.SetActive(true);
-                statusEffect.text = bulletTurret.GetTargetingType() + "\n"+ bulletTurret.GetStatusEffect();
+                statusEffect.text = bulletTurret.GetTargetingType() + "\n" +
+                    "Ability" + "\n" + bulletTurret.GetStatusEffect();
                 break;
             case LazerTypeTurret lazerTurret:
                 turretStat[0].text = lazerTurret.GetDamage() + "\n";
@@ -205,7 +226,8 @@ public class ListDisplayUI : MonoBehaviour
                 turretStat[4].text = lazerTurret.GetCritDamage() + "\n";
                 turretStat[5].gameObject.SetActive(false);
                 turretIcons.GetChild(5).gameObject.SetActive(false);
-                statusEffect.text = lazerTurret.GetTargetingType() + "\n"+ lazerTurret.GetStatusEffect();
+                statusEffect.text = lazerTurret.GetTargetingType() + "\n" +
+                    "Ability" + "\n" + lazerTurret.GetStatusEffect();
                 break;
         }
     }
@@ -227,21 +249,24 @@ public class ListDisplayUI : MonoBehaviour
     }
     public void ShowEnemiesUI()
     {
-        enemies.SetActive(true);
+        enemyUI.SetTrigger("Play");
+        // enemies.SetActive(true);
     }
     public void HideEnemiesUI()
     {
-        enemies.SetActive(false);
+        enemyUI.SetTrigger("Comeback");
+        //enemies.SetActive(false);
     }
     public void HideTurretsUI()
     {
-        turrets.SetActive(false);
+        turretUI.SetTrigger("Comeback");
+        //turrets.SetActive(false);
     }
     public void ShowTurretsUI()
     {
-        turrets.SetActive(true);
+        turretUI.SetTrigger("Play");
+        //turrets.SetActive(true);
     }
-
     public void ShowTurretStatInfo()
     {
         turretStatInfo.gameObject.SetActive(true);
@@ -257,5 +282,39 @@ public class ListDisplayUI : MonoBehaviour
     public void HideEnemyStatInfo()
     {
         enemyStatInfo.gameObject.SetActive(false);
+    }
+    public void ShowEnemyList(int index)
+    {
+        for (int i = 0; i < levelInfo.childCount-2; i++)
+        {
+            if(i < GameAsset.I.enemyThatRound[index].list.Count)
+            {
+                levelInfo.GetChild(i).gameObject.SetActive(true);
+                levelInfo.GetChild(i).GetComponent<Image>().sprite = enemy[GameAsset.I.enemyThatRound[index].list[i]].enemySprite;
+            }
+            else
+            {
+                levelInfo.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    public void ResetAllProgress(int maxLevel)
+    {      
+        LevelProgession lvp = new LevelProgession();//only 10 level for now
+        lvp.level.Add("Level 1");//keep at all cost
+        if (maxLevel > lvp.star.Count)
+        {
+            for (int i = 0; i < maxLevel- lvp.star.Count; i++)
+            {
+                lvp.star.Add(0);
+            }
+        }
+
+        SaveSystem.SaveLevelProgression(lvp);//keep at all cost
+    }
+    public void Wave(string str)
+    {
+        wave.gameObject.SetActive(true);
+        wave.text = str + " Waves";
     }
 }

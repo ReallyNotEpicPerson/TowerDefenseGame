@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 7342871224381551065, guid: cd0414fede073d34281f378363ef1b06,
         type: 3}
       propertyPath: passiveAbility
-      value: 32
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7342871224381551065, guid: cd0414fede073d34281f378363ef1b06,
         type: 3}

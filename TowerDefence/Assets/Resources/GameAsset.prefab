@@ -60,56 +60,62 @@ MonoBehaviour:
   description:
   - "Extremely fast , but have low health , can fly through all sort of terrain and
     love to get to the end of that path right there.\n\"Please , he`s is being very
-    polite here\"\r"
+    polite here\"\r."
   - "Slime seems to be lost , he said his home is at the end of the path right there.\n\"We
-    should hel-...Wait a minute.....\"\r"
+    should hel-...Wait a minute.....\"\r."
   - "Being one of the few crab that can walk straight . Crab said he would love to
-    find the sea, which is at the end of the path right over there! \n\".....Hold
-    on... \r\""
+    find the sea, which is at the end of the path right over there! \n\"..... Hold
+    on a minute ... \r\"."
   - "A strange leg with incredible speed despite not being connected to anything.
-    It just run...somehow\n\"Is this yours?\"\r"
+    It just run...somehow\n\"Is this yours?\"\r."
   - 'Another strange leg with unexplained speed , more durable than the first one
     , he seems a bit red?
 
-    "What do you mean not yours?"'
+    "What do you mean not yours?".'
   - "\"This is the fastest leg i have seen,yet....It can boost itself to great distance
-    in a matter of seconds. \nIm pretty sure this is yours\"\r"
+    in a matter of seconds. \nIm pretty sure this is yours\"\r."
   - "Strong, however lacking in speed, the Golem`s life has been rocky lately , he
     has been looking for his lover the Red Golem since that \"day\" to no avail ,she
     might be at the end of the path right there.\r"
   - "Stronger than a normal golem , the Red golem has a dirty secret ... she has
     been cheating on Golem with the Blue Golem ever since that day...she left out
-    of guilt, never to be seen again\r"
+    of guilt, never to be seen again\r."
   - 'Blue Golem is a NTR enthusiast strangely enough
 
     "Man....i have no idea
-    where to go with this story "
+    where to go with this story ".
 
 '
   - '"Another one? Haven`t we got enough Balls already ...I mean 2 is MORE than enough
-    . Wait where did it go?"'
+    . Wait where did it go?".'
   - "Despite his look, he`s still a really really really really really good boy!!!Who
     want nothing but to be pet , belly rub and get to the end of the path , in that
-    order\r"
+    order\r."
   - "A good boy that can be revive with a certain chance after death .\nApparently
     there is a dog heaven and we could get there\u2026.if we let him get to the end
-    of the path.\n\"That`s. Very.Tempting\""
+    of the path.\n\"That`s . Very . Tempting\"."
   - "\"A cube with additional armor that reduce incoming damage . \nWhat the hell
-    is this cube doing here all of the sudden ? I thought is is a 2D Game?\"\r"
+    is this cube doing here all of the sudden ? I thought is is a 2D Game?\"\r."
   - "\"A Sphere with additional armor that reduce incoming damage \nWeird\u2026ball?
-    3D? Or is that a 2D image of 3D ball? . we don`t know....\"\r"
-  - "\"He Just kept Dancing, never stopping , And WHY on earth is he 3D?.Seriously?
-    This.Is.A.2D.Game\r...to be honest idk anymore\""
-  - 'Boss Slime might appear more than once... To kill you
+    3D? Or is that a 2D image of 3D ball? . we don`t know....\"\r."
+  - "\"He Just kept Dancing , never stopping , And WHY on earth is he 3D? . Seriously?
+    This . Is . A . 2D . Game\r     , Oh f$%# i dont even know anymore , Brain Hurt\"."
+  - 'Boss Slime might appear more than once ... To kill you
 
     "he just a bit angry
-    at you , just a tini tiny bit "'
-  - "Boss Crab ate too much , thats why he sooo big \n\"Did you expect somthing more
-    to this story?\""
-  - 'This leg is like no other, definately yours...No? Dang it!
+    at you , just a tini tiny bit ".'
+  - "Boss Crab ate too much , thats why he`s big \n\"Did you expect somthing more
+    to this story?\"."
+  - Lets just say Boss Golem is a mob boss that just happen to be a wholesome enthusiast
+    and he wish to destroy all that is NTR
+  - 'The most evil force of nature , The Undone / Corrupted Game Dev . He only wish
+    to destroy your play through and make you life a living hell .
 
-'
+    " He`s just
+    a bit insecure , you know "'
   turretDescription: []
+  enemySprite: []
+  questionMarkSprite: {fileID: 21300000, guid: 8d972f9acad16a44780be28c1cfd2203, type: 3}
   turret:
   - prefab: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
       type: 3}
@@ -245,14 +251,22 @@ MonoBehaviour:
       sellPtcReduction: 0.5
   - prefab: {fileID: 8965921113538872230, guid: 2664bcd7a1b906f4aad0a76ce8d8941f,
       type: 3}
-    cost: 400
+    cost: 250
     CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs:
     - {fileID: 8933316092586181040, guid: c032b79545be804439baf4e3a0a690fd, type: 3}
-    - {fileID: 0}
-    upgradeCosts: f401000058020000
-    ultraUpgrades: []
+    - {fileID: 387059846927826255, guid: fa742e546605c31418d78e95e3b15b9d, type: 3}
+    upgradeCosts: fa0000002c010000
+    ultraUpgrades:
+    - ultraUpgradePrefab:
+      - {fileID: 7303342988982851478, guid: dee46096162b5564cb1f8401d117cecd, type: 3}
+      ultraUpgradeCosts: 5e010000
+      sellPtcReduction: 0.5
+    - ultraUpgradePrefab:
+      - {fileID: 4642276048597397484, guid: 8f71968988ac2c74f838de11d43dc773, type: 3}
+      ultraUpgradeCosts: 5e010000
+      sellPtcReduction: 0.5
   turretSprite:
   - {fileID: 21300000, guid: ee095c2891df8834193836c595ec89b4, type: 3}
   - {fileID: 21300000, guid: 061cfb5c61cf01f45bdfb8e96d140cda, type: 3}
@@ -302,18 +316,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 21300000, guid: 0b2522c45ddeda54dbd85392dafc0a91, type: 3}
   - {fileID: 21300000, guid: a1c44c2e404412e46bd9d2c3a0e665a2, type: 3}
-  - {fileID: 21300000, guid: a1c44c2e404412e46bd9d2c3a0e665a2, type: 3}
+  - {fileID: 21300000, guid: e2c2c368fb342d841bbe8cb7bde90ec6, type: 3}
   Map:
   - {fileID: 21300000, guid: b5dfb77547f4a2d4fad77ed543058aaf, type: 3}
   - {fileID: 21300000, guid: 2a512ecadd18cb948a94cea830047a62, type: 3}
   - {fileID: 21300000, guid: fb7fab1a971bb5947ad32e99d30f3971, type: 3}
   - {fileID: 21300000, guid: 8ecea068106cde94eac6c6512368e236, type: 3}
   - {fileID: 21300000, guid: 61fb6a1de39457141ab6738afdd4d573, type: 3}
-  - {fileID: 21300000, guid: 2d41b7cfe6cc56c4bb44f8736bce8e77, type: 3}
+  - {fileID: 21300000, guid: b741eb0f6b400154f85e42abeeb58880, type: 3}
   - {fileID: 21300000, guid: 11d55576f509322478be7c1d69a584b5, type: 3}
   - {fileID: 21300000, guid: b15c31704db533b4bbaaf8c280c66ca3, type: 3}
   - {fileID: 21300000, guid: 5f977b304123f3b4884b2509dd71b014, type: 3}
   - {fileID: 21300000, guid: 9d1cafb4095e6f649a90874dc5e49264, type: 3}
+  enemyThatRound:
+  - list: 00000000010000000200000003000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000006000000
+  - list: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
   PewPew_1: {fileID: 0}
   k: {fileID: 0}
   revive: {fileID: 8300000, guid: 5c6d3b1b195ad2446834003c33a7f12d, type: 3}

@@ -877,7 +877,7 @@ PrefabInstance:
     - target: {fileID: 7368864449139154063, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 1
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449250413781, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
@@ -957,27 +957,27 @@ PrefabInstance:
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368864449439241190, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
@@ -13192,6 +13192,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &430737972 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2249231934251201316, guid: 72f0d23379652ea4981591ab2bb65139,
+    type: 3}
+  m_PrefabInstance: {fileID: 6403677319454606753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &645792015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4510010700531411059, guid: f6672ded4e63e524caa7a692a5397997,
@@ -23911,6 +23917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverUI: {fileID: 6403677319454606756}
   completeLevelUI: {fileID: 6403677319454606755}
+  StarGained: {fileID: 430737972}
 --- !u!114 &2020636413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23923,8 +23930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf6fdfd3b19e2443a3d10447715776c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoneyInGame: 3000
-  startlives: 10
+  startMoneyInGame: 4500
+  startlives: 5
 --- !u!114 &2020636414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24483,7 +24490,7 @@ MonoBehaviour:
       endRate: 0
       path: 0
       useNavmesh: 0
-      delayBetweenGroup: 4
+      delayBetweenGroup: 2
     - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
         type: 3}
       enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab,
@@ -24664,6 +24671,786 @@ MonoBehaviour:
       path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
+  - waveName: 16
+    enemy:
+    - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+        type: 3}
+      enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+        type: 3}
+      enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 3
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 3
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 17
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 4
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 3
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 18
+    enemy:
+    - sprite: {fileID: 4020641652636173983, guid: cd1d67ba593ef8b42b0c9ef29cbfc721,
+        type: 3}
+      enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 4020641652636173983, guid: cd1d67ba593ef8b42b0c9ef29cbfc721,
+        type: 3}
+      enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 3
+    - sprite: {fileID: -6897147555146677718, guid: b270c6dd3f7f7d246bbfd82a5e7c6513,
+        type: 3}
+      enemy: {fileID: 7360574495338861212, guid: 0146facc535677a4485b56772e517e5c,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -6897147555146677718, guid: b270c6dd3f7f7d246bbfd82a5e7c6513,
+        type: 3}
+      enemy: {fileID: 7360574495338861212, guid: 0146facc535677a4485b56772e517e5c,
+        type: 3}
+      count: 1
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 2
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 19
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 2
+    - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+        type: 3}
+      enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+        type: 3}
+      enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 20
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 6
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 2.5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 2.5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 2
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 21
+    enemy:
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 4
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 22
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 4
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 23
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 4
+    - sprite: {fileID: -6897147555146677718, guid: b270c6dd3f7f7d246bbfd82a5e7c6513,
+        type: 3}
+      enemy: {fileID: 262966061738052319, guid: 421de2aaeac77ef41a80fd4d5321daf7,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -6897147555146677718, guid: b270c6dd3f7f7d246bbfd82a5e7c6513,
+        type: 3}
+      enemy: {fileID: 262966061738052319, guid: 421de2aaeac77ef41a80fd4d5321daf7,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+        type: 3}
+      enemy: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 4
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 6
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 1
+    - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
+        type: 3}
+      enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
+        type: 3}
+      enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab,
+        type: 3}
+      count: 5
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 24
+    enemy:
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
+        type: 3}
+      enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 3
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 6
+    - sprite: {fileID: 4020641652636173983, guid: cd1d67ba593ef8b42b0c9ef29cbfc721,
+        type: 3}
+      enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 4020641652636173983, guid: cd1d67ba593ef8b42b0c9ef29cbfc721,
+        type: 3}
+      enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
+        type: 3}
+      enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 3.5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
+        type: 3}
+      enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab,
+        type: 3}
+      count: 6
+      randomRateRange: 0
+      startRate: 3.5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
+  - waveName: 25
+    enemy:
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4.5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
+        type: 3}
+      enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 4.5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 2
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+        type: 3}
+      enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 5
+    - sprite: {fileID: -4659240652328388427, guid: ca7ec0d0dce315642a1f9835e0493613,
+        type: 3}
+      enemy: {fileID: 8706395518216621386, guid: 7e4e37e7328cb2c468d4cd1320345673,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: -4659240652328388427, guid: ca7ec0d0dce315642a1f9835e0493613,
+        type: 3}
+      enemy: {fileID: 8706395518216621386, guid: 7e4e37e7328cb2c468d4cd1320345673,
+        type: 3}
+      count: 2
+      randomRateRange: 0
+      startRate: 4
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 8
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 2.5
+      endRate: 0
+      path: 0
+      useNavmesh: 0
+      delayBetweenGroup: 0
+    - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+      enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec,
+        type: 3}
+      count: 3
+      randomRateRange: 0
+      startRate: 2.5
+      endRate: 0
+      path: 1
+      useNavmesh: 0
+      delayBetweenGroup: 0
   SpawnPoint:
   - {fileID: 1183309881}
   - {fileID: 1195263536}
@@ -24731,64 +25518,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataBase:
-  - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+  - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
       type: 3}
-    enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b, type: 3}
-    count: 2
+    enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053, type: 3}
+    count: 3
     randomRateRange: 0
-    startRate: 3
+    startRate: 4.5
     endRate: 0
     path: 0
     useNavmesh: 0
     delayBetweenGroup: 0
-  - sprite: {fileID: 2051009945517871295, guid: be59adaf20b9e0f46925b20bf2d15dd4,
+  - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
       type: 3}
-    enemy: {fileID: 6407367893224430446, guid: c493389f29865d3498178d3e91ee963b, type: 3}
-    count: 2
+    enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053, type: 3}
+    count: 3
     randomRateRange: 0
-    startRate: 3
+    startRate: 4.5
     endRate: 0
     path: 1
     useNavmesh: 0
-    delayBetweenGroup: 3
-  - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
+    delayBetweenGroup: 2
+  - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
       type: 3}
+    enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686, type: 3}
+    count: 2
+    randomRateRange: 0
+    startRate: 4
+    endRate: 0
+    path: 0
+    useNavmesh: 0
+    delayBetweenGroup: 0
+  - sprite: {fileID: -1368440423226524293, guid: 34eb8fd99258a2e46a08bc25710742e7,
+      type: 3}
+    enemy: {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686, type: 3}
+    count: 2
+    randomRateRange: 0
+    startRate: 4
+    endRate: 0
+    path: 1
+    useNavmesh: 0
+    delayBetweenGroup: 5
+  - sprite: {fileID: -4659240652328388427, guid: ca7ec0d0dce315642a1f9835e0493613,
+      type: 3}
+    enemy: {fileID: 8706395518216621386, guid: 7e4e37e7328cb2c468d4cd1320345673, type: 3}
+    count: 2
+    randomRateRange: 0
+    startRate: 4
+    endRate: 0
+    path: 0
+    useNavmesh: 0
+    delayBetweenGroup: 0
+  - sprite: {fileID: -4659240652328388427, guid: ca7ec0d0dce315642a1f9835e0493613,
+      type: 3}
+    enemy: {fileID: 8706395518216621386, guid: 7e4e37e7328cb2c468d4cd1320345673, type: 3}
+    count: 2
+    randomRateRange: 0
+    startRate: 4
+    endRate: 0
+    path: 1
+    useNavmesh: 0
+    delayBetweenGroup: 8
+  - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
     enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec, type: 3}
-    count: 5
+    count: 3
+    randomRateRange: 0
+    startRate: 2.5
+    endRate: 0
+    path: 0
+    useNavmesh: 0
+    delayBetweenGroup: 0
+  - sprite: {fileID: 21300000, guid: 87d96f9b84adb204dad9ad383630ba92, type: 3}
+    enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec, type: 3}
+    count: 3
     randomRateRange: 0
     startRate: 2.5
     endRate: 0
     path: 1
-    useNavmesh: 0
-    delayBetweenGroup: 0
-  - sprite: {fileID: 1730826577450134818, guid: 020d6dd9fc3c8874f9a3f14060458d52,
-      type: 3}
-    enemy: {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec, type: 3}
-    count: 5
-    randomRateRange: 0
-    startRate: 2.5
-    endRate: 0
-    path: 0
-    useNavmesh: 0
-    delayBetweenGroup: 4
-  - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
-      type: 3}
-    enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab, type: 3}
-    count: 10
-    randomRateRange: 0
-    startRate: 1.5
-    endRate: 0
-    path: 1
-    useNavmesh: 0
-    delayBetweenGroup: 0
-  - sprite: {fileID: 7013631516640934163, guid: 715c0d02c6e4dfc49bde793a8922da1f,
-      type: 3}
-    enemy: {fileID: 4981961317854357711, guid: ea8e0193dbc0f744d81395f33c202eab, type: 3}
-    count: 10
-    randomRateRange: 0
-    startRate: 1.5
-    endRate: 0
-    path: 0
     useNavmesh: 0
     delayBetweenGroup: 0
   Enemy:
@@ -24801,10 +25606,13 @@ MonoBehaviour:
   - {fileID: 7427026976839431252, guid: bdc29d8da08d642449980753a5cd61ed, type: 3}
   - {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053, type: 3}
   - {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915, type: 3}
+  - {fileID: 4650377941435650500, guid: 96602733de665b44b97fe296af005281, type: 3}
   - {fileID: 4983184104879524307, guid: 53256b7cc9d75f74cb4ed1f968c20dec, type: 3}
   - {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57, type: 3}
   - {fileID: 262966061738052319, guid: 421de2aaeac77ef41a80fd4d5321daf7, type: 3}
   - {fileID: 8377878605666632121, guid: a3e6109a52920394db08f8d8be212686, type: 3}
+  - {fileID: 7360574495338861212, guid: 0146facc535677a4485b56772e517e5c, type: 3}
+  - {fileID: 8491830722359337190, guid: df31ef5a455fec045b318fc5610199fc, type: 3}
   fileName: Level_5_Wave
 --- !u!1 &2069894863
 GameObject:
@@ -24843,6 +25651,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833884829242541276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2249589392347921434, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: sceneFader
@@ -24876,22 +25714,22 @@ PrefabInstance:
     - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 124.5
+      value: 127.5
       objectReference: {fileID: 0}
     - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 65
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 187.75
+      value: 186.25
       objectReference: {fileID: 0}
     - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32.5
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 5649748011740874571, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
@@ -24926,32 +25764,32 @@ PrefabInstance:
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 127.5
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 58.75
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 5649748012875505667, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
@@ -24963,15 +25801,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GameToggle
       objectReference: {fileID: 0}
+    - target: {fileID: 5649748012969146158, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5649748013256213248, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 7
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5649748013256213252, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_Name
       value: OverlayMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748013256213252, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5649748013256213263, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
@@ -25077,6 +25925,81 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748013644905873, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286270279355230089, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114443193200462276, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037251826165327392, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037251826165327392, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2249589392347921434, guid: 72f0d23379652ea4981591ab2bb65139, type: 3}

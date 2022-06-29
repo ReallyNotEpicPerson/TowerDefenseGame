@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 2039372861225107046, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: startArmor
-      value: 125
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2039372861225107046, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}

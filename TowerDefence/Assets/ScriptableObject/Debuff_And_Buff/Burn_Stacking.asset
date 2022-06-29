@@ -19,7 +19,7 @@ MonoBehaviour:
   effectType: 2
   removableType: 0
   expirableType: 0
-  _duration: 3
+  duration: 3
   chance: 1
   description: Burn Shiz up with style
   damagePerRate:

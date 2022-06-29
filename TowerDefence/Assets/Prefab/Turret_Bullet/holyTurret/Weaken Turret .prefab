@@ -276,19 +276,19 @@ MonoBehaviour:
   range:
     baseValue: 4
   rotationSpeed:
-    baseValue: 200
+    baseValue: 350
   spriteRenderer: {fileID: 572550913269442604}
   fireRate:
     baseValue: 0.8
   firePoint:
   - {fileID: 3113465356753349120}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 5913053846583213809}
   animator: {fileID: 5984072023233254671}
   BulletPrefab: {fileID: 7438568092731281345, guid: 92f2861bb7795634984717da70182597,
     type: 3}
   bu: {fileID: 2429219320854047328, guid: 92f2861bb7795634984717da70182597, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!114 &7859427024686994421
 MonoBehaviour:
   m_ObjectHideFlags: 0

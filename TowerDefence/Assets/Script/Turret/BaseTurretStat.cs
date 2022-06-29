@@ -7,8 +7,8 @@ public enum ShootType
     None = 0,
     SingleTarget = 1,
     MultipleTarget = 2,
-    ArmoredTarget = 4,
 }
+[System.Flags]
 public enum TargetingType
 {
     None = 0,
@@ -23,23 +23,14 @@ public enum TargetingType
 public enum PassiveAbility
 {
     None = 0,
-    Penetration = 1,//nope
-    Splash = 1 << 1,//nope
-    IncreaseDamage = 1 << 2,//maybe
-    IncreaseSpeed = 1 << 3,//maybe
-    CanShootWhenBuy = 1 << 4,
-    CanSeeInvisibleUnit = 1 << 5,
-    QuadrupleDamage = 1 << 6,
-    InfiniteRange = 1 << 7,
+    IncreaseDamageEachShot = 1 << 1,
+    IncreaseSpeed = 1 << 2,
+    CanShootWhenBuy = 1 << 3,
+    CanSeeInvisibleUnit = 1 << 4,
+    QuadrupleDamage = 1 << 5,
+    InfiniteRange = 1 << 6,
     RemoveAll = ~(-1 << 9)
 
-}
-public enum Direction
-{
-    Left,
-    Right,
-    Front,
-    Back,
 }
 [System.Serializable]
 public class BaseTurretStat : MonoBehaviour
@@ -48,11 +39,11 @@ public class BaseTurretStat : MonoBehaviour
     public TargetingType targetingType;
     public PassiveAbility passiveAbility;
     public int numberOfTarget = 1;
-    public CharacterStat range;//keep at all cost
-    public CharacterStat rotationSpeed;//keep at all cost
-    protected List<Transform> target;//keep at all cost
+    public CharacterStat range;
+    public CharacterStat rotationSpeed;
+    protected List<Transform> target;
     public SpriteRenderer spriteRenderer;
-    private float rangeTimer;
+    //private float rangeTimer;
     //protected Direction direction;
 
     public virtual void Awake()
@@ -92,10 +83,10 @@ public class BaseTurretStat : MonoBehaviour
 
     public virtual void RotateToObject()
     {
-        float angle = Mathf.Atan2(target[0].transform.position.y - transform.position.y, target[0].transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(target[0].transform.position.y - transform.position.y, 
+            target[0].transform.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed.baseValue * Time.deltaTime);
-        //Debug.DrawRay(transform.position, target.transform.position);
     }
     public void DisableThePewPew()
     {
@@ -130,7 +121,7 @@ public class BaseTurretStat : MonoBehaviour
         float leasthealth = Mathf.Infinity;
         float mostHealth = Mathf.NegativeInfinity;
         Collider2D ChosenCol = null;
-        List<Transform> ChosenCols = new List<Transform>(numberOfTarget);
+        //List<Transform> ChosenCols = new List<Transform>(numberOfTarget);
         foreach (Collider2D col in collider)
         {
             if (col.TryGetComponent(out Enemy enemy))
@@ -141,6 +132,11 @@ public class BaseTurretStat : MonoBehaviour
                 }
                 if (shootType.HasFlag(ShootType.SingleTarget))
                 {
+                    if (targetingType.HasFlag(TargetingType.Armored))
+                    {
+                        ChosenCol = col;
+                        break;
+                    }
                     if (targetingType.HasFlag(TargetingType.Closest))
                     {
                         float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
@@ -153,7 +149,6 @@ public class BaseTurretStat : MonoBehaviour
                     else if (targetingType.HasFlag(TargetingType.First))
                     {
                         float p = enemy.RemainingPath();
-                        // Debug.Log("path " + p);
                         if (p < pathCovered)
                         {
                             pathCovered = p;
@@ -186,8 +181,6 @@ public class BaseTurretStat : MonoBehaviour
                 }
                 else if (shootType.HasFlag(ShootType.MultipleTarget))
                 {
-                    /*if (targetingType.HasFlag(TargetingType.Random))
-                    {*/
                     target.Add(col.transform);
                     if (target.Count == numberOfTarget)
                     {
@@ -225,59 +218,10 @@ public class BaseTurretStat : MonoBehaviour
                         }
                     }*/
                 }
-                else if (targetingType.HasFlag(TargetingType.Armored))
-                {
-                    if (enemy.enemyState.HasFlag(EnemyState.Armored))
-                    {
-                        ChosenCol = col;
-                        break;
-                    }
-                    if (targetingType.HasFlag(TargetingType.Closest))
-                    {
-                        float DisToenenmy = Vector3.SqrMagnitude(transform.position - col.transform.position);//use Distancesquared??
-                        if (DisToenenmy < shortestDistance)
-                        {
-                            shortestDistance = DisToenenmy;
-                            ChosenCol = col;
-                        }
-                    }
-                    else if (targetingType.HasFlag(TargetingType.First))
-                    {
-                        float p = enemy.RemainingPath();
-                        // Debug.Log("path " + p);
-                        if (p < pathCovered)
-                        {
-                            pathCovered = p;
-                            ChosenCol = col;
-                        }
-                    }
-                    else if (targetingType.HasFlag(TargetingType.LeastHealth))
-                    {
-                        float h = enemy.GetHealthAmount();
-                        if (h < leasthealth)
-                        {
-                            leasthealth = h;
-                            ChosenCol = col;
-                        }
-                    }
-                    else if (targetingType.HasFlag(TargetingType.MostHealth))
-                    {
-                        float h = enemy.GetHealthAmount();
-                        if (h > mostHealth)
-                        {
-                            mostHealth = h;
-                            ChosenCol = col;
-                        }
-                    }
-                    else if (targetingType.HasFlag(TargetingType.Random))
-                    {
-                        ChosenCol = collider[Random.Range(0, collider.Length - 1)];
-                        break;
-                    }
-                }
+
             }
         }
-        if ((shootType.HasFlag(ShootType.SingleTarget) || targetingType.HasFlag(TargetingType.Armored)) && ChosenCol != null)
+        if (shootType.HasFlag(ShootType.SingleTarget) && ChosenCol != null)
         {
             target.Add(ChosenCol.transform);
         }

@@ -18,7 +18,7 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 4
+  duration: 1
   chance: 1
   description: 'boost enemy speed '
   _slowPercentage:

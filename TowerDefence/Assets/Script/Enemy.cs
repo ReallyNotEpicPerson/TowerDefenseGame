@@ -15,28 +15,16 @@ public enum EnemyState
 {
     None = 0, FirstHit = 1 << 0, Slow = 1 << 1, Weaken = 1 << 2, StandStill = 1 << 3, Armored = 1 << 5,
     TakeNoDamage = 1 << 6, Fear = 1 << 7, HealingTime = 1 << 8, Invisible = 1 << 9, YouEarnNothing = 1 << 10
-
-    //ArmorBurn = Slow | Amored,
-    //Slow2=1<<2,?
-    //Slow3=1<<3,?
 }
 [System.Flags]
 public enum EnemyType
 {
-    None = 0,//just a normal enemy
+    None = 0,
     FirstHitSpeedBoost = 1 << 0,
     Revive = 1 << 1,
     Healing = 1 << 2,
-    Invisible = 1 << 3,
-    //Necromancy = 1 << 4, //broke
-    ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8, ImmuneToFear = 1 << 9,
-    ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
-    //teleport?
-}
-public enum MovementType
-{
-    FixedPath,
-    NavMesh,
+    Invisible = 1 << 3,ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8, 
+    ImmuneToFear = 1 << 9,ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
 }
 #endregion 
 public class Enemy : MonoBehaviour
@@ -191,6 +179,8 @@ public class Enemy : MonoBehaviour
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
             {
+                Debug.Log("Boost");
+                animator.SetTrigger("SpeedBoost");
                 fxManager.Slow(this);
             }
             /*if (enemyType.HasFlag(EnemyType.Necromancy))
@@ -243,7 +233,6 @@ public class Enemy : MonoBehaviour
                 if (fxManager.Revive(this))
                     return false;
             }
-            //Debug.Log("Nope .... he died");
             Die();
         }
         return true;
@@ -268,6 +257,7 @@ public class Enemy : MonoBehaviour
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
             {
+                animator.SetTrigger("SpeedBoost");
                 fxManager.Slow(this);
             }
             /*if (enemyType.HasFlag(EnemyType.Necromancy))
@@ -465,7 +455,7 @@ public class Enemy : MonoBehaviour
         return reviveTime;
     }
     #endregion
-    #region for adjusting speed
+    #region Adjusting speed
     public void TurnBack(int i)
     {
         if (UsePathFinding)
@@ -504,6 +494,10 @@ public class Enemy : MonoBehaviour
             enemyPathMovement.AddSpeedMod(mod);
         }
         //Debug.Log("Work!,GOD DAMMIT");
+    }
+    public void UndoSpeedBoost()
+    {
+        animator.SetTrigger("DoneSB");
     }
     public void UndoModification(object source)
     {
@@ -552,7 +546,7 @@ public class Enemy : MonoBehaviour
         yield return HelperClass.WaitFor(2000);
     }*/
     #endregion
-    #region weaken 
+    #region Weaken 
     public void Weaken(StatValueType stat)
     {
         modifier = stat;
@@ -567,6 +561,7 @@ public class Enemy : MonoBehaviour
         DisableState(EnemyState.Weaken);
     }
     #endregion
+    #region SetDestination
     public void SetDestination(Transform spawnPoint, Transform endPoint)
     {
         enemyNavMeshMovement.SetDestination(spawnPoint, endPoint);
@@ -575,6 +570,8 @@ public class Enemy : MonoBehaviour
     {
         enemyPathMovement.SetPathIndex(path);
     }
+    #endregion
+    #region Color
     public void SetHealthColor()
     {
         healthBar.color = ogHealthBarColor;
@@ -587,6 +584,8 @@ public class Enemy : MonoBehaviour
     {
         enemyColor.color = color;
     }
+    #endregion
+    #region Invisibility
     public void DeInvisible()
     {
         DisableState(EnemyState.Invisible);
@@ -596,12 +595,15 @@ public class Enemy : MonoBehaviour
     {
         return Handler.StillHaveInvisibility();
     }
+    
     public void Invisible()
     {
         EnableState(EnemyState.Invisible);
         enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, 0.5f);
         //Debug.Log(enemyColor.color);
     }
+    #endregion
+    #region Cast
     public void EndCast()
     {
         if (enemyType.HasFlag(EnemyType.Healing))
@@ -626,6 +628,7 @@ public class Enemy : MonoBehaviour
         }*/
         return;
     }
+    #endregion 
     #region function to get stats
     public Sprite GetSprite()
     {
@@ -689,7 +692,7 @@ public class Enemy : MonoBehaviour
         if (enemyType.HasFlag(EnemyType.Invisible))
         {
             text.Append($"<color=#00ff00ff>{"Invisibility: "}</color>" +
-                "Become completely invisible to the naked eye for " + fxManager.GetInvisibleEffect()._duration + "s");
+                "Become completely invisible to the naked eye for " + fxManager.GetInvisibleEffect().duration + "s");
         }
         if (enemyType.HasFlag(EnemyType.ImmunityToAll))
         {
@@ -730,7 +733,6 @@ public class Enemy : MonoBehaviour
         return text;
     }
     #endregion
-
     #region flag checking/Manipulation
     public bool CheckEnemyType(EnemyType et)
     {

@@ -69,7 +69,7 @@ PrefabInstance:
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: critChance.baseValue
-      value: 0.05
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}

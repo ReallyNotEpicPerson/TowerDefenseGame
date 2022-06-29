@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 525667416562004114}
   - component: {fileID: 525667416562004115}
   m_Layer: 0
-  m_Name: Random Turret
+  m_Name: Mistake Fixer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2865144594564106229}
   - component: {fileID: 6429712985073462695}
   m_Layer: 0
-  m_Name: Random Turret
+  m_Name: Mistake Fixer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,24 +133,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootType: 1
   targetingType: 1
-  passiveAbility: 16
+  passiveAbility: 8
   numberOfTarget: 1
   range:
     baseValue: 2.5
   rotationSpeed:
-    baseValue: 250
+    baseValue: 350
   spriteRenderer: {fileID: 4841801495949578385}
   fireRate:
     baseValue: 1
   firePoint:
   - {fileID: 1030258514151337467}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 8497253379281823600}
   animator: {fileID: 4110289595494683078}
   BulletPrefab: {fileID: 5123848386489929708, guid: 3f94bd22b05b8c44a9af4fba117bcb00,
     type: 3}
   bu: {fileID: 7772646628547753414, guid: 3f94bd22b05b8c44a9af4fba117bcb00, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!61 &7947592254244693497
 BoxCollider2D:
   m_ObjectHideFlags: 0

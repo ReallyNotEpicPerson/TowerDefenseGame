@@ -1,21 +1,20 @@
 using UnityEngine;
 
 [System.Flags]
-public enum BulletType
+public enum StatusEffectType
 {
     None = 0,
-    Explode = 1 << 0,//done?
-    SlowPerSecond = 1 << 1,//done
-    Mine = 1 << 2,//soon
-    Dots = 1 << 3,//done
-    Fear = 1 << 4,//done
-    Insta_Kill = 1 << 5,//done
-    Weaken = 1 << 6,//Done
-    ArmorBreaking = 1 << 7,//done
-    PiercingShot = 1 << 8,//done
-    Cast = 1 << 9,
-        
-    JustStoodStill = 1 << 12,//IDK man, dont delete
+    Explode = 1 << 0,
+    SlowPerSecond = 1 << 1,
+    Dots = 1 << 3,
+    Fear = 1 << 4,
+    Insta_Kill = 1 << 5,
+    Weaken = 1 << 6,
+    ArmorBreaking = 1 << 7,
+    PiercingShot = 1 << 8,
+    ArmorDestroyer = 1<<9,
+    Cast = 1 << 10,
+    JustStoodStill = 1 << 12,
     RemoveAll = ~(-1 << 13)
 }
 
@@ -27,10 +26,7 @@ public class BaseBulletClass : MonoBehaviour
     public CharacterStat critChance;
     public CharacterStat critDamage;
     public GameObject ImpactFx;
-
-   // [SerializeField] protected string taggu = "Enemy";
-    //[SerializeField] protected string specialTag = "Invisible";
-    public BulletType bulletType;
+    public StatusEffectType bulletType;
 
     protected AudioSource audioSource;
 

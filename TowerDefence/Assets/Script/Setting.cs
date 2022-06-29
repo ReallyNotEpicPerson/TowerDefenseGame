@@ -8,10 +8,9 @@ public class Setting : ScriptableObject
 {
     public int[] characterLineUp;
     [SerializeField] private int moneyEachMatch;
-
-    public int[] LevelOpened;
-    //SaveSystem save
-
+    public string NextLevel;
+    //public int[] LevelOpened;
+    public int currentLevelIndex;
     public void SetRewardMoney(int m)
     {
         moneyEachMatch = m;

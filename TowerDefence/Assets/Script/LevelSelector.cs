@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -6,19 +7,21 @@ public class LevelSelector : MonoBehaviour
 {
     [SerializeField] private GameObject turretSelection;
     private GameObject levelSelectionScreen;
-    [SerializeField] private GameObject button; 
+    [SerializeField] private GameObject button;
+    public TMP_Text lvName;
     private string nextlevel;
     private string CurrentLevel;
     [SerializeField] private Image map;
+    public Animator animator;
+    //private RectTransform recTrans;
 
     public void SetMap(Sprite leMap)
     {
         map.sprite = leMap;
     }
-
     public void DisableLevelSelectionScreen()
     {
-       levelSelectionScreen.SetActive(false);
+        levelSelectionScreen.SetActive(false);
     }
     public void EnableLevelSelectionScreen()
     {
@@ -28,14 +31,14 @@ public class LevelSelector : MonoBehaviour
     {
         turretSelection.SetActive(false);
     }
-    public void EnableTurretSelection() 
+    public void EnableTurretSelection()
     {
         turretSelection.SetActive(true);
     }
     public void SelectMainMenu(string LvName)
     {
         SceneManager.LoadScene(LvName);
-    } 
+    }
     public void Select(string LvName)
     {
         nextlevel = LvName;
@@ -54,12 +57,22 @@ public class LevelSelector : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
-    public void EnableTurretSelection(string LvName)//The one usisng right now
+    public void EnableTurretSelection(string text)//The one usisng right now
     {
         //SceneManager.LoadScene(LvName);
-        CurrentLevel = LvName;
-        EnableTurretSelection();
+        CurrentLevel = text;
+        //EnableTurretSelection();
+        animator.SetTrigger("Play");
     }
+    public void SetName(string text)
+    {
+        lvName.text = text;
+    }
+    public void SetIndex(int i)
+    {
+        GameAsset.I.formation.currentLevelIndex = i;
+    }
+
     public void ResetAll()
     {
         PlayerPrefs.DeleteAll();

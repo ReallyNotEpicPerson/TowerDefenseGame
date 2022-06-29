@@ -26,7 +26,7 @@ public class TimedSlowEffect : TimedEffect
     }
     public float BestDuration(SlowEffect newSlowEffect)
     {
-        return Mathf.Max(newSlowEffect._duration, Effect._duration);
+        return Mathf.Max(newSlowEffect.duration, Effect.duration);
     }
     #endregion
     protected override void ApplyEffect()
@@ -123,6 +123,11 @@ public class TimedSlowEffect : TimedEffect
         slowEffect._slowPercentage.statValue.RemoveAllModifiersFromSource(this);
         if (_enemy != null && Effect.specialFX!=null)
         {
+            if (_enemy.enemyType.HasFlag(EnemyType.FirstHitSpeedBoost) && Effect.ID.Contains("ENE"))
+            {
+                Debug.Log("Yamete");
+                _enemy.UndoSpeedBoost();
+            }
             _enemy.UndoModification(this);
             _enemy.RemoveFX(Effect.ID);
         }

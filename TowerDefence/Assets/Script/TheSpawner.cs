@@ -45,8 +45,9 @@ public class TheSpawner : MonoBehaviour
     [SerializeField] private List<StartWaveEnemyDisplay> startWaveEnemyDisplays;
     [SerializeField] private List<Sprite> imageList = new List<Sprite>();
     private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
-    private bool win = false;
-    //private List<int> numOfEnemy = new List<int>();
+    private bool InstaWin = false;
+    private Dictionary<string, string> nameCheck = new Dictionary<string, string>();
+    private LevelProgession lvp;
 
     private void OnValidate()
     {
@@ -84,11 +85,16 @@ public class TheSpawner : MonoBehaviour
     }*/
     private void Awake()
     {
+        lvp = SaveSystem.LoadLevelProgression();
+        for (int i = 0; i < lvp.enemyList.Count; i++)
+        {
+            nameCheck.Add(lvp.enemyList[i], lvp.enemyList[i]);
+        }
         if (SurviveInTime == true)
         {
             StartCoroutine(Timer());
         }
-        win = false;
+        InstaWin = false;
         spawnPoint = SpawnPoint;
         endPoint = EndPoint;
         waveNum = 0;
@@ -109,12 +115,14 @@ public class TheSpawner : MonoBehaviour
         {
             waveButton.SetActive(true);
         }
-        if (waveNum == mainWaves.Length || win == true)
+        if (waveNum == mainWaves.Length || InstaWin == true || Input.GetKey(KeyCode.W))
         {
             game_Managers.WinLevel();
+            lvp.SetEnemyList(nameCheck);
+            SaveSystem.SaveLevelProgression(lvp);
             enabled = false;
         }
-        if ((Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.X)) && !PauseMenu.uiState)
+        if ((Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.X)) && !PauseMenu.uiState && waveNum != mainWaves.Length)
         {
             SkipWaitingTime();
             return;
@@ -300,6 +308,10 @@ public class TheSpawner : MonoBehaviour
         Wave wave = mainWaves[waveNum];// wave contain 
         for (int j = 0; j < wave.enemy.Length; j++)
         {
+            if (!nameCheck.ContainsKey(wave.enemy[j].enemy.name))
+            {
+                nameCheck.Add(wave.enemy[j].enemy.name, wave.enemy[j].enemy.name);
+            }
             numOfEnemies += wave.enemy[j].count;
             for (int i = 0; i < wave.enemy[j].count; i++)
             {
@@ -312,11 +324,12 @@ public class TheSpawner : MonoBehaviour
             }
         }
         waveNum++;
-        DoneWithSpawning = true;
         if (waveNum < mainWaves.Length)
         {
             WaveButtonToggle();
         }
+        DoneWithSpawning = true;
+        
     }
     /*public Vector3 RandomPos(this TheSpawner theSpawner,float range)
     {
@@ -339,7 +352,7 @@ public class TheSpawner : MonoBehaviour
         //move all the enemy to a enemylist soon
         GameObject lol = Instantiate(enemy, SpawnPoint[path].position + RandomCoordinate(path), Quaternion.identity);//,"EnemyList")
         //spawn fx now
-        Debug.Log(SpawnPoint[path].position + " " + lol.transform.position);
+        //Debug.Log(SpawnPoint[path].position + " " + lol.transform.position);
         if (lol.TryGetComponent(out Enemy ene))
         {
             if (PlayerGainNothing)

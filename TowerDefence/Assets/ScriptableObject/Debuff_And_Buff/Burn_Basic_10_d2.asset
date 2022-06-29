@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfbe5760948e9704694e49126f1551a5, type: 3}
-  m_Name: Burn_Basic_5_d2
+  m_Name: Burn_Basic_10_d2
   m_EditorClassIdentifier: 
-  ID: BU_BS_d5_5
+  ID: BU_BS_d5_10
   Icon: {fileID: -127012195401285244, guid: d2ba53ae5da98bb44af18418efb8fc4e, type: 3}
   specialFX: {fileID: 1006270265076942869, guid: 5bfe91a2b48dc1441a99ad729d036a39,
     type: 3}
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 3
+  duration: 2
   chance: 0.5
   description: Burn enemy
   damagePerRate:

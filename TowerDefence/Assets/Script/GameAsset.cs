@@ -26,7 +26,9 @@ public class GameAsset : MonoBehaviour
     public string[] description;
     [TextArea(1, 4)]
     public string[] turretDescription;
-
+    [Header("Enemy")]
+    public List<Sprite> enemySprite;
+    public Sprite questionMarkSprite;
     [Header("Turret")]
     public List<TurretBluePrint> turret;
     public List<Sprite> turretSprite;
@@ -34,9 +36,9 @@ public class GameAsset : MonoBehaviour
     public List<Sprite> upgradeTurret_3;
     public List<Sprite> upgradeTurret_Tree_0;
     public List<Sprite> upgradeTurret_Tree_1;
-
     [Header("MAP")]
     public Sprite[] Map;
+    public List<List2> enemyThatRound;
 
     [Header("SOUND")]
     public AudioClip PewPew_1;
@@ -62,4 +64,9 @@ public class GameAsset : MonoBehaviour
     {
         return;
     }
+}
+[System.Serializable]
+public class List2
+{
+    public List<int> list;
 }

@@ -9,6 +9,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private Transform parenting;
 
+    public GameObject toolTipsGO;
+    private TMP_Text toolTipsText;
     //BuildManager buildManager;
 
     public TheBuildManager theBuildManager;
@@ -17,7 +19,8 @@ public class Shop : MonoBehaviour
 
     public void Awake()
     {
-        NewCreateButton();
+        CreateNewButton();
+        toolTipsText = toolTipsGO.GetComponentInChildren<TMP_Text>();
     }
     /*void Start()
     {
@@ -27,29 +30,28 @@ public class Shop : MonoBehaviour
     }*/
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)|| Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
-            Debug.Log("Yes");
-            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[0]]);
+            SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[0]]);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
-            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[1]]);
+            SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[1]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
-            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[2]]);
+            SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[2]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
         {
-            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[3]]);
+            SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[3]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
         {
-            NewSelectTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[4]]);
+            SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[4]]);
         }
     }
-    void NewCreateButton()
+    void CreateNewButton()
     {
         for (int i = 0; i < GameAsset.I.formation.characterLineUp.Length; i++)
         {
@@ -57,9 +59,11 @@ public class Shop : MonoBehaviour
             temp.transform.SetParent(parenting, false);
             temp.name = "Button " + i;
             TurretBluePrint tempTurret = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[i]];
-            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
-            temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite[GameAsset.I.formation.characterLineUp[i]];
+            temp.onClick.AddListener(delegate { SelectNewTurret(tempTurret); });
+            temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite
+                [GameAsset.I.formation.characterLineUp[i]];
             SetButtonText(temp, GameAsset.I.formation.characterLineUp[i]);
+            temp.transform.Find("IndexNum").GetChild(0).GetComponent<TMP_Text>().text = (i + 1).ToString();
             temp.onClick.AddListener(delegate { PlaySound(); });
         }
     }
@@ -74,7 +78,7 @@ public class Shop : MonoBehaviour
             //img.rectTransform.localPosition = Vector3.zero;
             temp.name = "Button " + i;
             TurretBluePrint tempTurret = turret[i];
-            temp.onClick.AddListener(delegate { NewSelectTurret(tempTurret); });
+            temp.onClick.AddListener(delegate { SelectNewTurret(tempTurret); });
             SetButtonText(temp, i);
         }
     }
@@ -90,7 +94,7 @@ public class Shop : MonoBehaviour
             temp.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text += GameAsset.I.turret[index].cost.ToString() + " $";
         }
     }
-    public void NewSelectTurret(TurretBluePrint turretBluePrint)
+    public void SelectNewTurret(TurretBluePrint turretBluePrint)
     {
         Debug.Log(turretBluePrint.prefab.name + " selected");
         if (theBuildManager.tempTurret != null)
@@ -103,11 +107,21 @@ public class Shop : MonoBehaviour
             theBuildManager.TempTurret(turretBluePrint);
         }
         theBuildManager.SelectTurretToBuild(turretBluePrint);
-        //buildManager.SelectTurretToBuild(turretBluePrint);
     }
     public void PlaySound()
     {
         GameAsset.I.audioSource.PlayOneShot(GameAsset.I.clickClack);
+    }
+    public void ShowToolTips()
+    {
+        Vector3 tmpPos = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        toolTipsGO.transform.localPosition = tmpPos;
+        toolTipsGO.SetActive(true);
+        toolTipsText.text = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[0]].prefab.name;
+    }
+    public void HideToolTips()
+    {
+        toolTipsGO.SetActive(false);
     }
     /*
     public void SelectTurret(TurretBluePrint Character)

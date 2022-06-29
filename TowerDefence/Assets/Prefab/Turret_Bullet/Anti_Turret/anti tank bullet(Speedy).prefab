@@ -15,6 +15,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5128773798218346947, guid: 3771790e94a255846a14190a18174ecd,
         type: 3}
+      propertyPath: bulletType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128773798218346947, guid: 3771790e94a255846a14190a18174ecd,
+        type: 3}
       propertyPath: effectManager
       value: 
       objectReference: {fileID: 5419457031316966085, guid: 0d44f44b656e5d04986d58c564f6c2fd,

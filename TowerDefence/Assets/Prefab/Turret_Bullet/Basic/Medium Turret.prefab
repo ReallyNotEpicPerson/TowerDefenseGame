@@ -379,24 +379,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootType: 1
   targetingType: 2
-  passiveAbility: 64
+  passiveAbility: 32
   numberOfTarget: 1
   range:
     baseValue: 4
   rotationSpeed:
-    baseValue: 200
+    baseValue: 350
   spriteRenderer: {fileID: 2924406562392101156}
   fireRate:
     baseValue: 1.2
   firePoint:
   - {fileID: 7104437715986213567}
-  chanceToQuadrupleDamage: 0.05
   objectToRotate:
   - {fileID: 6795352336178389799}
   animator: {fileID: 73394629798931590}
   BulletPrefab: {fileID: 5678169074344825300, guid: 3ec6a82a4954dcb4b851f113777af683,
     type: 3}
   bu: {fileID: 7064604826841623550, guid: 3ec6a82a4954dcb4b851f113777af683, type: 3}
+  chanceToQuadrupleDamage: 0.05
 --- !u!61 &3889583694915677735
 BoxCollider2D:
   m_ObjectHideFlags: 0

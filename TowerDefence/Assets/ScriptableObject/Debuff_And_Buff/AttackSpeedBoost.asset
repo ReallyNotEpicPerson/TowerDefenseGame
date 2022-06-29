@@ -18,13 +18,13 @@ MonoBehaviour:
   effectType: 2
   removableType: 1
   expirableType: 1
-  _duration: 0
+  duration: 2
   chance: 1
   description: Increase attack speed
   _slowPercentage:
     modType: 100
     statValue:
-      baseValue: 0.4
+      baseValue: 0.1
   increaseRate:
     modType: 100
     statValue:

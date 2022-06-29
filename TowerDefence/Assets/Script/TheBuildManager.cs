@@ -136,7 +136,7 @@ public class TheBuildManager : MonoBehaviour
             sp.MassUndo();
 
         }
-        GameObject Sellfx = Instantiate(SellFX, transform.position, Quaternion.identity);
+        GameObject Sellfx = Instantiate(SellFX, Input.mousePosition, Quaternion.identity);
         Destroy(Sellfx, 2f);
 
         //Debug.Log(tileMapManager.turretOnTheField.TryGetValue(tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position),out _) + " " + tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position));

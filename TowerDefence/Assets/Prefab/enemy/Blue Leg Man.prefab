@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 258147007040098360, guid: 78b04ac38db6b314b9752213e707ac57,
+        type: 3}
+      propertyPath: distanceChangingWayPoint
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5225082394582268753, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: listOfDebuffs.Array.size
@@ -112,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 8265412206029175015, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}
       propertyPath: ChanceToEvade
-      value: 0.15
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 8265412206029175033, guid: 78b04ac38db6b314b9752213e707ac57,
         type: 3}

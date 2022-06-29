@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LazerTypeTurret : BaseTurretStat
 {
-    public BulletType bulletType;
+    public StatusEffectType bulletType;
     [Header("LazerTypeStat")]
     public CharacterStat critChance;
     public CharacterStat critDamage;
@@ -21,17 +21,8 @@ public class LazerTypeTurret : BaseTurretStat
     public LineRenderer lineRenderer;
 
     private AudioSource audioSource;
-    //public GameObject lazerBeam;//Upgrade
-    //private List<LineRenderer> lineRenderers = new List<LineRenderer>(); //upgrade 
     private float damage;
-    /*public override void Awake()
-    {
-        base.Awake();
-        for (int i = 0; i < numberOfTarget; i++)
-        {
-            lineRenderers.Enqueue(Instantiate(lazerBeam, gameObject.transform).GetComponent<LineRenderer>());
-        }
-    }*/
+    
     public override void Awake()
     {
         base.Awake();
@@ -143,7 +134,7 @@ public class LazerTypeTurret : BaseTurretStat
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (bulletType.HasFlag(BulletType.PiercingShot))
+                if (bulletType.HasFlag(StatusEffectType.PiercingShot))
                 {
                     ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -167,7 +158,7 @@ public class LazerTypeTurret : BaseTurretStat
                         damage *= (1 + Modifier.statValue.value);
                     }
                 }
-                if (bulletType.HasFlag(BulletType.PiercingShot))
+                if (bulletType.HasFlag(StatusEffectType.PiercingShot))
                 {
                     ene.ArmorPiercing(damage, DamageDisplayerType.ArmorPenetration);
                 }
@@ -183,27 +174,27 @@ public class LazerTypeTurret : BaseTurretStat
         {
             return;
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(BulletType.Insta_Kill))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(StatusEffectType.Insta_Kill))
         {
             fxManager.Insta_kill(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(BulletType.SlowPerSecond))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(StatusEffectType.SlowPerSecond))
         {
             fxManager.Slow(ene);
         }
-        if (bulletType.HasFlag(BulletType.Dots))
+        if (bulletType.HasFlag(StatusEffectType.Dots))
         {
             fxManager.Dots(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(BulletType.Fear))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(StatusEffectType.Fear))
         {
             fxManager.Fear(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(BulletType.Weaken))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(StatusEffectType.Weaken))
         {
             fxManager.Weaken(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(BulletType.ArmorBreaking))
+        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(StatusEffectType.ArmorBreaking))
         {
             fxManager.DisableArmor(ene);
         }
@@ -324,27 +315,27 @@ public class LazerTypeTurret : BaseTurretStat
     public StringBuilder GetStatusEffect()
     {
         StringBuilder text = new StringBuilder();
-        if (bulletType.HasFlag(BulletType.SlowPerSecond))
+        if (bulletType.HasFlag(StatusEffectType.SlowPerSecond))
         {
             text.Append(GetSlow());
         }
-        if (bulletType.HasFlag(BulletType.Dots))
+        if (bulletType.HasFlag(StatusEffectType.Dots))
         {
             text.Append(GetDOTS());
         }
-        if (bulletType.HasFlag(BulletType.Fear))
+        if (bulletType.HasFlag(StatusEffectType.Fear))
         {
             text.Append(GetFear());
         }
-        if (bulletType.HasFlag(BulletType.Weaken))
+        if (bulletType.HasFlag(StatusEffectType.Weaken))
         {
             text.Append(GetWeaken());
         }
-        if (bulletType.HasFlag(BulletType.ArmorBreaking))
+        if (bulletType.HasFlag(StatusEffectType.ArmorBreaking))
         {
             text.Append(GetArmorBreaking());
         }
-        if (bulletType.HasFlag(BulletType.PiercingShot))
+        if (bulletType.HasFlag(StatusEffectType.PiercingShot))
         {
             text.Append("Ignore ememy armor" + "\n");
         }
@@ -358,7 +349,7 @@ public class LazerTypeTurret : BaseTurretStat
         }
         if (text.Length == 0)
         {
-            text.Append("Ability" + "\n" + "None" + "\n");
+            text.Append("None" + "\n");
         }
         return text;
     }
@@ -373,11 +364,11 @@ public class LazerTypeTurret : BaseTurretStat
         }
         if (SE.ID.Contains("SL"))
         {
-            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " for " + $"<color=#00ff00ff>{ SE.duration + "s"}</color>" + "\n");
         }
         else if (SE.ID.Contains("STUN"))
         {
-            text.Append(SE.description + " for " + $"<color=#00ff00ff>{ SE._duration + "s"}</color>" + "\n");
+            text.Append(SE.description + " for " + $"<color=#00ff00ff>{ SE.duration + "s"}</color>" + "\n");
         }
         else if (SE.ID.Contains("TUR"))
         {
@@ -399,7 +390,7 @@ public class LazerTypeTurret : BaseTurretStat
         {
             text.Append($"<color=#00ff00ff>{DE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
-        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value/DE.rate.value}</color>" + " per second" + " for " + $"<color=#00ff00ff>{ DE._duration + "s"}</color>" + "\n");
+        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value/DE.rate.value}</color>" + " for " + $"<color=#00ff00ff>{ DE.duration + "s"}</color>" + "\n");
         if (DE.effectType.HasFlag(EffectType.StackingEffect))
         {
             text.Append("Can stack to " + $"<color=#00ff00ff>{DE.stackTime}</color>" + "\n");
@@ -416,7 +407,7 @@ public class LazerTypeTurret : BaseTurretStat
         {
             text.Append($"<color=#00ff00ff>{FE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
-        text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE._duration + "s"}</color>" + "\n");
+        text.Append(FE.description + " for " + $"<color=#00ff00ff>{ FE.duration + "s"}</color>" + "\n");
         if (FE.effectType.HasFlag(EffectType.StackingEffect))
         {
             text.Append("Can stack to " + $"<color=#00ff00ff>{FE.stackTime}</color>" + "\n");
@@ -458,33 +449,32 @@ public class LazerTypeTurret : BaseTurretStat
         {
             text.Append(ABE.chance * 100 + " to ");
         }
-        text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE._duration + "s"}</color>" + "\n");
+        text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE.duration + "s"}</color>" + "\n");
 
         return text;
     }
-
     public Sprite StatusEffectSprite()
     {
         switch (bulletType)
         {
-            case BulletType.SlowPerSecond:
+            case StatusEffectType.SlowPerSecond:
                 SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
                 return SE.Icon;
-            case BulletType.Dots:
+            case StatusEffectType.Dots:
                 DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
                 return DE.Icon;
-            case BulletType.Fear:
+            case StatusEffectType.Fear:
                 FearEffect FE = fxManager.GetFearEffect() as FearEffect;
                 return FE.Icon;
-            case BulletType.Insta_Kill:
+            case StatusEffectType.Insta_Kill:
                 break;
-            case BulletType.Weaken:
+            case StatusEffectType.Weaken:
                 Weaken WE = fxManager.GetWeakenEffect() as Weaken;
                 return WE.Icon;
-            case BulletType.ArmorBreaking:
+            case StatusEffectType.ArmorBreaking:
                 ArmorBreaking ABE = fxManager.GetWeakenEffect() as ArmorBreaking;
                 return ABE.Icon;
-            case BulletType.PiercingShot:
+            case StatusEffectType.PiercingShot:
                 break;
             default:
                 break;
@@ -495,6 +485,7 @@ public class LazerTypeTurret : BaseTurretStat
     public StringBuilder GetTargetingType()
     {
         StringBuilder text = new StringBuilder();
+        text.Append("Targeting Type:" + "\n");
         switch (targetingType)
         {
             case TargetingType.Closest:

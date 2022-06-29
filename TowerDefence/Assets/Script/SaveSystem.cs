@@ -1,10 +1,26 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using System.Security.Cryptography;
 
 public static class SaveSystem
 {
+    public static void SaveLevelProgression(LevelProgession enemyList)
+    {
+        string SaveFilePath = Application.persistentDataPath + "/Progress.json";
+        string json = JsonUtility.ToJson(enemyList);
+        Debug.Log(json);
+        File.WriteAllText(SaveFilePath, json);
+    }
+    public static LevelProgession LoadLevelProgression()
+    {
+        LevelProgession list;
+        string SaveFilePath = Application.persistentDataPath + "/Progress.json";
+        string json = File.ReadAllText(SaveFilePath);
+        list = JsonUtility.FromJson<LevelProgession>(json);
+        return list;
+    }
+
+    #region dont use
     public static void Savedata(Data dat)
     {
         string SaveFilePath = Application.persistentDataPath + "/SaveFile.json";
@@ -103,7 +119,6 @@ public static class SaveSystem
         iStream.Close();
         dataStream.Close();*/
     }
-
     public static Data LoadData()
     {
         //string SaveFilePath = Application.persistentDataPath + "/SaveFile.json";
@@ -190,6 +205,54 @@ public static class SaveSystem
         return dat;
     }
 }
+#endregion
+[System.Serializable]
+public class LevelProgession
+{
+    public List<string> enemyList;
+    public List<string> level;
+    public List<int> star;
+    public LevelProgession()
+    {
+        enemyList = new List<string>();
+        level = new List<string>();
+        star = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+    public LevelProgession(List<string> l)
+    {
+        enemyList = l;
+        level = new List<string>();
+        star = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+    public LevelProgession(List<string> l1, List<string> l2)
+    {
+        enemyList = l1;
+        level = l2;
+        star = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+    public void SetEnemyList(Dictionary<string, string> d)
+    {
+        enemyList.Clear();
+        foreach (KeyValuePair<string, string> item in d)
+        {
+            enemyList.Add(item.Value);
+        }
+    }
+    public LevelProgession(Dictionary<string, string> d1, Dictionary<string, string> d2)
+    {
+        enemyList = new List<string>();
+        foreach (KeyValuePair<string, string> item in d1)
+        {
+            enemyList.Add(item.Value);
+        }
+        level = new List<string>();
+        foreach (KeyValuePair<string, string> item in d2)
+        {
+            level.Add(item.Value);
+        }
+        star = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+}
 [System.Serializable]
 public class Equipment
 {
@@ -241,7 +304,7 @@ public class LevelUnlocked
 {
     public List<string> levelUnlocked;
     public List<int> dictKey;
-    
+
     public LevelUnlocked(Dictionary<string, int> d)
     {
         foreach (var item in d)
@@ -253,21 +316,21 @@ public class LevelUnlocked
     public LevelUnlocked()
     {
         levelUnlocked = new List<string>();
-        dictKey = new List<int>(); 
+        dictKey = new List<int>();
     }
-    public void AddLevel( string a,int b)
+    public void AddLevel(string a, int b)
     {
         levelUnlocked.Add(a);
         dictKey.Add(b);
-        
+
     }
-    public void AddLevel(Dictionary<string,int> d)
+    public void AddLevel(Dictionary<string, int> d)
     {
         foreach (var item in d)
         {
             levelUnlocked.Add(item.Key);
             dictKey.Add(item.Value);
-            
+
         }
     }
     public void AddLevel(List<string> a, List<int> b)
@@ -275,7 +338,7 @@ public class LevelUnlocked
         if (dictKey.Count == 0)
         {
             levelUnlocked = a;
-            dictKey= b;
+            dictKey = b;
         }
         else
         {
@@ -294,12 +357,12 @@ public class LevelUnlocked
             dictKey.Add(item.Value);
         }
     }
-    public Dictionary<string,int> GetLevelList()
+    public Dictionary<string, int> GetLevelList()
     {
         Dictionary<string, int> dict = new Dictionary<string, int>();
         for (int i = 0; i < dictKey.Count; i++)
         {
-            dict.Add(levelUnlocked[i] , dictKey[i]);
+            dict.Add(levelUnlocked[i], dictKey[i]);
         }
         return dict;
     }
@@ -318,7 +381,7 @@ public class Data
     }
     public List<int> dictKey;
     public List<string> unlockedCharacter;
-   
+
     public Data()
     {
         _money = 0;

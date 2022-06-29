@@ -25607,7 +25607,7 @@ PrefabInstance:
     - target: {fileID: 5172533770419662321, guid: 08cd6e2981b633242b2015d48edad1b4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5172533770419662334, guid: 08cd6e2981b633242b2015d48edad1b4,
         type: 3}
@@ -26286,6 +26286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverUI: {fileID: 840858163}
   completeLevelUI: {fileID: 1540106693}
+  StarGained: {fileID: 5094431727999573856}
 --- !u!114 &2001906743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26298,7 +26299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf6fdfd3b19e2443a3d10447715776c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoneyInGame: 250
+  startMoneyInGame: 300
   startlives: 10
 --- !u!114 &2001906744
 MonoBehaviour:
@@ -27319,7 +27320,7 @@ MonoBehaviour:
   PlayerGainNothing: 0
   SurviveInTime: 0
   timeToSurvive: 60
-  moneyBetweenWave: 20
+  moneyBetweenWave: 25
   waveDisplayer: {fileID: 897195746}
   waveButton: {fileID: 1643686188}
   startWaveEnemyDisplays:
@@ -27578,6 +27579,46 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 127.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 186.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011528906554, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748011740874573, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012422128876, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5649748012640900685, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -27593,6 +27634,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 127.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 58.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012640900686, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -45
+      objectReference: {fileID: 0}
     - target: {fileID: 5649748012875505667, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -27602,6 +27673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GameToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649748012969146158, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5649748013256213252, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
@@ -27713,6 +27789,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5649748013644905873, guid: 72f0d23379652ea4981591ab2bb65139,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5649748013644905887, guid: 72f0d23379652ea4981591ab2bb65139,
         type: 3}
       propertyPath: sceneFader
@@ -27720,3 +27801,9 @@ PrefabInstance:
       objectReference: {fileID: 1740044786}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f0d23379652ea4981591ab2bb65139, type: 3}
+--- !u!224 &5094431727999573856 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2249231934251201316, guid: 72f0d23379652ea4981591ab2bb65139,
+    type: 3}
+  m_PrefabInstance: {fileID: 5094431727999573855}
+  m_PrefabAsset: {fileID: 0}

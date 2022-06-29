@@ -24,7 +24,7 @@ public abstract class TimedEffect
     }
     public void ResetDuration()
     {
-        _duration = Effect._duration;
+        _duration = Effect.duration;
        //Debug.Log(_duration);
     }
     public void IncreaseDuration(float dur)
@@ -63,20 +63,18 @@ public abstract class TimedEffect
         //sb.Clear();
         return sb;
     }
-    /**
-     * Activates buff or extends duration if ScriptableBuff has IsDurationStacked or IsEffectStacked set to true.
-     */
+    
     public void Activate()
     {//might redo this function
-        if (Effect.effectType.HasFlag(EffectType.StackingEffect) || _duration <= 0) //activate shiz
+        if (Effect.effectType.HasFlag(EffectType.StackingEffect) || _duration <= 0) 
         {
             ApplyEffect();
         }
-        if (Effect.effectType.HasFlag(EffectType.StackableDuration) || _duration <= 0)//Add duration and shiz
+        if (Effect.effectType.HasFlag(EffectType.StackableDuration) || _duration <= 0)
         {
-            IncreaseDuration(Effect._duration);
+            IncreaseDuration(Effect.duration);
         }
-        else if (Effect.effectType.HasFlag(EffectType.None) || _duration <= 0)//reset duration and shiz
+        else if (Effect.effectType.HasFlag(EffectType.None) || _duration <= 0)
         {
             ResetDuration();
         }

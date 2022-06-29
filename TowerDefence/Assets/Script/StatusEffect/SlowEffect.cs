@@ -5,7 +5,6 @@ using UnityEngine;
 public class SlowEffect : BaseEffect
 {
     public StatValueType _slowPercentage;
-    //public CharacterStat _slowPercentage;
     public StatValueType increaseRate;
     public int stackTime;
 

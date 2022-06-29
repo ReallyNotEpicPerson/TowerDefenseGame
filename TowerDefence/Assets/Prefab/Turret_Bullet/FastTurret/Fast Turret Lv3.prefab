@@ -54,19 +54,19 @@ MonoBehaviour:
   range:
     baseValue: 3
   rotationSpeed:
-    baseValue: 250
+    baseValue: 380
   spriteRenderer: {fileID: 1331881451365113632}
   fireRate:
     baseValue: 1.11
   firePoint:
   - {fileID: 7595019002731880150}
-  chanceToQuadrupleDamage: 0
   objectToRotate:
   - {fileID: 2833522386308560780}
   animator: {fileID: 5937420025458019733}
   BulletPrefab: {fileID: 8193731818522764563, guid: 7194a5f57d7ef2d459bc5e42e3b223af,
     type: 3}
   bu: {fileID: 311068272359904730, guid: 7194a5f57d7ef2d459bc5e42e3b223af, type: 3}
+  chanceToQuadrupleDamage: 0
 --- !u!61 &2934758684208175353
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -424,8 +424,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4160065090389128440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.379, y: 0.26, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.379, y: 0.25, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 6619267317950610189}
   m_RootOrder: 5
@@ -608,8 +608,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6237562947755025766}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.379, y: 0.376, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.379, y: 0.4, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 6619267317950610189}
   m_RootOrder: 4

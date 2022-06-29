@@ -10,7 +10,7 @@ public class EnemyPathMovement : MonoBehaviour
     private bool turnBack = false;
     public CharacterStat startSpeed;
     public float distanceChangingWayPoint = 0.1f;
-    [HideInInspector]
+    //[HideInInspector]
     public float speed;
     private float distanceRemain;
     public float rateOfUpdateDistance = 0.2f;

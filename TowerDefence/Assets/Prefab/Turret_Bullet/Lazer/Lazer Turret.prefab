@@ -10071,7 +10071,7 @@ MonoBehaviour:
   range:
     baseValue: 3.2
   rotationSpeed:
-    baseValue: 200
+    baseValue: 350
   spriteRenderer: {fileID: 4264913545566152522}
   bulletType: 2
   critChance:

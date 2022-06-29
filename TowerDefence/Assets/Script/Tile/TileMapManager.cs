@@ -137,7 +137,7 @@ public class TileMapManager : MonoBehaviour
     {
         if (IsMouseOverUI() || state.HasFlag(TileNodeState.TurretPicked))
         {
-            return;
+            return; 
         }
         if (Input.GetMouseButtonDown(0))
         {

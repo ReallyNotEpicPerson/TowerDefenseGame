@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 575377132187066983, guid: 44f3fd93800fbee4cb1ff87572955103,
         type: 3}
       propertyPath: m_Name
-      value: White Bullet
+      value: Eye Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 932067029964601534, guid: 44f3fd93800fbee4cb1ff87572955103,
         type: 3}

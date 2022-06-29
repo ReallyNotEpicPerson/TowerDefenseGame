@@ -55,6 +55,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
+      propertyPath: ChanceToEvade
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
       propertyPath: UsePathFinding
       value: 0
       objectReference: {fileID: 0}

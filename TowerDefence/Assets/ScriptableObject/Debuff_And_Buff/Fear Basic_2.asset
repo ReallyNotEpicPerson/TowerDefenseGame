@@ -19,7 +19,7 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 3
+  duration: 3
   chance: 0.5
   description: make enemy run back in fear
   runBackSpeed:

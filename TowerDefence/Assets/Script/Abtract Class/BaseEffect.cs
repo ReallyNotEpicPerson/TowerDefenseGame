@@ -24,11 +24,12 @@ public abstract class BaseEffect : ScriptableObject
     public RemovableType removableType;
     public ExpirableType expirableType;
     protected bool activate = false;
-    public float _duration = 0.0f;
+    public float duration = 0.0f;
     public float chance=1;
 
     [TextArea(3, 6)]
     public string description;
+    public abstract TimedEffect Init(GameObject obj);
 
     public virtual void OnValidate()
     {
@@ -54,7 +55,6 @@ public abstract class BaseEffect : ScriptableObject
             chance = 1;
         }
     }
-    public abstract TimedEffect Init(GameObject obj);
     public bool CanDie()
     {
         if (chance > Random.value)

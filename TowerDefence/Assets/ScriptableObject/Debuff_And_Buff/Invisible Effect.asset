@@ -18,6 +18,6 @@ MonoBehaviour:
   effectType: 0
   removableType: 0
   expirableType: 0
-  _duration: 5
+  duration: 8
   chance: 1
   description: 'enemy invisible for '

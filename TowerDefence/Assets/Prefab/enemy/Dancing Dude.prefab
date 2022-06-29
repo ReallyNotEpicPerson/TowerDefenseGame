@@ -444,7 +444,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e3a8f439ad635774d8245e2f460ed01f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -553,7 +553,7 @@ MonoBehaviour:
   startHealth: 420
   armorStat: {fileID: 5368768617105502725}
   UsePathFinding: 0
-  ChanceToEvade: 0.1
+  ChanceToEvade: 0.08
   worth: 10
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 4901645585204776476}

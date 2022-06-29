@@ -19,10 +19,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6693998112917943491, guid: 2664bcd7a1b906f4aad0a76ce8d8941f,
         type: 3}
+    - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: critDamage.baseValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: bulletSpeed.baseValue
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107151141787308431, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: bulletDamage.baseValue
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565653210193701796, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.2924528
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565653210193701796, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565653210193701796, guid: e778713859c7bb943b23051d51ff6ab0,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.01674265
+      objectReference: {fileID: 0}
     - target: {fileID: 2565653210193701797, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}
       propertyPath: m_Name
-      value: Ammo Variant
+      value: Sniper Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 2565653210193701819, guid: e778713859c7bb943b23051d51ff6ab0,
         type: 3}

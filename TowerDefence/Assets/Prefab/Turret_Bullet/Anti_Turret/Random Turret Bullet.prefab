@@ -100,7 +100,7 @@ MonoBehaviour:
   bulletSpeed:
     baseValue: 25
   bulletDamage:
-    baseValue: 10
+    baseValue: 12
   critChance:
     baseValue: 0
   critDamage:
@@ -114,6 +114,7 @@ MonoBehaviour:
     type: 3}
   explosionRadius:
     baseValue: 0
+  quadrupleDamage: 0
 --- !u!82 &7831854688311567624
 AudioSource:
   m_ObjectHideFlags: 0

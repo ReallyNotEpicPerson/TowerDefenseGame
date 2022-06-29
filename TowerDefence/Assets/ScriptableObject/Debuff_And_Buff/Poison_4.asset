@@ -19,11 +19,11 @@ MonoBehaviour:
   effectType: 0
   removableType: 1
   expirableType: 0
-  _duration: 3
+  duration: 3
   chance: 0.3
   description: Poison enemy
   damagePerRate:
-    baseValue: 15
+    baseValue: 20
   rate:
     baseValue: 0.5
   damageIncreaseRate:

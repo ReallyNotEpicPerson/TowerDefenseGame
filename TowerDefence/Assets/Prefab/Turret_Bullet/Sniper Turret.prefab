@@ -13,6 +13,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fd4cb97331a1a784498c7e19fece02ab,
         type: 3}
+    - target: {fileID: 4616648653939757120, guid: 19962bd01682d534e96bac799dfd6be8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 4616648654466805613, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: m_Name
@@ -27,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: shootType
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
@@ -38,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: targetingType
-      value: 8
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
@@ -53,7 +58,12 @@ PrefabInstance:
     - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}
       propertyPath: fireRate.baseValue
-      value: 0.2
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266428079514317232, guid: 19962bd01682d534e96bac799dfd6be8,
+        type: 3}
+      propertyPath: rotationSpeed.baseValue
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 5266428079843986729, guid: 19962bd01682d534e96bac799dfd6be8,
         type: 3}

@@ -159,7 +159,7 @@ public class NodeUI : MonoBehaviour
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Fire rate:" + CurrentTurret.GetROF() + "\n");
                 Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
-                Stat.Append(CurrentTurret.GetTargetingType());
+                //Stat.Append(CurrentTurret.GetTargetingType());
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case LazerTypeTurret CurrentTurret:
@@ -167,7 +167,7 @@ public class NodeUI : MonoBehaviour
                 Stat.Append("Damage:" + CurrentTurret.GetDamage() + "\n");
                 Stat.Append("Rate:" + CurrentTurret.GetROF() + "\n");
                 Stat.Append("Range:" + CurrentTurret.GetRange() + "\n");
-                Stat.Append(CurrentTurret.GetTargetingType());
+                //Stat.Append(CurrentTurret.GetTargetingType());
                 Stat.Append(CurrentTurret.GetStatusEffect() + "\n");
                 break;
             case SupportTypeTurret CurrentTurret:
@@ -200,7 +200,6 @@ public class NodeUI : MonoBehaviour
     public void UpgradeTurretStat(int treeIndex)
     {
         StringBuilder Stat = new StringBuilder();
-        //upgradeCost.text = "$" + target.refBlueprint.upgradeCosts[target.upgradeLevel - 1];
         present = tempRefTurret.referenceTurret.GetComponentInChildren<BaseTurretStat>();
 
         if (tempRefTurret.upgradeLevel <= tempRefTurret.refBlueprint.upgradePrefabs.Length)

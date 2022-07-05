@@ -236,7 +236,7 @@ public class EnemyPathMovement : MonoBehaviour
     }
     void EndPath()
     {
-        Debug.Log("THEY PASSSSS through Dumbass");
+        //Debug.Log("THEY PASSSSS through Dumbass");
         GameAsset.I.audioSource.PlayOneShot(GameAsset.I.whenEnemyPassThrough);
         PlayerStat.Lives--;
         Destroy(gameObject);

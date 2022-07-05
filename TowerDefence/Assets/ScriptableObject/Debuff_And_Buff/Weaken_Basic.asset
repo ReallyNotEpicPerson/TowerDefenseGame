@@ -23,9 +23,9 @@ MonoBehaviour:
   chance: 0.5
   description: make enemy take extra
   extraDamageTaken:
-    modType: 100
+    modType: 300
     statValue:
-      baseValue: 10
+      baseValue: 0.1
   increaseRate:
     modType: 100
     statValue:

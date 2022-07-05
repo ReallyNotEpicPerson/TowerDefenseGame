@@ -55,6 +55,7 @@ public class Game_Managers : MonoBehaviour
             levelProgession.level.Add(GameAsset.I.formation.NextLevel);
         }
         int starNum = LiveToStar();
+        //Debug.Log(starNum);
         if (starNum > levelProgession.star[GameAsset.I.formation.currentLevelIndex])
         {
             levelProgession.star[GameAsset.I.formation.currentLevelIndex] = starNum;
@@ -86,11 +87,11 @@ public class Game_Managers : MonoBehaviour
         {
             return 3;
         }
-        if (ptc < 1 && ptc > .75)
+        if (ptc < 1 || ptc > .75)
         {
             return 2;
         }
-        if (ptc > .25 && ptc < .75)
+        if (ptc > .25 || ptc < .75)
         {
             return 1;
         }

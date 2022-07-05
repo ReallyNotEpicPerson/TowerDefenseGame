@@ -4,14 +4,14 @@ using UnityEngine;
 public class CloseCombatTurret : BaseTurretStat
 {
     public Animator animator;
-    [SerializeField] CharacterStat damage;
-    [SerializeField] float coolDown;
-    private bool delay = true;
+   // [SerializeField] CharacterStat damage;
+    //[SerializeField] float coolDown;
+    //private bool delay = true;
     public string etag = "Enemy";
     private float coolDownDelay;
     public GameObject damageDisplayUI;
     private Quaternion tempRotation;
-    private float modifier ;
+    //private float modifier ;
 
     public void OnValidate()
     {
@@ -61,8 +61,8 @@ public class CloseCombatTurret : BaseTurretStat
         }
         if (coolDownDelay <= 0f)
         {
-            delay = false;
-            coolDownDelay = coolDown;
+            //delay = false;
+            //coolDownDelay = coolDown;
         }
         coolDownDelay -= Time.deltaTime;
         //RotateToObject();

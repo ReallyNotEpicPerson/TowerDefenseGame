@@ -14,6 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 262966061738052291, guid: 421de2aaeac77ef41a80fd4d5321daf7,
         type: 3}
+      propertyPath: enemyType
+      value: 1088
+      objectReference: {fileID: 0}
+    - target: {fileID: 262966061738052291, guid: 421de2aaeac77ef41a80fd4d5321daf7,
+        type: 3}
       propertyPath: startHealth
       value: 900
       objectReference: {fileID: 0}

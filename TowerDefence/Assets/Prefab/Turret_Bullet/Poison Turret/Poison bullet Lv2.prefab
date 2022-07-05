@@ -82,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 3598932451251357239, guid: 44f3fd93800fbee4cb1ff87572955103,
         type: 3}
       propertyPath: bulletDamage.baseValue
-      value: 38
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f3fd93800fbee4cb1ff87572955103, type: 3}

@@ -3687,7 +3687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2177ff65e703e4ea646cdc9ecc15b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToFastForward: 4
+  timeToFastForward: 2
   ff: {fileID: 7368864449403015391}
 --- !u!1 &7368864449033713975
 GameObject:

@@ -619,6 +619,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6316580290274991520, guid: 949f03e6019261b4eb615a407bde7c8f,
+        type: 3}
+      propertyPath: timeToFastForward
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7368864448565446953, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: theBuildManager
@@ -667,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
@@ -682,7 +687,7 @@ PrefabInstance:
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -385
+      value: -416.25
       objectReference: {fileID: 0}
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
@@ -12673,6 +12678,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2020636411}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1873738889278793170, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
       propertyPath: m_RootOrder
@@ -12743,6 +12783,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2020636411}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1873738890046277326, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -12767,6 +12842,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2020636411}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3301599156556736979, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
@@ -12832,6 +12942,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2020636411}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8958959604531618387, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
@@ -25462,7 +25612,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   game_Managers: {fileID: 2020636412}
-  TimeBetweenWave: 25
+  TimeBetweenWave: 30
   CountDown: 60.04
   leWaveTimer: {fileID: 1901799940}
   Counter: {fileID: 1901799941}

@@ -569,12 +569,12 @@ PrefabInstance:
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7368864448614249621, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 62.499916
+      value: 124.99992
       objectReference: {fileID: 0}
     - target: {fileID: 7368864448801548859, guid: 949f03e6019261b4eb615a407bde7c8f,
         type: 3}
@@ -19847,18 +19847,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6672ded4e63e524caa7a692a5397997, type: 3}
---- !u!114 &857139231 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7368864449403015391, guid: 949f03e6019261b4eb615a407bde7c8f,
-    type: 3}
-  m_PrefabInstance: {fileID: 100572466}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &887232327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4510010700531411059, guid: f6672ded4e63e524caa7a692a5397997,
@@ -20712,6 +20700,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2001906741}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738889098429274, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1873738889278793170, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
       propertyPath: m_RootOrder
@@ -20782,6 +20805,76 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2001906741}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2001906741}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246836137280776907, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3301599156556736979, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -20841,6 +20934,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2001906741}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CanvasComeBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileMapManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394740681293046033, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8958959604531618387, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
@@ -26186,7 +26319,6 @@ GameObject:
   - component: {fileID: 2001906743}
   - component: {fileID: 2001906742}
   - component: {fileID: 2001906740}
-  - component: {fileID: 2001906738}
   - component: {fileID: 2001906741}
   - component: {fileID: 2001906739}
   - component: {fileID: 2001906746}
@@ -26197,20 +26329,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2001906738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001906737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2177ff65e703e4ea646cdc9ecc15b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToFastForward: 4
-  ff: {fileID: 857139231}
 --- !u!114 &2001906739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27148,22 +27266,22 @@ MonoBehaviour:
         type: 3}
       enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
         type: 3}
-      count: 1
+      count: 2
       randomRateRange: 0
-      startRate: 2
+      startRate: 3.5
       endRate: 0
-      path: 0
+      path: 1
       useNavmesh: 0
       delayBetweenGroup: 0
     - sprite: {fileID: 4020641652636173983, guid: cd1d67ba593ef8b42b0c9ef29cbfc721,
         type: 3}
       enemy: {fileID: 2332603192483872240, guid: 7253c504596f7d14d97d056d89622915,
         type: 3}
-      count: 1
+      count: 2
       randomRateRange: 0
-      startRate: 2
+      startRate: 3.5
       endRate: 0
-      path: 1
+      path: 0
       useNavmesh: 0
       delayBetweenGroup: 0
   - waveName: 20
@@ -27178,7 +27296,7 @@ MonoBehaviour:
       endRate: 0
       path: 1
       useNavmesh: 0
-      delayBetweenGroup: 4
+      delayBetweenGroup: 1
     - sprite: {fileID: 6180148953911850715, guid: 12984fdf347f7c44d951f6fb80c98a06,
         type: 3}
       enemy: {fileID: 4839582502899754192, guid: 78aec2e707b38814e8ff8c7eda2d4053,
@@ -27189,7 +27307,7 @@ MonoBehaviour:
       endRate: 0
       path: 0
       useNavmesh: 0
-      delayBetweenGroup: 4
+      delayBetweenGroup: 1
     - sprite: {fileID: 2438307069932402953, guid: 8be079bb19f21a44abe5b0dd550a1f15,
         type: 3}
       enemy: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
@@ -27311,7 +27429,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   game_Managers: {fileID: 2001906742}
-  TimeBetweenWave: 25
+  TimeBetweenWave: 30
   CountDown: 40.4
   leWaveTimer: {fileID: 2079522589}
   Counter: {fileID: 1022158195}
@@ -27320,7 +27438,7 @@ MonoBehaviour:
   PlayerGainNothing: 0
   SurviveInTime: 0
   timeToSurvive: 60
-  moneyBetweenWave: 25
+  moneyBetweenWave: 30
   waveDisplayer: {fileID: 897195746}
   waveButton: {fileID: 1643686188}
   startWaveEnemyDisplays:

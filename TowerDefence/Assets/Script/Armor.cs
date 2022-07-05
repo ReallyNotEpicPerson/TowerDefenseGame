@@ -64,7 +64,7 @@ public class Armor : MonoBehaviour
         else if (armorType.HasFlag(ArmorType.Single))
         {
             layerNum.text = "";
-            MaxLayer = 1;            
+            MaxLayer = 1;
             armor = startArmor;
             ArmorBarAdjust(true);
         }
@@ -87,15 +87,18 @@ public class Armor : MonoBehaviour
         {
             layer = (int)(armor / startArmor);
             return armor - (int)(armor / startArmor) * startArmor;
-        }  
+        }
     }
     public bool DamageArmor(float amount)
     {
-        DamageDisplayer.Create(transform.position,(amount * (1f - damangeReductionPtc)),DamageDisplayerType.ArmorHit);
+        DamageDisplayer.Create(transform.position, (amount * (1f - damangeReductionPtc)), DamageDisplayerType.ArmorHit);
         armor -= amount * (1f - damangeReductionPtc);
         FillBar(Refresh());
         if (armor <= 0)
+        {
+            GetComponent<Animator>().SetTrigger("Break");
             return false;
+        }
         return true;
     }
     public void RestoreArmor()
@@ -114,7 +117,7 @@ public class Armor : MonoBehaviour
     public void FillBar(float amount)
     {
         armorBar.fillAmount = amount / startArmor;
-        if (layer == 0|| armorType.HasFlag(ArmorType.Single))
+        if (layer == 0 || armorType.HasFlag(ArmorType.Single))
             layerNum.text = "";
         else
         {
@@ -151,7 +154,7 @@ public class Armor : MonoBehaviour
         }
         else
         {
-            text.Append("Stack:"+MaxLayer);
+            text.Append("Stack:" + MaxLayer);
         }
         return text;
     }

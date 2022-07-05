@@ -87,7 +87,7 @@ public class TheBuildManager : MonoBehaviour
         refTurret.referenceTurret = upgradePrefab;
         refTurret.referenceTurret.name = upgradePrefab.name;
         refTurret.UltraUpgradeLevel++;
-        Debug.Log("Ultra Upgrade version Level: "+ refTurret.UltraUpgradeLevel);
+        //Debug.Log("Ultra Upgrade version Level: "+ refTurret.UltraUpgradeLevel);
         GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
     }
@@ -95,7 +95,7 @@ public class TheBuildManager : MonoBehaviour
     {
         if (PlayerStat.moneyInGame < refTurret.refBlueprint.ultraUpgrades[treeIndex].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1])
         {
-            Debug.Log("Nah U poor!,cant upgrade,lol" + PlayerStat.moneyInGame);
+            //Debug.Log("Nah U poor!,cant upgrade,lol" + PlayerStat.moneyInGame);
             return;
         }
         PlayerStat.moneyInGame -= refTurret.refBlueprint.ultraUpgrades[treeIndex].ultraUpgradeCosts[refTurret.UltraUpgradeLevel - 1];
@@ -112,7 +112,7 @@ public class TheBuildManager : MonoBehaviour
     {
         if (PlayerStat.moneyInGame < refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1])
         {
-            Debug.Log("Nah U poor!,cant upgrade,lol " + PlayerStat.moneyInGame);
+            //Debug.Log("Nah U poor!,cant upgrade,lol " + PlayerStat.moneyInGame);
             return;
         }
         PlayerStat.moneyInGame -= refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1];
@@ -123,7 +123,7 @@ public class TheBuildManager : MonoBehaviour
         refTurret.referenceTurret = upgradePrefab;
         refTurret.referenceTurret.name = upgradePrefab.name;
         refTurret.upgradeLevel++;
-        Debug.Log("Normal Upgrade version Level: " + refTurret.upgradeLevel);
+        //Debug.Log("Normal Upgrade version Level: " + refTurret.upgradeLevel);
         GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
     }
@@ -136,7 +136,7 @@ public class TheBuildManager : MonoBehaviour
             sp.MassUndo();
 
         }
-        GameObject Sellfx = Instantiate(SellFX, Input.mousePosition, Quaternion.identity);
+        GameObject Sellfx = Instantiate(SellFX, refTurret.referenceTurret.transform.position, Quaternion.identity);
         Destroy(Sellfx, 2f);
 
         //Debug.Log(tileMapManager.turretOnTheField.TryGetValue(tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position),out _) + " " + tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position));

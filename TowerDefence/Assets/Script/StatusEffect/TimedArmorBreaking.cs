@@ -47,7 +47,7 @@ public class TimedArmorBreaking : TimedEffect
         else
         {
             haveArmorAtStart = false;
-            Debug.Log("no armor,man!");
+            //Debug.Log("no armor,man!");
             return;
         }
         if (!_enemy.ContainFX(Effect.ID))

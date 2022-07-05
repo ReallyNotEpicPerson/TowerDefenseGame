@@ -117,9 +117,9 @@ public class TheSpawner : MonoBehaviour
         }
         if (waveNum == mainWaves.Length || InstaWin == true || Input.GetKey(KeyCode.W))
         {
-            game_Managers.WinLevel();
             lvp.SetEnemyList(nameCheck);
             SaveSystem.SaveLevelProgression(lvp);
+            game_Managers.WinLevel();
             enabled = false;
         }
         if ((Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.X)) && !PauseMenu.uiState && waveNum != mainWaves.Length)
@@ -148,7 +148,6 @@ public class TheSpawner : MonoBehaviour
         if (!PlayerGainNothing && CountDown > 1 && waveNum != 0)
         {
             int moneyAdd = Mathf.CeilToInt(CountDown / 20 * moneyBetweenWave);
-            Debug.Log(moneyAdd);
             if (moneyAdd > moneyBetweenWave)
             {
                 PlayerStat.moneyInGame += moneyBetweenWave;

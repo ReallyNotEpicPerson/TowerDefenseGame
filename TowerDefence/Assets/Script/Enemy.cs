@@ -23,8 +23,10 @@ public enum EnemyType
     FirstHitSpeedBoost = 1 << 0,
     Revive = 1 << 1,
     Healing = 1 << 2,
-    Invisible = 1 << 3,ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8, 
-    ImmuneToFear = 1 << 9,ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
+    Invisible = 1 << 3,
+    Boss = 1 << 4, ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8,
+    ImmuneToFear = 1 << 9, ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
+
 }
 #endregion 
 public class Enemy : MonoBehaviour
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
     public bool UsePathFinding;
     private NavMeshAI enemyNavMeshMovement;
     private EnemyPathMovement enemyPathMovement;
-    public float ChanceToEvade = 0.1f;
+    public float ChanceToEvade = 0.001f;
     //[HideInInspector]
     //public float speed;
     private float health;
@@ -142,6 +144,7 @@ public class Enemy : MonoBehaviour
         }
         if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
         {
+            animator.SetTrigger("Armored");
             EnableState(EnemyState.Armored);
         }
         else if (armorStat.armorType.HasFlag(ArmorType.None))
@@ -174,12 +177,12 @@ public class Enemy : MonoBehaviour
             }
             if (enemyType.HasFlag(EnemyType.Healing))
             {
-                Debug.Log("Activate Heal");
+                //Debug.Log("Activate Heal");
                 GetComponent<Cast>().FindTarget();
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
             {
-                Debug.Log("Boost");
+                //Debug.Log("Boost");
                 animator.SetTrigger("SpeedBoost");
                 fxManager.Slow(this);
             }
@@ -252,7 +255,7 @@ public class Enemy : MonoBehaviour
             }
             if (enemyType.HasFlag(EnemyType.Healing))
             {
-                Debug.Log("Activate Heal");
+                //Debug.Log("Activate Heal");
                 GetComponent<Cast>().FindTarget();
             }
             if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
@@ -310,6 +313,10 @@ public class Enemy : MonoBehaviour
     {
         return health;
     }
+    public void Non_Armored()
+    {
+        animator.SetTrigger("NoArmor");
+    }
     #endregion
     #region Handler
     public void AddDebuff(BaseEffect baseEffect)//use this instead,like EVERY TIME
@@ -355,15 +362,14 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        GetComponent<Collider2D>().enabled = false;
         RemoveALLDebuff();
         isDead = true;
         if (!enemyState.HasFlag(EnemyState.YouEarnNothing))
         {
             PlayerStat.moneyInGame += worth;
         }
-        //Ded.SetActive(true);
         Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 0.5f);
-        //WaitFor((int)(2*FloatToIntRate));
         TheSpawner.numOfEnemies--;
         if (UsePathFinding)
         {
@@ -374,22 +380,25 @@ public class Enemy : MonoBehaviour
         {
             enemyPathMovement.enabled = false;
         }
-        GetComponent<Collider2D>().enabled = false;
         if (animator != null && animator.isActiveAndEnabled)
         {
             animator.SetTrigger("Die");
         }
-        StartCoroutine(FadeToBlack());
+        //StartCoroutine(FadeToBlack());
 
         //Ded.SetActive(false);
         //gameObject.SetActive(false);
+    }
+    public void FadeToBlackCR()
+    {
+        StartCoroutine(FadeToBlack());
     }
     public IEnumerator FadeToBlack()
     {
         for (float i = 1; i >= 0; i -= Time.deltaTime)
         {
             // set color with i as alpha
-            enemyColor.color = new Color(1, 1, 1, i);
+            enemyColor.color = new Color(enemyColor.color.r, enemyColor.color.g, enemyColor.color.b, i);
             yield return null;
         }
         //gameObject.SetActive(false);
@@ -414,7 +423,7 @@ public class Enemy : MonoBehaviour
     }
     public void Revive()
     {
-        Debug.Log("wake");
+        //Debug.Log("wake");
         audioSource.PlayOneShot(GameAsset.I.revive);
         RemoveALLDebuff();
         DisableState(EnemyState.TakeNoDamage);
@@ -595,7 +604,7 @@ public class Enemy : MonoBehaviour
     {
         return Handler.StillHaveInvisibility();
     }
-    
+
     public void Invisible()
     {
         EnableState(EnemyState.Invisible);
@@ -667,7 +676,7 @@ public class Enemy : MonoBehaviour
     public StringBuilder GetArmorDamageReduction()
     {
         StringBuilder text = new StringBuilder();
-        text.Append(armorStat.GetArmorDamageRedution()+"%");
+        text.Append(armorStat.GetArmorDamageRedution() + "%");
         return text;
     }
     public StringBuilder GetArmorLayer()
@@ -680,55 +689,56 @@ public class Enemy : MonoBehaviour
     public StringBuilder Ability()
     {
         StringBuilder text = new StringBuilder();
+        text.Append($"<color=#ffffffff>{"Special Ability:"}</color>" + "\n");
         if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
         {
-            text.Append($"<color=#00ff00ff>{"Speed boost: "}</color>" + "Increase speed after first hit");
+            text.Append($"<color=#00ff00ff>{"Speed boost: "}</color>" + "Increase speed after first hit"+"\n");
         }
         if (enemyType.HasFlag(EnemyType.Revive))
         {
             Revive RE = fxManager.GetReviveEffect() as Revive;
-            text.Append($"<color=#00ff00ff>{"Revive: "}</color>" + "Have a " + RE.chance*100 + "% chance to revive after death");
+            text.Append($"<color=#00ff00ff>{"Revive: "}</color>" + "Have a " + RE.chance * 100 + "% chance to revive after death"+"\n");
         }
         if (enemyType.HasFlag(EnemyType.Invisible))
         {
             text.Append($"<color=#00ff00ff>{"Invisibility: "}</color>" +
-                "Become completely invisible to the naked eye for " + fxManager.GetInvisibleEffect().duration + "s");
+                "Become completely invisible for " + fxManager.GetInvisibleEffect().duration + "s");
         }
         if (enemyType.HasFlag(EnemyType.ImmunityToAll))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to all status effect");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to all status effect" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmuneToSlow))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Slow");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Slow" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmuneToPoison))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Poison");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Poison" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmuneToFire))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Fire");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Fire" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmunityToArmorBreaking))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Armor breaking");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Armor breaking" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmunityToWeaken))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Weaken");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Weaken" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmuneToFear))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Fear");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Fear" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.ImmunityToInsta_Kill))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + " Immune to Insta_kill");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Insta_kill" + "\n");
         }
         if (text.Length == 0)
         {
-            text.Append($"<color=#ffffffff>{"Special Ability"}</color>" + "\n" + "None" + "\n");
+            text.Append("None" + "\n");
         }
         return text;
     }

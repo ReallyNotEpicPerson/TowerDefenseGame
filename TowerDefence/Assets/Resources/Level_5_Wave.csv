@@ -1,28 +1,85 @@
-Name,count,randomRateRange,startRate,endRate,path,useNavmesh,delayBetweenGroup,,
-Red Golem,1,FALSE,3.5,0,0,FALSE,2,,
-Red Leg Man,1,FALSE,3,0,0,FALSE,0,,
-Red Golem,1,FALSE,3.5,0,1,FALSE,2,,
-Red Leg Man,1,FALSE,3,0,1,FALSE,0,,
-Red Leg Man,1,FALSE,3,0,0,FALSE,1.5,,
-Leg Man,1,FALSE,2.5,0,1,FALSE,0,,
-Red Leg Man,1,FALSE,3,0,0,FALSE,1.5,,
-Leg Man,1,FALSE,2.5,0,1,FALSE,0,,
-Red Leg Man,1,FALSE,3,0,0,FALSE,1.5,,
-Leg Man,1,FALSE,2.5,0,1,FALSE,0,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-17,,,,,,,,,
-LR8:GL2:L6,,,,,,,,,
-Bat,Slime,Crab,Leg Man,Red Leg Man,Blue Leg Man,Golem,Red Golem,Heavenly Doge,Evil Doge
-THE CUBE,THE SPHERE,Blue Ball,Dancing Dude,Boss Slime,Boss Crab,Boss Golem,Blue Golem,,
+Name,count,randomRateRange,startRate,endRate,path,useNavmesh,delayBetweenGroup
+Dancing Dude,10,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,2,FALSE,0
+Armored Golem,1,FALSE,3,0,0,FALSE,0
+Armored Golem,1,FALSE,3,0,2,FALSE,0
+Armored Golem,1,FALSE,3,0,0,FALSE,0
+Armored Golem,1,FALSE,3,0,2,FALSE,0
+Armored Golem,1,FALSE,3,0,0,FALSE,0
+Armored Golem,1,FALSE,3,0,2,FALSE,0
+Armored Golem,1,FALSE,3,0,0,FALSE,0
+Armored Golem,1,FALSE,3,0,2,FALSE,0
+Armored Golem,1,FALSE,3,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,2,FALSE,3
+Heavenly Doge,1,FALSE,4.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,4.5,0,2,FALSE,0
+Evil Doge,1,FALSE,4,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,2,FALSE,3
+Heavenly Doge,1,FALSE,4.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,4.5,0,2,FALSE,0
+Evil Doge,1,FALSE,4,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,2,FALSE,3
+Heavenly Doge,1,FALSE,4.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,4.5,0,2,FALSE,0
+Evil Doge,1,FALSE,4,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,2,FALSE,3
+Heavenly Doge,1,FALSE,4.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,4.5,0,2,FALSE,0
+Evil Doge,1,FALSE,4,0,0,FALSE,0
+Evil Doge,1,FALSE,4,0,2,FALSE,3
+Heavenly Doge,1,FALSE,4.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,4.5,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3.5,0,2,FALSE,0
+Dancing Dude,1,FALSE,3,0,1,FALSE,0
+Armored Golem,1,FALSE,3.5,0,1,FALSE,0
+Dancing Dude,1,FALSE,3,0,1,FALSE,0
+Armored Golem,1,FALSE,3.5,0,1,FALSE,0
+Dancing Dude,1,FALSE,3,0,1,FALSE,0
+Armored Golem,1,FALSE,3.5,0,1,FALSE,0
+Dancing Dude,1,FALSE,3,0,1,FALSE,0
+Armored Golem,1,FALSE,3.5,0,1,FALSE,0
+Dancing Dude,1,FALSE,3,0,1,FALSE,0
+Armored Golem,1,FALSE,3.5,0,1,FALSE,0
+Dancing Dude,1,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,1,FALSE,0
+Dancing Dude,1,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,1,FALSE,0
+Dancing Dude,1,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,1,FALSE,0
+Dancing Dude,1,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,1,FALSE,0
+Dancing Dude,1,FALSE,2.5,0,1,FALSE,0
+Armored Golem,1,FALSE,3,0,1,FALSE,0
+Evil Doge,5,FALSE,3,0,1,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,2,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,2,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,2,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,2,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,0,FALSE,0
+Heavenly Doge,1,FALSE,3.5,0,2,FALSE,0
+Evil Doge,5,FALSE,3,0,1,FALSE,0
+Blue Leg Man,1,FALSE,3,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3,0,2,FALSE,0
+Blue Leg Man,1,FALSE,3,0,0,FALSE,0
+Blue Leg Man,1,FALSE,3,0,2,FALSE,8
+The Undone,1,FALSE,4,0,1,FALSE,60

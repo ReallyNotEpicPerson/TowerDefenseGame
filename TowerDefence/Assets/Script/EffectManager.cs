@@ -75,7 +75,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
                 Revive rev = listOfDebuffs[i] as Revive;
                 if (Random.value <= listOfDebuffs[i].chance && enemy.GetReviveTime() < rev.reviveTime)
                 {
-                    Debug.Log("He live this time");
+                    //Debug.Log("He live this time");
                     enemy.AddDebuff(listOfDebuffs[i]);
                     return true;
                 }

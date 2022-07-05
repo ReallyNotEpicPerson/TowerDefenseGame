@@ -21,7 +21,7 @@ public class EntityEffectHandler : MonoBehaviour
             if (effect.IsFinished)
             {
                 RemoveDebuff(effect.Effect.ID);
-                ListAllDebuff();
+                //ListAllDebuff();
             }
         }
     }
@@ -122,7 +122,7 @@ public class EntityEffectHandler : MonoBehaviour
     public void RemoveALLDebuff()
     {
         _effectList.Clear();
-        Debug.Log("No Debuff left right? " + _effectList.Count());
+        //Debug.Log("No Debuff left right? " + _effectList.Count());
         if (_effectList.Count > 0)
         {
             Debug.Log("WTF");
@@ -144,7 +144,7 @@ public class EntityEffectHandler : MonoBehaviour
             _effectList[timedEffect.Effect.ID].Activate();
 
         }
-        ListAllDebuff();
+        //ListAllDebuff();
     }
 
     public void ListAllDebuff()

@@ -587,7 +587,7 @@ MonoBehaviour:
   armorStat: {fileID: 2039372861225107046}
   UsePathFinding: 0
   ChanceToEvade: 0
-  worth: 9
+  worth: 8
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 7360605286617059849}
   Handler: {fileID: -6811311253033788735}
@@ -900,7 +900,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &2985349238734107989
 MonoBehaviour:

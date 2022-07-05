@@ -80,17 +80,18 @@ MonoBehaviour:
   - "Stronger than a normal golem , the Red golem has a dirty secret ... she has
     been cheating on Golem with the Blue Golem ever since that day...she left out
     of guilt, never to be seen again\r."
-  - 'Blue Golem is a NTR enthusiast strangely enough
+  - 'A Golem with additional armor that reduce incoming damage . Armored golem is
+    a NTR enthusiast strangely enough
 
-    "Man....i have no idea
-    where to go with this story ".
+    "Man....i have no idea where to go with
+    this story ".
 
 '
   - '"Another one? Haven`t we got enough Balls already ...I mean 2 is MORE than enough
     . Wait where did it go?".'
-  - "Despite his look, he`s still a really really really really really good boy!!!Who
-    want nothing but to be pet , belly rub and get to the end of the path , in that
-    order\r."
+  - "Despite his look, he`s still a really really really really really good boy!!!
+    Who want nothing but to be pet , belly rub and get to the end of the path , in
+    that order\r."
   - "A good boy that can be revive with a certain chance after death .\nApparently
     there is a dog heaven and we could get there\u2026.if we let him get to the end
     of the path.\n\"That`s . Very . Tempting\"."
@@ -239,33 +240,33 @@ MonoBehaviour:
     upgradePrefabs:
     - {fileID: 6926505079866910515, guid: 44f4fbeac4cb89342817a482639984fe, type: 3}
     - {fileID: 4136117717993565787, guid: dfbd5c2c54876af40a7dc62f8a1258c8, type: 3}
-    upgradeCosts: af000000eb000000
+    upgradeCosts: b9000000f5000000
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 846017217396804514, guid: ef13b0592d0edc444897fc61f61b916b, type: 3}
-      ultraUpgradeCosts: 22010000
+      ultraUpgradeCosts: 2c010000
       sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 7763437311502007712, guid: 0d44f44b656e5d04986d58c564f6c2fd, type: 3}
-      ultraUpgradeCosts: 22010000
+      ultraUpgradeCosts: 2c010000
       sellPtcReduction: 0.5
   - prefab: {fileID: 8965921113538872230, guid: 2664bcd7a1b906f4aad0a76ce8d8941f,
       type: 3}
-    cost: 250
+    cost: 270
     CanBeBuild: 1
     sellPtcReduction: 0.5
     upgradePrefabs:
     - {fileID: 8933316092586181040, guid: c032b79545be804439baf4e3a0a690fd, type: 3}
     - {fileID: 387059846927826255, guid: fa742e546605c31418d78e95e3b15b9d, type: 3}
-    upgradeCosts: fa0000002c010000
+    upgradeCosts: 0e01000040010000
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 7303342988982851478, guid: dee46096162b5564cb1f8401d117cecd, type: 3}
-      ultraUpgradeCosts: 5e010000
+      ultraUpgradeCosts: 72010000
       sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 4642276048597397484, guid: 8f71968988ac2c74f838de11d43dc773, type: 3}
-      ultraUpgradeCosts: 5e010000
+      ultraUpgradeCosts: 72010000
       sellPtcReduction: 0.5
   turretSprite:
   - {fileID: 21300000, guid: ee095c2891df8834193836c595ec89b4, type: 3}
@@ -331,14 +332,14 @@ MonoBehaviour:
   enemyThatRound:
   - list: 00000000010000000200000003000000
   - list: 0000000001000000020000000300000006000000
+  - list: 000000000100000002000000030000000600000009000000
+  - list: 000000000100000002000000030000000600000009000000
   - list: 0000000001000000020000000300000006000000
   - list: 0000000001000000020000000300000006000000
   - list: 0000000001000000020000000300000006000000
   - list: 0000000001000000020000000300000006000000
   - list: 0000000001000000020000000300000006000000
-  - list: 0000000001000000020000000300000006000000
-  - list: 0000000001000000020000000300000006000000
-  - list: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+  - list: 0400000005000000060000000700000008000000090000000a0000000b0000000d0000000e0000000f000000100000001100000012000000
   PewPew_1: {fileID: 0}
   k: {fileID: 0}
   revive: {fileID: 8300000, guid: 5c6d3b1b195ad2446834003c33a7f12d, type: 3}

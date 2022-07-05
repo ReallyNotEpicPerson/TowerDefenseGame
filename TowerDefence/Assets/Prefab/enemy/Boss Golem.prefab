@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: worth
-      value: 18
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      propertyPath: enemyType
+      value: 1536
       objectReference: {fileID: 0}
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
@@ -35,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 5101970841542106915, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: distanceChangingWayPoint
-      value: 0.01
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6206446704628521065, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}

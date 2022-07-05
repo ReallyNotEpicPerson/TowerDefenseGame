@@ -42,7 +42,7 @@ PrefabInstance:
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}
       propertyPath: bulletSpeed.baseValue
-      value: 35
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: -2216631133464207530, guid: 6a2a23c6ab494474a8bed149f1b2762c,
         type: 3}

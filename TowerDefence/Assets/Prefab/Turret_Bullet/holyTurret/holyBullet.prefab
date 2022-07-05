@@ -98,9 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletSpeed:
-    baseValue: 25
+    baseValue: 27
   bulletDamage:
-    baseValue: 25
+    baseValue: 27
   critChance:
     baseValue: 0
   critDamage:
@@ -114,6 +114,7 @@ MonoBehaviour:
     type: 3}
   explosionRadius:
     baseValue: 0
+  quadrupleDamage: 0
 --- !u!82 &5734990244928607048
 AudioSource:
   m_ObjectHideFlags: 0

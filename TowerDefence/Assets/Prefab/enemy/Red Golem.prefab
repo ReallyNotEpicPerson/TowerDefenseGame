@@ -35,7 +35,12 @@ PrefabInstance:
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: worth
-      value: 13
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
+        type: 3}
+      propertyPath: enemyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
@@ -56,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}
       propertyPath: ChanceToEvade
-      value: 0.01
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 3952891389591697407, guid: 78aec2e707b38814e8ff8c7eda2d4053,
         type: 3}

@@ -21,7 +21,7 @@ MonoBehaviour:
   expirableType: 0
   duration: 3
   chance: 1
-  description: Burn Shiz up with style
+  description: Burn enemy
   damagePerRate:
     baseValue: 5
   rate:

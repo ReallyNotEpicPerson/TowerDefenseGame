@@ -100,7 +100,7 @@ MonoBehaviour:
   bulletSpeed:
     baseValue: 30
   bulletDamage:
-    baseValue: 53
+    baseValue: 55
   critChance:
     baseValue: 0.05
   critDamage:

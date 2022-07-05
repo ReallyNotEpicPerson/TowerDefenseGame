@@ -64,7 +64,9 @@ public class Bullet : BaseBulletClass
                 EnemyCast(target.GetComponent<Enemy>());
             }
             else
+            {
                 Damage(target.GetComponent<Enemy>());
+            }
         }
         Destroy(gameObject);
     }
@@ -100,6 +102,10 @@ public class Bullet : BaseBulletClass
     }
     void Damage(Enemy ene)
     {
+        if (ene == null)
+        {
+            return;
+        }
         if (Random.value <= ene.ChanceToEvade)
         {
             DamageDisplayer.Create(ene.transform.position);
@@ -122,7 +128,6 @@ public class Bullet : BaseBulletClass
                         finalDamage *= (1 + Modifier.statValue.value);
                     }
                 }
-
                 if (bulletType.HasFlag(StatusEffectType.PiercingShot))
                 {
                     if (quadrupleDamage)

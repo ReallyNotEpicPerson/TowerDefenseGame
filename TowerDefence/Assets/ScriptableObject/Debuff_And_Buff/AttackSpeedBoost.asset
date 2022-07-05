@@ -24,7 +24,7 @@ MonoBehaviour:
   _slowPercentage:
     modType: 100
     statValue:
-      baseValue: 0.1
+      baseValue: 0.05
   increaseRate:
     modType: 100
     statValue:

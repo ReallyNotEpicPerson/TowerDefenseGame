@@ -237,7 +237,7 @@ public class BulletTypeTurret : BaseTurretStat
     //gay method
     public void AddingOneInstanceRateMod(StatModifier mod)
     {
-        Debug.Log("Fire rate" + fireRate.value);
+        //Debug.Log("Fire rate" + fireRate.value);
         fireRate.AddingOneInstance(mod);
     }
     #endregion
@@ -303,7 +303,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
         else if (SE.ID.Contains("TUR"))
         {
-            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.value * 100 + "%"}</color>" + " each shot" + "\n");
+            text.Append(SE.description + " " + $"<color=#00ff00ff>{SE._slowPercentage.statValue.baseValue * 100 + "%"}</color>" + " each shot" + "\n");
         }
         if (SE.effectType.HasFlag(EffectType.StackingEffect))
         {
@@ -369,7 +369,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
         else if (WE.extraDamageTaken.modType.HasFlag(StatModType.PercentAdd) || WE.extraDamageTaken.modType.HasFlag(StatModType.PercentMult))
         {
-            text.Append($"<color=#00ff00ff>{" +" + WE.extraDamageTaken.statValue.value + "%"}</color>" + " Damage " + "\n");
+            text.Append($"<color=#00ff00ff>{" +" + WE.extraDamageTaken.statValue.value * 100 + "%"}</color>" + " Damage " + "\n");
         }
         if (WE.effectType.HasFlag(EffectType.StackingEffect))
         {
@@ -485,26 +485,30 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetTargetingType()
     {
         StringBuilder text = new StringBuilder();
-        text.Append("Targeting Type:"+"\n");
-        switch (targetingType)
+        text.Append("Targeting Type:" + "\n");
+        if (targetingType.HasFlag(TargetingType.Armored))
         {
-            case TargetingType.Closest:
-                text.Append("Target the closest Enemy" + "\n");
-                break;
-            case TargetingType.First:
-                text.Append("Target the first Enemy" + "\n");
-                break;
-            case TargetingType.LeastHealth:
-                text.Append("Target the weakest Enemy" + "\n");
-                break;
-            case TargetingType.MostHealth:
-                text.Append("Target the strongest Enemy" + "\n");
-                break;
-            case TargetingType.Random:
-                text.Append("Target random Enemy" + "\n");
-                break;
-            default:
-                break;
+            text.Append("Prioritised Amored Enemy" + "\n");
+        }
+        if (targetingType.HasFlag(TargetingType.Closest))
+        {
+            text.Append("Target the closest Enemy" + "\n");
+        }
+        if (targetingType.HasFlag(TargetingType.First))
+        {
+            text.Append("Target the first Enemy" + "\n");
+        }
+        if (targetingType.HasFlag(TargetingType.LeastHealth))
+        {
+            text.Append("Target the weakest Enemy" + "\n");
+        }
+        if (targetingType.HasFlag(TargetingType.MostHealth))
+        {
+            text.Append("Target the strongest Enemy" + "\n");
+        }
+        if (targetingType.HasFlag(TargetingType.Random))
+        {
+            text.Append("Target random Enemy" + "\n");
         }
         return text;
     }

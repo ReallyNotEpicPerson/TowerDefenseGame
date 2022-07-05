@@ -22,10 +22,10 @@ public class TimedReviveEffect : TimedEffect
     }
     protected override void ApplyEffect()
     {
-        Debug.Log("activate");
+        //Debug.Log("activate");
         if (Effect.effectType.HasFlag(EffectType.LateActivation))
         {
-            Debug.Log("fake own death");
+            //Debug.Log("fake own death");
             _enemy.FakeDeath();
             return;
         }

@@ -96,7 +96,7 @@ public class Shop : MonoBehaviour
     }
     public void SelectNewTurret(TurretBluePrint turretBluePrint)
     {
-        Debug.Log(turretBluePrint.prefab.name + " selected");
+        //Debug.Log(turretBluePrint.prefab.name + " selected");
         if (theBuildManager.tempTurret != null)
         {
             Destroy(theBuildManager.tempTurret);

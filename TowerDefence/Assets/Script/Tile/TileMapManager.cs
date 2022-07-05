@@ -146,6 +146,7 @@ public class TileMapManager : MonoBehaviour
                 if (selected)
                 {
                     nodeUI.SetActive(false);
+                    CanvasComeBack();
                     selected = false;
                 }
                 return;
@@ -158,12 +159,12 @@ public class TileMapManager : MonoBehaviour
                 {
                     return;
                 }
-                Debug.Log("You Touch ME :3");
+                //Debug.Log("You Touch ME :3");
+                CanvasBeGone();
                 NodeUI UI = nodeUI.GetComponent<NodeUI>();
                 UI.Display(turret);
                 //UI.ui.SetActive(true);
             }
-            //Extract shiz from dict and do shit 
             EnableState(TileNodeState.Upgrade_Sell);
         }
         //if
@@ -179,7 +180,7 @@ public class TileMapManager : MonoBehaviour
         //Debug.Log(cv.sizeDelta);
         //cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y + 150);
         //Debug.Log(cv.sizeDelta);
-        CanvasMoved = true;
+        //CanvasMoved = true;
     }
     public void CanvasComeBack()
     {
@@ -188,7 +189,7 @@ public class TileMapManager : MonoBehaviour
         //Debug.Log(cv.sizeDelta);
         //cv.sizeDelta = new Vector2(cv.sizeDelta.x, cv.sizeDelta.y - 150);
         //Debug.Log(cv.sizeDelta);
-        CanvasMoved = false;
+        //CanvasMoved = false;
     }
     public void ResetHoverColor()
     {
@@ -230,7 +231,7 @@ public class TileMapManager : MonoBehaviour
     {
         if (PlayerStat.moneyInGame < blueprint.cost || AcceptablePosition() || !blueprint.CanBeBuild)
         {
-            Debug.Log("Nah U poor! or that spot is not okay!! >:-<");
+            //Debug.Log("Nah U poor! or that spot is not okay!! >:-<");
             GameAsset.I.audioSource.PlayOneShot(GameAsset.I.notEnoughMoney);
             //call something that tell you poor af
             return false;

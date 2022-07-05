@@ -194,7 +194,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &1230297670643638293
 MonoBehaviour:
@@ -448,14 +448,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySprite: {fileID: 7046093432801577004, guid: 79c32c4229ac12542b373ac24d2ad715,
     type: 3}
-  enemyType: 0
+  enemyType: 64
   enemyState: 32
   audioType: 1
   startHealth: 450
   armorStat: {fileID: 1230297672343561557}
   UsePathFinding: 0
   ChanceToEvade: 0.08
-  worth: 12
+  worth: 11
   dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
   healthBar: {fileID: 2275851745956436300}
   Handler: {fileID: 645807092627198320}

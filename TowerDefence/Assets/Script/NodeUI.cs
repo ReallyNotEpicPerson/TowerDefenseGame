@@ -53,7 +53,7 @@ public class NodeUI : MonoBehaviour
         }
         else
         {
-            Debug.Log(target.treeChoice);
+            //Debug.Log(target.treeChoice);
             normalUpgradeButton.gameObject.SetActive(false);
             if (target.treeChoice == -69 && target.refBlueprint.ultraUpgrades.Length > 0)
             {
@@ -244,21 +244,21 @@ public class NodeUI : MonoBehaviour
     }
     public void SupportTurretUpgrade(int i)
     {
-        Debug.Log("sp turret Upgrade");
+        //Debug.Log("sp turret Upgrade");
         buildManager.UpgradeSupportTurret(tempRefTurret, i);
         ui.SetActive(false);
         HidePresentTurret();
     }
     public void Upgrade(int i)
     {
-        Debug.Log("ultra Upgrade");
+        //Debug.Log("ultra Upgrade");
         buildManager.UltraUpgrade(tempRefTurret, i);
         ui.SetActive(false);
         HidePresentTurret();
     }
     public void Upgrade()
     {
-        Debug.Log("Upgrade");
+        //Debug.Log("Upgrade");
         buildManager.UpgradeTurret(tempRefTurret);
         ui.SetActive(false);
         HidePresentTurret();

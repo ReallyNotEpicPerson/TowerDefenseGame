@@ -49,7 +49,7 @@ public class TimedSlowEffect : TimedEffect
                 }
                 effectStacks = 0;
             }
-            Debug.Log("Reaching maximum stack of " + slowEffect.stackTime);
+            //Debug.Log("Reaching maximum stack of " + slowEffect.stackTime);
             return;
         }
         if (effectStacks < slowEffect.stackTime && Effect.effectType.HasFlag(EffectType.StackingEffect))

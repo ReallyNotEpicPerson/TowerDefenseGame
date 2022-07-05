@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletSpeed:
-    baseValue: 25
+    baseValue: 30
   bulletDamage:
     baseValue: 12
   critChance:

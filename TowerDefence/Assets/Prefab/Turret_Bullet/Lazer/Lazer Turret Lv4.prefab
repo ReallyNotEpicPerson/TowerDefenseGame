@@ -245,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 2016529467894117614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.19999999, y: 0.20000002, z: 0.20000002}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6828990122727252777}
   m_RootOrder: 1
@@ -5279,7 +5279,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 5, y: 0, z: 0}
@@ -5388,11 +5388,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b612888836471f548b21afae0ea0cdf6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1025df10e62ccea41a5c12681281e1ef, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5614,8 +5614,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8125989448787379039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.043999612, y: -0.020000458, z: 10.182}
-  m_LocalScale: {x: 0.04, y: 0.040000003, z: 0.040000003}
+  m_LocalPosition: {x: 0.043999612, y: -0.020000458, z: -0.1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 6828990122727252777}
   m_RootOrder: 0

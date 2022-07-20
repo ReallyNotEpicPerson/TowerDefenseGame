@@ -247,6 +247,7 @@ public class TileMapManager : MonoBehaviour
         turretOnTheField.Add(localGridPos, refTurret);
         //Debug.Log(localGridPos);
         _turret.name = blueprint.prefab.name;
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.BuildSound);
         return true;
     }
     public bool AcceptablePosition2_0()

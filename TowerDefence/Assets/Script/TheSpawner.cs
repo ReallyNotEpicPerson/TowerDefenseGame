@@ -46,7 +46,7 @@ public class TheSpawner : MonoBehaviour
     [SerializeField] private List<Sprite> imageList = new List<Sprite>();
     private Dictionary<Sprite, int> numOfEnemy = new Dictionary<Sprite, int>();
     private bool InstaWin = false;
-    private Dictionary<string, string> nameCheck = new Dictionary<string, string>();
+    private Dictionary<string, string> enemyThisRound = new Dictionary<string, string>();
     private LevelProgession lvp;
 
     private void OnValidate()
@@ -88,7 +88,7 @@ public class TheSpawner : MonoBehaviour
         lvp = SaveSystem.LoadLevelProgression();
         for (int i = 0; i < lvp.enemyList.Count; i++)
         {
-            nameCheck.Add(lvp.enemyList[i], lvp.enemyList[i]);
+            enemyThisRound.Add(lvp.enemyList[i], lvp.enemyList[i]);
         }
         if (SurviveInTime == true)
         {
@@ -115,9 +115,9 @@ public class TheSpawner : MonoBehaviour
         {
             waveButton.SetActive(true);
         }
-        if (waveNum == mainWaves.Length || InstaWin == true || Input.GetKey(KeyCode.W))
+        if (waveNum == mainWaves.Length || InstaWin == true)
         {
-            lvp.SetEnemyList(nameCheck);
+            lvp.SetEnemyList(enemyThisRound);
             SaveSystem.SaveLevelProgression(lvp);
             game_Managers.WinLevel();
             enabled = false;
@@ -163,7 +163,6 @@ public class TheSpawner : MonoBehaviour
         leWaveTimer.text = String.Format("{0:00.00}", CountDown);
         //StartCoroutine(WaveCount());
         WaveCounter(mainWaves[waveNum].waveName);
-
         return;
     }
     public void MoneyGained(float amount)
@@ -307,9 +306,9 @@ public class TheSpawner : MonoBehaviour
         Wave wave = mainWaves[waveNum];// wave contain 
         for (int j = 0; j < wave.enemy.Length; j++)
         {
-            if (!nameCheck.ContainsKey(wave.enemy[j].enemy.name))
+            if (!enemyThisRound.ContainsKey(wave.enemy[j].enemy.name))
             {
-                nameCheck.Add(wave.enemy[j].enemy.name, wave.enemy[j].enemy.name);
+                enemyThisRound.Add(wave.enemy[j].enemy.name, wave.enemy[j].enemy.name);
             }
             numOfEnemies += wave.enemy[j].count;
             for (int i = 0; i < wave.enemy[j].count; i++)

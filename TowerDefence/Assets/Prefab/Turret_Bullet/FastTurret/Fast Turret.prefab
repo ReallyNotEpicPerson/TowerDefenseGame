@@ -105,8 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338763577d6538542bad6ff4d94766eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfDebuffs:
-  - {fileID: 11400000, guid: e2b645fc9d203914180220c97403c464, type: 2}
+  listOfDebuffs: []
 --- !u!82 &4326448680109942135
 AudioSource:
   m_ObjectHideFlags: 0

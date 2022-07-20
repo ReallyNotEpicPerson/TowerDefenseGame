@@ -98,9 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletSpeed:
-    baseValue: 30
+    baseValue: 25
   bulletDamage:
-    baseValue: 12
+    baseValue: 8
   critChance:
     baseValue: 0
   critDamage:
@@ -108,9 +108,9 @@ MonoBehaviour:
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
   bulletType: 0
-  fxManager: {fileID: 525667416562004112, guid: e45d6f2358c358444b64dbe755cdde35,
+  theFxManager: {fileID: 525667416562004112, guid: e45d6f2358c358444b64dbe755cdde35,
     type: 3}
-  effectManager: {fileID: 2865144594564106229, guid: e45d6f2358c358444b64dbe755cdde35,
+  fxManager: {fileID: 2865144594564106229, guid: e45d6f2358c358444b64dbe755cdde35,
     type: 3}
   explosionRadius:
     baseValue: 0

@@ -25,7 +25,7 @@ MonoBehaviour:
   extraDamageTaken:
     modType: 300
     statValue:
-      baseValue: 0.1
+      baseValue: 0.75
   increaseRate:
     modType: 100
     statValue:

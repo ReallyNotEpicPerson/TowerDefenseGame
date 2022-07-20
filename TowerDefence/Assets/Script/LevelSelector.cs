@@ -13,6 +13,7 @@ public class LevelSelector : MonoBehaviour
     private string CurrentLevel;
     [SerializeField] private Image map;
     public Animator animator;
+    public AudioSource audioSource;
     //private RectTransform recTrans;
 
     public void SetMap(Sprite leMap)
@@ -50,11 +51,13 @@ public class LevelSelector : MonoBehaviour
         return nextlevel;
     }
     public void LoadScence()
-    {
+    {       
+        audioSource.Play();
         SceneManager.LoadScene(CurrentLevel);
     }
     public void LoadScence(string name)
     {
+        audioSource.Play();
         SceneManager.LoadScene(name);
     }
     public void EnableTurretSelection(string text)//The one usisng right now
@@ -76,5 +79,9 @@ public class LevelSelector : MonoBehaviour
     public void ResetAll()
     {
         PlayerPrefs.DeleteAll();
+    }
+    public void PlayPopingSound()
+    {
+        audioSource.PlayOneShot(GameAsset.I.PopingSound);
     }
 }

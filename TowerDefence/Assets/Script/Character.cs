@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
             itemToolTips = FindObjectOfType<ItemToolTips>();
         }
     }
-    private void Start()
+    public void Start()
     {
         statPanel.SetStat(Strength, Thiccness, DingdongSize, Experience);
         statPanel.UpdateStatValue();

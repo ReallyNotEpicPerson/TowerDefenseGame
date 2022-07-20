@@ -58,62 +58,58 @@ MonoBehaviour:
   underling: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
     type: 3}
   description:
-  - "Extremely fast , but have low health , can fly through all sort of terrain and
-    love to get to the end of that path right there.\n\"Please , he`s is being very
+  - "Extremely fast, but have low health, can fly through all sort of terrain and
+    love to get to the end of that path right there.\n\"Please, he`s is being very
     polite here\"\r."
-  - "Slime seems to be lost , he said his home is at the end of the path right there.\n\"We
+  - "Slime seems to be lost, he said his home is at the end of the path right there.\n\"We
     should hel-...Wait a minute.....\"\r."
-  - "Being one of the few crab that can walk straight . Crab said he would love to
+  - "Being one of the few crab that can walk straight. Crab said he would love to
     find the sea, which is at the end of the path right over there! \n\"..... Hold
     on a minute ... \r\"."
-  - "A strange leg with incredible speed despite not being connected to anything.
-    It just run...somehow\n\"Is this yours?\"\r."
-  - 'Another strange leg with unexplained speed , more durable than the first one
-    , he seems a bit red?
+  - "A strange leg with incredible speed despite not being connected to anything. 
+    It just run... somehow\n\"Is this yours?\"\r."
+  - 'Another strange leg with unexplained speed, more durable than the first one,
+    he seems a bit red?
 
     "What do you mean not yours?".'
-  - "\"This is the fastest leg i have seen,yet....It can boost itself to great distance
-    in a matter of seconds. \nIm pretty sure this is yours\"\r."
-  - "Strong, however lacking in speed, the Golem`s life has been rocky lately , he
-    has been looking for his lover the Red Golem since that \"day\" to no avail ,she
-    might be at the end of the path right there.\r"
-  - "Stronger than a normal golem , the Red golem has a dirty secret ... she has
-    been cheating on Golem with the Blue Golem ever since that day...she left out
-    of guilt, never to be seen again\r."
-  - 'A Golem with additional armor that reduce incoming damage . Armored golem is
-    a NTR enthusiast strangely enough
+  - "\"This is the fastest leg i have seen, yet....It can boost itself to great distance
+    in a matter of seconds. \nIm pretty sure this is yours, NO? \"\r."
+  - 'Strong, however lacking in speed, the Golem`s life has been a bit rocky lately,
+    get it?
 
-    "Man....i have no idea where to go with
-    this story ".
-
-'
-  - '"Another one? Haven`t we got enough Balls already ...I mean 2 is MORE than enough
-    . Wait where did it go?".'
+    "He`s going to kill you for laughing"'
+  - "Stronger than a normal golem, and faster too , \"She\" might be in her period
+    right now but thats no laughing matter \n\"DO NOT LAUGH AT WOMAN IN HER PERIOD!,
+    just run\""
+  - "A Golem with additional armor that reduce incoming damage . Armored golem can
+    take all the damage , nothing can make him crumble \n\"Except for that annoying
+    armor break turret!\".\n"
+  - '"Another one? Haven`t we got enough Balls already... I mean 2 is MORE than enough.
+    Wait where did it go?".'
   - "Despite his look, he`s still a really really really really really good boy!!!
-    Who want nothing but to be pet , belly rub and get to the end of the path , in
+    Who want nothing but to be pet, belly rub and get to the end of the path, in
     that order\r."
-  - "A good boy that can be revive with a certain chance after death .\nApparently
-    there is a dog heaven and we could get there\u2026.if we let him get to the end
-    of the path.\n\"That`s . Very . Tempting\"."
-  - "\"A cube with additional armor that reduce incoming damage . \nWhat the hell
-    is this cube doing here all of the sudden ? I thought is is a 2D Game?\"\r."
-  - "\"A Sphere with additional armor that reduce incoming damage \nWeird\u2026ball?
-    3D? Or is that a 2D image of 3D ball? . we don`t know....\"\r."
-  - "\"He Just kept Dancing , never stopping , And WHY on earth is he 3D? . Seriously?
-    This . Is . A . 2D . Game\r     , Oh f$%# i dont even know anymore , Brain Hurt\"."
-  - 'Boss Slime might appear more than once ... To kill you
-
-    "he just a bit angry
-    at you , just a tini tiny bit ".'
-  - "Boss Crab ate too much , thats why he`s big \n\"Did you expect somthing more
-    to this story?\"."
-  - Lets just say Boss Golem is a mob boss that just happen to be a wholesome enthusiast
-    and he wish to destroy all that is NTR
-  - 'The most evil force of nature , The Undone / Corrupted Game Dev . He only wish
-    to destroy your play through and make you life a living hell .
+  - "A good boy that fell from heaven. Apparently there is a dog heaven and we could
+    get there\u2026. if we let him get to the end of the path.\n\"That`s . Very .
+    Tempting\"."
+  - "A cube with additional armor that reduce incoming damage . \n\"His shell is
+    only a disguise for what underneath\"."
+  - "\"A Sphere with additional armor that reduce incoming damage \nWeird\u2026 ball?
+    3D? Or is that a 2D image of 3D ball?. break the armor to find out\"\r."
+  - "\"He Just kept Dancing, never stopping.  And WHY on earth is he 3D?. Seriously?
+    This . Is . A . 2D . Game\r     , Oh f$%# i dont even know anymore , Brain Hurt.
+    Stop the music!\"."
+  - "Boss Slime might appear more than once ... To kill you \n\"he just a bit angry
+    at you, just a tini tiny bit \"."
+  - "Boss Crab ate too much, thats why he`s big \n\"Did you expect somthing more
+    to this story? \". "
+  - 'Lets just say Boss Golem is a mob boss that just happen to be a wholesome enthusiast
+    and he wish to destroy all that is NTR '
+  - 'The most evil force of nature, The Undone or the Corrupted Game Dev only wish
+    to destroy your play through and make your life a living hell .
 
     " He`s just
-    a bit insecure , you know "'
+    a bit insecure, you know "-The actual nice Game Dev'
   turretDescription: []
   enemySprite: []
   questionMarkSprite: {fileID: 21300000, guid: 8d972f9acad16a44780be28c1cfd2203, type: 3}
@@ -122,7 +118,7 @@ MonoBehaviour:
       type: 3}
     cost: 75
     CanBeBuild: 1
-    sellPtcReduction: 0.75
+    sellPtcReduction: 0.6
     upgradePrefabs:
     - {fileID: 8747716264140433802, guid: d2e4d97f23a765d4e9db3108a32f7633, type: 3}
     - {fileID: 6592738224764880434, guid: 6025fafcf4693334db633457ffd3879d, type: 3}
@@ -131,11 +127,9 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 4296147440220727171, guid: a88c3d144c9d17445975c35cbbe5d529, type: 3}
       ultraUpgradeCosts: 96000000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 4222680035136752377, guid: 407c8fe52143de44e847340007216d3a, type: 3}
       ultraUpgradeCosts: 96000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 5291870584937686922, guid: b342c62d036f7d047b20aaa10b25179a,
       type: 3}
     cost: 100
@@ -149,11 +143,9 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 8776768127137054333, guid: 8a6177cec73cd464bb34f9f0323dac6f, type: 3}
       ultraUpgradeCosts: af000000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 4167127261436955230, guid: d00832d25b7c33f4994e6dfeb0aa66d2, type: 3}
       ultraUpgradeCosts: af000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 3428752714890112891, guid: b21c6192f7b34654bb77431c04969ae4,
       type: 3}
     cost: 125
@@ -167,11 +159,9 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 7353551556990177677, guid: 53f64731c7085fe4dbbe317268c0eaf6, type: 3}
       ultraUpgradeCosts: b4000000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 1570042668356290577, guid: e7f410de4f2e4b74eaad198f27202657, type: 3}
       ultraUpgradeCosts: b4000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 5139430634388571129, guid: 6b56a90063a6d1d4db4d2d647d33ca1b,
       type: 3}
     cost: 175
@@ -185,11 +175,9 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 5255571582873797314, guid: c3c2030742d97c44b9b9cbfd7e6d3612, type: 3}
       ultraUpgradeCosts: fa000000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 4809151525094598337, guid: eef44e76e84a3f242b839b4983e926a0, type: 3}
       ultraUpgradeCosts: fa000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 5826005812112630557, guid: 8c9eaaf07f7550f448e5a934195be047,
       type: 3}
     cost: 150
@@ -203,11 +191,9 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 741333515900032696, guid: e0c3b6fb69525c54596ec9c19465d344, type: 3}
       ultraUpgradeCosts: e1000000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 3353924651515865828, guid: 6875ee6c54b3f4d418c2dc058d64ba5e, type: 3}
       ultraUpgradeCosts: e1000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 525667416562004112, guid: e45d6f2358c358444b64dbe755cdde35, type: 3}
     cost: 0
     CanBeBuild: 0
@@ -216,27 +202,25 @@ MonoBehaviour:
     upgradeCosts: 
     ultraUpgrades: []
   - prefab: {fileID: 382585485345961780, guid: cd0414fede073d34281f378363ef1b06, type: 3}
-    cost: 160
+    cost: 180
     CanBeBuild: 1
-    sellPtcReduction: 0.5
+    sellPtcReduction: 0.45
     upgradePrefabs:
     - {fileID: 7056486356234093800, guid: 2d4441361b2bea34087113df8a8a6c86, type: 3}
     - {fileID: 5137339787193338788, guid: eaa9184550a61084fa1d7bc99bb83930, type: 3}
-    upgradeCosts: 8c000000be000000
+    upgradeCosts: a0000000d2000000
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 7748943488595122275, guid: 7b5da0c265116924bb10cf5ee7c5ae57, type: 3}
-      ultraUpgradeCosts: f0000000
-      sellPtcReduction: 0.5
+      ultraUpgradeCosts: 04010000
     - ultraUpgradePrefab:
       - {fileID: 8485852054697804859, guid: e95e8fb88f7b28a4da4359109b8f4002, type: 3}
       ultraUpgradeCosts: b4000000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 6821397518981287459, guid: 1e203ea8723d77443a5a421af47e538f,
       type: 3}
     cost: 200
     CanBeBuild: 1
-    sellPtcReduction: 0.5
+    sellPtcReduction: 0.45
     upgradePrefabs:
     - {fileID: 6926505079866910515, guid: 44f4fbeac4cb89342817a482639984fe, type: 3}
     - {fileID: 4136117717993565787, guid: dfbd5c2c54876af40a7dc62f8a1258c8, type: 3}
@@ -245,29 +229,25 @@ MonoBehaviour:
     - ultraUpgradePrefab:
       - {fileID: 846017217396804514, guid: ef13b0592d0edc444897fc61f61b916b, type: 3}
       ultraUpgradeCosts: 2c010000
-      sellPtcReduction: 0.5
     - ultraUpgradePrefab:
       - {fileID: 7763437311502007712, guid: 0d44f44b656e5d04986d58c564f6c2fd, type: 3}
       ultraUpgradeCosts: 2c010000
-      sellPtcReduction: 0.5
   - prefab: {fileID: 8965921113538872230, guid: 2664bcd7a1b906f4aad0a76ce8d8941f,
       type: 3}
-    cost: 270
+    cost: 350
     CanBeBuild: 1
-    sellPtcReduction: 0.5
+    sellPtcReduction: 0.4
     upgradePrefabs:
     - {fileID: 8933316092586181040, guid: c032b79545be804439baf4e3a0a690fd, type: 3}
     - {fileID: 387059846927826255, guid: fa742e546605c31418d78e95e3b15b9d, type: 3}
-    upgradeCosts: 0e01000040010000
+    upgradeCosts: 5e01000090010000
     ultraUpgrades:
     - ultraUpgradePrefab:
       - {fileID: 7303342988982851478, guid: dee46096162b5564cb1f8401d117cecd, type: 3}
-      ultraUpgradeCosts: 72010000
-      sellPtcReduction: 0.5
+      ultraUpgradeCosts: c2010000
     - ultraUpgradePrefab:
       - {fileID: 4642276048597397484, guid: 8f71968988ac2c74f838de11d43dc773, type: 3}
-      ultraUpgradeCosts: 72010000
-      sellPtcReduction: 0.5
+      ultraUpgradeCosts: c2010000
   turretSprite:
   - {fileID: 21300000, guid: ee095c2891df8834193836c595ec89b4, type: 3}
   - {fileID: 21300000, guid: 061cfb5c61cf01f45bdfb8e96d140cda, type: 3}
@@ -335,18 +315,22 @@ MonoBehaviour:
   - list: 000000000100000002000000030000000600000009000000
   - list: 000000000100000002000000030000000600000009000000
   - list: 0000000001000000020000000300000006000000
+  - list: 0000000001000000020000000300000004000000050000000600000007000000090000000a0000000b0000000c00000010000000
   - list: 0000000001000000020000000300000006000000
-  - list: 0000000001000000020000000300000006000000
-  - list: 0000000001000000020000000300000006000000
-  - list: 0000000001000000020000000300000006000000
-  - list: 0400000005000000060000000700000008000000090000000a0000000b0000000d0000000e0000000f000000100000001100000012000000
+  - list: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000d0000000e0000001000000011000000
+  - list: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000d0000000e0000001000000011000000
+  - list: 0400000005000000060000000700000008000000090000000a0000000b0000000d0000000e0000000f0000001000000011000000
   PewPew_1: {fileID: 0}
   k: {fileID: 0}
   revive: {fileID: 8300000, guid: 5c6d3b1b195ad2446834003c33a7f12d, type: 3}
   whenEnemyPassThrough: {fileID: 8300000, guid: ba4ad5dcf65834c42828ec5cf15cf018,
     type: 3}
-  notEnoughMoney: {fileID: 8300000, guid: 0ec57618fd2ce65498eebbb21c5a9700, type: 3}
+  notEnoughMoney: {fileID: 8300000, guid: 9e7fdf39d901f444e8f312eb9f7019cc, type: 3}
   clickClack: {fileID: 8300000, guid: 4b43e03676cdc7643b9a9ed934a4f5d7, type: 3}
+  PopingSound: {fileID: 8300000, guid: dc43d518ab33d264f9a4aaf9e0a41aeb, type: 3}
+  ClickSound: {fileID: 8300000, guid: 9e7fdf39d901f444e8f312eb9f7019cc, type: 3}
+  BuildSound: {fileID: 8300000, guid: bacf112f26bfea945a05b1820c9e06bd, type: 3}
+  SellingSound: {fileID: 8300000, guid: 9d7e48e7d3bd93a47bb7fe369b134863, type: 3}
 --- !u!82 &-5479834351035917023
 AudioSource:
   m_ObjectHideFlags: 0

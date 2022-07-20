@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
-using System.Text;
 using UnityEditor;
 #endif
 using UnityEngine;
+using System.Text;
 
 public class LazerTypeTurret : BaseTurretStat
 {
@@ -59,6 +59,14 @@ public class LazerTypeTurret : BaseTurretStat
                 audioSource.Stop();
             }
             return;
+        }
+        if (PauseMenu.uiState || Manual.uiState)
+        {
+            audioSource.Pause();
+        }
+        else if((!PauseMenu.uiState || !Manual.uiState) && target.Count > 0)
+        {
+            audioSource.UnPause();
         }
         RotateToObject();
         LazerBeam();
@@ -174,7 +182,7 @@ public class LazerTypeTurret : BaseTurretStat
         {
             return;
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(StatusEffectType.Insta_Kill))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToInsta_Kill) && bulletType.HasFlag(StatusEffectType.Insta_Kill))
         {
             fxManager.Insta_kill(ene);
         }
@@ -190,11 +198,11 @@ public class LazerTypeTurret : BaseTurretStat
         {
             fxManager.Fear(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(StatusEffectType.Weaken))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToWeaken) && bulletType.HasFlag(StatusEffectType.Weaken))
         {
             fxManager.Weaken(ene);
         }
-        if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(StatusEffectType.ArmorBreaking))
+        if (!ene.CheckEnemyType(EnemyType.ImmuneToArmorBreaking) && bulletType.HasFlag(StatusEffectType.ArmorBreaking))
         {
             fxManager.DisableArmor(ene);
         }

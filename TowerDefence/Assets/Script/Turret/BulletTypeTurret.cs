@@ -18,11 +18,11 @@ public class BulletTypeTurret : BaseTurretStat
     [SerializeField] private Bullet bu;
     public float chanceToQuadrupleDamage = 0;
 
+    private EffectManager fxManager;
     private float FireCountDown = 0f;
     private EntityEffectHandler fxHandler;
-    private EffectManager fxManager;
     private StatModifier modifier;
-    private Dictionary<int, Dictionary<object, StatModifier>> bulletMod = 
+    private Dictionary<int, Dictionary<object, StatModifier>> bulletMod =
         new Dictionary<int, Dictionary<object, StatModifier>>();
     private AudioSource audioSource;
 
@@ -287,8 +287,7 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetSlow()
     {
         StringBuilder text = new StringBuilder();
-
-        SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+        SlowEffect SE = bu.fxManager.GetSlowEffect() as SlowEffect;
         if (SE.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{SE.chance * 100 + "%"}</color>" + " chance" + " to ");
@@ -314,12 +313,12 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetDOTS()
     {
         StringBuilder text = new StringBuilder();
-        DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
+        DotsEffect DE = bu.fxManager.GetDOTSEffect() as DotsEffect;
         if (DE.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{DE.chance * 100 + "%"}</color>" + " chance" + " to ");
         }
-        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value/DE.rate.value}</color>" + " damage for " + $"<color=#00ff00ff>{ DE.duration + "s"}</color>" + "\n");
+        text.Append(DE.description + " " + $"<color=#00ff00ff>{DE.damagePerRate.value / DE.rate.value}</color>" + " damage for " + $"<color=#00ff00ff>{ DE.duration + "s"}</color>" + "\n");
         if (DE.effectType.HasFlag(EffectType.StackingEffect))
         {
             text.Append("Can stack to " + $"<color=#00ff00ff>{DE.stackTime}</color>" + "\n");
@@ -331,7 +330,7 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetFear()
     {
         StringBuilder text = new StringBuilder();
-        FearEffect FE = fxManager.GetFearEffect() as FearEffect;
+        FearEffect FE = bu.fxManager.GetFearEffect() as FearEffect;
         if (FE.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{FE.chance * 100 + "%"}</color>" + " chance" + " to ");
@@ -346,7 +345,7 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetInstaKill()
     {
         StringBuilder text = new StringBuilder();
-        Insta_Kill IK = fxManager.GetInsta_KillEffect() as Insta_Kill;
+        Insta_Kill IK = bu.fxManager.GetInsta_KillEffect() as Insta_Kill;
         if (IK.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{IK.chance * 100 + "%"}</color>" + " chance" + " to " + IK.description);
@@ -357,7 +356,7 @@ public class BulletTypeTurret : BaseTurretStat
     {
         StringBuilder text = new StringBuilder();
 
-        Weaken WE = fxManager.GetWeakenEffect() as Weaken;
+        Weaken WE = bu.fxManager.GetWeakenEffect() as Weaken;
         if (WE.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{WE.chance * 100 + "%"}</color>" + " chance" + " to ");
@@ -382,8 +381,7 @@ public class BulletTypeTurret : BaseTurretStat
     public StringBuilder GetArmorBreaking()
     {
         StringBuilder text = new StringBuilder();
-
-        ArmorBreaking ABE = fxManager.GetArmorBreakEffect() as ArmorBreaking;
+        ArmorBreaking ABE = bu.fxManager.GetArmorBreakEffect() as ArmorBreaking;
         if (ABE.chance < 1)
         {
             text.Append($"<color=#00ff00ff>{ABE.chance * 100 + "%"}</color>" + " chance to ");
@@ -391,7 +389,7 @@ public class BulletTypeTurret : BaseTurretStat
         text.Append(ABE.description + " for " + $"<color=#00ff00ff>{ ABE.duration + "s"}</color>" + "\n");
         if (ABE.effectType.HasFlag(EffectType.StackableDuration))
         {
-            text.Append("Can Stack up duration" +"\n");
+            text.Append("Can Stack up duration" + "\n");
         }
         return text;
     }
@@ -428,7 +426,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
         if (bu.bulletType.HasFlag(StatusEffectType.ArmorDestroyer))
         {
-            text.Append("Destroy enemy armor " +"\n");
+            text.Append("Destroy enemy armor " + "\n");
         }
         if (passiveAbility.HasFlag(PassiveAbility.CanShootWhenBuy))
         {
@@ -440,7 +438,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
         if (passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage))
         {
-            text.Append("Have " + $"<color=#00ff00ff>{chanceToQuadrupleDamage * 100+"%" }</color>" + " chance to quadruple damage" + "\n");
+            text.Append("Have " + $"<color=#00ff00ff>{chanceToQuadrupleDamage * 100 + "%" }</color>" + " chance to quadruple damage" + "\n");
         }
         if (passiveAbility.HasFlag(PassiveAbility.InfiniteRange))
         {
@@ -448,7 +446,7 @@ public class BulletTypeTurret : BaseTurretStat
         }
         if (text.Length == 0)
         {
-            text.Append("None"+"\n");
+            text.Append("None" + "\n");
         }
         return text;
     }
@@ -457,22 +455,22 @@ public class BulletTypeTurret : BaseTurretStat
         switch (bu.bulletType)
         {
             case StatusEffectType.SlowPerSecond:
-                SlowEffect SE = fxManager.GetSlowEffect() as SlowEffect;
+                SlowEffect SE = bu.fxManager.GetSlowEffect() as SlowEffect;
                 return SE.Icon;
             case StatusEffectType.Dots:
-                DotsEffect DE = fxManager.GetDOTSEffect() as DotsEffect;
+                DotsEffect DE = bu.fxManager.GetDOTSEffect() as DotsEffect;
                 return DE.Icon;
             case StatusEffectType.Fear:
-                FearEffect FE = fxManager.GetFearEffect() as FearEffect;
+                FearEffect FE = bu.fxManager.GetFearEffect() as FearEffect;
                 return FE.Icon;
             case StatusEffectType.Insta_Kill:
-                Insta_Kill IK = fxManager.GetInsta_KillEffect() as Insta_Kill;
+                Insta_Kill IK = bu.fxManager.GetInsta_KillEffect() as Insta_Kill;
                 return IK.Icon;
             case StatusEffectType.Weaken:
-                Weaken WE = fxManager.GetWeakenEffect() as Weaken;
+                Weaken WE = bu.fxManager.GetWeakenEffect() as Weaken;
                 return WE.Icon;
             case StatusEffectType.ArmorBreaking:
-                ArmorBreaking ABE = fxManager.GetArmorBreakEffect() as ArmorBreaking;
+                ArmorBreaking ABE = bu.fxManager.GetArmorBreakEffect() as ArmorBreaking;
                 return ABE.Icon;
             case StatusEffectType.PiercingShot:
                 break;

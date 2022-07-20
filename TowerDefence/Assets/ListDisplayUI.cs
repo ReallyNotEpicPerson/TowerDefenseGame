@@ -36,6 +36,7 @@ public class ListDisplayUI : MonoBehaviour
     public Animator turretUI;
     public Transform levelInfo;
     public TMP_Text wave;
+    private LevelProgession savedEnemySprite;
     private void OnValidate()
     {
         for (int i = 0; i < enemyList.childCount; i++)
@@ -45,7 +46,7 @@ public class ListDisplayUI : MonoBehaviour
     }
     private void Awake()
     {
-        LevelProgession savedEnemySprite = SaveSystem.LoadLevelProgression();
+        savedEnemySprite = SaveSystem.LoadLevelProgression();
         for (int i = 0; i < image.Count; i++)
         {
             if (savedEnemySprite.enemyList.Contains(enemy[i].name))
@@ -309,12 +310,19 @@ public class ListDisplayUI : MonoBehaviour
                 lvp.star.Add(0);
             }
         }
-
         SaveSystem.SaveLevelProgression(lvp);//keep at all cost
     }
     public void Wave(string str)
     {
         wave.gameObject.SetActive(true);
         wave.text = str + " Waves";
+    }
+    public void LoadAllEnemy()
+    {
+        for (int i = 0; i < enemy.Count-1; i++)
+        {
+            savedEnemySprite.enemyList.Add(enemy[i].name);
+        }
+        SaveSystem.SaveLevelProgression(savedEnemySprite);
     }
 }

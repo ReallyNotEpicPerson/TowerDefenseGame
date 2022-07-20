@@ -123,7 +123,7 @@ public class TimedSlowEffect : TimedEffect
         slowEffect._slowPercentage.statValue.RemoveAllModifiersFromSource(this);
         if (_enemy != null && Effect.specialFX!=null)
         {
-            if (_enemy.enemyType.HasFlag(EnemyType.FirstHitSpeedBoost) && Effect.ID.Contains("ENE"))
+            if (Effect.ID.Contains("ENE"))
             {
                 Debug.Log("Yamete");
                 _enemy.UndoSpeedBoost();

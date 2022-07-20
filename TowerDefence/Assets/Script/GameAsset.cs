@@ -47,10 +47,23 @@ public class GameAsset : MonoBehaviour
     public AudioClip whenEnemyPassThrough;
     public AudioClip notEnoughMoney;
     public AudioClip clickClack;
+    public AudioClip PopingSound;
+    public AudioClip ClickSound;
+    public AudioClip BuildSound;
+    public AudioClip SellingSound;
 
-    public void PlaySound(AudioClip clip, float volume)
+
+    public void PlayClickSound()
     {
-        audioSource.PlayOneShot(clip, volume);
+        audioSource.PlayOneShot(ClickSound);
+    }
+    public void PlayPopingSound()
+    {
+        audioSource.PlayOneShot(PopingSound);
+    }
+    public void PlayMoneySound()
+    {
+        audioSource.PlayOneShot(SellingSound);
     }
     public static void Spawn(string name, Vector3 pos)
     {

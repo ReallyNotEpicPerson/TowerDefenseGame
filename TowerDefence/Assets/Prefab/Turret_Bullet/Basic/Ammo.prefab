@@ -108,9 +108,9 @@ MonoBehaviour:
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
   bulletType: 0
-  fxManager: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
+  theFxManager: {fileID: 5266428079843986731, guid: 19962bd01682d534e96bac799dfd6be8,
     type: 3}
-  effectManager: {fileID: 7610694149465799246, guid: 19962bd01682d534e96bac799dfd6be8,
+  fxManager: {fileID: 7610694149465799246, guid: 19962bd01682d534e96bac799dfd6be8,
     type: 3}
   explosionRadius:
     baseValue: 0

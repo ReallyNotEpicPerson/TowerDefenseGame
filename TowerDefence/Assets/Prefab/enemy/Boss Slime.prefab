@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: startHealth
       value: 900
       objectReference: {fileID: 0}
+    - target: {fileID: 262966061738052292, guid: 421de2aaeac77ef41a80fd4d5321daf7,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 262966061738052293, guid: 421de2aaeac77ef41a80fd4d5321daf7,
         type: 3}
       propertyPath: m_RootOrder
@@ -96,6 +101,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973627654500929590, guid: 421de2aaeac77ef41a80fd4d5321daf7,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 421de2aaeac77ef41a80fd4d5321daf7, type: 3}

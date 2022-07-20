@@ -38,6 +38,7 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = timeScale;
         }
+
         uiState = ui.activeSelf;
     }
 

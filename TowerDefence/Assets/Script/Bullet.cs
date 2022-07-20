@@ -1,24 +1,23 @@
 ﻿#if UNITY_EDITOR
 #endif
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Bullet : BaseBulletClass
 {
-    public GameObject fxManager;
-    [SerializeField] private EffectManager effectManager;
+    public GameObject theFxManager;
+    public EffectManager fxManager;
     [SerializeField] private CharacterStat explosionRadius;
     float finalDamage;
     public bool quadrupleDamage = false;
     public void OnValidate()//taggu
     {
-        if (effectManager == null)
-        {
-            effectManager = fxManager.GetComponentInChildren<EffectManager>();
-        }
-        if (fxManager == null || effectManager == null)
+        
+        fxManager = theFxManager.GetComponentInChildren<EffectManager>();
+        /*if (theFxManager == null || fxManager == null)
         {
             Debug.Log(name);
-        }
+        }*/
         if (!TryGetComponent(out audioSource))
         {
             gameObject.AddComponent(typeof(AudioSource));
@@ -29,7 +28,7 @@ public class Bullet : BaseBulletClass
     {
         target = _target;
     }
-    void Update()
+    public void Update()
     {
         if (target == null)
         {
@@ -93,11 +92,11 @@ public class Bullet : BaseBulletClass
         //Enemy ene = enemy.GetComponent<Enemy>();
         if (bulletType.HasFlag(StatusEffectType.SlowPerSecond))
         {
-            effectManager.Slow(ene);
+            fxManager.Slow(ene);
         }
         if (bulletType.HasFlag(StatusEffectType.Dots))
         {
-            effectManager.Dots(ene);
+            fxManager.Dots(ene);
         }
     }
     void Damage(Enemy ene)
@@ -200,32 +199,36 @@ public class Bullet : BaseBulletClass
             {
                 return;
             }
-            if (!ene.CheckEnemyType(EnemyType.ImmunityToInsta_Kill) && bulletType.HasFlag(StatusEffectType.Insta_Kill))
+            if (!ene.CheckEnemyType(EnemyType.ImmuneToInsta_Kill) && bulletType.HasFlag(StatusEffectType.Insta_Kill))
             {
-                effectManager.Insta_kill(ene);
+                fxManager.Insta_kill(ene);
             }
             if (!ene.CheckEnemyType(EnemyType.ImmuneToSlow) && bulletType.HasFlag(StatusEffectType.SlowPerSecond))
             {
-                effectManager.Slow(ene);
+                fxManager.Slow(ene);
             }
             if (bulletType.HasFlag(StatusEffectType.Dots))
             {
-                effectManager.Dots(ene);
+                fxManager.Dots(ene);
             }
             if (!ene.CheckEnemyType(EnemyType.ImmuneToFear) && bulletType.HasFlag(StatusEffectType.Fear))
             {
-                effectManager.Fear(ene);
+                fxManager.Fear(ene);
             }
-            if (!ene.CheckEnemyType(EnemyType.ImmunityToWeaken) && bulletType.HasFlag(StatusEffectType.Weaken))
+            if (!ene.CheckEnemyType(EnemyType.ImmuneToWeaken) && bulletType.HasFlag(StatusEffectType.Weaken))
             {
-                effectManager.Weaken(ene);
+                fxManager.Weaken(ene);
             }
-            if (!ene.CheckEnemyType(EnemyType.ImmunityToArmorBreaking) && bulletType.HasFlag(StatusEffectType.ArmorBreaking))
+            if (!ene.CheckEnemyType(EnemyType.ImmuneToArmorBreaking) && bulletType.HasFlag(StatusEffectType.ArmorBreaking))
             {
-                effectManager.DisableArmor(ene);
+                fxManager.DisableArmor(ene);
             }
             if (bulletType.HasFlag(StatusEffectType.ArmorDestroyer))
             {
+                if (ene.enemyState.HasFlag(EnemyState.Armored))
+                {
+                    ene.ArmorBreak();
+                }
                 ene.DisableState(EnemyState.Armored);
                 ene.armorStat.ArmorBarAdjust(false);
             }

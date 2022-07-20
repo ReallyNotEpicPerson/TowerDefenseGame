@@ -71,6 +71,12 @@ PrefabInstance:
         type: 3}
       propertyPath: fxManager
       value: 
+      objectReference: {fileID: 9176564227685398328, guid: eaa9184550a61084fa1d7bc99bb83930,
+        type: 3}
+    - target: {fileID: 3598932451251357239, guid: 44f3fd93800fbee4cb1ff87572955103,
+        type: 3}
+      propertyPath: theFxManager
+      value: 
       objectReference: {fileID: 5137339787193338788, guid: eaa9184550a61084fa1d7bc99bb83930,
         type: 3}
     - target: {fileID: 3598932451251357239, guid: 44f3fd93800fbee4cb1ff87572955103,

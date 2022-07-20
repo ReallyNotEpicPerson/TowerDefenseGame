@@ -12348,7 +12348,7 @@ PrefabInstance:
     - target: {fileID: 4510010700531411059, guid: f6672ded4e63e524caa7a692a5397997,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4510010700531411059, guid: f6672ded4e63e524caa7a692a5397997,
         type: 3}
@@ -20805,6 +20805,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873738889977380625, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1295682413}
     - target: {fileID: 1873738890046277297, guid: a62d9ded37001e84a8d8ad84ecfef3f7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

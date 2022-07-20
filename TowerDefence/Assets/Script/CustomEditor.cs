@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 public class CustomEditor : EditorWindow
@@ -17,3 +18,4 @@ public class CustomEditor : EditorWindow
         }
     }
 }
+#endif

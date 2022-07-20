@@ -15,6 +15,19 @@ public static class SaveSystem
     {
         LevelProgession list;
         string SaveFilePath = Application.persistentDataPath + "/Progress.json";
+        if (!File.Exists(SaveFilePath))
+        {
+            LevelProgession lvp = new LevelProgession();//only 10 level for now
+            lvp.level.Add("Level 1");//keep at all cost
+            if (10 > lvp.star.Count)
+            {
+                for (int i = 0; i < 10 - lvp.star.Count; i++)
+                {
+                    lvp.star.Add(0);
+                }
+            }
+            SaveLevelProgression(lvp);//keep at all cost
+        }
         string json = File.ReadAllText(SaveFilePath);
         list = JsonUtility.FromJson<LevelProgession>(json);
         return list;
@@ -253,6 +266,7 @@ public class LevelProgession
         star = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     }
 }
+
 [System.Serializable]
 public class Equipment
 {

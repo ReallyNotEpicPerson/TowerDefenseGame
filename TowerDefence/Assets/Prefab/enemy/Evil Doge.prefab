@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.87058824, g: 0.08627451, b: 0.08627451, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -854,19 +854,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySprite: {fileID: -4659240652328388427, guid: ca7ec0d0dce315642a1f9835e0493613,
     type: 3}
-  enemyType: 640
+  enemyType: 896
   enemyState: 0
   audioType: 0
   startHealth: 500
   armorStat: {fileID: 8706395518216621396}
   UsePathFinding: 0
+  enemyNavMeshMovement: {fileID: 2957904093619745126}
+  enemyPathMovement: {fileID: 4300188369288890778}
   ChanceToEvade: 0.05
   worth: 11
-  dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
+  dedFX: {fileID: 0}
   healthBar: {fileID: 8526654074050998605}
   Handler: {fileID: 7005331145342925169}
   fxManager: {fileID: 6744289972574355477}
   specialFX: {fileID: 5260510407227792469}
+  Death: {fileID: 8300000, guid: 4af9fab37aefc004ebf07d8a95a19539, type: 3}
 --- !u!114 &8706395518216621396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,7 +959,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

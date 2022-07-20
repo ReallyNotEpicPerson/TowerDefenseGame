@@ -10,16 +10,20 @@ public class EnemyPathMovement : MonoBehaviour
     private bool turnBack = false;
     public CharacterStat startSpeed;
     public float distanceChangingWayPoint = 0.1f;
-    //[HideInInspector]
+    [HideInInspector]
     public float speed;
     private float distanceRemain;
     public float rateOfUpdateDistance = 0.2f;
     private float rate;
-    private AudioSource audioSource;
-
+    //private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+    public void Awake()
+    {
+        TryGetComponent(out spriteRenderer);
+        //TryGetComponent(out audioSource);
+    }
     public void Start()
     {
-        TryGetComponent(out audioSource);
         if (pathIndex == 0)
         {
             Target = WayPoint.Points[0];
@@ -51,6 +55,7 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     NextWayPoint_0();
+                    SpriteFlip();
                 }
             }
             else
@@ -58,6 +63,8 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     PreviousWayPoint_0();
+                    SpriteFlip();
+
                 }
             }
             if (rate <= 0)
@@ -78,6 +85,7 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     NextWayPoint_1();
+                    SpriteFlip();
                 }
             }
             else
@@ -85,6 +93,7 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     PreviousWayPoint_1();
+                    SpriteFlip();
                 }
             }
             if (rate <= 0)
@@ -105,6 +114,7 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     NextWayPoint_2();
+                    SpriteFlip();
                 }
             }
             else
@@ -112,6 +122,7 @@ public class EnemyPathMovement : MonoBehaviour
                 if (Vector3.Distance(transform.position, Target.position) <= distanceChangingWayPoint)
                 {
                     PreviousWayPoint_2();
+                    SpriteFlip();
                 }
             }
             if (rate <= 0)
@@ -120,6 +131,17 @@ public class EnemyPathMovement : MonoBehaviour
                 rate = rateOfUpdateDistance;
             }
             rate -= Time.deltaTime;
+        }
+    }
+    public void SpriteFlip()
+    {
+        if (transform.position.x > Target.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
     }
     public void SetPathIndex(int i)

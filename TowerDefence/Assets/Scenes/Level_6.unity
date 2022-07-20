@@ -6418,7 +6418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoneyInGame: 480
-  startlives: 5
+  startlives: 10
 --- !u!114 &401634974
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -89,7 +89,7 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
         {
             if (listOfDebuffs[i] is SlowEffect)
             {
-                if (listOfDebuffs[i].ID.Contains("TUR"))
+                if (listOfDebuffs[i].ID.Contains("TUR") || (enemy.CheckEnemyType(EnemyType.ImmuneToStun) && listOfDebuffs[i].ID.Contains("STUN")))
                 {
                     continue;
                 }
@@ -191,7 +191,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("forget to add eii?");
         return null;
@@ -204,7 +203,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -217,7 +215,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -230,7 +227,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -243,7 +239,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -256,7 +251,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -269,7 +263,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -282,7 +275,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;
@@ -295,7 +287,6 @@ public class EffectManager : MonoBehaviour//use as an epic manager for a turret
             {
                 return listOfDebuffs[i];
             }
-            continue;
         }
         Debug.LogError("Oh....Forgot sth?");
         return null;

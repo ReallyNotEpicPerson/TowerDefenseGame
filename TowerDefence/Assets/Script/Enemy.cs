@@ -23,9 +23,9 @@ public enum EnemyType
     FirstHitSpeedBoost = 1 << 0,
     Revive = 1 << 1,
     Healing = 1 << 2,
-    Invisible = 1 << 3,
-    Boss = 1 << 4, ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8,
-    ImmuneToFear = 1 << 9, ImmunityToInsta_Kill = 1 << 10, ImmunityToWeaken = 1 << 11, ImmunityToArmorBreaking = 1 << 12,
+    Invisible = 1 << 3, ImmunityToAll = 1 << 5, ImmuneToPoison = 1 << 6, ImmuneToSlow = 1 << 7, ImmuneToFire = 1 << 8,
+    ImmuneToFear = 1 << 9, ImmuneToInsta_Kill = 1 << 10, ImmuneToWeaken = 1 << 11, ImmuneToArmorBreaking = 1 << 12, 
+    ImmuneToStun = 1 << 13,
 
 }
 #endregion 
@@ -41,8 +41,8 @@ public class Enemy : MonoBehaviour
     public Armor armorStat;
 
     public bool UsePathFinding;
-    private NavMeshAI enemyNavMeshMovement;
-    private EnemyPathMovement enemyPathMovement;
+    public NavMeshAI enemyNavMeshMovement;
+    public EnemyPathMovement enemyPathMovement;
     public float ChanceToEvade = 0.001f;
     //[HideInInspector]
     //public float speed;
@@ -52,8 +52,7 @@ public class Enemy : MonoBehaviour
     #endregion
 
     public GameObject dedFX;
-    GameObject Ded;
-
+    //GameObject Ded;
     [SerializeField] private Image healthBar;
 
     private bool isDead = false;
@@ -62,6 +61,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EntityEffectHandler Handler;
     [SerializeField] private EffectManager fxManager;
     [SerializeField] private SpecialFX specialFX;
+
+    public AudioClip Death;
 
     private StatValueType modifier;
     private AudioSource audioSource;
@@ -144,7 +145,7 @@ public class Enemy : MonoBehaviour
         }
         if (armorStat.armorType.HasFlag(ArmorType.Single) || armorStat.armorType.HasFlag(ArmorType.Multiple))
         {
-            animator.SetTrigger("Armored");
+            EnableArmor();
             EnableState(EnemyState.Armored);
         }
         else if (armorStat.armorType.HasFlag(ArmorType.None))
@@ -317,6 +318,15 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("NoArmor");
     }
+    public void EnableArmor()
+    {
+        animator.SetTrigger("Armored");
+    }
+    public void ArmorBreak()
+    {
+        animator.SetTrigger("Break");
+    }
+
     #endregion
     #region Handler
     public void AddDebuff(BaseEffect baseEffect)//use this instead,like EVERY TIME
@@ -369,7 +379,10 @@ public class Enemy : MonoBehaviour
         {
             PlayerStat.moneyInGame += worth;
         }
-        Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 0.5f);
+        if (dedFX != null)
+        {
+            Destroy(Instantiate(dedFX, transform.position, Quaternion.identity), 1f);
+        }
         TheSpawner.numOfEnemies--;
         if (UsePathFinding)
         {
@@ -384,10 +397,10 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
-        //StartCoroutine(FadeToBlack());
-
-        //Ded.SetActive(false);
-        //gameObject.SetActive(false);
+        if (Death != null)
+        {
+            audioSource.PlayOneShot(Death);
+        }
     }
     public void FadeToBlackCR()
     {
@@ -458,6 +471,10 @@ public class Enemy : MonoBehaviour
         Handler.RemoveALLDebuff();
         DamageDisplayer.Create(transform.position, "INSTA KILL!!", DamageDisplayerType.Insta_kill);
         Die();//pooling
+    }
+    public void PlayAudio(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
     public int GetReviveTime()
     {
@@ -685,19 +702,18 @@ public class Enemy : MonoBehaviour
         text.Append(armorStat.GetArmorLayer());
         return text;
     }
-
     public StringBuilder Ability()
     {
         StringBuilder text = new StringBuilder();
         text.Append($"<color=#ffffffff>{"Special Ability:"}</color>" + "\n");
         if (enemyType.HasFlag(EnemyType.FirstHitSpeedBoost))
         {
-            text.Append($"<color=#00ff00ff>{"Speed boost: "}</color>" + "Increase speed after first hit"+"\n");
+            text.Append($"<color=#00ff00ff>{"Speed boost: "}</color>" + "Increase speed after first hit" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.Revive))
         {
             Revive RE = fxManager.GetReviveEffect() as Revive;
-            text.Append($"<color=#00ff00ff>{"Revive: "}</color>" + "Have a " + RE.chance * 100 + "% chance to revive after death"+"\n");
+            text.Append($"<color=#00ff00ff>{"Revive: "}</color>" + "Have a " + RE.chance * 100 + "% chance to revive after death" + "\n");
         }
         if (enemyType.HasFlag(EnemyType.Invisible))
         {
@@ -712,6 +728,10 @@ public class Enemy : MonoBehaviour
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Slow" + "\n");
         }
+        if (enemyType.HasFlag(EnemyType.ImmuneToStun))
+        {
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Stun" + "\n");
+        }
         if (enemyType.HasFlag(EnemyType.ImmuneToPoison))
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Poison" + "\n");
@@ -720,11 +740,11 @@ public class Enemy : MonoBehaviour
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Fire" + "\n");
         }
-        if (enemyType.HasFlag(EnemyType.ImmunityToArmorBreaking))
+        if (enemyType.HasFlag(EnemyType.ImmuneToArmorBreaking))
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Armor breaking" + "\n");
         }
-        if (enemyType.HasFlag(EnemyType.ImmunityToWeaken))
+        if (enemyType.HasFlag(EnemyType.ImmuneToWeaken))
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Weaken" + "\n");
         }
@@ -732,9 +752,9 @@ public class Enemy : MonoBehaviour
         {
             text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Fear" + "\n");
         }
-        if (enemyType.HasFlag(EnemyType.ImmunityToInsta_Kill))
+        if (enemyType.HasFlag(EnemyType.ImmuneToInsta_Kill))
         {
-            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to Insta_kill" + "\n");
+            text.Append($"<color=#00ff00ff>{"Immunity: "}</color>" + "Immune to InstaKill" + "\n");
         }
         if (text.Length == 0)
         {

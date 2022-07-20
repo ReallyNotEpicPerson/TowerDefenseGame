@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3422943722685699857}
   - component: {fileID: 3437818668031310182}
   m_Layer: 0
-  m_Name: Insta-Kill Turret(2)
+  m_Name: Stun Turret(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
     baseValue: 380
   spriteRenderer: {fileID: 757579695089883395}
   fireRate:
-    baseValue: 1.18
+    baseValue: 1.1
   firePoint:
   - {fileID: 4335083091487607380}
   objectToRotate:
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 5163258094439931813}
   - component: {fileID: 7821069579115722442}
   m_Layer: 0
-  m_Name: Insta-Kill Turret(1)
+  m_Name: Stun Turret(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
     baseValue: 380
   spriteRenderer: {fileID: 7155925367419306950}
   fireRate:
-    baseValue: 1.19
+    baseValue: 1.15
   firePoint:
   - {fileID: 5247798683001591596}
   objectToRotate:
@@ -1014,6 +1014,17 @@ PrefabInstance:
       propertyPath: fireRate.baseValue
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 689252863417060428, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689252863417060428, guid: b21c6192f7b34654bb77431c04969ae4,
+        type: 3}
+      propertyPath: listOfDebuffs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e2b645fc9d203914180220c97403c464,
+        type: 2}
     - target: {fileID: 1417081888062188752, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
       propertyPath: m_RootOrder
@@ -1032,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 2839478457026506565, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}
       propertyPath: m_Name
-      value: Insta-Kill Turret
+      value: Stun Turret
       objectReference: {fileID: 0}
     - target: {fileID: 3428752714890112888, guid: b21c6192f7b34654bb77431c04969ae4,
         type: 3}

@@ -5,29 +5,8 @@ public class UltraUpgrade
 {
     public GameObject[] ultraUpgradePrefab;
     public int[] ultraUpgradeCosts;
-    [SerializeField] private float sellPtcReduction = 0.75f;
+    //[SerializeField] private float sellPtcReduction = 0.75f;
 
-    public int GetSellAmount(int i)
-    {
-        //Debug.Log(i);
-        if (i < ultraUpgradeCosts.Length)
-        {
-            if (sellPtcReduction > 1)
-            {
-                return (int)Mathf.Abs(ultraUpgradeCosts[i] * sellPtcReduction);
-            }
-            return (int)Mathf.Abs(ultraUpgradeCosts[i] * sellPtcReduction);
-        }
-        else
-        {
-            int costSum = SumOfCost();
-            if (sellPtcReduction > 1)
-            {
-                return (int)Mathf.Abs(costSum * sellPtcReduction);
-            }
-            return (int)Mathf.Abs(costSum * sellPtcReduction);
-        }
-    }
     public int SumOfCost()
     {
         int costSum = 0;
@@ -37,21 +16,7 @@ public class UltraUpgrade
         }
         return costSum;
     }
-    /*
-    public void RedudeCost(float ptc)
-    {
-        cost = (int)Mathf.Ceil(cost * (1 - ptc));
-        for (int i = 0; i < cost; i++)
-        {
-            upgradeCosts[i] = (int)Mathf.Ceil(upgradeCosts[i] * (1 - ptc));
-        }
-    }
-    public void RedudeUpgradeCost(float ptc, int i)
-    {
-        upgradeCosts[i] = (int)Mathf.Ceil(upgradeCosts[i] * (1 - ptc));
-    }*/
 }
-
 [System.Serializable]
 public class TurretBluePrint
 {

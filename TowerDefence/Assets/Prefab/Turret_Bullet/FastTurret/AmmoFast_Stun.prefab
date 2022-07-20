@@ -86,13 +86,19 @@ PrefabInstance:
         type: 3}
       propertyPath: fxManager
       value: 
-      objectReference: {fileID: 1570042668356290577, guid: e7f410de4f2e4b74eaad198f27202657,
+      objectReference: {fileID: 3732427199838300966, guid: e7f410de4f2e4b74eaad198f27202657,
         type: 3}
     - target: {fileID: 4978888093764008938, guid: 22b392f411a19004d8bbe0ce08f9a75c,
         type: 3}
       propertyPath: bulletType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4978888093764008938, guid: 22b392f411a19004d8bbe0ce08f9a75c,
+        type: 3}
+      propertyPath: theFxManager
+      value: 
+      objectReference: {fileID: 1570042668356290577, guid: e7f410de4f2e4b74eaad198f27202657,
+        type: 3}
     - target: {fileID: 4978888093764008938, guid: 22b392f411a19004d8bbe0ce08f9a75c,
         type: 3}
       propertyPath: effectManager

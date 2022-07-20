@@ -13,6 +13,7 @@ public class TimedArmorBreaking : TimedEffect
         if (haveArmorAtStart || _enemy.armorStat.HaveArmor())
         {
             _enemy.EnableState(EnemyState.Armored);
+            _enemy.EnableArmor();
         }
         _enemy.RemoveFX(Effect.ID);
     }
@@ -43,6 +44,7 @@ public class TimedArmorBreaking : TimedEffect
         {
             haveArmorAtStart = true;
             _enemy.DisableState(EnemyState.Armored);
+            _enemy.ArmorBreak();
         }
         else
         {
@@ -54,5 +56,6 @@ public class TimedArmorBreaking : TimedEffect
         {
             _enemy.AddFX(this);
         }
+
     }
 }

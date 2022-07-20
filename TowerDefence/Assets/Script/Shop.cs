@@ -16,7 +16,6 @@ public class Shop : MonoBehaviour
     public TheBuildManager theBuildManager;
 
     //public StatUI statUI;
-
     public void Awake()
     {
         CreateNewButton();
@@ -32,22 +31,27 @@ public class Shop : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
+            PlaySound();
             SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[0]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
+            PlaySound();
             SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[1]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
+            PlaySound();
             SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[2]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
         {
+            PlaySound();
             SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[3]]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
         {
+            PlaySound();
             SelectNewTurret(GameAsset.I.turret[GameAsset.I.formation.characterLineUp[4]]);
         }
     }
@@ -60,8 +64,7 @@ public class Shop : MonoBehaviour
             temp.name = "Button " + i;
             TurretBluePrint tempTurret = GameAsset.I.turret[GameAsset.I.formation.characterLineUp[i]];
             temp.onClick.AddListener(delegate { SelectNewTurret(tempTurret); });
-            temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite
-                [GameAsset.I.formation.characterLineUp[i]];
+            temp.transform.GetChild(0).GetComponent<Image>().sprite = GameAsset.I.turretSprite[GameAsset.I.formation.characterLineUp[i]];
             SetButtonText(temp, GameAsset.I.formation.characterLineUp[i]);
             temp.transform.Find("IndexNum").GetChild(0).GetComponent<TMP_Text>().text = (i + 1).ToString();
             temp.onClick.AddListener(delegate { PlaySound(); });

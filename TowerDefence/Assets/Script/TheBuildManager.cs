@@ -88,6 +88,7 @@ public class TheBuildManager : MonoBehaviour
         refTurret.referenceTurret.name = upgradePrefab.name;
         refTurret.UltraUpgradeLevel++;
         //Debug.Log("Ultra Upgrade version Level: "+ refTurret.UltraUpgradeLevel);
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.BuildSound);
         GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
     }
@@ -113,6 +114,7 @@ public class TheBuildManager : MonoBehaviour
         if (PlayerStat.moneyInGame < refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1])
         {
             //Debug.Log("Nah U poor!,cant upgrade,lol " + PlayerStat.moneyInGame);
+            GameAsset.I.audioSource.PlayOneShot(GameAsset.I.ClickSound);
             return;
         }
         PlayerStat.moneyInGame -= refTurret.refBlueprint.upgradeCosts[refTurret.upgradeLevel - 1];
@@ -124,6 +126,7 @@ public class TheBuildManager : MonoBehaviour
         refTurret.referenceTurret.name = upgradePrefab.name;
         refTurret.upgradeLevel++;
         //Debug.Log("Normal Upgrade version Level: " + refTurret.upgradeLevel);
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.BuildSound);
         GameObject Bfx = Instantiate(UpgradeEffect, upgradePrefab.transform.position, Quaternion.identity);
         Destroy(Bfx, 2f);
     }
@@ -134,11 +137,10 @@ public class TheBuildManager : MonoBehaviour
         {
             SupportTypeTurret sp = unknownTurret as SupportTypeTurret;
             sp.MassUndo();
-
         }
         GameObject Sellfx = Instantiate(SellFX, refTurret.referenceTurret.transform.position, Quaternion.identity);
         Destroy(Sellfx, 2f);
-
+        GameAsset.I.audioSource.PlayOneShot(GameAsset.I.SellingSound);
         //Debug.Log(tileMapManager.turretOnTheField.TryGetValue(tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position),out _) + " " + tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position));
         tileMapManager.turretOnTheField.Remove(tileMapManager.GetGridPositionP2(refTurret.referenceTurret.transform.position));
         Destroy(refTurret.referenceTurret);

@@ -21,4 +21,4 @@ MonoBehaviour:
   expirableType: 0
   duration: 5
   chance: 1
-  description: break armor
+  description: Temporary break armor

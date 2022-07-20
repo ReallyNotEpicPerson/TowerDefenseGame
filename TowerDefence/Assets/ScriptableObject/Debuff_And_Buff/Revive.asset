@@ -20,6 +20,6 @@ MonoBehaviour:
   removableType: 1
   expirableType: 0
   duration: 5
-  chance: 0.5
+  chance: 0.6
   description: 'revive enemy '
   reviveTime: 1

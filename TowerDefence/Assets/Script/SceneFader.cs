@@ -7,6 +7,11 @@ public class SceneFader : MonoBehaviour
 {
     public Image img;
     public AnimationCurve curve;
+    public float fadeTimer = 1f;
+    /*private void Awake()
+    {
+        
+    }*/
     void Start()
     {
         StartCoroutine(FadeIn());    
@@ -18,7 +23,7 @@ public class SceneFader : MonoBehaviour
     }
     IEnumerator FadeIn()
     {
-        float t = 1f;
+        float t = fadeTimer;
         
         while (t > 0f)
         {
@@ -27,13 +32,12 @@ public class SceneFader : MonoBehaviour
             img.color = new Color(0f,0f,0f,a);
             yield return 0;
         }
-
     }
     IEnumerator FadeOut(string scene)
     {
         float t = 0f;
 
-        while (t < 1f)
+        while (t < fadeTimer)
         {
             t += Time.deltaTime;
             float a = curve.Evaluate(t);

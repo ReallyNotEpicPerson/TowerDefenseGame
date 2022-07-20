@@ -57,7 +57,7 @@ public class TurretSetup : MonoBehaviour
     }
     public void SetButton(int num)
     {
-        for (int i = 0; i < transform.childCount-1; i++)
+        for (int i = 0; i < transform.childCount - 1; i++)
         {
             if (i < num)
             {
@@ -93,6 +93,7 @@ public class TurretSetup : MonoBehaviour
             but.transform.localScale = Vector3.one;
             but.name = "Button " + (i + 1);
             but.onClick.AddListener(delegate { Deselect(but); });
+            but.onClick.AddListener(delegate { GameAsset.I.PlayClickSound(); });
             but.interactable = false;
             //but.GetComponent<Event>().ad(delegate { Deselect(but); });
 
@@ -197,7 +198,7 @@ public class TurretSetup : MonoBehaviour
                 }
                 else if (bulTurret.passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage) && !passiveAbility.HasFlag(PassiveAbility.QuadrupleDamage))
                 {
-                    statText[i].text = "Have "+bulTurret.chanceToQuadrupleDamage+"% chance to quadruple damage";
+                    statText[i].text = "Have " + bulTurret.chanceToQuadrupleDamage + "% chance to quadruple damage";
                     statText[i].gameObject.SetActive(true);
                     Icons.transform.GetChild(i).gameObject.SetActive(false);
                     passiveAbility |= PassiveAbility.QuadrupleDamage;
@@ -251,7 +252,7 @@ public class TurretSetup : MonoBehaviour
                     EnableState(StatusEffectType.Fear);
                     continue;
                 }
-                
+
                 else if (LazTurret.bulletType.HasFlag(StatusEffectType.Weaken) && !flag.HasFlag(StatusEffectType.Weaken))
                 {
                     statText[i].gameObject.SetActive(true);
@@ -386,8 +387,8 @@ public class TurretSetup : MonoBehaviour
     }
     public void ReadyButtonPressed()
     {
-        levelSelector.LoadScence();
         GameAsset.I.formation.SetLineUp(checkExistInt.ToArray());
+        levelSelector.LoadScence();
     }
     public void DisableState(StatusEffectType bt)
     {

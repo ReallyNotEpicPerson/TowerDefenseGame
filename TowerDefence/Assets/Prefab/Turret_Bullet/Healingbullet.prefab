@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4417846864596405780
 Transform:
   m_ObjectHideFlags: 0
@@ -108,12 +108,13 @@ MonoBehaviour:
   ImpactFx: {fileID: 2959825038674600700, guid: bca31fbdf9944654fb0df24da1dbec9c,
     type: 3}
   bulletType: 520
-  fxManager: {fileID: 3053064806348107529, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+  theFxManager: {fileID: 827330132171800716, guid: d45acfec41d53104f9108206a9b07980,
     type: 3}
-  effectManager: {fileID: 1086908084338352726, guid: fa225b58fa1f0ec49956f8e7dfc5e969,
+  fxManager: {fileID: 2518773486010881455, guid: d45acfec41d53104f9108206a9b07980,
     type: 3}
   explosionRadius:
     baseValue: 0
+  quadrupleDamage: 0
 --- !u!82 &4990014854910998208
 AudioSource:
   m_ObjectHideFlags: 0

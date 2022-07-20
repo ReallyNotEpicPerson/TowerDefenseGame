@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Formation", menuName = "FMS")]
 public class Setting : ScriptableObject
@@ -11,6 +8,8 @@ public class Setting : ScriptableObject
     public string NextLevel;
     //public int[] LevelOpened;
     public int currentLevelIndex;
+    public bool OpenManualAtStart = false;
+
     public void SetRewardMoney(int m)
     {
         moneyEachMatch = m;
@@ -18,8 +17,11 @@ public class Setting : ScriptableObject
     public void SetLineUp(int[] l)
     {
         characterLineUp = l;
-        EditorUtility.SetDirty(this);
-    } 
+        //SetDirty();
+        #if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+        #endif
+    }
     public int GetMoney()
     {
         return moneyEachMatch;

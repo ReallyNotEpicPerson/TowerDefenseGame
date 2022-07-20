@@ -47,6 +47,21 @@ TextureImporter:
   - first:
       213: -7213447358556672491
     second: The Undone Boss_14
+  - first:
+      213: 3837996304613735079
+    second: The Undone Boss_15
+  - first:
+      213: 5636249398583208890
+    second: The Undone Boss_16
+  - first:
+      213: -3689858775463797852
+    second: The Undone Boss_17
+  - first:
+      213: -811513797199759259
+    second: The Undone Boss_18
+  - first:
+      213: -4693941362076690919
+    second: The Undone Boss_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -482,6 +497,48 @@ TextureImporter:
       bones: []
       spriteID: 51eef3b88dfa4eb90800000000000000
       internalID: -7213447358556672491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Undone Boss_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aa73c1fd4d434530800000000000000
+      internalID: 3837996304613735079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Undone Boss_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abbaf0447faf73e40800000000000000
+      internalID: 5636249398583208890
       vertices: []
       indices: 
       edges: []

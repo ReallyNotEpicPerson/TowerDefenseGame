@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -448,19 +448,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySprite: {fileID: 7046093432801577004, guid: 79c32c4229ac12542b373ac24d2ad715,
     type: 3}
-  enemyType: 64
+  enemyType: 1088
   enemyState: 32
   audioType: 1
   startHealth: 450
   armorStat: {fileID: 1230297672343561557}
   UsePathFinding: 0
+  enemyNavMeshMovement: {fileID: 4669432057242130791}
+  enemyPathMovement: {fileID: 3727257253071422711}
   ChanceToEvade: 0.08
   worth: 11
-  dedFX: {fileID: 781759538502400553, guid: 0261b293bb0f50f42a3a71e5c5c13517, type: 3}
+  dedFX: {fileID: 0}
   healthBar: {fileID: 2275851745956436300}
   Handler: {fileID: 645807092627198320}
   fxManager: {fileID: 3772105887990933524}
   specialFX: {fileID: 2360070882049864788}
+  Death: {fileID: 8300000, guid: 8aea24270ca8f8145a5fd38977605089, type: 3}
 --- !u!114 &1230297672343561557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +555,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: dddb54ffbe2bad545b0c3801fffaf4d5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -696,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -773,7 +776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -848,7 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1025,7 +1028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.87058824, g: 0.08627451, b: 0.08627451, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
